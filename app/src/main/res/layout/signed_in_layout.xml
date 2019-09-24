@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/account_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+
+        <LinearLayout
+            android:id="@+id/account_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/unit8"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/user_profile_picture"
+                android:layout_width="@dimen/unit60"
+                android:layout_height="@dimen/unit60"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/profile_picture_content_desc"
+                app:srcCompat="@drawable/ic_anon_user_48dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/unit8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/user_display_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:textIsSelectable="true"
+                    tools:text="Alpay Sabuncuoglu" />
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
+                    tools:text="sabuncuoglualpay@gmail.com" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextLink"
+            android:id="@+id/my_notes"
+            android:layout_below="@+id/account_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/unit8"
+            android:text="@string/my_notes" />
+
+
+        <TextView
+            style="@style/TextLink"
+            android:id="@+id/my_programs"
+            android:layout_below="@+id/my_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/unit8"
+            android:text="@string/my_programs" />
+
+        <TextView
+            style="@style/TextLink"
+            android:id="@+id/sign_out"
+            android:layout_below="@+id/my_programs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/unit8"
+            android:text="@string/sign_out" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sign_in_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:text="@string/sign_in_start">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sign_in"
+            android:layout_margin="@dimen/unit16"
+            android:gravity="center"
+            android:text="@string/sign_in_header" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

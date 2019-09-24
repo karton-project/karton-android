@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="auth"
+        android:enabled="true"
+        android:icon="@mipmap/codenoteslogo"
+        android:shortcutShortLabel="@string/title_auth_activity">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.firebase.uidemo"
+            android:targetClass="com.firebase.uidemo.auth.AuthUiActivity"/>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="realtime-database"
+        android:enabled="true"
+        android:icon="@mipmap/codenoteslogo"
+        android:shortcutShortLabel="@string/title_realtime_database_activity">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.alpay.codenotes"
+            android:targetClass="com.alpay.codenotes.database.realtime.RealtimeDbChatActivity"/>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="storage"
+        android:enabled="true"
+        android:icon="@mipmap/codenoteslogo"
+        android:shortcutShortLabel="@string/title_storage_activity">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.alpay.codenotes"
+            android:targetClass="com.alpay.codenotes.storage.ImageActivity"/>
+    </shortcut>
+</shortcuts>

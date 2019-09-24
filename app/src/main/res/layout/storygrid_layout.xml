@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/storygrid_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/unit5"
+        android:backgroundTint="@color/md_blue_grey_100"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/unit10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/unit3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/storygrid_card_id"
+                style="@style/HomeCardDetail"
+                android:layout_width="@dimen/unit24"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/unit3"
+                android:background="@drawable/rounded_shape_button"
+                android:gravity="center"
+                tool:text="1" />
+
+            <ViewSwitcher
+                android:id="@+id/storygrid_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:outAnimation="@android:anim/slide_out_right">
+
+                <ImageView
+                    android:id="@+id/storygrid_card_thumbnail"
+                    android:layout_width="@dimen/unit120"
+                    android:layout_height="@dimen/unit120"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/unit5"
+                    android:clickable="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_image_black_24dp" />
+
+                <LinearLayout
+                    android:id="@+id/story_action_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/unit16">
+
+                    <TextView
+                        android:id="@+id/storygrid_add_from_gallery"
+                        style="@style/StoryCardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit5"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="@string/add_from_gallery" />
+
+                    <TextView
+                        android:id="@+id/storygrid_add_from_camera"
+                        style="@style/StoryCardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit5"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="@string/add_from_camera" />
+
+                    <TextView
+                        android:id="@+id/storygrid_add_drawing"
+                        style="@style/StoryCardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit5"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="@string/add_drawing" />
+
+                </LinearLayout>
+
+            </ViewSwitcher>
+
+
+            <TextView
+                android:id="@+id/storygrid_card_name"
+                style="@style/StoryCardTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit3"
+                android:clickable="true"
+                android:gravity="center"
+                tool:text="Card Name" />
+
+
+            <RelativeLayout
+                android:id="@+id/storygrid_card_title_edit_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/storygrid_card_title_edit"
+                    style="@style/StoryCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/frameholder_name_hint" />
+
+                <ImageView
+                    android:id="@+id/storygrid_card_title_edit_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/storygrid_card_title_edit"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_ok" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/storygrid_card_add_text"
+                style="@style/StoryCardCodeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit3"
+                android:text="@string/tell_story" />
+
+            <TextView
+                android:id="@+id/storygrid_code_button"
+                style="@style/StoryCardCodeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/unit30"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:padding="@dimen/unit3"
+                android:text="@string/add_code" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

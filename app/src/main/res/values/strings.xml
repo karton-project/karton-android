@@ -1,0 +1,251 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Account -->
+    <string name="my_notes">Notlarım</string>
+    <string name="my_programs">Programlarım</string>
+
+    <!-- Actionbar Headers -->
+    <string name="action_blockly">Blockly ile Kodla</string>
+    <string name="task_title">Görevin</string>
+
+    <!-- Add New Statement -->
+    <string name="addstatement_name">Yani Önerme Ekle</string>
+    <string name="create_new_statement">Yeni bir Code Notes kartı oluştur</string>
+    <string name="create_conditional_text">Yeni mantık cümlesi:</string>
+    <string name="create_output_text">Yeni çıktı cümlesi:</string>
+    <string name="new_conditional_value_select_text">Doğruluk değeri:</string>
+    <string name="select_output_image_from_gallery"><u>Galeriden çıktı resmi seç</u></string>
+    <string name="select_image_error">Resim seçme işlemi başarısız.</string>
+    <string name="firebase_conditional_exist_error">Bu mantık önermesi zaten sistemde var!</string>
+    <string name="firebase_output_exist_error">Bu çıktı zaten sistemde var!</string>
+    <string name="saved_conditional_text">Yeni mantık cümlesi kaydedildi</string>
+    <string name="saved_output_text">Yeni çıktı kaydedildi</string>
+    <string name="create_new_output">Çıktıyı Kaydet</string>
+    <string name="create_new_conditional">Önermeyi Kaydet</string>
+    <string name="save_logic_statement_error">Bir mantık önermesi girmelisiniz</string>
+    <string name="save_output_statement_error">Bir çıktı girmeniz gerekiyor</string>
+
+    <!-- Barcode Reader -->
+    <string name="scan_barcode_button">KARE KODU TARAT</string>
+
+    <!--Blockly-->
+    <string name="no_block_error">No blocks in your program area.</string>
+
+    <!-- Compiler -->
+    <string name="codenotescompiler_name">Programı Çalıştır</string>
+    <string name="no_code_dialog_message">Üzgünüm! Herhangi bir kod algılayamadım...</string>
+
+    <!-- Dependencies -->
+    <string name="low_storage_error">Hafıza Çok Az</string>
+    <string name="no_camera_permission">Kamera kullanımına izin verilmedi</string>
+    <string name="no_nfc_warning">NFC cihazın tarafından desteklenmiyor.</string>
+    <string name="nfc_disabled_warning">Öncelikle NFC\'yi etkileştirmekisin.</string>
+    <string name="no_internet_dialog_message">İnternet bağlantın olmadığı için, tüm güncel etkinlikleri göremeyebilirsin. Etkinliklerin tümünü görüntülemek için internete bağlan.</string>
+
+    <!-- Exercises -->
+    <string name="card_watch_video_button_text">Öğren</string>
+    <string name="card_practice_button_text">Dene</string>
+
+    <string name="card_change">Düzenle</string>
+    <string name="card_run">Çalıştır</string>
+    <string name="card_delete">Sil</string>
+    <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
+
+    <!-- Feedback -->
+    <string name="sendfeedback_name">Yorumlarını Bize Yolla</string>
+    <string name="sendfeedback_title">Yorumlarınız Code Notes\'u Güçlendirecek!</string>
+    <string name="sendfeedback_formtitle">Bu yorum ne hakkında?</string>
+    <string name="sendfeedback_formcontent">Yorumu biraz daha fazla açıklayabilir misiniz?</string>
+    <string name="sendfeedback_formtitle_required">Başlık bu yorumu kategorilememize yardım edecek!</string>
+    <string name="sendfeedback_formcontent_required">Detaylar bu yorumu uygulayabilmemiz için çok önemli!</string>
+    <string name="sendfeedback_thankyoumessage">Önerileriniz için teşekkürler!</string>
+
+    <!-- General -->
+    <string name="app_name">Code Notes</string>
+    <string name="hello_blank_fragment">Merhaba!</string>
+    <string name="error_text">Bir hata oluştu.</string>
+    <string name="ok">OK</string>
+
+    <!-- Home Page -->
+    <string name="home_card_learn">Öğren</string>
+    <string name="home_card_program">Kodla</string>
+    <string name="home_card_story">Hikaye</string>
+    <string name="home_card_account">Hesap</string>
+    <string name="hour_of_code_play">Flappy Bird ile Kod Saati</string>
+
+    <!-- Image Descriptions -->
+
+    <!-- Media Player -->
+    <string name="progress_title">Video Yükleniyor</string>
+    <string name="progress_content">İçerik alınıyor ...</string>
+
+    <!-- Notes -->
+    <string name="no_to_dos">You don\'t have any notes</string>
+
+    <!-- Sketch Activity-->
+    <string name="clear">Temizle</string>
+    <string name="erase">Sil</string>
+    <string name="color">Color</string>
+    <string name="draw">Çiz</string>
+
+    <!-- Storyboard Fragment -->
+    <string name="binded_text">Binded Components: </string>
+    <string name="add_from_camera"><u>Kameradan Ekle</u></string>
+    <string name="add_from_gallery"><u>Galeriden Seç</u></string>
+    <string name="add_drawing"><u>Çizim Ekle</u></string>
+    <string name="create_new_frame">Şerit Ekle</string>
+    <string name="frameholder_name_hint">Başlığı Değiştir</string>
+    <string name="add_header_frame"><u>Bölüm Ekle</u></string>
+    <string name="add_story_frame"><u>Şerit Ekle</u></string>
+    <string name="add_code"><u>Programla</u></string>
+    <string name="tell_story">Hikayeni anlat</string>
+
+    <!-- Tutorial -->
+    <string name="previous">Geri</string>
+    <string name="next">İleri</string>
+    <string name="finish">Bitir</string>
+    <string name="cancel">İptal</string>
+    <string name="or_text">veya</string>
+    <string name="save_text">Kaydet</string>
+    <string name="tutorial_content_1">Code Notes\'ta her program START ve END blokları arasına yazılır. Programını bu kartlar arasına koymazsan uygulama kodunu algılayamaz.</string>
+    <string name="tutorial_content_2">"IF" kartının yanında her zaman bir mantık önermesi olmalıdır. Mantık önermen doğruysa program çıktını ekranda görürsün. </string>
+    <string name="tutorial_content_3">Eğer mantık önermen yanlışsa IF bloğunun altındaki cümle çalışmaz. Eğer yanlış bir önermenin çıktısını almak istiyorsan "ELSE" kartını kullan.</string>
+    <string name="tutorial_content_4">"ELSE" kartının yanına bir kart koymana gerek yok. Yukarıdaki program IF-ELSE yapısı ile bir aslan çizimine örnektir.</string>
+    <string name="tutorial_content_5">"FOR" kartı yanına yazdığın sayı kadar ürün çıktısı verir. Eğer "3 times" kartını koyarsan 3 tane ağaç çizer. </string>
+    <string name="tutorial_content_6">"WHILE" kartının yanında "IF" kartında olduğu gibi bir mantık önermesi olmalıdır. Program bu mantık önermesinin doğruluğu değişine kadar çıktı verir.</string>
+
+    <!-- Welcome -->
+    <string name="welcome_text">Code Notes\'a hoşgeldin</string>
+    <string name="welcome_page_2">Hikayeler oluştur</string>
+    <string name="welcome_page_3">Animasyonlar yarat</string>
+    <string name="welcome_page_4">Kodlama ile hareket kat</string>
+    <string name="welcome_page_5">İlk hikayemizi yaratalım.</string>
+    <string name="welcome_page_6">İlk kutucuğa bas ve bir fotoğraf çek.</string>
+    <string name="welcome_page_7">İkinci kutucuğa bas ve bir resim çiz.</string>
+    <string name="welcome_page_8">Kutucuğun üstündeki kodlma simgesine bas ve hikayene hareket kat.</string>
+    <string name="welcome_page_9">İlk hikayen hazır!</string>
+
+    <string name="title_auth_activity">Auth UI Demo</string>
+    <string name="title_firestore_activity">Cloud Firestore Demo</string>
+    <string name="title_firestore_paging_activity">Cloud Firestore Paging Demo</string>
+    <string name="title_realtime_database_activity">Realtime Database Demo</string>
+    <string name="title_realtime_database_paging_activity">Realtime Database Paging Demo</string>
+    <string name="title_storage_activity">Storage Image Demo</string>
+
+    <string name="desc_auth">Demonstrates the Firebase Auth UI flow, with customization options.</string>
+    <string name="desc_anonymous_upgrade">Demonstrates upgrading an anonymous account using FirebaseUI.</string>
+    <string name="desc_firestore">Demonstrates using a FirestoreRecyclerAdapter to load data from Cloud Firestore into a RecyclerView for a basic chat app.</string>
+    <string name="desc_firestore_paging">Demonstrates using a FirestorePagingAdapter to load/infinite scroll paged data from Cloud Firestore.</string>
+    <string name="desc_realtime_database">Demonstrates using a FirebaseRecyclerAdapter to load data from Firebase Database into a RecyclerView for a basic chat app.</string>
+    <string name="desc_realtime_database_paging">Demonstrates using a FirebaseRecyclerPagingAdapter to load/infinite scroll paged data from Firebase Realtime Database.</string>
+    <string name="desc_storage">Demonstrates displaying an image from Cloud Storage using Glide.</string>
+
+    <!-- Auth UI -->
+    <string name="sign_in_start"><u><b>Hesabın ile Giriş Yap</b></u></string>
+    <string name="sign_in_silent"><u><b>Ziyaretçi olarak Gir</b></u></string>
+    <string name="sign_in_header">Yaptıklarını kaydetmek ve arkadaşlarınla paylaşmak için oturum aç:</string>
+
+    <string name="providers_header">Auth providers</string>
+    <string name="providers_google">Google</string>
+    <string name="providers_facebook">Facebook</string>
+    <string name="providers_twitter">Twitter</string>
+    <string name="providers_email">Email</string>
+    <string name="providers_email_link">Email link</string>
+    <string name="providers_phone">Phone</string>
+    <string name="providers_anonymous">Anonymous</string>
+
+    <string name="layout_header">Layout</string>
+    <string name="layout_default">Default</string>
+    <string name="layout_custom">Custom</string>
+
+    <string name="theme_header">Theme</string>
+    <string name="theme_default">Default theme</string>
+    <string name="theme_purple">Purple Theme</string>
+    <string name="theme_green">Green Theme</string>
+    <string name="theme_dark">Dark Theme</string>
+
+    <string name="logo_header">Logo</string>
+    <string name="logo_firebase">Firebase Auth</string>
+    <string name="logo_google">Google</string>
+    <string name="logo_none">None</string>
+
+    <string name="tos_pp_header">Terms of Service and Privacy Policy</string>
+    <string name="tos_pp_google">Google</string>
+    <string name="tos_pp_firebase">Firebase</string>
+    <string name="tos_pp_none">None</string>
+
+    <string name="google_scopes_header">Example extra Google scopes</string>
+    <string name="google_scope_drive_file">Drive File</string>
+    <string name="google_scope_youtube_data">Youtube data</string>
+
+    <string name="facebook_permissions_header">Example extra Facebook permissions</string>
+    <string name="facebook_permission_friends">Friends</string>
+    <string name="facebook_permission_photos">Photos</string>
+
+    <string name="options_header">Other Options</string>
+    <string name="options_enable_credential_selector">Enable Smart Lock\'s credential selector</string>
+    <string name="options_enable_hint_selector">Enable Smart Lock\'s hint selector</string>
+    <string name="options_allow_new_email_acccount">Allow new account creation</string>
+    <string name="options_require_name">Require first/last name with email accounts.</string>
+
+    <string name="configuration_required">Configuration required - see README.md</string>
+    <string name="google_label_missing_config">Google configuration missing</string>
+    <string name="facebook_label_missing_config">Facebook configuration missing</string>
+    <string name="twitter_label_missing_config">Twitter configuration missing</string>
+
+    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="account_disabled">Account is disabled by the administrator</string>
+    <string name="unknown_error">An unknown error occurred</string>
+
+    <string name="title_anonymous_upgrade">FirebaseUI Anonymous Account Linking</string>
+    <string name="anonymous_sign_in">Anonymous Sign In</string>
+    <string name="launch_auth_ui">Launch Auth UI</string>
+    <string name="resolve_merge_conflict">Resolve Merge Conflict</string>
+
+    <!-- Auth UI - Signed in -->
+    <string name="signed_in_header">You are signed in!</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account_label">Delete account</string>
+
+    <string name="sign_in_failed">Sign in failed</string>
+    <string name="sign_out_failed">Sign out failed</string>
+    <string name="delete_account_failed">Delete account failed</string>
+
+    <string name="user_profile_header">User profile:</string>
+    <string name="profile_picture_content_desc">Profile picture</string>
+    <string name="used_providers">Providers used: %s</string>
+    <string name="idp_token">IDP Token</string>
+    <string name="idp_secret">IDP Secret</string>
+
+    <!-- Auth UI - Custom AuthMethodPickerLayout -->
+    <string name="custom_layout_subheader">Sign in using this nice custom layout!</string>
+    <string name="custom_layout_idp_header">Choose a provider</string>
+    <string name="custom_layout_email_header">Use your email</string>
+    <string name="custom_layout_email_click_text">Continue with Email</string>
+
+
+    <!-- Storage -->
+    <string name="choose_image">Choose Image</string>
+    <string name="upload">Upload</string>
+    <string name="download">Download</string>
+    <string name="send">Send</string>
+    <string name="accessibility_downloaded_image">Downloaded image</string>
+
+    <string name="rational_image_perm">This sample will read an image from local storage to upload to Cloud Storage.</string>
+
+    <!-- Database -->
+    <string name="start_chatting">No messages. Start chatting at the bottom!</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_in">Signed In</string>
+    <string name="anonymous_auth_failed_msg">
+        Anonymous authentication failed, various components of the demo will not work.
+        Make sure your device is online and that Anonymous Auth is configured in your Firebase project
+        (https://console.firebase.google.com/project/_/authentication/providers)
+    </string>
+
+    <string name="menu_add_data">Add Data</string>
+    <string name="hint_message">Say something…</string>
+    <string name="paging_finished_message">Reached End of List</string>
+
+</resources>

@@ -1,0 +1,212 @@
+[
+  {
+    "title": "background:",
+    "code": "background({0});",
+    "input": "numeric",
+    "code_type": 2,
+    "no_in": 3
+  },
+  {
+    "title": "background image:",
+    "code": "loadImage({0}, img => { background(img); });",
+    "input": "string",
+    "code_type": 2,
+    "no_in": 1
+  },
+  {
+    "title": "ellipse:",
+    "code": "ellipse({0});",
+    "input": "shape",
+    "code_type": 3,
+    "no_in": 3
+  },
+  {
+    "title": "text:",
+    "code": "textSize({0}); \n text('{1}', {2}, {3});",
+    "input": "text",
+    "code_type": 3,
+    "no_in": 3
+  },
+  {
+    "title": "fill with: ",
+    "code": "fill({0});",
+    "input": "numeric",
+    "code_type": 3,
+    "no_in": 1
+  },
+  {
+    "title": "line: ",
+    "code": "line({0});",
+    "input": "shape",
+    "code_type": 3,
+    "no_in": 4
+  },
+  {
+    "title": "rect: ",
+    "code": "rect({0});",
+    "input": "shape",
+    "code_type": 3,
+    "no_in": 4
+  },
+  {
+    "title": "define function to: ",
+    "code": "let {0} = function(){",
+    "input": "cond",
+    "code_type": 1,
+    "no_in": 1
+  },
+  {
+    "title": "if : ",
+    "code": "if({0}){",
+    "input": "cond",
+    "code_type": 3,
+    "no_in": 1
+  },
+  {
+    "title": "when device shaken",
+    "code": "function deviceShaken() {",
+    "input": "cond",
+    "code_type": 1,
+    "no_in": 0
+  },
+  {
+    "title": "else",
+    "code": "}else{",
+    "input": "cond",
+    "code_type": 3,
+    "no_in": 0
+  },
+  {
+    "title": "end",
+    "code": "}",
+    "input": "end",
+    "code_type": 3,
+    "no_in": 0
+  },
+  {
+    "title": "call : ",
+    "code": "{0}();",
+    "input": "string",
+    "code_type": 3,
+    "no_in": 1
+  },
+  {
+    "title": "create new variable n:",
+    "code": "let {0} = {1};",
+    "input": "variable",
+    "code_type": 1,
+    "no_in": 2
+  },
+  {
+    "title": "increase the value n:",
+    "code": "{0} += {1};",
+    "input": "variable",
+    "code_type": 3,
+    "no_in": 2
+  },
+  {
+    "title": "decrease the value n:",
+    "code": "{0} -= {1};",
+    "input": "variable",
+    "code_type": 3,
+    "no_in": 2
+  },
+  {
+    "title": "change the value n:",
+    "code": "{0} = {1};",
+    "input": "variable",
+    "code_type": 3,
+    "no_in": 2
+  },
+  {
+    "title": "stroke r:",
+    "code": "stroke({0});",
+    "input": "numeric",
+    "code_type": 3,
+    "no_in": 3
+  },
+  {
+    "title": "note:",
+    "code": "addNote('{0}');",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 1
+  },
+  {
+    "title": "sound: piano",
+    "code": "selectSample('piano');",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 0
+  },
+  {
+    "title": "sound: harmonium",
+    "code": "selectSample('harmonium');",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 0
+  },
+  {
+    "title": "sound: cello",
+    "code": "selectSample('cello');",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 0
+  },
+  {
+    "title": "frequency: ",
+    "code": "changeOctave('{0}');",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 1
+  },
+  {
+    "title": "add music",
+    "code": "addMusic();",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 0
+  },
+  {
+    "title": "start loop",
+    "code": "startLoop();",
+    "input": "music",
+    "code_type": 2,
+    "no_in": 0
+  },
+  {
+    "title": "times:",
+    "code": "for(let i = 0; i < {0}; i++){",
+    "input": "cond",
+    "code_type": 2,
+    "no_in": 1
+  },
+  {
+    "title": "random number s: e:",
+    "code": "random({0})",
+    "input": "numeric",
+    "code_type": 2,
+    "no_in": 2
+  },
+  {
+    "title": "animated ghost:",
+    "code": "animation(ghost, {0});",
+    "input": "numeric",
+    "code_type": 3,
+    "no_in": 2
+  },
+  {
+    "title": "animated asterisk:",
+    "code": "animation(asterisk, {0});",
+    "input": "numeric",
+    "code_type": 3,
+    "no_in": 2
+  },
+  {
+    "title": "",
+    "code": "",
+    "input": "numeric",
+    "code_type": 2,
+    "no_in": 1
+  }
+]
