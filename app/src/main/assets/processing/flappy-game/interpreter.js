@@ -106,8 +106,8 @@ function setGameScore(x) {
 }
 
 function initInterpreter() {
-    //window.$.getJSON('https://raw.githubusercontent.com/asabuncuoglu13/processing-cards/master/code.json', function (response) {
-    window.$.getJSON('./code.json', function (response) {
+    window.$.getJSON('https://raw.githubusercontent.com/asabuncuoglu13/karton-web/master/flappy-game/code.json', function (response) {
+    //window.$.getJSON('./code.json', function (response) {
         fuse = new Fuse(response, {
             keys: ['title'],
             shouldSort: true

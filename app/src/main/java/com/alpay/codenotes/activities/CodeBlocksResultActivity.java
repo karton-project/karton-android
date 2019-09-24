@@ -96,7 +96,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
                 }
             });
             if (isFlappy){
-                webView.loadUrl("file:///android_asset/processing/flappygame/index.html");
+                webView.loadUrl("file:///android_asset/processing/flappy-game/index.html");
             } else{
                 webView.loadUrl("file:///android_asset/processing/index.html");
             }
