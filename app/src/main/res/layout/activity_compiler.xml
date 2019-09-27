@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fireTopLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
 
-        <SurfaceView
-            android:id="@+id/surface_view"
+        <com.alpay.codenotes.utils.vision.CameraSourcePreview
+            android:id="@+id/firePreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true">
+
+                <com.alpay.codenotes.utils.vision.GraphicOverlay
+                    android:id="@+id/fireFaceOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </com.alpay.codenotes.utils.vision.CameraSourcePreview>
 
         <TextView
-            android:id="@+id/text_view"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="No Text"
-            android:gravity="right"
-            android:layout_marginRight="@dimen/unit8"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:paddingLeft="80dp"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.alpay.codenotes.view.AutofitVerticalRecyclerView
+            android:id="@+id/codeblocks_recycler_view"
+            android:layout_margin="@dimen/unit8"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:layout_width="@dimen/unit180"
+            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/send_code_button"
@@ -35,16 +48,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/unit10" />
-
-        <com.alpay.codenotes.view.AutofitRecyclerView
-            android:id="@+id/codeblocks_recycler_view"
-            android:layout_toRightOf="@+id/send_code_button"
-            android:layout_toLeftOf="@+id/read_code_button"
-            android:layout_margin="@dimen/unit8"
-            android:layout_alignParentBottom="true"
-            android:background="@color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/read_code_button"
@@ -66,6 +69,5 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/unit10" />
-
 
 </RelativeLayout>

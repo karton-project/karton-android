@@ -42,12 +42,10 @@
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.CameraActivity" />
         <activity
             android:name=".activities.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
-        <activity android:name="com.github.florent37.camerafragment.PreviewActivity" />
         <activity
             android:name=".activities.StoryViewActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -93,8 +91,9 @@
             android:screenOrientation="landscape"/>
 
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr" />
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="barcode,ocr" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="2edf501d14eeb3985c921e718a13f3fb5203b32d" />

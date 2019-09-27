@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+
 
 public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> {
 
@@ -46,13 +48,13 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
         holder.mRunButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, CodeBlocksResultActivity.class);
             String[] p5CodeArr = p5Code.split("\n");
-            intent.putExtra(NavigationManager.BUNDLE_KEY, p5CodeArr);
+            intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, CodeNotesCompilerActivity.class);
             String[] p5CodeArr = p5Code.split("\n");
-            intent.putExtra("p5codeArr", p5CodeArr);
+            intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mDeleteButton.setOnClickListener(v -> {

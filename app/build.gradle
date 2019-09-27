@@ -74,7 +74,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime:2.1.0"
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.duanhong169:colorpicker:1.1.5'
-    implementation 'com.github.florent37:camerafragment:1.0.9'
+    //implementation 'com.github.florent37:camerafragment:1.0.9'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'

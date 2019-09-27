@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.CameraActivity;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StoryboardFragment;
 import com.alpay.codenotes.models.Frame;
@@ -128,9 +127,7 @@ public class StoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 if (!permissionsToRequest.isEmpty()) {
                     ActivityCompat.requestPermissions(appCompatActivity, permissionsToRequest.toArray(new String[permissionsToRequest.size()]), REQUEST_CAMERA_PERMISSIONS);
                 } else {
-                    Intent intent = new Intent(appCompatActivity, CameraActivity.class);
-                    intent.putExtra(NavigationManager.BUNDLE_KEY, String.valueOf(mFrameList.get(position).getFrameID()));
-                    appCompatActivity.startActivity(intent);
+                    //TODO: Delete all camera related story activities
                 }
 
                 ((StoryViewHolder) holder).mImage.setVisibility(View.VISIBLE);

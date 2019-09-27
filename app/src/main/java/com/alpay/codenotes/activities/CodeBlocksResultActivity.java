@@ -24,7 +24,7 @@ import butterknife.OnClick;
 
 public class CodeBlocksResultActivity extends BaseActivity {
 
-    private String[] p5Code;
+    private String[] p5Code = {};
     Bundle bundle;
     private boolean isFlappy = false;
     private final Handler mHandler = new Handler();
@@ -96,9 +96,9 @@ public class CodeBlocksResultActivity extends BaseActivity {
                 }
             });
             if (isFlappy){
-                webView.loadUrl("file:///android_asset/processing/flappy-game/index.html");
+                webView.loadUrl("https://codenotesalpay.web.app/processing/flappy-game/index.html");
             } else{
-                webView.loadUrl("file:///android_asset/processing/index.html");
+                webView.loadUrl("https://codenotesalpay.web.app/processing/index.html");
             }
         }
     }

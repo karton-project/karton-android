@@ -16,11 +16,8 @@ import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StoryboardFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
-import com.github.florent37.camerafragment.CameraFragment;
-import com.github.florent37.camerafragment.configuration.Configuration;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 public class NavigationManager {
@@ -31,7 +28,6 @@ public class NavigationManager {
     public static final String STORYBOARD = "story";
     public static final String CONTENT = "content";
     public static final String SKETCH = "sketch";
-    public static final String CAMERA = "camera";
     public static final String NOTES = "notes";
     public static final String INFO = "info";
     public static final String BLOCKLY = "blockly";
@@ -58,12 +54,6 @@ public class NavigationManager {
         } else if (fragmentID.contentEquals(SKETCH)) {
             SketchFragment sketchFragment = new SketchFragment();
             ft.replace(R.id.fragment_container, sketchFragment);
-        } else if (fragmentID.contentEquals(CAMERA)) {
-            if (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                CameraFragment cameraFragment = CameraFragment.newInstance(new Configuration.Builder().build());
-                ft.replace(R.id.fragment_container, cameraFragment);
-                return;
-            }
         } else if (fragmentID.contentEquals(NOTES)) {
             StudyNotesFragment studyNotesFragment = new StudyNotesFragment();
             ft.replace(R.id.fragment_container, studyNotesFragment);
