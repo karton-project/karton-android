@@ -10,13 +10,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.fragments.ProgramListFragment;
-import com.alpay.codenotes.models.Program;
-import com.alpay.codenotes.models.ProgramHelper;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.utils.WebChromeClient;
-
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -114,6 +110,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
     }
 
     public void runCode() {

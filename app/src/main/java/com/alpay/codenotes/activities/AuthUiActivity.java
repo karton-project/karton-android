@@ -163,7 +163,7 @@ public class AuthUiActivity extends BaseActivity {
 
     @DrawableRes
     private int getSelectedLogo() {
-        return R.mipmap.codenoteslogo_round;
+        return R.mipmap.wlogo;
     }
 
     private List<IdpConfig> getSelectedProviders() {

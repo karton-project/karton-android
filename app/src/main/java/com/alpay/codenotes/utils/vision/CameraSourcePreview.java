@@ -22,6 +22,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 
+import com.alpay.codenotes.R;
 import com.google.android.gms.common.images.Size;
 
 import java.io.IOException;
@@ -123,8 +124,8 @@ public class CameraSourcePreview extends ViewGroup {
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    int width = 320;
-    int height = 240;
+    int width = getResources().getDisplayMetrics().widthPixels;
+    int height = getResources().getDisplayMetrics().heightPixels;
     if (cameraSource != null) {
       Size size = cameraSource.getPreviewSize();
       if (size != null) {

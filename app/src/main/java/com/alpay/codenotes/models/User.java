@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class User {
     private String name = "";
     private String email = "";
-    private ArrayList<Program> programList = new ArrayList();
+    private ArrayList<Group> groupList = new ArrayList();
     private ArrayList<StudyNoteItem> noteList = new ArrayList();
 
     public User(){
-
+        groupList.add(new Group("0"));
     }
 
     public User(String name, String email){
@@ -17,10 +17,10 @@ public class User {
         this.email = email;
     }
 
-    public User(String name, String email, ArrayList<Program> programList, ArrayList<StudyNoteItem> noteList) {
+    public User(String name, String email, ArrayList<Group> groupList, ArrayList<StudyNoteItem> noteList) {
         this.name = name;
         this.email = email;
-        this.programList = programList;
+        this.groupList = groupList;
         this.noteList = noteList;
     }
 
@@ -40,12 +40,12 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Program> getProgramList() {
-        return programList;
+    public ArrayList<Group> getGroupList() {
+        return groupList;
     }
 
-    public void setProgramList(ArrayList<Program> programList) {
-        this.programList = programList;
+    public void setGroupList(ArrayList<Group> groupList) {
+        this.groupList = groupList;
     }
 
     public ArrayList<StudyNoteItem> getNoteList() {

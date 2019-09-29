@@ -35,7 +35,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     public void checkIfUserAuthenticate() {
-        if (auth.getCurrentUser() == null && Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
+        if (auth.getCurrentUser() == null && !Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
             Intent intent = new Intent(this, AuthUiActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

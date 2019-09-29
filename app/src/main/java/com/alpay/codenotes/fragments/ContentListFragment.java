@@ -62,7 +62,7 @@ public class ContentListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if(Utils.isInternetAvailable(getContext()) && BaseApplication.connectInternetToGetDB){
+        if(Utils.isInternetAvailable(getContext())){
             initFirebase();
             generateContentListFromFirebase();
         }else{

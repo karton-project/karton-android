@@ -19,7 +19,6 @@ import com.alpay.codenotes.utils.vision.CameraSourcePreview;
 import com.alpay.codenotes.utils.vision.GraphicOverlay;
 import com.alpay.codenotes.utils.vision.ObjectDetectorProcessor;
 import com.alpay.codenotes.utils.vision.TextRecognitionProcessor;
-import com.alpay.codenotes.view.AutofitRecyclerView;
 import com.alpay.codenotes.view.AutofitVerticalRecyclerView;
 import com.alpay.codenotes.view.utils.MarginDecoration;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,8 +36,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.alpay.codenotes.models.ProgramHelper.codeList;
+import static com.alpay.codenotes.models.GroupHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
 
 public class CodeNotesCompilerActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -78,8 +78,19 @@ public class CodeNotesCompilerActivity extends BaseActivity implements ActivityC
         String[] p5Code = codeList.toArray(new String[codeList.size()]);
         Intent intent = new Intent(this, CodeBlocksResultActivity.class);
         intent.putExtra(BUNDLE_CODE_KEY, p5Code);
-        intent.putExtra(NavigationManager.BUNDLE_FLAPPY_KEY, isFlappy);
+        intent.putExtra(BUNDLE_FLAPPY_KEY, isFlappy);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.read_barcode)
+    public void readBarcode(){
+        preview.stop();
+        if (allPermissionsGranted()) {
+            createCameraSource(BARCODE_DETECTION);
+            startCameraSource();
+        } else {
+            getRuntimePermissions();
+        }
     }
 
     @OnClick(R.id.back_code_button)
@@ -104,7 +115,7 @@ public class CodeNotesCompilerActivity extends BaseActivity implements ActivityC
             if (bundle.getString(NavigationManager.BUNDLE_KEY) != null) {
                 openHintView(bundle.getString(NavigationManager.BUNDLE_KEY));
             }
-            if (bundle.getString(NavigationManager.BUNDLE_FLAPPY_KEY) != null){
+            if (bundle.getBoolean(BUNDLE_FLAPPY_KEY)){
                 isFlappy = true;
             }
         }

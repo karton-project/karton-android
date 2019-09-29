@@ -45,7 +45,8 @@ public class Utils {
     public static final String USER_NAME_KEY = "user_name";
     public static final String USER_EMAIL_KEY = "user_email";
     public static final String USER_LOGIN_KEY = "is_login";
-    public static String code;
+    public static String code = "";
+    public static String groupId = "0";
 
     public static boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";

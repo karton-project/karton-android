@@ -9,7 +9,7 @@
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit8"
+        android:layout_margin="@dimen/unit12"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -72,18 +72,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/new_program_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/unit14"
-            android:background="@color/colorPrimary"
-            app:backgroundTint="@color/learn_color"
-            app:srcCompat="@drawable/ic_add" />
-
     </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_program_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/unit14"
+        android:background="@color/colorPrimary"
+        app:backgroundTint="@color/learn_color"
+        app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>

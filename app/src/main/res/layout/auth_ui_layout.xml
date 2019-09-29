@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/unit12"
-        android:src="@mipmap/codenoteslogo_round" />
+        android:src="@mipmap/wlogo" />
 
 
     <LinearLayout

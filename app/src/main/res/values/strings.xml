@@ -30,6 +30,7 @@
 
     <!--Blockly-->
     <string name="no_block_error">No blocks in your program area.</string>
+    <string name="show_all">Hepsini Gör</string>
 
     <!-- Compiler -->
     <string name="codenotescompiler_name">Programı Çalıştır</string>
@@ -61,7 +62,7 @@
     <string name="sendfeedback_thankyoumessage">Önerileriniz için teşekkürler!</string>
 
     <!-- General -->
-    <string name="app_name">Code Notes</string>
+    <string name="app_name">Kart-ON</string>
     <string name="hello_blank_fragment">Merhaba!</string>
     <string name="error_text">Bir hata oluştu.</string>
     <string name="ok">OK</string>

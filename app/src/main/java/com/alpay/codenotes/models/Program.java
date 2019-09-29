@@ -4,16 +4,14 @@ public class Program {
 
     String name = "";
     String code = "";
-    String jsCode = "";
 
     public Program() {
 
     }
 
-    public Program(String name, String code, String jsCode) {
+    public Program(String name, String code) {
         this.name = name;
         this.code = code;
-        this.jsCode = jsCode;
     }
 
     public String getName() {
@@ -32,11 +30,4 @@ public class Program {
         this.code = code;
     }
 
-    public String getJsCode() {
-        return jsCode;
-    }
-
-    public void setJsCode(String jsCode) {
-        this.jsCode = jsCode;
-    }
 }

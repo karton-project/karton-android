@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.alpay.codenotes.models.ProgramHelper.codeList;
+import static com.alpay.codenotes.models.GroupHelper.codeList;
 
 
 public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> {
@@ -41,12 +41,9 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
         holder.mTitle.setText(mContentList.get(position));
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                codeList.remove(position);
-                ((CodeNotesCompilerActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
-            }
+        holder.mDeleteButton.setOnClickListener(v -> {
+            codeList.remove(position);
+            ((CodeNotesCompilerActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
         });
 
         holder.mTitle.setOnClickListener(v -> {

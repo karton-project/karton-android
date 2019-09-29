@@ -25,9 +25,6 @@ public class BaseApplication extends Application {
     public static FirebaseAuth auth;
     public static User user = new User();
     public static String userID = "";
-    public static int fbDatabaseVersion;
-    public static final int appDatabaseVersion = 1;
-    public static boolean connectInternetToGetDB;
 
     private static final String TAG = BaseApplication.class.getSimpleName();
     private int mVisibleCount;
@@ -49,7 +46,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         Fabric.with(this, new Crashlytics());
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             userID = auth.getUid();
@@ -65,21 +61,6 @@ public class BaseApplication extends Application {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-        }
-
-        ref.child("version").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                fbDatabaseVersion = dataSnapshot.getValue(Integer.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-        if (fbDatabaseVersion != appDatabaseVersion) {
-            connectInternetToGetDB = true;
         }
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
@@ -146,12 +127,15 @@ public class BaseApplication extends Application {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void saveUserData(){
-        if (user != null){
-            ref.child("users").child(userID).setValue(user);
+    public static boolean checkIfUserLogin(){
+        return !userID.contentEquals("");
+    }
 
-            if (user.getProgramList() != null){
-                ref.child("users").child(userID).child("programList").setValue(user.getProgramList());
+    private void saveUserData(){
+        if (checkIfUserLogin()){
+
+            if (user.getGroupList() != null){
+                ref.child("users").child(userID).child("groupList").setValue(user.getGroupList());
             }
 
             if (user.getNoteList() != null){

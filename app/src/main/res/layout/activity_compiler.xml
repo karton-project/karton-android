@@ -50,6 +50,17 @@
             android:layout_margin="@dimen/unit10" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/read_barcode"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_photo_camera"
+            android:tint="@color/white"
+            android:layout_toRightOf="@+id/back_code_button"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/unit10" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/read_code_button"
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
