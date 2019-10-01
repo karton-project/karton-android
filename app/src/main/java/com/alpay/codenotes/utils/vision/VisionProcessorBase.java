@@ -15,17 +15,15 @@ package com.alpay.codenotes.utils.vision;
 
 import android.graphics.Bitmap;
 
-import androidx.annotation.GuardedBy;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.nio.ByteBuffer;
+
+import androidx.annotation.GuardedBy;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Abstract base class for ML Kit frame processors. Subclasses need to implement {@link
@@ -108,22 +106,14 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
             final GraphicOverlay graphicOverlay) {
         detectInImage(image)
                 .addOnSuccessListener(
-                        new OnSuccessListener<T>() {
-                            @Override
-                            public void onSuccess(T results) {
-                                VisionProcessorBase.this.onSuccess(originalCameraImage, results,
-                                        metadata,
-                                        graphicOverlay);
-                                processLatestImage(graphicOverlay);
-                            }
+                        results -> {
+                            VisionProcessorBase.this.onSuccess(originalCameraImage, results,
+                                    metadata,
+                                    graphicOverlay);
+                            processLatestImage(graphicOverlay);
                         })
                 .addOnFailureListener(
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                VisionProcessorBase.this.onFailure(e);
-                            }
-                        });
+                        e -> VisionProcessorBase.this.onFailure(e));
     }
 
     @Override

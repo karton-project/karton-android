@@ -1,6 +1,7 @@
 package com.alpay.codenotes.fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,15 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.WebChromeClient;
+import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -30,6 +34,12 @@ public class WebViewFragment extends Fragment {
     private Unbinder unbinder;
     private String url;
 
+    @BindView(R.id.error_image)
+    ImageView imageView;
+
+    @BindView(R.id.error_layout)
+    LinearLayout errorLayout;
+
     @BindView(R.id.webview_frame)
     WebView webView;
 
@@ -40,14 +50,14 @@ public class WebViewFragment extends Fragment {
 
     }
 
-    public WebViewFragment(String webURL){
+    public WebViewFragment(String webURL) {
         this.url = webURL;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_web_view, container, false);
-        unbinder =  ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         setWebView();
         return view;
     }
@@ -63,7 +73,7 @@ public class WebViewFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
@@ -71,9 +81,13 @@ public class WebViewFragment extends Fragment {
             }
 
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
-                super.onReceivedError(view, request, error);
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
+                if (url.equals(failingUrl)) {
+                    view.setVisibility(View.GONE);
+                    errorLayout.setVisibility(View.VISIBLE);
+                    Glide.with(getActivity()).load("file:///android_asset/lottie/empty.gif").into(imageView);
+                }
+                super.onReceivedError(view, errorCode, description, failingUrl);
             }
         });
     }

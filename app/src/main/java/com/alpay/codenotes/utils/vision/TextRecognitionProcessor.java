@@ -14,11 +14,6 @@
 package com.alpay.codenotes.utils.vision;
 
 import android.graphics.Bitmap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import okhttp3.internal.Util;
-
 import android.util.Log;
 
 import com.alpay.codenotes.utils.Utils;
@@ -30,6 +25,9 @@ import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Processor for the text recognition demo.
@@ -74,8 +72,7 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
         for (int i = 0; i < blocks.size(); i++) {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
             for (int j = 0; j < lines.size(); j++) {
-                GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay,
-                        lines.get(j));
+                GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j));
                 graphicOverlay.add(textGraphic);
                 Utils.code = lines.get(j).getText();
             }

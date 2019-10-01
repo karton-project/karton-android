@@ -12,12 +12,12 @@ import android.widget.ProgressBar;
 
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
-import com.alpay.codenotes.adapter.ProgramViewAdapter;
+import com.alpay.codenotes.activities.CodeNotesCompilerOld;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
+import com.alpay.codenotes.adapter.ProgramViewAdapter;
 import com.alpay.codenotes.models.Group;
-import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.models.GroupHelper;
+import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,7 +48,6 @@ public class ProgramListFragment extends Fragment {
     private GroupViewAdapter groupViewAdapter;
     private ArrayList<Group> groupList;
     private Unbinder unbinder;
-    ProgramViewAdapter programViewAdapter;
 
     @BindView(R.id.program_recycler_view)
     RecyclerView recyclerView;
@@ -63,12 +63,12 @@ public class ProgramListFragment extends Fragment {
 
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
-        Intent intent = new Intent(getActivity(), CodeNotesCompilerActivity.class);
+        Intent intent = new Intent(getActivity(), CodeNotesCompilerOld.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.hourofcode_view)
-    public void openHourOfCodeMode(){
+    public void openHourOfCodeMode() {
         NavigationManager.openFlappyBirdHourOfCode((AppCompatActivity) getActivity());
     }
 
@@ -85,7 +85,11 @@ public class ProgramListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_program, container, false);
         unbinder = ButterKnife.bind(this, view);
-        generateProgramList();
+        if (Utils.isInternetAvailable(getContext())) {
+            generateProgramListFromFirebase();
+        } else {
+            generateProgramListFromGSON();
+        }
         return view;
     }
 
@@ -95,7 +99,7 @@ public class ProgramListFragment extends Fragment {
         super.onDetach();
     }
 
-    public void saveProgram(String name, String code){
+    public void saveProgram(String name, String code) {
         Program program = new Program();
         program.setCode(code);
         program.setName(name);
@@ -115,9 +119,9 @@ public class ProgramListFragment extends Fragment {
         groupViewAdapter = new GroupViewAdapter((AppCompatActivity) getActivity(), groupList);
         recyclerView.setAdapter(groupViewAdapter);
         recyclerView.scrollToPosition(position);
-        if (groupList.size() <= 0){
+        if (groupList.size() <= 0) {
             showEmptyScreenLayout();
-        }else{
+        } else {
             hideEmptyScreenLayout();
         }
     }
@@ -136,7 +140,9 @@ public class ProgramListFragment extends Fragment {
                 }
                 if (recyclerView != null) {
                     setUpRecyclerView();
-                    refreshCodeBlockRecyclerView((groupList.size() > 0 ) ? groupList.size() - 1 : 0);
+                    progressBar.setVisibility(View.GONE);
+                    refreshCodeBlockRecyclerView((groupList.size() > 0) ? groupList.size() - 1 : 0);
+                    GroupHelper.saveProgramList(getActivity(), groupList);
                 }
             }
 
@@ -157,20 +163,12 @@ public class ProgramListFragment extends Fragment {
         emptyProgramLayout.setVisibility(View.GONE);
     }
 
-    private void generateProgramList() {
-        try {
-            if (Utils.isInternetAvailable(getContext()) && BaseApplication.checkIfUserLogin()) {
-                generateProgramListFromFirebase();
-            }else{
-                groupList = GroupHelper.readProgramList(getActivity());
-            }
-            if (recyclerView != null) {
-                setUpRecyclerView();
-                refreshCodeBlockRecyclerView((groupList.size() > 0 ) ? groupList.size() - 1 : 0);
-                progressBar.setVisibility(View.GONE);
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("Program", "generateProgramListFromGSON: ", e);
+    private void generateProgramListFromGSON() {
+        groupList = GroupHelper.readProgramList(getActivity());
+        if (recyclerView != null) {
+            setUpRecyclerView();
+            refreshCodeBlockRecyclerView((groupList.size() > 0) ? groupList.size() - 1 : 0);
+            progressBar.setVisibility(View.GONE);
         }
     }
 }

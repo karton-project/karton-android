@@ -1,8 +1,6 @@
 package com.alpay.codenotes.utils.vision;
 
 import android.graphics.Bitmap;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -14,6 +12,9 @@ import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetectorOptions
 
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /** A processor to run object detector. */
 public class ObjectDetectorProcessor extends VisionProcessorBase<List<FirebaseVisionObject>> {

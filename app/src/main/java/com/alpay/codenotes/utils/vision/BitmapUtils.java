@@ -6,12 +6,14 @@ import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
-import android.hardware.Camera.CameraInfo;
-import androidx.annotation.Nullable;
 import android.util.Log;
+
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+
+import androidx.annotation.Nullable;
 
 /** Utils functions for bitmap conversions. */
 public class BitmapUtils {
@@ -61,13 +63,7 @@ public class BitmapUtils {
 
         // Rotate the image back to straight.}
         matrix.postRotate(rotationDegree);
-        if (facing == CameraInfo.CAMERA_FACING_BACK) {
-            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        } else {
-            // Mirror the image along X axis for front-facing camera image.
-            matrix.postScale(-1.0f, 1.0f);
-            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        }
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 }
 

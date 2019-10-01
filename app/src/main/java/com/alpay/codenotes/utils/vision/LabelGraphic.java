@@ -3,6 +3,7 @@ package com.alpay.codenotes.utils.vision;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 
 import java.util.List;

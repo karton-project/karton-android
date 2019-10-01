@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.ContentViewAdapter;
 import com.alpay.codenotes.models.Content;

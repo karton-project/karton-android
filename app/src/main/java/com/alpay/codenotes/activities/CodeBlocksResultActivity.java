@@ -3,16 +3,18 @@ package com.alpay.codenotes.activities;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.utils.WebChromeClient;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +24,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     private String[] p5Code = {};
     Bundle bundle;
+    private String url = "";
     private boolean isFlappy = false;
     private final Handler mHandler = new Handler();
     private final Launcher mLauncher = new Launcher();
@@ -34,6 +37,12 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     @BindView(R.id.result_webview)
     WebView webView;
+
+    @BindView(R.id.error_image)
+    ImageView imageView;
+
+    @BindView(R.id.error_layout)
+    LinearLayout errorLayout;
 
     @OnClick(R.id.back_code_button)
     public void backToProgramming(){
@@ -90,12 +99,22 @@ public class CodeBlocksResultActivity extends BaseActivity {
                 public void onPageFinished(WebView view, String url) {
                     mHandler.postDelayed(mLauncher, 500);
                 }
+                @Override
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
+                    if (url.equals(failingUrl)) {
+                        view.setVisibility(View.GONE);
+                        errorLayout.setVisibility(View.VISIBLE);
+                        Glide.with(CodeBlocksResultActivity.this).load("file:///android_asset/lottie/empty.gif").into(imageView);
+                    }
+                    super.onReceivedError(view, errorCode, description, failingUrl);
+                }
             });
             if (isFlappy){
-                webView.loadUrl("https://codenotesalpay.web.app/processing/flappy-game/index.html");
+                url = "https://codenotesalpay.web.app/processing/flappy-game/index.html";
             } else{
-                webView.loadUrl("https://codenotesalpay.web.app/processing/index.html");
+                url = "https://codenotesalpay.web.app/processing/index.html";
             }
+            webView.loadUrl(url);
         }
     }
 
@@ -110,7 +129,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
 
     public void runCode() {

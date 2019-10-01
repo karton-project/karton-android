@@ -45,8 +45,8 @@ public class GroupHelper {
         writeToFile(programListString, context);
     }
 
-    public static ArrayList<Group> readProgramList(Context context) throws FileNotFoundException {
-        BufferedReader bufferedReader = null;
+    public static ArrayList<Group> readProgramList(Context context){
+        BufferedReader bufferedReader;
         try {
             InputStream inputStream = context.openFileInput(FILE_NAME);
             if (inputStream != null) {

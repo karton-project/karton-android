@@ -11,6 +11,29 @@
 
     </WebView>
 
+    <LinearLayout
+        android:id="@+id/error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="@dimen/unit200"
+            android:layout_height="@dimen/unit200" />
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="@dimen/unit200"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit16"
+            android:gravity="center"
+            android:text="@string/no_internet_connection" />
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_code_button"
         android:background="@color/colorPrimary"

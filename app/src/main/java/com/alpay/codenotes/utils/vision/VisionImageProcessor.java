@@ -14,10 +14,8 @@
 package com.alpay.codenotes.utils.vision;
 
 import android.graphics.Bitmap;
-import android.media.Image;
 
 import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 
 import java.nio.ByteBuffer;
 

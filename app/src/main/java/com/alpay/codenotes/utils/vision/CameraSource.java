@@ -1,17 +1,3 @@
-// Copyright 2018 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package com.alpay.codenotes.utils.vision;
 
 import android.Manifest;
@@ -22,8 +8,6 @@ import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -39,6 +23,9 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+
 /**
  * Manages the camera and allows UI updates on top of it (e.g. overlaying extra Graphics or
  * displaying extra information). This receives preview frames from the camera at a specified rate,
@@ -48,9 +35,6 @@ import java.util.Map;
 public class CameraSource {
   @SuppressLint("InlinedApi")
   public static final int CAMERA_FACING_BACK = CameraInfo.CAMERA_FACING_BACK;
-
-  @SuppressLint("InlinedApi")
-  public static final int CAMERA_FACING_FRONT = CameraInfo.CAMERA_FACING_FRONT;
 
   private static final String TAG = "MIDemoApp:CameraSource";
 
@@ -84,8 +68,8 @@ public class CameraSource {
   // These values may be requested by the caller.  Due to hardware limitations, we may need to
   // select close, but not exactly the same values for these.
   private final float requestedFps = 20.0f;
-  private final int requestedPreviewWidth = 480;
-  private final int requestedPreviewHeight = 360;
+  private int requestedPreviewWidth = 480;
+  private int requestedPreviewHeight = 360;
   private final boolean requestedAutoFocus = true;
 
   // These instances need to be held onto to avoid GC of their underlying resources.  Even though
@@ -126,6 +110,8 @@ public class CameraSource {
 
   public CameraSource(Activity activity, GraphicOverlay overlay) {
     this.activity = activity;
+    requestedPreviewHeight = activity.getResources().getDisplayMetrics().heightPixels;
+    requestedPreviewWidth = activity.getResources().getDisplayMetrics().widthPixels;
     graphicOverlay = overlay;
     graphicOverlay.clear();
     processingRunnable = new FrameProcessingRunnable();
@@ -247,23 +233,11 @@ public class CameraSource {
     bytesToByteBuffer.clear();
   }
 
-  /** Changes the facing of the camera. */
-  public synchronized void setFacing(int facing) {
-    if ((facing != CAMERA_FACING_BACK) && (facing != CAMERA_FACING_FRONT)) {
-      throw new IllegalArgumentException("Invalid camera: " + facing);
-    }
-    this.facing = facing;
-  }
-
   /** Returns the preview size that is currently in use by the underlying camera. */
   public Size getPreviewSize() {
     return previewSize;
   }
 
-  /**
-   * Returns the selected camera; one of {@link #CAMERA_FACING_BACK} or {@link
-   * #CAMERA_FACING_FRONT}.
-   */
   public int getCameraFacing() {
     return facing;
   }

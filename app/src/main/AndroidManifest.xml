@@ -38,6 +38,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activities.CodeNotesCompilerOld"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activities.HomeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"

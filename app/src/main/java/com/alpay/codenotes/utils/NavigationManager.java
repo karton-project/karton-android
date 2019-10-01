@@ -1,11 +1,10 @@
 package com.alpay.codenotes.utils;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
+import com.alpay.codenotes.activities.CodeNotesCompilerOld;
 import com.alpay.codenotes.activities.HomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
 import com.alpay.codenotes.fragments.BlocklyWebViewFragment;
@@ -83,7 +82,7 @@ public class NavigationManager {
     }
 
     public static void openFlappyBirdHourOfCode(AppCompatActivity appCompatActivity) {
-        Intent intent = new Intent(appCompatActivity, CodeNotesCompilerActivity.class);
+        Intent intent = new Intent(appCompatActivity, CodeNotesCompilerOld.class);
         intent.putExtra(NavigationManager.BUNDLE_FLAPPY_KEY, true);
         appCompatActivity.startActivity(intent);
     }

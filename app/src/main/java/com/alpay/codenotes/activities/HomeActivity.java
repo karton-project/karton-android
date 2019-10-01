@@ -1,6 +1,5 @@
 package com.alpay.codenotes.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.alpay.codenotes.R;
