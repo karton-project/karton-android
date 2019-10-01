@@ -24,12 +24,14 @@ public class BaseApplication extends Application {
 
     public static FirebaseAuth auth;
     public static User user = new User();
-    public static String userID = "";
+    public static String userID;
+    public static int version;
 
     private static final String TAG = BaseApplication.class.getSimpleName();
     private int mVisibleCount;
     private boolean mInBackground;
     public static DatabaseReference ref;
+
 
     static {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
@@ -47,9 +49,9 @@ public class BaseApplication extends Application {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         Fabric.with(this, new Crashlytics());
         auth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference();
         if (auth.getCurrentUser() != null) {
             userID = auth.getUid();
-            ref = FirebaseDatabase.getInstance().getReference();
             ref.child("users/" + userID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

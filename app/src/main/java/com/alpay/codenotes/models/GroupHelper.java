@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -80,15 +79,5 @@ public class GroupHelper {
     public static String toJson(List<Program> programList) {
         return gson.toJson(programList);
     }
-
-    public static List<Program> listFromJSON(String jsonString) {
-        ArrayList<Program> programList = gson.fromJson(jsonString, groupListType);
-        return programList;
-    }
-
-    public static List<Group> listAll() {
-        return groupList;
-    }
-
 
 }

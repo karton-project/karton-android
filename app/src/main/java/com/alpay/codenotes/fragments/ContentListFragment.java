@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.ContentViewAdapter;
 import com.alpay.codenotes.models.Content;
@@ -48,7 +49,7 @@ public class ContentListFragment extends Fragment {
     ProgressBar progressBar;
 
     @OnClick(R.id.take_note_button)
-    public void startTakeNoteAction(){
+    public void startTakeNoteAction() {
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.NOTES);
     }
 
@@ -61,12 +62,28 @@ public class ContentListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if(Utils.isInternetAvailable(getContext())){
-            initFirebase();
-            generateContentListFromFirebase();
-        }else{
+        if (Utils.isInternetAvailable(getContext())) {
+            BaseApplication.ref.child("tr/version").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int version = ((Long) dataSnapshot.getValue()).intValue();
+                    if (Utils.getIntegerFromSharedPreferences((AppCompatActivity) getActivity(), Utils.DB_VERSION_KEY) != version) {
+                        initFirebase();
+                        generateContentListFromFirebase();
+                        Utils.addIntegerToSharedPreferences((AppCompatActivity) getActivity(), Utils.DB_VERSION_KEY, version);
+                    } else {
+                        generateContentListFromGSON();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        } else {
             generateContentListFromGSON();
-            if (!Utils.noConnectionErrorDisplayed){
+            if (!Utils.noConnectionErrorDisplayed) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.no_internet_connection)
                         .setMessage(R.string.no_internet_dialog_message)
@@ -114,7 +131,8 @@ public class ContentListFragment extends Fragment {
                     Content content = dataSnapshot.getValue(Content.class);
                     contentArrayList.add(content);
                 }
-                if (recyclerView != null){
+                ContentHelper.saveContentList(getContext(), contentArrayList);
+                if (recyclerView != null) {
                     setUpRecyclerView();
                     populateRecyclerView();
                 }
@@ -128,14 +146,10 @@ public class ContentListFragment extends Fragment {
     }
 
     private void generateContentListFromGSON() {
-        try {
-            contentArrayList = ContentHelper.readContentList(getActivity());
-            if (recyclerView != null){
-                setUpRecyclerView();
-                populateRecyclerView();
-            }
-        } catch (FileNotFoundException e){
-            Log.e("Content", "generateContentListFromGSON: ", e);
+        contentArrayList = ContentHelper.readContentList(getActivity());
+        if (recyclerView != null) {
+            setUpRecyclerView();
+            populateRecyclerView();
         }
     }
 }

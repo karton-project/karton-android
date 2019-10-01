@@ -40,13 +40,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Utils {
 
-    public static String SP_START_KEY_IS_PRESSED = "startKeyIsPressed";
     public static boolean noConnectionErrorDisplayed = false;
     public static final String USER_NAME_KEY = "user_name";
     public static final String USER_EMAIL_KEY = "user_email";
     public static final String USER_LOGIN_KEY = "is_login";
+    public static final String DB_VERSION_KEY = "db_version";
     public static String code = "";
-    public static String groupId = "0";
+    public static String groupId = "Default";
 
     public static boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";

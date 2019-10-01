@@ -79,13 +79,4 @@ public class FrameHelper {
         return frameList;
     }
 
-    public static List<Frame> listAll(){
-
-        return frameList;
-    }
-
-    public static void addNewFrame(Frame frame){
-        frameList.add(frame);
-    }
-
 }

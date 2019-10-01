@@ -14,7 +14,6 @@ import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeNotesCompilerOld;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
-import com.alpay.codenotes.adapter.ProgramViewAdapter;
 import com.alpay.codenotes.models.Group;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
@@ -27,10 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -85,7 +82,7 @@ public class ProgramListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_program, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (Utils.isInternetAvailable(getContext())) {
+        if (Utils.isInternetAvailable(getContext()) && BaseApplication.userID!= null) {
             generateProgramListFromFirebase();
         } else {
             generateProgramListFromGSON();
@@ -104,6 +101,10 @@ public class ProgramListFragment extends Fragment {
         program.setCode(code);
         program.setName(name);
         int id = GroupHelper.getGroupIndex(Utils.groupId);
+        if (groupList.size() <= 0){
+            groupList.add(new Group(Utils.groupId, new ArrayList<>()));
+            hideEmptyScreenLayout();
+        }
         groupList.get(id).getProgramList().add(program);
         GroupHelper.saveProgramList(getActivity(), groupList);
         GroupHelper.codeList = new ArrayList<>();
