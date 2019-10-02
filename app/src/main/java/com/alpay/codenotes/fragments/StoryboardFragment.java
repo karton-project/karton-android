@@ -88,10 +88,6 @@ public class StoryboardFragment extends Fragment {
         newFrameLayout.setVisibility(View.GONE);
     }
 
-    public static StoryboardFragment newInstance(){
-        return new StoryboardFragment();
-    }
-
     public StoryboardFragment() {
         // Required empty public constructor
     }

@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeBlocksResultActivity;
-import com.alpay.codenotes.activities.CodeNotesCompilerOld;
+import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
+import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.NavigationManager;
 
@@ -27,10 +28,12 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
 
     private AppCompatActivity appCompatActivity;
     private ArrayList<Program> mProgramList;
+    private int parentPosition;
 
-    public ProgramViewAdapter(AppCompatActivity appCompatActivity, ArrayList<Program> mContentList) {
+    public ProgramViewAdapter(AppCompatActivity appCompatActivity, ArrayList<Program> mContentList, int parentPosition) {
         this.appCompatActivity = appCompatActivity;
         this.mProgramList = mContentList;
+        this.parentPosition = parentPosition;
     }
 
     @Override
@@ -52,20 +55,22 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(appCompatActivity, CodeNotesCompilerOld.class);
+            Intent intent = new Intent(appCompatActivity, CodeNotesCompilerActivity.class);
             String[] p5CodeArr = p5Code.split("\n");
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mDeleteButton.setOnClickListener(v -> {
-            mProgramList.remove(position);
-            NavigationManager.programListFragment.refreshCodeBlockRecyclerView(position);
+            GroupHelper.deleteProgram(parentPosition, position);
         });
     }
 
     @Override
     public int getItemCount() {
-        return mProgramList.size();
+        if (mProgramList != null)
+            return mProgramList.size();
+        else
+            return 0;
     }
 }
 

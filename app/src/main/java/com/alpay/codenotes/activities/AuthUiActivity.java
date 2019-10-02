@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.ConfigurationUtils;
 import com.alpay.codenotes.utils.Utils;
@@ -98,6 +99,7 @@ public class AuthUiActivity extends BaseActivity {
         }
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
+        BaseApplication.userID = auth.getUid();
 
         if (auth.getCurrentUser() != null) {
             Utils.addBooleanToSharedPreferences(this, Utils.USER_LOGIN_KEY, true);

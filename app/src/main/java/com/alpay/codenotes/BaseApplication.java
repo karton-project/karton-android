@@ -64,64 +64,6 @@ public class BaseApplication extends Application {
                 }
             });
         }
-
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                mVisibleCount++;
-                if (mInBackground && mVisibleCount > 0) {
-                    mInBackground = false;
-                    Log.i(TAG, "App in foreground");
-                }
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                mVisibleCount--;
-                if (mVisibleCount == 0) {
-                    if (activity.isFinishing()) {
-                        saveUserData();
-                        Log.i(TAG, "App is finishing");
-                    } else {
-                        mInBackground = true;
-                        Log.i(TAG, "App in background");
-                    }
-                }
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-            }
-        });
-    }
-
-    public boolean isAppInBackground() {
-        return mInBackground;
-    }
-
-    public boolean isAppVisible() {
-        return mVisibleCount > 0;
-    }
-
-    public int getVisibleCount() {
-        return mVisibleCount;
     }
 
     @Override
@@ -129,21 +71,4 @@ public class BaseApplication extends Application {
         super.onConfigurationChanged(newConfig);
     }
 
-    public static boolean checkIfUserLogin(){
-        return !userID.contentEquals("");
-    }
-
-    private void saveUserData(){
-        if (checkIfUserLogin()){
-
-            if (user.getGroupList() != null){
-                ref.child("users").child(userID).child("groupList").setValue(user.getGroupList());
-            }
-
-            if (user.getNoteList() != null){
-                ref.child("users").child(userID).child("noteList").setValue(user.getNoteList());
-            }
-        }
-
-    }
 }

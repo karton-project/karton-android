@@ -18,11 +18,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.alpay.codenotes.BaseApplication.ref;
+import static com.alpay.codenotes.BaseApplication.userID;
+
 public class GroupHelper {
 
     public static ArrayList<String> codeList = new ArrayList();
     public static ArrayList<Group> groupList = new ArrayList();
     private static final String FILE_NAME = "karton_programs.json";
+    public static String groupId = "Default";
     private static Type groupListType = new TypeToken<ArrayList<Group>>() {}.getType();
 
     static Gson gson = new GsonBuilder().create();
@@ -37,26 +41,24 @@ public class GroupHelper {
         }
     }
 
-    public static void saveProgramList(Context context, ArrayList<Group> list) {
-        groupList = list;
-        BaseApplication.user.setGroupList(list);
-        String programListString = gson.toJson(list);
+    public static void saveProgramList(Context context) {
+        BaseApplication.user.setGroupList(groupList);
+        String programListString = gson.toJson(groupList);
         writeToFile(programListString, context);
     }
 
     public static ArrayList<Group> readProgramList(Context context){
+        groupList = new ArrayList<>();
         BufferedReader bufferedReader;
         try {
             InputStream inputStream = context.openFileInput(FILE_NAME);
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
-                ArrayList<Group> data = new ArrayList<>();
                 if (bufferedReader != null) {
                     JsonReader reader = new JsonReader(bufferedReader);
-                    data = gson.fromJson(reader, groupListType);
+                    groupList = gson.fromJson(reader, groupListType);
                 }
-                groupList = data;
             }else{
                 groupList = new ArrayList<>();
             }
@@ -67,13 +69,41 @@ public class GroupHelper {
     }
 
     public static int getGroupIndex(String groupID){
-        int id = 0;
-        for (int i= 0; i < groupList.size(); i++){
+        int id = -1;
+        for (int i= 0; i < groupList.size() -1; i++){
             if (groupID.contentEquals(groupList.get(i).getName())){
                 id = i;
             }
         }
         return id;
+    }
+
+    public static void changeProgram(int index, Program program) {
+        int id = GroupHelper.getGroupIndex(GroupHelper.groupId);
+        groupList.get(id).getProgramList().set(index, program);
+        if (userID!=null)
+            ref.child("users").child(userID).child("groupList").setValue(groupList);
+    }
+
+    public static void deleteProgram(int parentPos, int index) {
+        groupList.get(parentPos).getProgramList().remove(index);
+        if (userID!=null)
+            ref.child("users").child(userID).child("groupList").setValue(groupList);
+    }
+
+    public static void saveProgram(Context context, String name, String code) {
+        Program program = new Program();
+        program.setCode(code);
+        program.setName(name);
+        int id = GroupHelper.getGroupIndex(GroupHelper.groupId);
+        if (id < 0){
+            groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
+            id = groupList.size() -1;
+        }
+        groupList.get(id).getProgramList().add(program);
+        if (userID!=null)
+            ref.child("users").child(userID).child("groupList").setValue(groupList);
+        codeList = new ArrayList<>();
     }
 
     public static String toJson(List<Program> programList) {

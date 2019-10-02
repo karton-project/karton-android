@@ -45,8 +45,9 @@ public class Utils {
     public static final String USER_EMAIL_KEY = "user_email";
     public static final String USER_LOGIN_KEY = "is_login";
     public static final String DB_VERSION_KEY = "db_version";
+    public static final String IS_FIRST_OPEN_KEY = "isfirst";
+    public static final String CLOSE_FLAPPY = "closeflappy";
     public static String code = "";
-    public static String groupId = "Default";
 
     public static boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";

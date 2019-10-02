@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.CodeNotesCompilerOld;
+import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
         holder.mTitle.setText(mContentList.get(position));
         holder.mDeleteButton.setOnClickListener(v -> {
             codeList.remove(position);
-            ((CodeNotesCompilerOld) appCompatActivity).refreshCodeBlockRecyclerView(position);
+            ((CodeNotesCompilerActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
         });
 
         holder.mTitle.setOnClickListener(v -> {
@@ -56,7 +56,7 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
             codeList.set(position, holder.mTextEdit.getText().toString());
             holder.mTitle.setVisibility(View.VISIBLE);
             holder.mTextEditLayout.setVisibility(View.GONE);
-            ((CodeNotesCompilerOld) appCompatActivity).refreshCodeBlockRecyclerView(position);
+            ((CodeNotesCompilerActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
         });
     }
 

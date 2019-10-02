@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.CodeNotesCompilerOld;
+import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
 import com.alpay.codenotes.models.Group;
 import com.alpay.codenotes.models.GroupHelper;
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,13 +39,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.alpay.codenotes.BaseApplication.userID;
+import static com.alpay.codenotes.models.GroupHelper.groupList;
+
 public class ProgramListFragment extends Fragment {
 
     private View view;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private GroupViewAdapter groupViewAdapter;
-    private ArrayList<Group> groupList;
     private Unbinder unbinder;
 
     @BindView(R.id.program_recycler_view)
@@ -58,12 +62,22 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.empty_program_image)
     ImageView imageView;
 
+    @BindView(R.id.hourofcode_view)
+    RelativeLayout hourOfCodeView;
+
+    @OnClick(R.id.close_flappy_bird)
+    public void closeFlappyBirdAnnouncement(){
+        hourOfCodeView.setVisibility(View.GONE);
+        Utils.addBooleanToSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_FLAPPY, true);
+    }
+
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
-        Intent intent = new Intent(getActivity(), CodeNotesCompilerOld.class);
+        Intent intent = new Intent(getActivity(), CodeNotesCompilerActivity.class);
         startActivity(intent);
     }
 
+    @Nullable
     @OnClick(R.id.hourofcode_view)
     public void openHourOfCodeMode() {
         NavigationManager.openFlappyBirdHourOfCode((AppCompatActivity) getActivity());
@@ -73,19 +87,18 @@ public class ProgramListFragment extends Fragment {
         // default public constructor
     }
 
-    public static ProgramListFragment newInstance() {
-        return new ProgramListFragment();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_program, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (Utils.isInternetAvailable(getContext()) && BaseApplication.userID!= null) {
+        if (Utils.isInternetAvailable(getContext()) && userID!= null) {
             generateProgramListFromFirebase();
         } else {
             generateProgramListFromGSON();
+        }
+        if (Utils.getBooleanFromSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_FLAPPY)){
+            hourOfCodeView.setVisibility(View.GONE);
         }
         return view;
     }
@@ -94,20 +107,6 @@ public class ProgramListFragment extends Fragment {
     public void onDetach() {
         unbinder.unbind();
         super.onDetach();
-    }
-
-    public void saveProgram(String name, String code) {
-        Program program = new Program();
-        program.setCode(code);
-        program.setName(name);
-        int id = GroupHelper.getGroupIndex(Utils.groupId);
-        if (groupList.size() <= 0){
-            groupList.add(new Group(Utils.groupId, new ArrayList<>()));
-            hideEmptyScreenLayout();
-        }
-        groupList.get(id).getProgramList().add(program);
-        GroupHelper.saveProgramList(getActivity(), groupList);
-        GroupHelper.codeList = new ArrayList<>();
     }
 
     private void setUpRecyclerView() {
@@ -128,10 +127,10 @@ public class ProgramListFragment extends Fragment {
     }
 
     private void generateProgramListFromFirebase() {
+        groupList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("/users/" + BaseApplication.auth.getCurrentUser().getUid() + "/groupList");
         databaseReference.keepSynced(true);
-        groupList = new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -143,7 +142,6 @@ public class ProgramListFragment extends Fragment {
                     setUpRecyclerView();
                     progressBar.setVisibility(View.GONE);
                     refreshCodeBlockRecyclerView((groupList.size() > 0) ? groupList.size() - 1 : 0);
-                    GroupHelper.saveProgramList(getActivity(), groupList);
                 }
             }
 

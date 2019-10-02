@@ -19,13 +19,12 @@ public class GroupViewAdapter extends RecyclerView.Adapter<GroupViewAdapter.Grou
 
 
     class GroupViewHolder extends RecyclerView.ViewHolder {
-        private TextView sectionLabel, showAllButton;
+        private TextView sectionLabel;
         private RecyclerView itemRecyclerView;
 
         public GroupViewHolder(View itemView) {
             super(itemView);
             sectionLabel = itemView.findViewById(R.id.section_label);
-            showAllButton = itemView.findViewById(R.id.section_show_all_button);
             itemRecyclerView = itemView.findViewById(R.id.item_recycler_view);
         }
     }
@@ -56,13 +55,8 @@ public class GroupViewAdapter extends RecyclerView.Adapter<GroupViewAdapter.Grou
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(appCompatActivity, LinearLayoutManager.HORIZONTAL, false);
         holder.itemRecyclerView.setLayoutManager(linearLayoutManager);
 
-        ProgramViewAdapter adapter = new ProgramViewAdapter(appCompatActivity, groupModel.getProgramList());
+        ProgramViewAdapter adapter = new ProgramViewAdapter(appCompatActivity, groupModel.getProgramList(), position);
         holder.itemRecyclerView.setAdapter(adapter);
-
-        //show toast on click of show all button
-        holder.showAllButton.setOnClickListener(v ->
-                Toast.makeText(appCompatActivity, "You clicked on Show All of : " + groupModel.getName(), Toast.LENGTH_SHORT).show());
-
     }
 
     @Override

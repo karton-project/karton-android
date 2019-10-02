@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
 import com.alpay.codenotes.utils.NavigationManager;
@@ -54,6 +55,11 @@ public class AccountFragment extends Fragment {
     RelativeLayout mAccountView;
     @BindView(R.id.sign_in_view)
     RelativeLayout mSignInView;
+
+    @OnClick(R.id.open_flappy)
+    public void startHouOfCode(){
+        NavigationManager.openFlappyBirdHourOfCode((AppCompatActivity) getActivity());
+    }
 
     @OnClick(R.id.my_notes)
     public void openNotes(){
@@ -100,6 +106,7 @@ public class AccountFragment extends Fragment {
                 .signOut(getActivity())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        BaseApplication.userID = null;
                         startActivity(AuthUiActivity.createIntent(getActivity()));
                         getActivity().finish();
                     } else {

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fireTopLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGrey"
+    android:keepScreenOn="true">
+
+        <com.alpay.codenotes.utils.vision.CameraSourcePreview
+            android:id="@+id/firePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true">
+
+                <com.alpay.codenotes.utils.vision.GraphicOverlay
+                    android:id="@+id/fireFaceOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </com.alpay.codenotes.utils.vision.CameraSourcePreview>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="80dp"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.alpay.codenotes.view.AutofitVerticalRecyclerView
+            android:id="@+id/codeblocks_recycler_view"
+            android:layout_margin="@dimen/unit8"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/read_code_button"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/send_code_button"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_ok"
+            android:tint="@color/white"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/unit10" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/read_barcode"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_photo_camera"
+            android:tint="@color/white"
+            android:layout_toRightOf="@+id/back_code_button"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/unit10" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/read_code_button"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/unit10" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/back_code_button"
+            android:background="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_back"
+            android:tint="@color/white"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/unit10" />
+
+</RelativeLayout>

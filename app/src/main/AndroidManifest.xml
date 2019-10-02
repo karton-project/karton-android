@@ -33,12 +33,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.CodeNotesCompilerActivity"
+            android:name=".activities.FBVisionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activities.CodeNotesCompilerOld"
+            android:name=".activities.CodeNotesCompilerActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />

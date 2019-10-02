@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.utils.WebChromeClient;
 import com.bumptech.glide.Glide;
 
@@ -67,7 +69,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
             for (String code: p5Code){
                 programCode += code;
             }
-            NavigationManager.programListFragment.saveProgram(programName, programCode);
+            GroupHelper.saveProgram(this, programName, programCode);
             NavigationManager.openFragment(this, NavigationManager.PROGRAM_LIST);
         });
         alertDialog.show();

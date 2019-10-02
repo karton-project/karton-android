@@ -1,10 +1,10 @@
 package com.alpay.codenotes.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 
 import static com.alpay.codenotes.BaseApplication.auth;
@@ -35,16 +35,15 @@ public class SplashActivity extends BaseActivity {
     }
 
     public void checkIfUserAuthenticate() {
-        if (auth.getCurrentUser() == null && !Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
-            Intent intent = new Intent(this, AuthUiActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
-        } else {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
+        if (!Utils.getBooleanFromSharedPreferences(this, Utils.IS_FIRST_OPEN_KEY)){
+            Utils.addBooleanToSharedPreferences(this, Utils.IS_FIRST_OPEN_KEY, true);
+            NavigationManager.openWelcomeActivity(this);
+        }else{
+            if (auth.getCurrentUser() == null && !Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
+                NavigationManager.openAuthUIActivity(this);
+            } else {
+                NavigationManager.openHomeActiviy(this);
+            }
         }
     }
 

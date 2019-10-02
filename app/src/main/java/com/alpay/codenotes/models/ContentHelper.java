@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
-import com.alpay.codenotes.BaseApplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,17 +42,15 @@ public class ContentHelper {
             JsonReader reader = new JsonReader(bufferedReader);
             data = gson.fromJson(reader, contentListType);
         }
-        contentList = data;
         return data;
     }
 
     public static ArrayList<Content> readContentList(Context context){
-        BufferedReader bufferedReader;
         try {
             InputStream inputStream = context.openFileInput(FILE_NAME);
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                bufferedReader = new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 ArrayList<Content> data = new ArrayList<>();
                 if (bufferedReader != null) {
                     JsonReader reader = new JsonReader(bufferedReader);
@@ -62,10 +58,11 @@ public class ContentHelper {
                 }
                 contentList = data;
             }else{
-                contentList = new ArrayList<>();
+                contentList = readFromAssets(context);
             }
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            contentList = readFromAssets(context);
         }
         return contentList;
     }

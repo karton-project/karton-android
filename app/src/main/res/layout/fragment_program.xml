@@ -7,6 +7,8 @@
     <RelativeLayout
         android:id="@+id/hourofcode_view"
         android:clickable="true"
+        android:padding="@dimen/unit8"
+        android:background="@color/material_deep_purple_50"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit12"
@@ -15,6 +17,7 @@
         <ImageView
             android:id="@+id/flappy_icon"
             app:srcCompat="@drawable/ic_flappy"
+            android:layout_centerVertical="true"
             android:layout_width="@dimen/unit48"
             android:layout_height="@dimen/unit48"
             android:layout_alignParentLeft="true"/>
@@ -24,8 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textSize="@dimen/unit20"
             android:layout_toRightOf="@+id/flappy_icon"
             android:layout_marginLeft="@dimen/unit8"/>
+
+        <ImageView
+            android:id="@+id/close_flappy_bird"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_close"
+            android:layout_centerVertical="true"
+            android:tint="@color/darkGrey"
+            android:layout_width="@dimen/unit24"
+            android:layout_height="@dimen/unit24" />
 
     </RelativeLayout>
 

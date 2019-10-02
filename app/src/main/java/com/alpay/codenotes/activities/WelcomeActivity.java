@@ -1,6 +1,5 @@
 package com.alpay.codenotes.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,15 @@ import android.widget.ImageView;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.listener.OnSwipeTouchListener;
+import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity {
+import static com.alpay.codenotes.BaseApplication.auth;
+
+public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.welcome_frame)
     FrameLayout welcomeFrame;
@@ -112,10 +114,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void endTutorial() {
         if (!isFinishing()) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
+            if (auth.getCurrentUser() == null && !Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
+                NavigationManager.openAuthUIActivity(this);
+            } else {
+                NavigationManager.openHomeActiviy(this);
+            }
         }
     }
 
