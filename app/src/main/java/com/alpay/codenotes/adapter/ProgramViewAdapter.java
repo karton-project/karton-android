@@ -28,12 +28,12 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
 
     private AppCompatActivity appCompatActivity;
     private ArrayList<Program> mProgramList;
-    private int parentPosition;
+    private String parentName;
 
-    public ProgramViewAdapter(AppCompatActivity appCompatActivity, ArrayList<Program> mContentList, int parentPosition) {
+    public ProgramViewAdapter(AppCompatActivity appCompatActivity, ArrayList<Program> mContentList, String parentName) {
         this.appCompatActivity = appCompatActivity;
         this.mProgramList = mContentList;
-        this.parentPosition = parentPosition;
+        this.parentName = parentName;
     }
 
     @Override
@@ -61,7 +61,8 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             appCompatActivity.startActivity(intent);
         });
         holder.mDeleteButton.setOnClickListener(v -> {
-            GroupHelper.deleteProgram(parentPosition, position);
+            GroupHelper.deleteProgram(appCompatActivity, parentName, position);
+            this.notifyDataSetChanged();
         });
     }
 

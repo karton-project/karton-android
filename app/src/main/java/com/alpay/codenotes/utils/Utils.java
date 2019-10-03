@@ -54,28 +54,24 @@ public class Utils {
         return (Runtime.getRuntime().exec(command).waitFor() == 0);
     }
 
-    public static void showOKDialog(Activity activity, int stringID) {
+    public static void showOKDialog(AppCompatActivity activity, int stringID) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(stringID)
                 .setCancelable(true)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                    }
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> {
+                    //do things
                 });
         AlertDialog alert = builder.create();
         alert.show();
     }
 
-    public static void showOKDialog(final Activity activity, int stringID, final Intent intent) {
+    public static void showOKDialogForIntent(AppCompatActivity activity, int stringID, final Intent intent) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(stringID)
                 .setCancelable(true)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if (intent != null) {
-                            activity.startActivity(intent);
-                        }
+                .setPositiveButton("OK", (dialog, id) -> {
+                    if (intent != null) {
+                        activity.startActivity(intent);
                     }
                 });
         AlertDialog alert = builder.create();

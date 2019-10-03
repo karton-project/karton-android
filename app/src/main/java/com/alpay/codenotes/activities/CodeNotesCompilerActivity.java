@@ -206,9 +206,6 @@ public class CodeNotesCompilerActivity extends BaseActivity {
                             stringBuilder.append("\n");
                         }
                         code = stringBuilder.toString().toLowerCase();
-                        if (code.contains("group:")){
-                            groupId = code.substring(6);
-                        }
                         textView.setText(code);
                     });
                 }

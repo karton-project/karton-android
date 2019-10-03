@@ -22,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.alpay.codenotes.models.GroupHelper.groupId;
+
 public class CodeBlocksResultActivity extends BaseActivity {
 
     private String[] p5Code = {};
@@ -61,15 +63,20 @@ public class CodeBlocksResultActivity extends BaseActivity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
+        lp.leftMargin = (int)getResources().getDimension(R.dimen.unit8);
         input.setLayoutParams(lp);
         alertDialog.setView(input);
-        alertDialog.setNeutralButton("OK", (dialog, which) -> {
+        alertDialog.setNeutralButton(android.R.string.ok, (dialog, which) -> {
             String programName = input.getText().toString();
             String programCode = "";
             for (String code: p5Code){
-                programCode += code;
+                if (code.contains("group:")){
+                    groupId = code.substring(6);
+                }else{
+                    programCode += code;
+                }
             }
-            GroupHelper.saveProgram(this, programName, programCode);
+            GroupHelper.saveProgram(this, GroupHelper.groupId, programName, programCode);
             NavigationManager.openFragment(this, NavigationManager.PROGRAM_LIST);
         });
         alertDialog.show();

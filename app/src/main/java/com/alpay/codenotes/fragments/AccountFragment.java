@@ -116,33 +116,6 @@ public class AccountFragment extends Fragment {
                 });
     }
 
-    /*@OnClick(R.id.delete_account)
-    public void deleteAccountClicked() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("Are you sure you want to delete this account?")
-                .setPositiveButton("Yes, nuke it!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteAccount();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
-
-    private void deleteAccount() {
-        AuthUI.getInstance()
-                .delete(getActivity())
-                .addOnCompleteListener(getActivity(), (OnCompleteListener<Void>) task -> {
-                    if (task.isSuccessful()) {
-                        startActivity(AuthUiActivity.createIntent(getActivity()));
-                        getActivity().finish();
-                    } else {
-                        showSnackbar(R.string.delete_account_failed);
-                    }
-                });
-    }*/
-
     private void populateProfile(FirebaseUser user) {
         if (user.getPhotoUrl() != null) {
             Glide.with(this)

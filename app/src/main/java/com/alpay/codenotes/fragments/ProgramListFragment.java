@@ -17,7 +17,6 @@ import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
 import com.alpay.codenotes.models.Group;
 import com.alpay.codenotes.models.GroupHelper;
-import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
@@ -40,7 +39,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static com.alpay.codenotes.BaseApplication.userID;
-import static com.alpay.codenotes.models.GroupHelper.groupList;
+import static com.alpay.codenotes.models.GroupHelper.getGroupList;
+import static com.alpay.codenotes.models.GroupHelper.getListSize;
+import static com.alpay.codenotes.models.GroupHelper.setGroupList;
 
 public class ProgramListFragment extends Fragment {
 
@@ -92,9 +93,13 @@ public class ProgramListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_program, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (Utils.isInternetAvailable(getContext()) && userID!= null) {
-            generateProgramListFromFirebase();
-        } else {
+        if (GroupHelper.getListSize() <= 0){
+            if (Utils.isInternetAvailable(getContext()) && userID!= null) {
+                generateProgramListFromFirebase();
+            } else {
+                generateProgramListFromGSON();
+            }
+        }else{
             generateProgramListFromGSON();
         }
         if (Utils.getBooleanFromSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_FLAPPY)){
@@ -116,10 +121,10 @@ public class ProgramListFragment extends Fragment {
     }
 
     public void refreshCodeBlockRecyclerView(int position) {
-        groupViewAdapter = new GroupViewAdapter((AppCompatActivity) getActivity(), groupList);
+        groupViewAdapter = new GroupViewAdapter((AppCompatActivity) getActivity(), getGroupList());
         recyclerView.setAdapter(groupViewAdapter);
         recyclerView.scrollToPosition(position);
-        if (groupList.size() <= 0) {
+        if (getListSize() <= 0) {
             showEmptyScreenLayout();
         } else {
             hideEmptyScreenLayout();
@@ -127,7 +132,7 @@ public class ProgramListFragment extends Fragment {
     }
 
     private void generateProgramListFromFirebase() {
-        groupList = new ArrayList<>();
+        setGroupList(new ArrayList<>());
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("/users/" + BaseApplication.auth.getCurrentUser().getUid() + "/groupList");
         databaseReference.keepSynced(true);
@@ -136,12 +141,12 @@ public class ProgramListFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Group group = dataSnapshot.getValue(Group.class);
-                    groupList.add(group);
+                    GroupHelper.addNewGroup(group);
                 }
                 if (recyclerView != null) {
                     setUpRecyclerView();
                     progressBar.setVisibility(View.GONE);
-                    refreshCodeBlockRecyclerView((groupList.size() > 0) ? groupList.size() - 1 : 0);
+                    refreshCodeBlockRecyclerView(0);
                 }
             }
 
@@ -163,10 +168,10 @@ public class ProgramListFragment extends Fragment {
     }
 
     private void generateProgramListFromGSON() {
-        groupList = GroupHelper.readProgramList(getActivity());
+        GroupHelper.readProgramList(getActivity());
         if (recyclerView != null) {
             setUpRecyclerView();
-            refreshCodeBlockRecyclerView((groupList.size() > 0) ? groupList.size() - 1 : 0);
+            refreshCodeBlockRecyclerView(0);
             progressBar.setVisibility(View.GONE);
         }
     }

@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -83,14 +82,7 @@ public class ContentListFragment extends Fragment {
         } else {
             generateContentListFromGSON();
             if (!Utils.noConnectionErrorDisplayed) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.no_internet_connection)
-                        .setMessage(R.string.no_internet_dialog_message)
-                        .setNeutralButton(android.R.string.ok, (dialog, which) -> {
-                            // Continue with operation
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                Utils.showOKDialog((AppCompatActivity) getActivity(), R.string.no_internet_dialog_message);
                 Utils.noConnectionErrorDisplayed = true;
             }
         }

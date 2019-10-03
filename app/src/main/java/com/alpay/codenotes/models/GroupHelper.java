@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alpay.codenotes.BaseApplication;
+import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -16,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.alpay.codenotes.BaseApplication.ref;
@@ -24,12 +27,41 @@ import static com.alpay.codenotes.BaseApplication.userID;
 public class GroupHelper {
 
     public static ArrayList<String> codeList = new ArrayList();
-    public static ArrayList<Group> groupList = new ArrayList();
+    private static ArrayList<Group> groupList = new ArrayList<>();
     private static final String FILE_NAME = "karton_programs.json";
     public static String groupId = "Default";
     private static Type groupListType = new TypeToken<ArrayList<Group>>() {}.getType();
 
     static Gson gson = new GsonBuilder().create();
+
+    public static ArrayList<Group> getGroupList(){
+        return  groupList;
+    }
+
+    public static void setGroupList(ArrayList<Group> groupList) {
+        GroupHelper.groupList = groupList;
+    }
+
+    public static int getListSize(){
+        return groupList.size();
+    }
+
+    public static void addNewGroup(Group group){
+        if (getGroupIndex(group.getName()) < 0){
+            groupList.add(group);
+        }
+    }
+
+    private static int getGroupIndex(String groupID){
+        int id = -1;
+        groupID = groupID.replace("\n", "");
+        for (int i= 0; i < groupList.size(); i++){
+            if (groupID.contentEquals(groupList.get(i).getName())){
+                id = i;
+            }
+        }
+        return id;
+    }
 
     private static void writeToFile(String data, Context context) {
         try {
@@ -47,7 +79,7 @@ public class GroupHelper {
         writeToFile(programListString, context);
     }
 
-    public static ArrayList<Group> readProgramList(Context context){
+    public static void readProgramList(Context context){
         groupList = new ArrayList<>();
         BufferedReader bufferedReader;
         try {
@@ -65,44 +97,38 @@ public class GroupHelper {
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
         }
-        return groupList;
     }
 
-    public static int getGroupIndex(String groupID){
-        int id = -1;
-        for (int i= 0; i < groupList.size() -1; i++){
-            if (groupID.contentEquals(groupList.get(i).getName())){
-                id = i;
-            }
+    public static void changeProgram(Context context, String parentName, int index, Program program) {
+        int pos = getGroupIndex(parentName);
+        groupList.get(pos).getProgramList().set(index, program);
+        if (userID!=null)
+            ref.child("users").child(userID).child("groupList").setValue(groupList);
+        saveProgramList(context);
+    }
+
+    public static void deleteProgram(Context context, String parentName, int index) {
+        int pos = getGroupIndex(parentName);
+        groupList.get(pos).getProgramList().remove(index);
+        if (userID!=null)
+            ref.child("users").child(userID).child("groupList").setValue(groupList);
+        saveProgramList(context);
+    }
+
+    public static void saveProgram(Context context, String parentName, String name, String code) {
+        Program program = new Program(name, code);
+        int pos = getGroupIndex(parentName);
+        if (groupList == null){
+            groupList = new ArrayList<>();
         }
-        return id;
-    }
-
-    public static void changeProgram(int index, Program program) {
-        int id = GroupHelper.getGroupIndex(GroupHelper.groupId);
-        groupList.get(id).getProgramList().set(index, program);
-        if (userID!=null)
-            ref.child("users").child(userID).child("groupList").setValue(groupList);
-    }
-
-    public static void deleteProgram(int parentPos, int index) {
-        groupList.get(parentPos).getProgramList().remove(index);
-        if (userID!=null)
-            ref.child("users").child(userID).child("groupList").setValue(groupList);
-    }
-
-    public static void saveProgram(Context context, String name, String code) {
-        Program program = new Program();
-        program.setCode(code);
-        program.setName(name);
-        int id = GroupHelper.getGroupIndex(GroupHelper.groupId);
-        if (id < 0){
+        if (pos < 0){
             groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
-            id = groupList.size() -1;
+            pos = 0;
         }
-        groupList.get(id).getProgramList().add(program);
+        groupList.get(pos).getProgramList().add(program);
         if (userID!=null)
             ref.child("users").child(userID).child("groupList").setValue(groupList);
+        saveProgramList(context);
         codeList = new ArrayList<>();
     }
 
