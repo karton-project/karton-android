@@ -51,46 +51,10 @@
             android:name=".activities.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".activities.StoryViewActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="landscape" />
-
         <!-- Auth UI demo -->
         <activity
             android:name=".activities.AuthUiActivity"
             android:label="@string/title_auth_activity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
-
-        <!-- Realtime database demo -->
-        <activity
-            android:name=".database.realtime.RealtimeDbChatActivity"
-            android:label="@string/title_realtime_database_activity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape" />
-
-        <!-- Realtime database paging demo -->
-        <activity
-            android:name=".database.realtime.FirebaseDbPagingActivity"
-            android:label="@string/title_realtime_database_paging_activity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
-
-        <activity
-            android:name=".database.realtime.RealtimeDbChatIndexActivity"
-            android:label="@string/title_realtime_database_activity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape" />
-
-        <!-- Storage UI demo -->
-        <activity
-            android:name=".storage.ImageActivity"
-            android:label="@string/title_storage_activity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>

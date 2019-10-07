@@ -56,11 +56,6 @@ public class AccountFragment extends Fragment {
     @BindView(R.id.sign_in_view)
     RelativeLayout mSignInView;
 
-    @OnClick(R.id.open_flappy)
-    public void startHouOfCode(){
-        NavigationManager.openFlappyBirdHourOfCode((AppCompatActivity) getActivity());
-    }
-
     @OnClick(R.id.my_notes)
     public void openNotes(){
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.NOTES);

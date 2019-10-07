@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.models.Frame;
-import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.view.InkView;
 
 import java.io.ByteArrayOutputStream;
@@ -21,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -152,9 +149,6 @@ public class SketchFragment extends Fragment {
     @OnClick(R.id.sketch_save_button)
     public void saveSketch() {
         saveBitmap();
-        Frame.updateFrameImageName(Integer.valueOf(frameID), fileName);
-        StoryboardFragment.setCurrentFrameID(Integer.valueOf(frameID));
-        NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.STORYBOARD);
     }
 
 

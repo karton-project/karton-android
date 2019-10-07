@@ -81,7 +81,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/nav_story"
+                android:id="@+id/nav_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -101,7 +101,7 @@
                     android:layout_height="@dimen/unit24"
                     android:layout_margin="@dimen/unit3"
                     android:gravity="center"
-                    android:text="@string/home_card_story"
+                    android:text="@string/home_card_game"
                     android:textColor="@color/white"
                     app:autoSizeMaxTextSize="@dimen/unit12"
                     app:autoSizeMinTextSize="@dimen/unit8"

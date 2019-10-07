@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alpay.codenotes.BaseApplication;
-import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -18,11 +16,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import static com.alpay.codenotes.BaseApplication.ref;
-import static com.alpay.codenotes.BaseApplication.userID;
 
 public class GroupHelper {
 
@@ -38,23 +32,13 @@ public class GroupHelper {
         return  groupList;
     }
 
-    public static void setGroupList(ArrayList<Group> groupList) {
-        GroupHelper.groupList = groupList;
-    }
-
     public static int getListSize(){
         return groupList.size();
     }
 
-    public static void addNewGroup(Group group){
-        if (getGroupIndex(group.getName()) < 0){
-            groupList.add(group);
-        }
-    }
 
     private static int getGroupIndex(String groupID){
         int id = -1;
-        groupID = groupID.replace("\n", "");
         for (int i= 0; i < groupList.size(); i++){
             if (groupID.contentEquals(groupList.get(i).getName())){
                 id = i;
@@ -102,16 +86,12 @@ public class GroupHelper {
     public static void changeProgram(Context context, String parentName, int index, Program program) {
         int pos = getGroupIndex(parentName);
         groupList.get(pos).getProgramList().set(index, program);
-        if (userID!=null)
-            ref.child("users").child(userID).child("groupList").setValue(groupList);
         saveProgramList(context);
     }
 
     public static void deleteProgram(Context context, String parentName, int index) {
         int pos = getGroupIndex(parentName);
         groupList.get(pos).getProgramList().remove(index);
-        if (userID!=null)
-            ref.child("users").child(userID).child("groupList").setValue(groupList);
         saveProgramList(context);
     }
 
@@ -123,11 +103,10 @@ public class GroupHelper {
         }
         if (pos < 0){
             groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
-            pos = 0;
+            groupList.get(groupList.size()-1).getProgramList().add(program);
+        }else{
+            groupList.get(pos).getProgramList().add(program);
         }
-        groupList.get(pos).getProgramList().add(program);
-        if (userID!=null)
-            ref.child("users").child(userID).child("groupList").setValue(groupList);
         saveProgramList(context);
         codeList = new ArrayList<>();
     }

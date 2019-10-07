@@ -13,7 +13,6 @@ import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
-import com.alpay.codenotes.utils.NavigationManager;
 
 import java.util.ArrayList;
 

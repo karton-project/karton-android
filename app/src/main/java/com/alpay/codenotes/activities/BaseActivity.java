@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,14 +59,6 @@ public class BaseActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
-    }
-
-    public void printToastShort(int resID) {
-        Toast.makeText(this, getResources().getString(resID), Toast.LENGTH_SHORT).show();
-    }
-
-    public void printToastLong(int resID) {
-        Toast.makeText(this, getResources().getString(resID), Toast.LENGTH_LONG).show();
     }
 
 }

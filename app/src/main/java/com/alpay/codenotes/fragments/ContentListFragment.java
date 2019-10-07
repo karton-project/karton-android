@@ -1,24 +1,16 @@
 package com.alpay.codenotes.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.ContentViewAdapter;
 import com.alpay.codenotes.models.Content;
 import com.alpay.codenotes.models.ContentHelper;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -34,8 +26,6 @@ import butterknife.Unbinder;
 public class ContentListFragment extends Fragment {
 
     private View view;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
     private ArrayList<Content> contentArrayList;
     private Unbinder unbinder;
     GridLayoutManager gridLayoutManager;
@@ -60,32 +50,7 @@ public class ContentListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_content, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (Utils.isInternetAvailable(getContext())) {
-            BaseApplication.ref.child("tr/version").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int version = ((Long) dataSnapshot.getValue()).intValue();
-                    if (Utils.getIntegerFromSharedPreferences((AppCompatActivity) getActivity(), Utils.DB_VERSION_KEY) != version) {
-                        initFirebase();
-                        generateContentListFromFirebase();
-                        Utils.addIntegerToSharedPreferences((AppCompatActivity) getActivity(), Utils.DB_VERSION_KEY, version);
-                    } else {
-                        generateContentListFromGSON();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
-        } else {
-            generateContentListFromGSON();
-            if (!Utils.noConnectionErrorDisplayed) {
-                Utils.showOKDialog((AppCompatActivity) getActivity(), R.string.no_internet_dialog_message);
-                Utils.noConnectionErrorDisplayed = true;
-            }
-        }
+        generateContentListFromGSON();
         return view;
     }
 
@@ -101,39 +66,10 @@ public class ContentListFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 
-    protected void initFirebase() {
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference().child("tr/contents");
-        databaseReference.keepSynced(true);
-    }
-
     private void populateRecyclerView() {
         final ContentViewAdapter adapter = new ContentViewAdapter((AppCompatActivity) getActivity(), contentArrayList);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.GONE);
-    }
-
-    private void generateContentListFromFirebase() {
-        contentArrayList = new ArrayList<>();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Content content = dataSnapshot.getValue(Content.class);
-                    contentArrayList.add(content);
-                }
-                ContentHelper.saveContentList(getContext(), contentArrayList);
-                if (recyclerView != null) {
-                    setUpRecyclerView();
-                    populateRecyclerView();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError firebaseError) {
-                Log.e("The read failed: ", firebaseError.getMessage());
-            }
-        });
     }
 
     private void generateContentListFromGSON() {

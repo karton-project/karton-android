@@ -1,20 +1,14 @@
 package com.alpay.codenotes;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.alpay.codenotes.models.User;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
@@ -27,9 +21,6 @@ public class BaseApplication extends Application {
     public static String userID;
     public static int version;
 
-    private static final String TAG = BaseApplication.class.getSimpleName();
-    private int mVisibleCount;
-    private boolean mInBackground;
     public static DatabaseReference ref;
 
 
@@ -52,17 +43,6 @@ public class BaseApplication extends Application {
         ref = FirebaseDatabase.getInstance().getReference();
         if (auth.getCurrentUser() != null) {
             userID = auth.getUid();
-            ref.child("users/" + userID).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    user = dataSnapshot.getValue(User.class);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
         }
     }
 

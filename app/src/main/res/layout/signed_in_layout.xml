@@ -78,20 +78,11 @@
             android:text="@string/my_programs" />
 
         <TextView
-            style="@style/TextLink"
-            android:id="@+id/open_flappy"
-            android:layout_below="@+id/my_programs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/unit8"
-            android:text="@string/hour_of_code_play" />
-
-        <TextView
             android:id="@+id/sign_out"
             style="@style/TextLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/open_flappy"
+            android:layout_below="@+id/my_programs"
             android:layout_marginStart="@dimen/unit8"
             android:layout_marginLeft="@dimen/unit8"
             android:layout_marginEnd="@dimen/unit8"

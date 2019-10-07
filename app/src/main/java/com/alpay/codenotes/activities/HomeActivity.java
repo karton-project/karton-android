@@ -26,9 +26,9 @@ public class HomeActivity extends BaseActivity {
         NavigationManager.openFragment(this, NavigationManager.CONTENT);
     }
 
-    @OnClick(R.id.nav_story)
-    public void openSharingCenter() {
-        NavigationManager.openFragment(this, NavigationManager.STORYBOARD);
+    @OnClick(R.id.nav_game)
+    public void openHourOfCodeGame() {
+        NavigationManager.openFragment(this, NavigationManager.GAMES);
     }
 
     @OnClick(R.id.nav_user)

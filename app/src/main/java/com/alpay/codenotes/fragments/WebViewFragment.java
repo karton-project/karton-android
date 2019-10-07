@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.WebChromeClient;
 import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,7 +69,6 @@ public class WebViewFragment extends Fragment {
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);

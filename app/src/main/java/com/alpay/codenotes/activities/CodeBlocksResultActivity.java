@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
-import com.alpay.codenotes.utils.WebChromeClient;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -67,11 +65,11 @@ public class CodeBlocksResultActivity extends BaseActivity {
         input.setLayoutParams(lp);
         alertDialog.setView(input);
         alertDialog.setNeutralButton(android.R.string.ok, (dialog, which) -> {
-            String programName = input.getText().toString();
+            String programName = input.getText().toString().trim().replaceAll(" +", " ");
             String programCode = "";
             for (String code: p5Code){
                 if (code.contains("group:")){
-                    groupId = code.substring(6);
+                    groupId = code.substring(6).trim().replaceAll(" +", " ");;
                 }else{
                     programCode += code;
                 }
@@ -97,7 +95,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
         if (bundle != null) {
             p5Code = bundle.getStringArray(NavigationManager.BUNDLE_CODE_KEY);
             isFlappy = bundle.getBoolean(NavigationManager.BUNDLE_FLAPPY_KEY);
-            webView.setWebChromeClient(new WebChromeClient());
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -129,7 +126,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     public void setWebView() {
         WebSettings webSettings = webView.getSettings();
-        webView.setWebChromeClient(new WebChromeClient());
         webView.setPadding(0, 0, 0, 0);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

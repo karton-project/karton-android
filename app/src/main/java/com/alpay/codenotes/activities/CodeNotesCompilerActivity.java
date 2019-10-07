@@ -31,7 +31,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
-import static com.alpay.codenotes.models.GroupHelper.groupId;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
