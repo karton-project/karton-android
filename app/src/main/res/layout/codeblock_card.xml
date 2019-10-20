@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/unit2"
         android:padding="@dimen/unit4"
-        android:backgroundTint="@color/md_blue_grey_100"
+        android:backgroundTint="@color/colorDarkGrey"
         android:elevation="3dp"
         card_view:cardCornerRadius="@dimen/unit10">
 
@@ -25,16 +25,12 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/icon_home_text"
                 android:id="@+id/codeblock_text"
                 android:visibility="visible"
-                android:layout_width="@dimen/unit70"
+                android:layout_width="@dimen/unit80"
                 android:layout_height="@dimen/unit30"
                 android:layout_margin="@dimen/unit3"
-                android:gravity="center"
-                app:autoSizeMaxTextSize="@dimen/unit24"
-                app:autoSizeMinTextSize="@dimen/unit8"
-                app:autoSizeStepGranularity="@dimen/unit2"
-                app:autoSizeTextType="uniform"
                 tool:text="background" />
 
             <RelativeLayout
@@ -62,6 +58,7 @@
 
             <ImageButton
                 android:id="@+id/codeblock_delete"
+                android:background="@color/transparent"
                 android:layout_width="@dimen/unit20"
                 android:layout_height="@dimen/unit20"
                 android:layout_gravity="center"

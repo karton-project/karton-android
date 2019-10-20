@@ -4,113 +4,63 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/nunitofamily</item>
 
     </style>
 
-    <style name="HomeCardTitle" parent="TextAppearance.AppCompat.Headline">
-        <item name="android:textColor">@color/white</item>
+    <style name="icon_home">
+        <item name="android:layout_width">@dimen/unit24</item>
+        <item name="android:layout_height">@dimen/unit24</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:tint">@color/colorWhite</item>
     </style>
 
-    <style name="HomeCardDetail" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">@color/white</item>
+    <style name="icon_home_text" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:layout_width">@dimen/unit40</item>
+        <item name="android:layout_height">@dimen/unit24</item>
+        <item name="android:layout_margin">@dimen/unit3</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/unit10</item>
     </style>
 
-    <style name="StoryCardText" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/md_blue_grey_900</item>
+    <style name="icon_home_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/unit12</item>
+        <item name="android:clickable">true</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="StoryCardCodeButton" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">@color/md_blue_600</item>
+    <style name="text_light">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/unit12</item>
     </style>
 
-    <style name="StoryCardHeaderEditText" parent="Base.V7.Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:color">@color/white</item>
-    </style>
-
-    <style name="StoryHeaderText" parent="TextAppearance.AppCompat.Headline">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="StoryCardTitle" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">@color/story_build_color</item>
+    <style name="text_light_bold_large">
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/unit16</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="WelcomePageText" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/comicsfamily</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:lineSpacingExtra">@dimen/unit35</item>
-    </style>
-
-    <style name="ExerciseCardTextTitle">
-        <item name="android:textColor">@color/md_blue_grey_100</item>
-    </style>
-
-    <style name="ExerciseCardTextDetail">
-        <item name="android:textColor">@color/textDetail</item>
-    </style>
-
-    <style name="ExerciseCardButton">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/exercise_color</item>
-        <item name="android:layout_margin">@dimen/unit4</item>
-    </style>
-
-    <style name="ContentCardButton">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/learn_color</item>
-        <item name="android:layout_marginRight">@dimen/unit10</item>
-        <item name="android:layout_marginBottom">@dimen/unit10</item>
-    </style>
-
-    <style name="PurpleTheme">
-        <item name="colorPrimary">@color/material_deep_purple_500</item>
-        <item name="colorPrimaryDark">@color/material_deep_purple_700</item>
-        <item name="colorAccent">@color/material_lime_a700</item>
-        <item name="android:windowBackground">@color/material_deep_purple_50</item>
-    </style>
-
-    <style name="GreenTheme">
-        <item name="colorPrimary">@color/material_green_500</item>
-        <item name="colorPrimaryDark">@color/material_green_700</item>
-        <item name="colorAccent">@color/material_purple_a700</item>
-        <item name="android:windowBackground">@color/material_green_50</item>
-    </style>
-
-    <style name="WarnButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/material_red_a200</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
-    <style name="TextLink">
+    <style name="text_link">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/unit16</item>
         <item name="android:clickable">true</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="button_learn">
+        <item name="android:background">@drawable/learn_button_shape</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="button_floating_nav">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:tint">@color/colorLightGrey</item>
+        <item name="android:layout_margin">@dimen/unit10</item>
+    </style>
+
     <!-- Theme used in custom layout example -->
-    <style name="CustomTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorPrimary">#7c4dff</item>
-        <item name="colorPrimaryDark">#4527a0</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="CustomWingInner">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:background">#FFFFFF</item>
-    </style>
-
-    <style name="CustomWingOuter">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-    </style>
 
 </resources>

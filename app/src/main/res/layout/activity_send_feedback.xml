@@ -23,7 +23,7 @@
                 android:layout_margin="8dp"
                 android:padding="10dp"
                 android:elevation="100dp"
-                card_view:cardBackgroundColor="@color/white"
+                card_view:cardBackgroundColor="@color/colorWhite"
                 card_view:cardCornerRadius="8dp">
 
                 <TextView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:elevation="100dp"
-                card_view:cardBackgroundColor="@color/white"
+                card_view:cardBackgroundColor="@color/colorWhite"
                 card_view:cardCornerRadius="8dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:elevation="100dp"
-                card_view:cardBackgroundColor="@color/white"
+                card_view:cardBackgroundColor="@color/colorWhite"
                 card_view:cardCornerRadius="8dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -86,10 +86,10 @@
                 android:id="@+id/sendFeedBackButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/unit20"
                 android:background="@color/colorPrimary"
                 android:text="@string/save_text"
-                android:textColor="@color/white" />
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
     </ScrollView>

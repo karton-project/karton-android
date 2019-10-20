@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.GameFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@+id/game_flappy"
-        android:layout_width="@dimen/unit200"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit12"
-        android:background="@color/material_deep_purple_700"
-        android:clickable="true"
-        android:padding="@dimen/unit8">
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="@dimen/unit8"
+        android:layout_margin="@dimen/unit4"
+        app:cardBackgroundColor="@color/colorLightGrey"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/flappy_icon"
-            android:padding="@dimen/unit10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/game_flappy"
+            android:layout_width="@dimen/unit160"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_flappy" />
+            android:layout_margin="@dimen/unit12"
+            android:clickable="true"
+            android:padding="@dimen/unit8">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/unit8"
-            android:layout_below="@+id/flappy_icon"
-            android:text="@string/hour_of_code_flappy_exp"
-            android:textSize="@dimen/unit20" />
+            <ImageView
+                android:id="@+id/flappy_icon"
+                android:padding="@dimen/unit10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_flappy" />
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/unit8"
+                android:layout_below="@+id/flappy_icon"
+                android:text="@string/hour_of_code_flappy_exp"
+                android:textSize="@dimen/unit20" />
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>

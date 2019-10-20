@@ -59,27 +59,26 @@
         </LinearLayout>
 
         <TextView
-            style="@style/TextLink"
             android:id="@+id/my_notes"
-            android:layout_below="@+id/account_layout"
+            style="@style/text_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/account_layout"
             android:layout_margin="@dimen/unit8"
             android:text="@string/my_notes" />
 
-
         <TextView
-            style="@style/TextLink"
             android:id="@+id/my_programs"
-            android:layout_below="@+id/my_notes"
+            style="@style/text_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/my_notes"
             android:layout_margin="@dimen/unit8"
             android:text="@string/my_programs" />
 
         <TextView
             android:id="@+id/sign_out"
-            style="@style/TextLink"
+            style="@style/text_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/my_programs"

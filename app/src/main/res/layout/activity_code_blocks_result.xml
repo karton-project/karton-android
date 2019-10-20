@@ -25,7 +25,6 @@
             android:layout_height="@dimen/unit200" />
 
         <TextView
-            android:id="@+id/error_text"
             android:layout_width="@dimen/unit200"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/unit16"
@@ -35,25 +34,20 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/back_code_button"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_back"
-        android:tint="@color/white"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit10" />
+        android:layout_alignParentTop="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save_code_button"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_save"
-        android:tint="@color/white"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/unit10" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

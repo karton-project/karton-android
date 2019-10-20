@@ -17,7 +17,7 @@
         android:layout_height="@dimen/unit50"
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/left_arrow"
-        android:tint="@color/white"
+        android:tint="@color/colorWhite"
         android:clickable="true"
         android:layout_alignParentLeft="true"/>
 
@@ -28,7 +28,7 @@
         android:layout_centerVertical="true"
         app:srcCompat="@drawable/right_arrow"
         android:clickable="true"
-        android:tint="@color/white"
+        android:tint="@color/colorWhite"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

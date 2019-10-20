@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/unit10"
-        android:background="@color/white"
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
         card_view:cardCornerRadius="@dimen/unit4">
@@ -42,31 +41,30 @@
                 android:weightSum="2">
 
                 <Button
+                    style="@style/button_learn"
                     android:id="@+id/content_card_watch_video_button"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_marginTop="@dimen/unit10"
                     android:layout_marginRight="@dimen/unit10"
                     android:layout_weight="1"
-                    android:background="@color/learn_color"
                     android:text="@string/card_watch_video_button_text"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/unit12" />
 
                 <Button
+                    style="@style/button_learn"
                     android:id="@+id/content_card_practice_button"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_margin="@dimen/unit10"
                     android:layout_weight="1"
-                    android:background="@color/learn_color"
                     android:text="@string/card_practice_button_text"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/unit12" />
 
             </LinearLayout>
 
             <TextView
+                style="@style/text_light"
                 android:id="@+id/content_card_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,20 +72,17 @@
                 android:layout_gravity="top|center_horizontal"
                 android:layout_marginTop="@dimen/unit4"
                 android:layout_marginBottom="@dimen/unit4"
-                android:maxLines="4"
-                android:textColor="@color/white"
-                android:textSize="@dimen/unit14"
+                android:maxLines="6"
                 tools:text="@tools:sample/lorem/random" />
 
             <TextView
+                style="@style/text_light_bold_large"
                 android:id="@+id/content_card_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="@dimen/unit4"
                 android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="@dimen/unit16"
                 tools:text="Card Title" />
 
             <View
@@ -96,7 +91,7 @@
                 android:layout_height="@dimen/unit2"
                 android:layout_below="@+id/content_card_title"
                 android:layout_marginRight="@dimen/unit30"
-                android:background="@color/md_grey_500" />
+                android:background="@color/colorLightGrey" />
 
         </RelativeLayout>
 

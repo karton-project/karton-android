@@ -23,21 +23,20 @@
         android:text="No Text"
         android:gravity="center"
         android:layout_marginRight="@dimen/unit8"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/send_code_button"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_ok"
-        android:tint="@color/white"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/unit10" />
+        android:layout_alignParentBottom="true"/>
 
     <com.alpay.codenotes.view.AutofitVerticalRecyclerView
+        style="@style/button_floating_nav"
         android:id="@+id/codeblocks_recycler_view"
         android:layout_margin="@dimen/unit8"
         android:layout_alignParentRight="true"
@@ -47,24 +46,21 @@
         android:layout_above="@+id/read_code_button"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/read_code_button"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/unit10" />
+        android:layout_alignParentBottom="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/back_code_button"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_back"
-        android:tint="@color/white"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit10" />
+        android:layout_alignParentTop="true"/>
 
 </RelativeLayout>

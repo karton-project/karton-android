@@ -15,16 +15,15 @@
         android:layout_marginLeft="@dimen/unit10"
         android:layout_marginRight="8dp"
         app:srcCompat="@drawable/warning_icon"
-        android:tint="@color/white" />
+        android:tint="@color/colorWhite" />
 
     <TextView
         android:id="@+id/warning_toast_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nunitofamily"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/unit10"
         android:layout_marginRight="@dimen/unit10"
-        android:textColor="#FFF" />
+        android:textColor="@color/colorWhite" />
 
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/unit10"
-        android:background="@color/white"
+        android:background="@color/colorWhite"
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
         card_view:cardCornerRadius="@dimen/unit4">
@@ -42,37 +42,34 @@
                 android:weightSum="3">
 
                 <Button
+                    style="@style/button_learn"
                     android:id="@+id/program_run_code"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_marginTop="@dimen/unit10"
                     android:layout_marginRight="@dimen/unit10"
                     android:layout_weight="1"
-                    android:background="@color/learn_color"
                     android:text="@string/card_run"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/unit12" />
 
                 <Button
+                    style="@style/button_learn"
                     android:id="@+id/program_change_code"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_margin="@dimen/unit10"
                     android:layout_weight="1"
-                    android:background="@color/learn_color"
                     android:text="@string/card_change"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/unit12" />
 
                 <Button
+                    style="@style/button_learn"
                     android:id="@+id/program_delete_code"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_margin="@dimen/unit10"
                     android:layout_weight="1"
-                    android:background="@color/learn_color"
                     android:text="@string/card_delete"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/unit12" />
 
             </LinearLayout>
@@ -90,7 +87,7 @@
                     android:layout_gravity="top|center_horizontal"
                     android:layout_marginTop="@dimen/unit4"
                     android:layout_marginBottom="@dimen/unit4"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorWhite"
                     android:textSize="@dimen/unit14"
                     tools:text="@tools:sample/lorem/random" />
 
@@ -103,7 +100,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="@dimen/unit4"
                 android:gravity="center_vertical"
-                android:textColor="@color/white"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/unit16"
                 tools:text="Card Title" />
 
@@ -113,7 +110,7 @@
                 android:layout_height="@dimen/unit2"
                 android:layout_below="@+id/program_card_title"
                 android:layout_marginRight="@dimen/unit30"
-                android:background="@color/md_grey_500" />
+                android:background="@color/colorLightGrey" />
 
         </RelativeLayout>
 

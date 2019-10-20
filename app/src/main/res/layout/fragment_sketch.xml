@@ -12,58 +12,48 @@
         app:inkFlags="interpolation|responsiveWeight" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/sketch_color_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/sketch_draw"
-        android:layout_margin="@dimen/unit8"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_color_palette" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/sketch_draw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/sketch_eraser"
-        android:layout_margin="@dimen/unit8"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_draw" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/sketch_eraser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/sketch_clean"
-        android:layout_margin="@dimen/unit8"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_eraser" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/sketch_clean"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/unit8"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/sketch_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/unit18"
-        android:tint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_ok" />
 
 </RelativeLayout>

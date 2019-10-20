@@ -1,24 +1,45 @@
-<!--
-  Copyright 2013 The Android Open Source Project
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  -->
-
 <resources>
 
     <dimen name="item_margin">8dp</dimen>
 
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="unit1">1.00dp</dimen>
+    <dimen name="unit2">2.00dp</dimen>
+    <dimen name="unit3">3.00dp</dimen>
+    <dimen name="unit4">4.00dp</dimen>
+    <dimen name="unit5">5.00dp</dimen>
+    <dimen name="unit7">7.00dp</dimen>
+    <dimen name="unit8">8.00dp</dimen>
+    <dimen name="unit10">10.00dp</dimen>
+    <dimen name="unit12">12.00dp</dimen>
+    <dimen name="unit14">14.00dp</dimen>
+    <dimen name="unit16">16.00dp</dimen>
+    <dimen name="unit18">18.00dp</dimen>
+    <dimen name="unit20">20.00dp</dimen>
+    <dimen name="unit24">24.00dp</dimen>
+    <dimen name="unit30">30.00dp</dimen>
+    <dimen name="unit35">35.00dp</dimen>
+    <dimen name="unit40">40.00dp</dimen>
+    <dimen name="unit48">48.00dp</dimen>
+    <dimen name="unit50">50.00dp</dimen>
+    <dimen name="unit60">60.00dp</dimen>
+    <dimen name="unit70">70.00dp</dimen>
+
+    <dimen name="unit80">80.00dp</dimen>
+
+    <dimen name="unit120">120.00dp</dimen>
+
+    <dimen name="unit150">150.00dp</dimen>
+
+    <dimen name="unit160">160.00dp</dimen>
+
+    <dimen name="unit200">200.00dp</dimen>
+
+    <dimen name="unit220">220.00dp</dimen>
+
+    <dimen name="unit224">224.00dp</dimen>
+
+    <dimen name="unit240">240.00dp</dimen>
+
+    <dimen name="unit320">320.00dp</dimen>
 
 </resources>

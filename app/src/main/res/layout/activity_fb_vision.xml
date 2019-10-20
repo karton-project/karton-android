@@ -2,10 +2,9 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fireTopLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGrey"
+    android:background="@color/colorDarkGrey"
     android:keepScreenOn="true">
 
         <com.alpay.codenotes.utils.vision.CameraSourcePreview
@@ -41,46 +40,39 @@
             android:layout_above="@+id/read_code_button"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/button_floating_nav"
             android:id="@+id/send_code_button"
-            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_ok"
-            android:tint="@color/white"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/unit10" />
+            android:layout_alignParentBottom="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/button_floating_nav"
             android:id="@+id/read_barcode"
-            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_photo_camera"
-            android:tint="@color/white"
             android:layout_toRightOf="@+id/back_code_button"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/unit10" />
+            android:layout_alignParentTop="true"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/button_floating_nav"
             android:id="@+id/read_code_button"
-            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/unit10" />
+            android:layout_alignParentBottom="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/button_floating_nav"
             android:id="@+id/back_code_button"
-            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_back"
-            android:tint="@color/white"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/unit10" />
+            android:layout_alignParentTop="true" />
 
 </RelativeLayout>
