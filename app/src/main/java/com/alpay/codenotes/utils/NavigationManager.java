@@ -12,7 +12,6 @@ import com.alpay.codenotes.fragments.AccountFragment;
 import com.alpay.codenotes.fragments.ContentListFragment;
 import com.alpay.codenotes.fragments.GameFragment;
 import com.alpay.codenotes.fragments.ProgramListFragment;
-import com.alpay.codenotes.fragments.SendFeedbackFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
@@ -31,7 +30,6 @@ public class NavigationManager {
     public static final String NOTES = "notes";
     public static final String ACCOUNT = "account";
     public static final String PROGRAM_LIST = "programlist";
-    public static final String SEND_FEEDBACK = "feedback";
 
     public static void openFragment(AppCompatActivity appCompatActivity, String fragmentID) {
         if (!appCompatActivity.getClass().getSimpleName().contentEquals("HomeActivity")) {
@@ -59,9 +57,6 @@ public class NavigationManager {
         } else if (fragmentID.contentEquals(ACCOUNT)) {
             AccountFragment accountFragment = new AccountFragment();
             ft.replace(R.id.fragment_container, accountFragment);
-        } else if (fragmentID.contentEquals(SEND_FEEDBACK)) {
-            SendFeedbackFragment sendFeedbackFragment = new SendFeedbackFragment();
-            ft.replace(R.id.fragment_container, sendFeedbackFragment);
         }
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();

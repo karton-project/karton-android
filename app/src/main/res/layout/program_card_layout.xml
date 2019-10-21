@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/unit320"
-    android:layout_height="@dimen/unit240">
+    android:layout_width="@dimen/unit240"
+    android:layout_height="@dimen/unit160">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/program_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/unit10"
+        android:layout_margin="@dimen/unit4"
         android:background="@color/colorWhite"
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
@@ -30,7 +30,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/unit10"
+            android:layout_margin="@dimen/unit8"
             android:orientation="vertical">
 
             <LinearLayout
@@ -42,35 +42,22 @@
                 android:weightSum="3">
 
                 <Button
-                    style="@style/button_learn"
+                    style="@style/button_program"
                     android:id="@+id/program_run_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/unit40"
-                    android:layout_marginTop="@dimen/unit10"
-                    android:layout_marginRight="@dimen/unit10"
                     android:layout_weight="1"
-                    android:text="@string/card_run"
-                    android:textSize="@dimen/unit12" />
+                    android:text="@string/card_run" />
 
                 <Button
-                    style="@style/button_learn"
+                    style="@style/button_program"
                     android:id="@+id/program_change_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/unit40"
-                    android:layout_margin="@dimen/unit10"
                     android:layout_weight="1"
-                    android:text="@string/card_change"
-                    android:textSize="@dimen/unit12" />
+                    android:text="@string/card_change"/>
 
                 <Button
-                    style="@style/button_learn"
+                    style="@style/button_program"
                     android:id="@+id/program_delete_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/unit40"
-                    android:layout_margin="@dimen/unit10"
                     android:layout_weight="1"
-                    android:text="@string/card_delete"
-                    android:textSize="@dimen/unit12" />
+                    android:text="@string/card_delete" />
 
             </LinearLayout>
 
@@ -88,28 +75,27 @@
                     android:layout_marginTop="@dimen/unit4"
                     android:layout_marginBottom="@dimen/unit4"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/unit14"
+                    android:textSize="@dimen/unit10"
                     tools:text="@tools:sample/lorem/random" />
 
             </ScrollView>
 
             <TextView
+                style="@style/text_light_bold_large"
                 android:id="@+id/program_card_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="@dimen/unit4"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/unit16"
                 tools:text="Card Title" />
 
             <View
                 android:id="@+id/title_line"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/unit2"
+                android:layout_height="@dimen/unit1"
                 android:layout_below="@+id/program_card_title"
-                android:layout_marginRight="@dimen/unit30"
+                android:layout_marginRight="@dimen/unit8"
                 android:background="@color/colorLightGrey" />
 
         </RelativeLayout>

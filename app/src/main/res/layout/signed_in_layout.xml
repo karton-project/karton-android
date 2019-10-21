@@ -22,72 +22,122 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/unit8"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/unit16"
+            android:background="@drawable/learn_button_shape"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/user_profile_picture"
-                android:layout_width="@dimen/unit60"
-                android:layout_height="@dimen/unit60"
+                android:layout_width="@dimen/unit120"
+                android:layout_height="@dimen/unit120"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/profile_picture_content_desc"
+                android:padding="@dimen/unit16"
                 app:srcCompat="@drawable/ic_anon_user_48dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/unit8"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/user_display_name"
+                    style="@style/text_light_bold_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/unit8"
                     android:textIsSelectable="true"
+                    android:textSize="@dimen/unit24"
                     tools:text="Alpay Sabuncuoglu" />
 
                 <TextView
                     android:id="@+id/user_email"
+                    style="@style/text_light"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/unit8"
                     android:textIsSelectable="true"
                     tools:text="sabuncuoglualpay@gmail.com" />
+
+                <TextView
+                    android:id="@+id/sign_out"
+                    style="@style/text_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:text="@string/sign_out" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/my_notes"
-            style="@style/text_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/unit160"
             android:layout_below="@+id/account_layout"
-            android:layout_margin="@dimen/unit8"
-            android:text="@string/my_notes" />
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-        <TextView
-            android:id="@+id/my_programs"
-            style="@style/text_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_notes"
-            android:layout_margin="@dimen/unit8"
-            android:text="@string/my_programs" />
 
-        <TextView
-            android:id="@+id/sign_out"
-            style="@style/text_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_programs"
-            android:layout_marginStart="@dimen/unit8"
-            android:layout_marginLeft="@dimen/unit8"
-            android:layout_marginEnd="@dimen/unit8"
-            android:layout_marginRight="@dimen/unit8"
-            android:layout_marginBottom="@dimen/unit8"
-            android:text="@string/sign_out" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/my_notes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit8"
+                        android:text="@string/my_notes" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_programs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit8"
+                        android:text="@string/my_programs" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tip_of_the_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit8"
+                    android:text="@string/tip_of_the_day" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

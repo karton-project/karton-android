@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit12"
-        android:background="@color/colorAccent"
+        android:background="@drawable/warningtoastshape"
         android:clickable="true"
         android:padding="@dimen/unit8">
 

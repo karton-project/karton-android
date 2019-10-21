@@ -1,53 +1,55 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Account -->
-    <string name="my_notes">My Notes</string>
-    <string name="my_programs">My Programs</string>
+    <string name="my_notes">Notlarım</string>
+    <string name="my_programs">Programlarım</string>
 
     <!-- Actionbar Headers -->
-    <string name="task_title">Your Mission</string>
+    <string name="task_title">Görevin</string>
 
     <!-- Compiler -->
-    <string name="no_code_dialog_message">No Understandable Code</string>
+    <string name="no_code_dialog_message">Üzgünüm! Herhangi bir kod algılayamadım...</string>
 
     <!-- Dependencies -->
 
     <!-- Exercises -->
-    <string name="card_watch_video_button_text">Learn</string>
-    <string name="card_practice_button_text">Try</string>
+    <string name="card_watch_video_button_text">Öğren</string>
+    <string name="card_practice_button_text">Dene</string>
 
-    <string name="card_change">Change</string>
-    <string name="card_run">Run</string>
-    <string name="card_delete">Remove</string>
-    <string name="empty_program_text">Create a new program with + button</string>
+    <string name="card_change">Düzenle</string>
+    <string name="card_run">Çalıştır</string>
+    <string name="card_delete">Sil</string>
+    <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
 
     <!-- General -->
     <string name="app_name">Kart-ON</string>
     <string name="ok">OK</string>
 
     <!-- Home Page -->
-    <string name="home_card_learn">Learn</string>
-    <string name="home_card_program">Code</string>
-    <string name="home_card_game">Play</string>
-    <string name="home_card_account">Account</string>
-    <string name="hour_of_code_play">Hour of Code with Flappy Bird</string>
-    <string name="hour_of_code_flappy_exp">Learn the fundamentals of coding with Flappy Bird</string>
+    <string name="home_card_learn">Öğren</string>
+    <string name="home_card_program">Kodla</string>
+    <string name="home_card_game">Oyna</string>
+    <string name="home_card_account">Hesap</string>
+    <string name="hour_of_code_play">Flappy Bird ile Kod Saati</string>
+    <string name="hour_of_code_flappy_exp">Flappy Bird ile kodlamanın temellerini öğren!</string>
+
+    <!-- Image Descriptions -->
 
     <!-- Media Player -->
-    <string name="progress_title">Video is Buffering</string>
-    <string name="progress_content">Content is Loading</string>
+    <string name="progress_title">Video Yükleniyor</string>
+    <string name="progress_content">İçerik alınıyor ...</string>
 
     <!-- Notes -->
     <string name="no_to_dos">You don\'t have any notes</string>
 
     <!-- Tutorial -->
-    <string name="cancel">Cancel</string>
-    <string name="or_text">or</string>
-    <string name="save_text">Save</string>
+    <string name="cancel">İptal</string>
+    <string name="or_text">veya</string>
+    <string name="save_text">Kaydet</string>
 
     <!-- Welcome -->
-    <string name="welcome_text">Welcome to Kart-ON</string>
-    <string name="welcome_page_2">Create stories</string>
+    <string name="welcome_text">Code Notes\'a hoşgeldin</string>
+    <string name="welcome_page_2">Hikayeler oluştur</string>
     <string name="welcome_page_3">Animasyonlar yarat</string>
     <string name="welcome_page_4">Kodlama ile hareket kat</string>
     <string name="welcome_page_5">İlk hikayemizi yaratalım.</string>
@@ -59,9 +61,9 @@
     <string name="title_auth_activity">Auth UI Demo</string>
 
     <!-- Auth UI -->
-    <string name="sign_in_start"><u><b>Login with Google Account</b></u></string>
-    <string name="sign_in_silent"><u><b>Sign in Anonymously</b></u></string>
-    <string name="sign_in_header">Sign in to save notes and programs</string>
+    <string name="sign_in_start"><u><b>Hesabın ile Giriş Yap</b></u></string>
+    <string name="sign_in_silent"><u><b>Ziyaretçi olarak Gir</b></u></string>
+    <string name="sign_in_header">Yaptıklarını kaydetmek ve arkadaşlarınla paylaşmak için oturum aç:</string>
 
     <string name="providers_google">Google</string>
     <string name="providers_email">Email</string>
@@ -84,7 +86,7 @@
 
     <!-- Auth UI - Custom AuthMethodPickerLayout -->
 
-    <string name="game_flappy_text">Learn the fundamentals of coding with Flappy Bird</string>
-    <string name="tip_of_the_day">Tip of the Day</string>
+    <string name="game_flappy_text">Flappy Bird ile kodlamanın temellerini öğren.</string>
+    <string name="tip_of_the_day">Günün Önerisi</string>
 
 </resources>
