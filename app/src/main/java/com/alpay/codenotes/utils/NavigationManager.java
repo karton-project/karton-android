@@ -5,7 +5,6 @@ import android.content.Intent;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
 import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
-import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.activities.HomeActivity;
 import com.alpay.codenotes.activities.WelcomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
@@ -77,7 +76,7 @@ public class NavigationManager {
     }
 
     public static void openPracticeWithInstructions(AppCompatActivity appCompatActivity, String instructions) {
-        Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
+        Intent intent = new Intent(appCompatActivity, CodeNotesCompilerActivity.class);
         intent.putExtra(NavigationManager.BUNDLE_KEY, instructions);
         appCompatActivity.startActivity(intent);
     }

@@ -13,8 +13,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.os.Environment;
 import android.util.Base64;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -28,11 +26,9 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.util.Arrays;
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,7 +38,6 @@ public class Utils {
     public static final String USER_NAME_KEY = "user_name";
     public static final String USER_EMAIL_KEY = "user_email";
     public static final String USER_LOGIN_KEY = "is_login";
-    public static final String DB_VERSION_KEY = "db_version";
     public static final String IS_FIRST_OPEN_KEY = "isfirst";
     public static final String CLOSE_FLAPPY = "closeflappy";
     public static String code = "";
@@ -50,6 +45,14 @@ public class Utils {
     public static boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";
         return (Runtime.getRuntime().exec(command).waitFor() == 0);
+    }
+
+    public static final String getDeviceLanguage(){
+        return Locale.getDefault().getDisplayLanguage();
+    }
+
+    public static boolean isTR(Context context){
+       return getStringFromResource(context, R.string.check).contentEquals("tr");
     }
 
     public static void showOKDialog(AppCompatActivity activity, int stringID) {
@@ -162,21 +165,6 @@ public class Utils {
         return buf.toString();
     }
 
-    public static byte[] serialize(Object obj) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ObjectOutputStream os = new ObjectOutputStream(out);
-        os.writeObject(obj);
-        return out.toByteArray();
-    }
-
-    public static void sendAnalyticsData(String id, String name) {
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
-        if (mFirebaseAnalytics != null)
-            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-    }
-
     public static void showErrorToast(AppCompatActivity activityCompat, int stringID, int duration) {
         LayoutInflater inflater = activityCompat.getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_error, activityCompat.findViewById(R.id.error_toast_container));
@@ -199,30 +187,6 @@ public class Utils {
         toast.setDuration(duration);
         toast.setView(layout);
         toast.show();
-    }
-
-    public static Drawable getDrawableWithName(AppCompatActivity appCompatActivity, String fileName) {
-        Drawable drawable;
-        try {
-            String[] assetFileNames = appCompatActivity.getAssets().list("storytr");
-            if (Arrays.asList(assetFileNames).contains(fileName)) {
-                InputStream inputStream = appCompatActivity.getAssets().open("storytr/" + fileName);
-                drawable = Drawable.createFromStream(inputStream, null);
-                inputStream.close();
-            } else {
-                String directoryPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                if (!directoryPath.isEmpty()) {
-                    directoryPath += "/CodeNotes/Drawable";
-                } else {
-                    directoryPath = "storage/self/primary/CodeNotes/Drawable";
-                }
-                File file = new File(directoryPath + "/" + fileName);
-                drawable = Drawable.createFromPath(file.getAbsolutePath());
-            }
-            return drawable;
-        } catch (IOException ex) {
-            return null;
-        }
     }
 
     public static Drawable encodeImageDrawableFromBase64(Context context, String encodedImage) {

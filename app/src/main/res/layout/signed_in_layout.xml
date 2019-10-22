@@ -90,50 +90,78 @@
 
                 <LinearLayout
                     android:id="@+id/my_notes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_margin="@dimen/unit4"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:background="@drawable/warningtoastshape"
+                    android:padding="@dimen/unit8"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/unit40"
+                        android:layout_height="@dimen/unit40"
+                        app:srcCompat="@drawable/ic_edit"/>
 
                     <TextView
-                        style="@style/text_link"
+                        style="@style/text_dark_bold_large"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/unit8"
+                        android:layout_marginLeft="@dimen/unit16"
                         android:text="@string/my_notes" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/my_programs"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_margin="@dimen/unit4"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:background="@drawable/warningtoastshape"
+                    android:padding="@dimen/unit8"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/unit40"
+                        android:layout_height="@dimen/unit40"
+                        app:srcCompat="@drawable/ic_construction_dark"/>
 
                     <TextView
-                        style="@style/text_link"
+                        style="@style/text_dark_bold_large"
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/unit8"
+                        android:layout_marginLeft="@dimen/unit16"
                         android:text="@string/my_programs" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/tip_of_the_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit4"
+                android:layout_marginLeft="@dimen/unit4"
+                android:layout_marginRight="@dimen/unit8"
+                android:background="@drawable/warningtoastshape"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/text_link"
+                    style="@style/text_dark_bold_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit8"
                     android:text="@string/tip_of_the_day" />
+
+                <TextView
+                    style="@style/text_light_bold_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit8"
+                    android:text="@string/karton_website" />
 
             </LinearLayout>
 

@@ -73,7 +73,7 @@ public class ContentListFragment extends Fragment {
     }
 
     private void generateContentListFromGSON() {
-        contentArrayList = ContentHelper.readContentList(getActivity());
+        contentArrayList = ContentHelper.readFromAssets(getActivity());
         if (recyclerView != null) {
             setUpRecyclerView();
             populateRecyclerView();

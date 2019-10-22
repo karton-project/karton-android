@@ -33,12 +33,7 @@ public class WelcomeActivity extends BaseActivity {
             R.layout.welcome_page_1,
             R.layout.welcome_page_2,
             R.layout.welcome_page_3,
-            R.layout.welcome_page_4,
-            R.layout.welcome_page_5,
-            R.layout.welcome_page_6,
-            R.layout.welcome_page_7,
-            R.layout.welcome_page_8,
-            R.layout.welcome_page_9
+            R.layout.welcome_page_4
     };
     int pageIndex = 0;
 

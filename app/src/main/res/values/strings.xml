@@ -1,8 +1,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="check">en</string>
     <!-- Account -->
     <string name="my_notes">My Notes</string>
     <string name="my_programs">My Programs</string>
+    <string name="karton_website">You can download the card blocks, see all activities, read our research and see more tips and guidelines at <u>karton.ku.edu.tr</u></string>
 
     <!-- Actionbar Headers -->
     <string name="task_title">Your Mission</string>
@@ -46,15 +48,10 @@
     <string name="save_text">Save</string>
 
     <!-- Welcome -->
-    <string name="welcome_text">Welcome to Kart-ON</string>
-    <string name="welcome_page_2">Create stories</string>
-    <string name="welcome_page_3">Animasyonlar yarat</string>
-    <string name="welcome_page_4">Kodlama ile hareket kat</string>
-    <string name="welcome_page_5">İlk hikayemizi yaratalım.</string>
-    <string name="welcome_page_6">İlk kutucuğa bas ve bir fotoğraf çek.</string>
-    <string name="welcome_page_7">İkinci kutucuğa bas ve bir resim çiz.</string>
-    <string name="welcome_page_8">Kutucuğun üstündeki kodlma simgesine bas ve hikayene hareket kat.</string>
-    <string name="welcome_page_9">İlk hikayen hazır!</string>
+    <string name="welcome_text">Welcome to Kart-ON, learn programming, and technology with different applications</string>
+    <string name="welcome_page_2">Use cardboards to program sketches and animations</string>
+    <string name="welcome_page_3">or start with hour of code and program your first game</string>
+    <string name="welcome_page_4">Learn programming in a fun and interactive way</string>
 
     <string name="title_auth_activity">Auth UI Demo</string>
 

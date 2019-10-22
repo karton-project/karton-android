@@ -1,6 +1,7 @@
 package com.alpay.codenotes.activities;
 
 import android.app.AlertDialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -8,13 +9,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,9 +38,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     @BindView(R.id.result_webview)
     WebView webView;
-
-    @BindView(R.id.error_image)
-    ImageView imageView;
 
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
@@ -110,12 +106,12 @@ public class CodeBlocksResultActivity extends BaseActivity {
                     if (url.equals(failingUrl)) {
                         view.setVisibility(View.GONE);
                         errorLayout.setVisibility(View.VISIBLE);
-                        Glide.with(CodeBlocksResultActivity.this).load("file:///android_asset/lottie/empty.gif").into(imageView);
                     }
                     super.onReceivedError(view, errorCode, description, failingUrl);
                 }
             });
             if (isFlappy){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 url = "https://codenotesalpay.web.app/processing/flappy-game/index.html";
             } else{
                 url = "https://codenotesalpay.web.app/processing/index.html";
@@ -142,7 +138,9 @@ public class CodeBlocksResultActivity extends BaseActivity {
             codeLine = codeLine.replace("\n", "").replace("\r", "");
             evalCode("addCodeInput('" + codeLine + "')");
         }
-        evalCode("runP5Code()");
+        if (!isFlappy){
+            evalCode("runP5Code()");
+        }
     }
 
     public void evalCode(String code) {

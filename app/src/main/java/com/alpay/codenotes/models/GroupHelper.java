@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alpay.codenotes.BaseApplication;
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -79,6 +80,8 @@ public class GroupHelper {
                 groupList = new ArrayList<>();
             }
         } catch (IOException e) {
+            Crashlytics.log(Log.WARN, "program", "program file cannot be read");
+            Crashlytics.logException(e);
             Log.e("login activity", "Can not read file: " + e.toString());
         }
     }

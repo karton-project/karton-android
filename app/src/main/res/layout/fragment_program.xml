@@ -47,36 +47,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/hourofcode_view">
 
-        <LinearLayout
-            android:id="@+id/empty_program_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/empty_program_image"
-                android:layout_width="@dimen/unit200"
-                android:layout_height="@dimen/unit200" />
-
-            <TextView
-                android:layout_width="@dimen/unit200"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/unit16"
-                android:gravity="center"
-                android:text="@string/empty_program_text" />
-
-        </LinearLayout>
-
         <ProgressBar
             android:id="@+id/program_progress_bar"
             android:layout_width="@dimen/unit120"
             android:layout_height="@dimen/unit120"
             android:layout_centerInParent="true"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/colorLearn"
-            android:indeterminateTintMode="src_atop" />
+            android:indeterminate="true"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/program_recycler_view"
@@ -86,15 +62,43 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/empty_program_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/unit48"
+        android:layout_marginBottom="@dimen/unit8"
+        android:layout_marginLeft="@dimen/unit24"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/text_dark_bold_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/unit8"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="@string/empty_program_text" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:lottie_rawRes="@raw/rightarrow"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
+
+    </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
         android:id="@+id/new_program_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/unit14"
-        android:background="@color/colorPrimary"
-        app:backgroundTint="@color/colorLearn"
         app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>

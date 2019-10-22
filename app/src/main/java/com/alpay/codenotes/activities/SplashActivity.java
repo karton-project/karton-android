@@ -2,19 +2,10 @@ package com.alpay.codenotes.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
-import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.models.Content;
-import com.alpay.codenotes.models.ContentHelper;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 import static com.alpay.codenotes.BaseApplication.auth;
 
@@ -29,22 +20,6 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        if (Utils.isInternetAvailable(this)) {
-            BaseApplication.ref.child("tr/version").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int version = ((Long) dataSnapshot.getValue()).intValue();
-                    if (Utils.getIntegerFromSharedPreferences(SplashActivity.this, Utils.DB_VERSION_KEY) != version) {
-                        generateContentListFromFirebase();
-                        Utils.addIntegerToSharedPreferences(SplashActivity.this, Utils.DB_VERSION_KEY, version);
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
-        }
     }
 
     @Override
@@ -70,25 +45,6 @@ public class SplashActivity extends BaseActivity {
                 NavigationManager.openHomeActiviy(this);
             }
         }
-    }
-
-    private void generateContentListFromFirebase() {
-        ArrayList<Content> contentArrayList = new ArrayList<>();
-        BaseApplication.ref.child("tr/contents").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Content content = dataSnapshot.getValue(Content.class);
-                    contentArrayList.add(content);
-                }
-                ContentHelper.saveContentList(SplashActivity.this, contentArrayList);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError firebaseError) {
-                Log.e("The read failed: ", firebaseError.getMessage());
-            }
-        });
     }
 
     private void launch() {

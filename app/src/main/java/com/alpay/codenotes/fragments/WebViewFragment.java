@@ -9,13 +9,11 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -29,17 +27,14 @@ public class WebViewFragment extends Fragment {
     private Unbinder unbinder;
     private String url;
 
-    @BindView(R.id.error_image)
-    ImageView imageView;
-
     @BindView(R.id.error_layout)
     LinearLayout errorLayout;
 
     @BindView(R.id.webview_frame)
     WebView webView;
 
-    @BindView(R.id.webview_progress_bar)
-    ProgressBar progressBar;
+    @BindView(R.id.webview_load_anim)
+    LottieAnimationView loadAnim;
 
     public WebViewFragment() {
 
@@ -71,7 +66,7 @@ public class WebViewFragment extends Fragment {
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
-                progressBar.setVisibility(View.GONE);
+                loadAnim.setVisibility(View.GONE);
             }
 
             @Override
@@ -79,7 +74,6 @@ public class WebViewFragment extends Fragment {
                 if (url.equals(failingUrl)) {
                     view.setVisibility(View.GONE);
                     errorLayout.setVisibility(View.VISIBLE);
-                    Glide.with(getActivity()).load("file:///android_asset/lottie/empty.gif").into(imageView);
                 }
                 super.onReceivedError(view, errorCode, description, failingUrl);
             }

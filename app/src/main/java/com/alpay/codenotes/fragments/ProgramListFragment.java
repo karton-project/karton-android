@@ -16,7 +16,6 @@ import com.alpay.codenotes.adapter.GroupViewAdapter;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.bumptech.glide.Glide;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,9 +44,6 @@ public class ProgramListFragment extends Fragment {
 
     @BindView(R.id.empty_program_layout)
     LinearLayout emptyProgramLayout;
-
-    @BindView(R.id.empty_program_image)
-    ImageView imageView;
 
     @BindView(R.id.hourofcode_view)
     RelativeLayout hourOfCodeView;
@@ -114,7 +110,6 @@ public class ProgramListFragment extends Fragment {
 
     public void showEmptyScreenLayout() {
         emptyProgramLayout.setVisibility(View.VISIBLE);
-        Glide.with(getActivity()).load("file:///android_asset/lottie/empty.gif").into(imageView);
     }
 
 

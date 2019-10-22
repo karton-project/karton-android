@@ -20,6 +20,7 @@ public class FullScreenVideoFragment extends Fragment {
     private ProgressDialog progressDialog;
 
     public FullScreenVideoFragment() {
+
     }
 
     public static FullScreenVideoFragment newInstance(String videoLink) {

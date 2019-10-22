@@ -1,9 +1,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="check">tr</string>
     <!-- Account -->
     <string name="my_notes">Notlarım</string>
     <string name="my_programs">Programlarım</string>
-
+    <string name="karton_website"><u>karton.ku.edu.tr</u> web sitesinde, yazıcıdan çıkarabileceğiniz blokları, aktivite açıklamalarını, araştırmalarımızı ve çok daha fazla bilgiyi bulabilirsiniz.</string>
     <!-- Actionbar Headers -->
     <string name="task_title">Görevin</string>
 
@@ -48,16 +49,11 @@
     <string name="save_text">Kaydet</string>
 
     <!-- Welcome -->
-    <string name="welcome_text">Code Notes\'a hoşgeldin</string>
-    <string name="welcome_page_2">Hikayeler oluştur</string>
-    <string name="welcome_page_3">Animasyonlar yarat</string>
-    <string name="welcome_page_4">Kodlama ile hareket kat</string>
-    <string name="welcome_page_5">İlk hikayemizi yaratalım.</string>
-    <string name="welcome_page_6">İlk kutucuğa bas ve bir fotoğraf çek.</string>
-    <string name="welcome_page_7">İkinci kutucuğa bas ve bir resim çiz.</string>
-    <string name="welcome_page_8">Kutucuğun üstündeki kodlma simgesine bas ve hikayene hareket kat.</string>
-    <string name="welcome_page_9">İlk hikayen hazır!</string>
 
+    <string name="welcome_text">Kart-ON ile programlama ve teknolojiyi deneyerek keşfet</string>
+    <string name="welcome_page_2">Karton blokları kullanarak çizim ve animasyon programları oluştur</string>
+    <string name="welcome_page_3">veya Kod Saati oyunu ile başla ve ilk oyununu yarat</string>
+    <string name="welcome_page_4">Programlamayı deneyerek ve keşfederek öğren!</string>
     <string name="title_auth_activity">Auth UI Demo</string>
 
     <!-- Auth UI -->

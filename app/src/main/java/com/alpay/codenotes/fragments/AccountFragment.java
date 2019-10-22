@@ -61,7 +61,6 @@ public class AccountFragment extends Fragment {
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.NOTES);
     }
 
-
     @OnClick(R.id.my_programs)
     public void openPrograms(){
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.PROGRAM_LIST);
@@ -71,6 +70,11 @@ public class AccountFragment extends Fragment {
     public void signIn(){
         Intent intent = new Intent(getActivity(), AuthUiActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.tip_of_the_day)
+    public void openWebpage(){
+        NavigationManager.openWebViewFragment((AppCompatActivity) getActivity(), "https://karton.ku.edu.tr");
     }
 
     @Override
