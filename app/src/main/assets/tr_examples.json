@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Hello World",
+    "programList": [
+      {
+        "name": "Red Circle",
+        "code": "fill r: 255 g: 0 b: 0\nellipse x:200 y:200 w:100 h:100"
+      },
+      {
+        "name": "Blue Rectangle",
+        "code": "fill r: 0 g: 0 b: 255;\nrect x:200 y:200 w:100 h:150"
+      }
+    ]
+  },
+  {
+    "name": "Color and Shapes",
+    "programList": [
+      {
+        "name": "Orange Circle and Square",
+        "code": "fill r: 255 g: 130 b: 0\nellipse x:200 y:200 w:100 h:100\nrect x:150 y:150 w:50 h:50"
+      },
+      {
+        "name": "Orange Circle and Pink Square",
+        "code": "fill r: 255 g: 130 b: 0\nellipse x:200 y:200 w:100 h:100\nfill r: 255 g: 0 b: 190\nrect x:150 y:150 w:50 h:50"
+      }
+    ]
+  }
+]

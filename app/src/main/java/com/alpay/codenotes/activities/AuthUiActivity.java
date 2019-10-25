@@ -165,7 +165,7 @@ public class AuthUiActivity extends BaseActivity {
 
     @DrawableRes
     private int getSelectedLogo() {
-        return R.mipmap.wlogo;
+        return R.drawable.sb_byaz;
     }
 
     private List<IdpConfig> getSelectedProviders() {

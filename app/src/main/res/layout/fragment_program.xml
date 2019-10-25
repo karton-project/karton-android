@@ -4,10 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/button_floating_nav"
+        android:id="@+id/show_examples"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ic_menu" />
+
     <RelativeLayout
         android:id="@+id/hourofcode_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/show_examples"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit12"
         android:background="@drawable/warningtoastshape"

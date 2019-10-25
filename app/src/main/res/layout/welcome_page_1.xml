@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDarkGrey"
-    android:padding="@dimen/unit50">
+    android:paddingTop="@dimen/unit16"
+    android:paddingBottom="@dimen/unit16"
+    android:paddingLeft="@dimen/unit50"
+    android:paddingRight="@dimen/unit50">
 
     <TextView
         android:id="@+id/page_text"
@@ -21,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/page_text"
-        android:layout_marginTop="@dimen/unit16" />
+        android:layout_marginTop="@dimen/unit16"
+        app:srcCompat="@drawable/w1"/>
     
 </RelativeLayout>

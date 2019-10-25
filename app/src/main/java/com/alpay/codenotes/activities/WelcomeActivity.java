@@ -33,7 +33,6 @@ public class WelcomeActivity extends BaseActivity {
             R.layout.welcome_page_1,
             R.layout.welcome_page_2,
             R.layout.welcome_page_3,
-            R.layout.welcome_page_4
     };
     int pageIndex = 0;
 
@@ -80,13 +79,6 @@ public class WelcomeActivity extends BaseActivity {
         } else {
             previousButton.setVisibility(View.VISIBLE);
         }
-
-        if (pageIndex == pageArray.length - 1) {
-            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_ok));
-        } else {
-            nextButton.setVisibility(View.VISIBLE);
-        }
-
     }
 
     public void nextPage() {

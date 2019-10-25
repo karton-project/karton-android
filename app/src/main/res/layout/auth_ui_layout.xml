@@ -7,14 +7,16 @@
     android:background="@color/colorAccent">
 
     <ImageView
-        android:layout_width="@dimen/unit150"
+        android:layout_width="@dimen/unit200"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/unit12"
-        android:src="@mipmap/wlogo" />
+        android:layout_above="@+id/sign_options"
+        android:src="@drawable/w_byaz" />
 
 
     <LinearLayout
+        android:id="@+id/sign_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

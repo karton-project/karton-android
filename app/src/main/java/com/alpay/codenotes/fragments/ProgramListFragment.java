@@ -16,6 +16,7 @@ import com.alpay.codenotes.adapter.GroupViewAdapter;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class ProgramListFragment extends Fragment {
     private View view;
     private GroupViewAdapter groupViewAdapter;
     private Unbinder unbinder;
+    private boolean isExampleButtonClicked = false;
 
     @BindView(R.id.program_recycler_view)
     RecyclerView recyclerView;
@@ -48,6 +50,9 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.hourofcode_view)
     RelativeLayout hourOfCodeView;
 
+    @BindView(R.id.show_examples)
+    FloatingActionButton showExamplesButton;
+
     @OnClick(R.id.close_flappy_bird)
     public void closeFlappyBirdAnnouncement() {
         hourOfCodeView.setVisibility(View.GONE);
@@ -58,6 +63,18 @@ public class ProgramListFragment extends Fragment {
     public void createNewProgram() {
         Intent intent = new Intent(getActivity(), CodeNotesCompilerActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.show_examples)
+    public void showExamples(){
+        if (!isExampleButtonClicked){
+            generateExampleListFromGSON();
+            showExamplesButton.setImageResource(R.drawable.ic_close);
+        }else{
+            generateProgramListFromGSON();
+            showExamplesButton.setImageResource(R.drawable.ic_menu);
+        }
+        isExampleButtonClicked = !isExampleButtonClicked;
     }
 
     @Nullable
@@ -119,6 +136,14 @@ public class ProgramListFragment extends Fragment {
 
     private void generateProgramListFromGSON() {
         GroupHelper.readProgramList(getActivity());
+        if (recyclerView != null) {
+            setUpRecyclerView();
+            refreshCodeBlockRecyclerView(0);
+        }
+    }
+
+    private void generateExampleListFromGSON() {
+        GroupHelper.readFromAssets(getActivity());
         if (recyclerView != null) {
             setUpRecyclerView();
             refreshCodeBlockRecyclerView(0);

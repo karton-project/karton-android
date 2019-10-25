@@ -1,9 +1,11 @@
 package com.alpay.codenotes.models;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.util.Log;
 
 import com.alpay.codenotes.BaseApplication;
+import com.alpay.codenotes.utils.Utils;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +28,8 @@ public class GroupHelper {
     private static final String FILE_NAME = "karton_programs.json";
     public static String groupId = "Default";
     private static Type groupListType = new TypeToken<ArrayList<Group>>() {}.getType();
+    static String TR_FILE_NAME = "tr_examples.json";
+    static String EN_FILE_NAME = "en_examples.json";
 
     static Gson gson = new GsonBuilder().create();
 
@@ -83,6 +87,33 @@ public class GroupHelper {
             Crashlytics.log(Log.WARN, "program", "program file cannot be read");
             Crashlytics.logException(e);
             Log.e("login activity", "Can not read file: " + e.toString());
+        }
+    }
+
+    public static void readFromAssets(Context context) {
+        AssetManager am = context.getAssets();
+        InputStream inputStream;
+        BufferedReader bufferedReader = null;
+        try {
+            if (Utils.isTR(context)){
+                inputStream = am.open(TR_FILE_NAME);
+            }else{
+                inputStream = am.open(EN_FILE_NAME);
+            }
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                bufferedReader = new BufferedReader(inputStreamReader);
+            }
+        } catch (IOException e) {
+            Crashlytics.log(Log.WARN, "group", "group file cannot be read");
+            Crashlytics.logException(e);
+            Log.e("Group", "Can not read file: " + e.toString());
+        }
+
+        ArrayList<Group> data = new ArrayList<>();
+        if(bufferedReader != null){
+            JsonReader reader = new JsonReader(bufferedReader);
+            groupList = gson.fromJson(reader, groupListType);
         }
     }
 
