@@ -15,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
@@ -33,6 +34,7 @@ public class WebViewFragment extends Fragment {
     @BindView(R.id.webview_frame)
     WebView webView;
 
+    @Nullable
     @BindView(R.id.webview_load_anim)
     LottieAnimationView loadAnim;
 
@@ -66,7 +68,8 @@ public class WebViewFragment extends Fragment {
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
-                loadAnim.setVisibility(View.GONE);
+                if (loadAnim != null)
+                    loadAnim.setVisibility(View.GONE);
             }
 
             @Override

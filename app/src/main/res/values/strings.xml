@@ -13,6 +13,7 @@
     <string name="no_code_dialog_message">No Understandable Code</string>
 
     <!-- Dependencies -->
+    <string name="project_website">Project Website:</string>
 
     <!-- Exercises -->
     <string name="card_watch_video_button_text">Learn</string>
@@ -22,7 +23,7 @@
     <string name="card_run">Run</string>
     <string name="card_delete">Remove</string>
     <string name="empty_program_text">Create a new program with + button</string>
-
+    <string name="change_coding_language">Change the coding language to:</string>
     <!-- General -->
     <string name="app_name">Kart-ON</string>
     <string name="ok">OK</string>

@@ -1,6 +1,8 @@
 package com.alpay.codenotes.utils;
 
 public class Constants {
-    public static String DEVELOPER_KEY = "YOUR_DEVELOPER_API_KEY";
-    public static final String CARD_PDF_URL = "https://drive.google.com/file/d/1IED5RR94-fNdsW9hHj_6w5rYj4ZH6CpO/view?usp=sharing";
+    public static final String FLAPPY = "https://codenotesalpay.web.app/processing/flappy-game/index.html";
+    public static final String TR_CODE = "https://codenotesalpay.web.app/processing/tr/index.html";
+    public static final String EN_CODE = "https://codenotesalpay.web.app/processing/index.html";
+    public static final String PROJECT_WEBSITE = "https://karton.ku.edu.tr";
 }

@@ -13,7 +13,10 @@ import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.GroupHelper;
+import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
+import com.bumptech.glide.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +68,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
             String programCode = "";
             for (String code: p5Code){
                 if (code.contains("group:")){
-                    groupId = code.substring(6).trim().replaceAll(" +", " ");;
+                    groupId = code.substring(6).trim().replaceAll(" +", " ");
                 }else{
                     programCode += code;
                 }
@@ -112,9 +115,13 @@ public class CodeBlocksResultActivity extends BaseActivity {
             });
             if (isFlappy){
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                url = "https://codenotesalpay.web.app/processing/flappy-game/index.html";
+                url = Constants.FLAPPY;
             } else{
-                url = "https://codenotesalpay.web.app/processing/index.html";
+                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")){
+                    url = Constants.EN_CODE;
+                }else{
+                    url = Constants.TR_CODE;
+                }
             }
             webView.loadUrl(url);
         }

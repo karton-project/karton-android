@@ -12,6 +12,7 @@
     <string name="no_code_dialog_message">Üzgünüm! Herhangi bir kod algılayamadım...</string>
 
     <!-- Dependencies -->
+    <string name="project_website">Proje Web sitesi:</string>
 
     <!-- Exercises -->
     <string name="card_watch_video_button_text">Öğren</string>
@@ -21,6 +22,7 @@
     <string name="card_run">Çalıştır</string>
     <string name="card_delete">Sil</string>
     <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
+    <string name="change_coding_language">Kodlama Dilini Değiştir:</string>
 
     <!-- General -->
     <string name="app_name">Kart-ON</string>

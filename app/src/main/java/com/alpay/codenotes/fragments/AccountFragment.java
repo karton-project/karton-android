@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
+import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -55,15 +58,23 @@ public class AccountFragment extends Fragment {
     RelativeLayout mAccountView;
     @BindView(R.id.sign_in_view)
     RelativeLayout mSignInView;
+    @BindView(R.id.change_language_icon)
+    ImageView languageIcon;
 
     @OnClick(R.id.my_notes)
     public void openNotes(){
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.NOTES);
     }
 
-    @OnClick(R.id.my_programs)
+    @OnClick(R.id.change_language)
     public void openPrograms(){
-        NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.PROGRAM_LIST);
+        if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("TR")){
+            Utils.addStringToSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG", "UK");
+            languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_uk));
+        }else{
+            Utils.addStringToSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG", "TR");
+            languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_tr));
+        }
     }
 
     @OnClick(R.id.sign_in)
@@ -72,9 +83,9 @@ public class AccountFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.tip_of_the_day)
+    @OnClick(R.id.project_website)
     public void openWebpage(){
-        NavigationManager.openWebViewFragment((AppCompatActivity) getActivity(), "https://karton.ku.edu.tr");
+        NavigationManager.openWebViewFragment((AppCompatActivity) getActivity(), Constants.PROJECT_WEBSITE);
     }
 
     @Override
@@ -82,7 +93,11 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.signed_in_layout, container, false);
         unbinder = ButterKnife.bind(this, view);
-
+        if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("UK")){
+            languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_uk));
+        }else{
+            languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_tr));
+        }
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             mAccountView.setVisibility(View.GONE);

@@ -75,93 +75,99 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/unit160"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/account_layout"
             android:orientation="horizontal"
             android:weightSum="2">
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/unit240"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
 
                 <LinearLayout
-                    android:id="@+id/my_notes"
+                    android:id="@+id/change_language"
                     android:layout_width="match_parent"
-                    android:layout_margin="@dimen/unit4"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit4"
                     android:background="@drawable/warningtoastshape"
-                    android:padding="@dimen/unit8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/unit40"
-                        android:layout_height="@dimen/unit40"
-                        app:srcCompat="@drawable/ic_edit"/>
+                    android:orientation="horizontal"
+                    android:padding="@dimen/unit8">
 
                     <TextView
                         style="@style/text_dark_bold_large"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/unit16"
-                        android:text="@string/my_notes" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/unit2"
+                        android:text="@string/change_coding_language" />
+
+
+                    <ImageView
+                        android:id="@+id/change_language_icon"
+                        android:layout_width="@dimen/unit40"
+                        android:layout_height="@dimen/unit40"
+                        android:layout_marginLeft="@dimen/unit8"
+                        app:srcCompat="@drawable/ic_tr" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/my_programs"
-                    android:layout_width="match_parent"
-                    android:layout_margin="@dimen/unit4"
+                    android:id="@+id/project_website"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit4"
                     android:background="@drawable/warningtoastshape"
-                    android:padding="@dimen/unit8"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/unit40"
-                        android:layout_height="@dimen/unit40"
-                        app:srcCompat="@drawable/ic_construction_dark"/>
+                    android:orientation="horizontal"
+                    android:padding="@dimen/unit8">
 
                     <TextView
                         style="@style/text_dark_bold_large"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/unit16"
-                        android:text="@string/my_programs" />
+                        android:layout_margin="@dimen/unit8"
+                        android:text="@string/project_website" />
+
+                    <TextView
+                        style="@style/text_light_bold_large"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit8"
+                        android:text="@string/karton_website" />
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/tip_of_the_day"
+                android:id="@+id/my_notes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/unit4"
                 android:layout_marginLeft="@dimen/unit4"
+                android:layout_marginTop="@dimen/unit4"
                 android:layout_marginRight="@dimen/unit8"
-                android:background="@drawable/warningtoastshape"
                 android:layout_weight="1"
+                android:background="@drawable/warningtoastshape"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/unit80"
+                    android:layout_height="@dimen/unit80"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/ic_edit" />
 
                 <TextView
                     style="@style/text_dark_bold_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit8"
-                    android:text="@string/tip_of_the_day" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/unit16"
+                    android:text="@string/my_notes" />
 
-                <TextView
-                    style="@style/text_light_bold_large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit8"
-                    android:text="@string/karton_website" />
 
             </LinearLayout>
 
