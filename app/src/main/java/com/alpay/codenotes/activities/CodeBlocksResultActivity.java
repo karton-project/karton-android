@@ -16,7 +16,6 @@ import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.bumptech.glide.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

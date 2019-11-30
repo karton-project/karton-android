@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SurfaceView
+    <FrameLayout
         android:id="@+id/surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        />
+
 
     <TextView
         android:id="@+id/text_view"
@@ -20,7 +22,7 @@
         android:layout_toLeftOf="@+id/read_code_button"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/unit10"
-        android:text="No Text"
+        android:text="Only one block at a time"
         android:gravity="center"
         android:layout_marginRight="@dimen/unit8"
         android:textColor="@color/colorWhite"

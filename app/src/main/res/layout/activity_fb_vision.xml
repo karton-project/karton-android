@@ -50,15 +50,6 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             style="@style/button_floating_nav"
-            android:id="@+id/read_barcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_photo_camera"
-            android:layout_toRightOf="@+id/back_code_button"
-            android:layout_alignParentTop="true"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            style="@style/button_floating_nav"
             android:id="@+id/read_code_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

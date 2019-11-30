@@ -3,10 +3,13 @@ package com.alpay.codenotes.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 import android.os.Bundle;
-import android.util.SparseArray;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.util.Log;
+import android.view.TextureView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alpay.codenotes.R;
@@ -14,14 +17,20 @@ import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.AutofitVerticalRecyclerView;
+import com.alpay.codenotes.view.CameraPreview;
 import com.alpay.codenotes.view.utils.MarginDecoration;
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -38,7 +47,7 @@ import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 public class CodeNotesCompilerActivity extends BaseActivity {
 
     @BindView(R.id.surface_view)
-    SurfaceView cameraView;
+    FrameLayout cameraView;
     @BindView(R.id.text_view)
     TextView textView;
     @BindView(R.id.read_code_button)
@@ -46,8 +55,10 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     @BindView(R.id.codeblocks_recycler_view)
     AutofitVerticalRecyclerView blocksRecyclerView;
 
-    CameraSource cameraSource;
-    TextRecognizer textRecognizer;
+
+    private Camera mCamera;
+    private CameraPreview mPreview;
+
     CodeBlockViewAdapter codeBlockViewAdapter;
     private boolean isFlappy = false;
 
@@ -56,12 +67,8 @@ public class CodeNotesCompilerActivity extends BaseActivity {
 
     @OnClick(R.id.read_code_button)
     public void readCode() {
-        if (code != null) {
-            codeList.add(code);
-            refreshCodeBlockRecyclerView(codeList.size() - 1);
-        } else {
-            Utils.showOKDialog(this, R.string.no_code_dialog_message);
-        }
+        mCamera.takePicture(null, null, picture);
+
     }
 
     @OnClick(R.id.send_code_button)
@@ -74,7 +81,7 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     }
 
     @OnClick(R.id.back_code_button)
-    public void backToHome(){
+    public void backToHome() {
         super.onBackPressed();
     }
 
@@ -86,11 +93,7 @@ public class CodeNotesCompilerActivity extends BaseActivity {
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         return;
                     }
-                    try {
-                        cameraSource.start(cameraView.getHolder());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    buildCameraSource();
                 }
             }
             break;
@@ -103,29 +106,27 @@ public class CodeNotesCompilerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compiler);
         ButterKnife.bind(this);
-        textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
-        buildCameraSourceForText();
+        buildCameraSource();
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            if (bundle.getStringArray(BUNDLE_CODE_KEY) != null){
+        if (bundle != null) {
+            if (bundle.getStringArray(BUNDLE_CODE_KEY) != null) {
                 String[] p5code = bundle.getStringArray(BUNDLE_CODE_KEY);
-                for (String code : p5code){
+                for (String code : p5code) {
                     codeList.add(code);
                 }
             }
             if (bundle.getString(NavigationManager.BUNDLE_KEY) != null) {
                 openHintView(bundle.getString(NavigationManager.BUNDLE_KEY));
             }
-            if (bundle.getBoolean(BUNDLE_FLAPPY_KEY)){
+            if (bundle.getBoolean(BUNDLE_FLAPPY_KEY)) {
                 isFlappy = true;
             }
         }
-        recognizeText();
         setUpRecyclerView();
-        refreshCodeBlockRecyclerView(codeList.size() -1);
+        refreshCodeBlockRecyclerView(codeList.size() - 1);
     }
 
-    private void openHintView(String instructions){
+    private void openHintView(String instructions) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.task_title)
                 .setMessage(instructions)
@@ -147,69 +148,63 @@ public class CodeNotesCompilerActivity extends BaseActivity {
         blocksRecyclerView.scrollToPosition(position);
     }
 
-
-    private void buildCameraSourceForText() {
-        cameraSource = new CameraSource.Builder(getApplicationContext(), textRecognizer)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1280, 1024)
-                .setRequestedFps(2.0f)
-                .setAutoFocusEnabled(true)
-                .build();
-        startCamera();
+    public static Camera getCameraInstance() {
+        Camera c = null;
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
+        } catch (Exception e) {
+            // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
     }
 
-    private void startCamera() {
-        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
-                try {
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(CodeNotesCompilerActivity.this,
-                                new String[]{Manifest.permission.CAMERA},
-                                RequestCameraPermissionID);
-                        return;
+    private void buildCameraSource() {
+        mCamera = getCameraInstance();
+        mPreview = new CameraPreview(this, mCamera);
+        cameraView.addView(mPreview);
+        Camera.Parameters params = mCamera.getParameters();
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
+        mCamera.setParameters(params);
+
+    }
+
+    private Camera.PictureCallback picture = (data, camera) -> {
+        recognizeText(data);
+        camera.startPreview();
+    };
+
+
+    private void recognizeText(byte[] bytes) {
+        FirebaseVisionImage image = imageFromArray(bytes);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
+        detector.processImage(image)
+                .addOnSuccessListener(firebaseVisionText -> {
+                    code = firebaseVisionText.getText().toLowerCase();
+                    if (code != null) {
+                        checkAndCorrectCode();
+                        codeList.add(code);
+                        refreshCodeBlockRecyclerView(codeList.size() - 1);
+                    } else {
+                        Utils.showOKDialog(this, R.string.no_code_dialog_message);
                     }
-                    cameraSource.start(cameraView.getHolder());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-                cameraSource.stop();
-            }
-        });
+                })
+                .addOnFailureListener(e -> {
+                    // Task failed with an exception
+                    // ...
+                });
     }
 
-    private void recognizeText() {
-        textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
-            @Override
-            public void release() {
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<TextBlock> detections) {
-                final SparseArray<TextBlock> items = detections.getDetectedItems();
-                if (items.size() != 0) {
-                    textView.post(() -> {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int i = 0; i < items.size(); ++i) {
-                            TextBlock item = items.valueAt(i);
-                            stringBuilder.append(item.getValue());
-                            stringBuilder.append("\n");
-                        }
-                        code = stringBuilder.toString().toLowerCase();
-                        textView.setText(code);
-                    });
-                }
-            }
-        });
+    private void checkAndCorrectCode() {
+        code.replaceAll("o", "0");
+        code.replaceAll("s", "5");
     }
+
+    private FirebaseVisionImage imageFromArray(byte[] byteArray) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+        return image;
+    }
+
 
 }
