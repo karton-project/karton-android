@@ -84,8 +84,6 @@ public class GroupHelper {
                 groupList = new ArrayList<>();
             }
         } catch (IOException e) {
-            Crashlytics.log(Log.WARN, "program", "program file cannot be read");
-            Crashlytics.logException(e);
             Log.e("login activity", "Can not read file: " + e.toString());
         }
     }
