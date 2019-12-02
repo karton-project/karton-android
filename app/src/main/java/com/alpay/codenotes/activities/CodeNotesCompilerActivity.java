@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.TextureView;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -19,17 +23,14 @@ import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.AutofitVerticalRecyclerView;
 import com.alpay.codenotes.view.CameraPreview;
 import com.alpay.codenotes.view.utils.MarginDecoration;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
 
-public class CodeNotesCompilerActivity extends BaseActivity {
+public class CodeNotesCompilerActivity extends BaseActivity{
 
     @BindView(R.id.surface_view)
     FrameLayout cameraView;
@@ -55,7 +56,7 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     @BindView(R.id.codeblocks_recycler_view)
     AutofitVerticalRecyclerView blocksRecyclerView;
 
-
+    private static  final int FOCUS_AREA_SIZE= 300;
     private Camera mCamera;
     private CameraPreview mPreview;
 
@@ -68,7 +69,6 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     @OnClick(R.id.read_code_button)
     public void readCode() {
         mCamera.takePicture(null, null, picture);
-
     }
 
     @OnClick(R.id.send_code_button)
@@ -84,6 +84,77 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     public void backToHome() {
         super.onBackPressed();
     }
+
+    private int clamp(int touchCoordinateInCameraReper, int focusAreaSize) {
+        int result;
+        if (Math.abs(touchCoordinateInCameraReper)+focusAreaSize/2>1000){
+            if (touchCoordinateInCameraReper>0){
+                result = 1000 - focusAreaSize/2;
+            } else {
+                result = -1000 + focusAreaSize/2;
+            }
+        } else{
+            result = touchCoordinateInCameraReper - focusAreaSize/2;
+        }
+        return result;
+    }
+
+
+    private Rect calculateFocusArea(float x, float y) {
+        int left = clamp(Float.valueOf((x / cameraView.getWidth()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
+        int top = clamp(Float.valueOf((y / cameraView.getHeight()) * 2000 - 1000).intValue(), FOCUS_AREA_SIZE);
+
+        return new Rect(left, top, left + FOCUS_AREA_SIZE, top + FOCUS_AREA_SIZE);
+    }
+
+    private void setCameraFocus(){
+        cameraView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (mCamera != null) {
+                    mCamera.cancelAutoFocus();
+
+                    Rect focusRect = calculateFocusArea(event.getX(), event.getY());
+
+                    Camera.Parameters parameters = mCamera.getParameters();
+                    if (parameters.getFocusMode().equals(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                    }
+
+                    if (parameters.getMaxNumFocusAreas() > 0) {
+                        List<Camera.Area> mylist = new ArrayList<Camera.Area>();
+                        mylist.add(new Camera.Area(focusRect, 1000));
+                        parameters.setFocusAreas(mylist);
+                    }
+
+                    try {
+                        mCamera.cancelAutoFocus();
+                        mCamera.setParameters(parameters);
+                        mCamera.startPreview();
+                        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+                            @Override
+                            public void onAutoFocus(boolean success, Camera camera) {
+                                if (!camera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                                    Camera.Parameters parameters = camera.getParameters();
+                                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                                    if (parameters.getMaxNumFocusAreas() > 0) {
+                                        parameters.setFocusAreas(null);
+                                    }
+                                    camera.setParameters(parameters);
+                                    camera.startPreview();
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+
+        });
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -107,6 +178,7 @@ public class CodeNotesCompilerActivity extends BaseActivity {
         setContentView(R.layout.activity_compiler);
         ButterKnife.bind(this);
         buildCameraSource();
+        setCameraFocus();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.getStringArray(BUNDLE_CODE_KEY) != null) {
@@ -163,9 +235,6 @@ public class CodeNotesCompilerActivity extends BaseActivity {
         mCamera = getCameraInstance();
         mPreview = new CameraPreview(this, mCamera);
         cameraView.addView(mPreview);
-        Camera.Parameters params = mCamera.getParameters();
-        params.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
-        mCamera.setParameters(params);
 
     }
 
@@ -174,12 +243,29 @@ public class CodeNotesCompilerActivity extends BaseActivity {
         camera.startPreview();
     };
 
+    private void addRectangle(int left, int top, int width, int height){
+        ShapeDrawable sd = new ShapeDrawable(new RectShape());
+        sd.getPaint().setColor(0xFFFFFFFF);
+        sd.getPaint().setStyle(Paint.Style.STROKE);
+        sd.getPaint().setStrokeWidth(2);
+        View shapeView = new View(this);
+        shapeView.setBackground(sd);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        params.setMargins(left, top, 0, 0);
+        cameraView.addView(shapeView, params);
+    }
+
 
     private void recognizeText(byte[] bytes) {
         FirebaseVisionImage image = imageFromArray(bytes);
         FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
         detector.processImage(image)
                 .addOnSuccessListener(firebaseVisionText -> {
+                    /*for (FirebaseVisionText.TextBlock textBlock : firebaseVisionText.getTextBlocks()){
+                        Rect rect = textBlock.getBoundingBox();
+                        addRectangle(rect.left, rect.top, rect.width(), rect.height());
+                    }*/
                     code = firebaseVisionText.getText().toLowerCase();
                     if (code != null) {
                         checkAndCorrectCode();
@@ -196,8 +282,8 @@ public class CodeNotesCompilerActivity extends BaseActivity {
     }
 
     private void checkAndCorrectCode() {
-        code.replaceAll("o", "0");
-        code.replaceAll("s", "5");
+        code = code.replaceAll("\\so\\s", "0");
+        code = code.replaceAll("\\ss\\s", "5");
     }
 
     private FirebaseVisionImage imageFromArray(byte[] byteArray) {
