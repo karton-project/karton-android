@@ -74,10 +74,22 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             for (int j = 0; j < lines.size(); j++) {
                 GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j));
                 graphicOverlay.add(textGraphic);
-                Utils.code = lines.get(j).getText();
+                Utils.code = checkAndCorrectCode(lines.get(j).getText());
             }
         }
         graphicOverlay.postInvalidate();
+    }
+
+    private String checkAndCorrectCode(String code) {
+        code = code.toLowerCase();
+        int pos = code.indexOf(":");
+        if (pos > 0) {
+            String rest = code.substring(pos);
+            rest = rest.replaceAll("o", "0");
+            rest = rest.replaceAll("s", "5");
+            code = code.substring(0, pos) + rest;
+        }
+        return code;
     }
 
     @Override

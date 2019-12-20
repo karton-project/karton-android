@@ -9,8 +9,8 @@
 
         <com.alpay.codenotes.utils.vision.CameraSourcePreview
             android:id="@+id/firePreview"
-            android:layout_width="480dp"
-            android:layout_height="360dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true">
 

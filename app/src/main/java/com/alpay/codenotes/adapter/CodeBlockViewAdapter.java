@@ -4,8 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alpay.codenotes.R;
@@ -71,8 +70,8 @@ class CodeBlockViewHolder extends RecyclerView.ViewHolder {
     TextView mTitle;
     AppCompatEditText mTextEdit;
     ImageButton mDeleteButton;
-    ImageView mNewTextButton;
-    RelativeLayout mTextEditLayout;
+    ImageButton mNewTextButton;
+    LinearLayout mTextEditLayout;
     CardView mCardView;
 
     CodeBlockViewHolder(View itemView) {

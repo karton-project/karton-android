@@ -27,11 +27,11 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 public class TextGraphic extends GraphicOverlay.Graphic {
 
   private static final int TEXT_COLOR = Color.WHITE;
-  private static final float TEXT_SIZE = 22.0f;
+  //private static final float TEXT_SIZE = 22.0f;
   private static final float STROKE_WIDTH = 3.0f;
 
   private final Paint rectPaint;
-  private final Paint textPaint;
+  //private final Paint textPaint;
   private final FirebaseVisionText.Line text;
 
   TextGraphic(GraphicOverlay overlay, FirebaseVisionText.Line text) {
@@ -44,9 +44,9 @@ public class TextGraphic extends GraphicOverlay.Graphic {
     rectPaint.setStyle(Paint.Style.STROKE);
     rectPaint.setStrokeWidth(STROKE_WIDTH);
 
-    textPaint = new Paint();
-    textPaint.setColor(TEXT_COLOR);
-    textPaint.setTextSize(TEXT_SIZE);
+    //textPaint = new Paint();
+    //textPaint.setColor(TEXT_COLOR);
+    //textPaint.setTextSize(TEXT_SIZE);
   }
 
   /** Draws the text block annotations for position, size, and raw value on the supplied canvas. */
@@ -65,6 +65,6 @@ public class TextGraphic extends GraphicOverlay.Graphic {
     canvas.drawRect(rect, rectPaint);
 
     // Renders the text at the bottom of the box.
-    canvas.drawText(text.getText().toLowerCase(), rect.left, rect.bottom, textPaint);
+    // canvas.drawText(text.getText().toLowerCase(), rect.left, rect.bottom, textPaint);
   }
 }

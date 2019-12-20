@@ -18,7 +18,6 @@ import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.util.Util;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.EmailAuthProvider;

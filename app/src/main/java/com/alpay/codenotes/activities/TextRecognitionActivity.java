@@ -4,9 +4,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +20,9 @@ import com.google.firebase.ml.vision.text.RecognizedLanguage;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TextRecognitionActivity extends AppCompatActivity {
 

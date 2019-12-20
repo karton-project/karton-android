@@ -10,7 +10,6 @@ import android.hardware.camera2.CameraManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.RequiresApi;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Surface;
@@ -20,6 +19,8 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+
+import androidx.annotation.RequiresApi;
 
 import static android.content.Context.CAMERA_SERVICE;
 

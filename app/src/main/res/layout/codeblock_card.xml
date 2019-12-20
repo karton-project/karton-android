@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
-    android:layout_width="@dimen/unit120"
+    android:layout_width="@dimen/unit160"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -24,38 +24,6 @@
             android:padding="@dimen/unit4"
             android:orientation="horizontal">
 
-            <TextView
-                style="@style/icon_home_text"
-                android:id="@+id/codeblock_text"
-                android:visibility="visible"
-                android:layout_width="@dimen/unit80"
-                android:layout_height="@dimen/unit30"
-                android:layout_margin="@dimen/unit3"
-                tool:text="background" />
-
-            <RelativeLayout
-                android:id="@+id/codeblock_text_input_view"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/codeblock_text_edit"
-                    android:layout_width="@dimen/unit80"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" />
-
-                <ImageView
-                    android:id="@+id/codeblock_text_input_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/codeblock_text_edit"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/ic_ok" />
-
-            </RelativeLayout>
-
             <ImageButton
                 android:id="@+id/codeblock_delete"
                 android:background="@color/transparent"
@@ -63,6 +31,42 @@
                 android:layout_height="@dimen/unit20"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_close" />
+
+            <TextView
+                style="@style/icon_home_text"
+                android:id="@+id/codeblock_text"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit4"
+                android:textSize="@dimen/unit16"
+                tool:text="background" />
+
+            <LinearLayout
+                android:id="@+id/codeblock_text_input_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/codeblock_text_input_button"
+                    android:background="@color/transparent"
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_ok" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/codeblock_text_edit"
+                    android:imeOptions="flagNoExtractUi"
+                    android:layout_margin="@dimen/unit4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
