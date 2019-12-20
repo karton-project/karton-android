@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeBlocksResultActivity;
-import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
+import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
 
@@ -54,7 +54,7 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(appCompatActivity, CodeNotesCompilerActivity.class);
+            Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
             String[] p5CodeArr = p5Code.split("\n");
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);

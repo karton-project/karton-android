@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.CodeNotesCompilerActivity;
+import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
@@ -60,7 +60,7 @@ public class ProgramListFragment extends Fragment {
 
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
-        Intent intent = new Intent(getActivity(), CodeNotesCompilerActivity.class);
+        Intent intent = new Intent(getActivity(), FBVisionActivity.class);
         startActivity(intent);
     }
 

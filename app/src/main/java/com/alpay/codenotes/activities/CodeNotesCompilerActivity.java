@@ -108,50 +108,43 @@ public class CodeNotesCompilerActivity extends BaseActivity{
     }
 
     private void setCameraFocus(){
-        cameraView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (mCamera != null) {
-                    mCamera.cancelAutoFocus();
+        cameraView.setOnTouchListener((v, event) -> {
+            if (mCamera != null) {
+                mCamera.cancelAutoFocus();
 
-                    Rect focusRect = calculateFocusArea(event.getX(), event.getY());
+                Rect focusRect = calculateFocusArea(event.getX(), event.getY());
 
-                    Camera.Parameters parameters = mCamera.getParameters();
-                    if (parameters.getFocusMode().equals(Camera.Parameters.FOCUS_MODE_AUTO)) {
-                        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-                    }
-
-                    if (parameters.getMaxNumFocusAreas() > 0) {
-                        List<Camera.Area> mylist = new ArrayList<Camera.Area>();
-                        mylist.add(new Camera.Area(focusRect, 1000));
-                        parameters.setFocusAreas(mylist);
-                    }
-
-                    try {
-                        mCamera.cancelAutoFocus();
-                        mCamera.setParameters(parameters);
-                        mCamera.startPreview();
-                        mCamera.autoFocus(new Camera.AutoFocusCallback() {
-                            @Override
-                            public void onAutoFocus(boolean success, Camera camera) {
-                                if (!camera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-                                    Camera.Parameters parameters = camera.getParameters();
-                                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                                    if (parameters.getMaxNumFocusAreas() > 0) {
-                                        parameters.setFocusAreas(null);
-                                    }
-                                    camera.setParameters(parameters);
-                                    camera.startPreview();
-                                }
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                Camera.Parameters parameters = mCamera.getParameters();
+                if (parameters.getFocusMode().equals(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
                 }
-                return true;
-            }
 
+                if (parameters.getMaxNumFocusAreas() > 0) {
+                    List<Camera.Area> mylist = new ArrayList<Camera.Area>();
+                    mylist.add(new Camera.Area(focusRect, 1000));
+                    parameters.setFocusAreas(mylist);
+                }
+
+                try {
+                    mCamera.cancelAutoFocus();
+                    mCamera.setParameters(parameters);
+                    mCamera.startPreview();
+                    mCamera.autoFocus((success, camera) -> {
+                        if (!camera.getParameters().getFocusMode().equals(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                            Camera.Parameters parameters1 = camera.getParameters();
+                            parameters1.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                            if (parameters1.getMaxNumFocusAreas() > 0) {
+                                parameters1.setFocusAreas(null);
+                            }
+                            camera.setParameters(parameters1);
+                            camera.startPreview();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
         });
     }
 
@@ -235,7 +228,6 @@ public class CodeNotesCompilerActivity extends BaseActivity{
         mCamera = getCameraInstance();
         mPreview = new CameraPreview(this, mCamera);
         cameraView.addView(mPreview);
-
     }
 
     private Camera.PictureCallback picture = (data, camera) -> {
@@ -262,10 +254,10 @@ public class CodeNotesCompilerActivity extends BaseActivity{
         FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
         detector.processImage(image)
                 .addOnSuccessListener(firebaseVisionText -> {
-                    /*for (FirebaseVisionText.TextBlock textBlock : firebaseVisionText.getTextBlocks()){
+                    for (FirebaseVisionText.TextBlock textBlock : firebaseVisionText.getTextBlocks()){
                         Rect rect = textBlock.getBoundingBox();
                         addRectangle(rect.left, rect.top, rect.width(), rect.height());
-                    }*/
+                    }
                     code = firebaseVisionText.getText().toLowerCase();
                     if (code != null) {
                         checkAndCorrectCode();
