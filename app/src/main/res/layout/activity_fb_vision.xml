@@ -7,19 +7,19 @@
     android:background="@color/colorDarkGrey"
     android:keepScreenOn="true">
 
-        <com.alpay.codenotes.utils.vision.CameraSourcePreview
+        <com.alpay.codenotes.vision.CameraSourcePreview
             android:id="@+id/firePreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true">
 
-                <com.alpay.codenotes.utils.vision.GraphicOverlay
+                <com.alpay.codenotes.vision.GraphicOverlay
                     android:id="@+id/fireFaceOverlay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-        </com.alpay.codenotes.utils.vision.CameraSourcePreview>
+        </com.alpay.codenotes.vision.CameraSourcePreview>
 
         <TextView
             android:id="@+id/text"

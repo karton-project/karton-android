@@ -12,10 +12,10 @@ import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.alpay.codenotes.utils.vision.CameraSource;
-import com.alpay.codenotes.utils.vision.CameraSourcePreview;
-import com.alpay.codenotes.utils.vision.GraphicOverlay;
-import com.alpay.codenotes.utils.vision.TextRecognitionProcessor;
+import com.alpay.codenotes.vision.CameraSource;
+import com.alpay.codenotes.vision.CameraSourcePreview;
+import com.alpay.codenotes.vision.GraphicOverlay;
+import com.alpay.codenotes.vision.TextRecognitionProcessor;
 import com.alpay.codenotes.view.AutofitVerticalRecyclerView;
 import com.alpay.codenotes.view.utils.MarginDecoration;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +43,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private static final int PERMISSION_REQUESTS = 1;
     private boolean isFlappy = false;
 
-    private com.alpay.codenotes.utils.vision.CameraSource cameraSource = null;
+    private com.alpay.codenotes.vision.CameraSource cameraSource = null;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
 

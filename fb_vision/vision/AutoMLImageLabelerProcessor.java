@@ -1,4 +1,4 @@
-package com.alpay.codenotes.utils.vision;
+package com.alpay.codenotes.vision;
 
 import android.content.Context;
 import android.graphics.Bitmap;

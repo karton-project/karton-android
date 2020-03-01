@@ -1,4 +1,4 @@
-package com.alpay.codenotes.utils.vision;
+package com.alpay.codenotes.vision;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

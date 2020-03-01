@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.alpay.codenotes.utils.vision;
+package com.alpay.codenotes.vision;
 
 import android.content.Context;
 import android.graphics.Canvas;
