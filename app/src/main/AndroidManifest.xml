@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".transfer.MainActivity"/>
         <activity
             android:name=".activities.CodeNotesCompilerActivity"
             android:configChanges="orientation|keyboardHidden"

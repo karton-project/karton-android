@@ -10,6 +10,8 @@
 
     <!-- Compiler -->
     <string name="no_code_dialog_message">Üzgünüm! Herhangi bir kod algılayamadım...</string>
+    <string name="add_function">Fonksiyonu Kaydet</string>
+
 
     <!-- Dependencies -->
     <string name="project_website">Proje Web sitesi:</string>
@@ -86,5 +88,14 @@
 
     <string name="game_flappy_text">Flappy Bird ile kodlamanın temellerini öğren.</string>
     <string name="tip_of_the_day">Günün Önerisi</string>
+
+    <string name="inference_mode_title">Inference</string>
+    <string name="capture_mode_title">Capture</string>
+
+    <string name="train_action">Train</string>
+    <string name="pause_action">Pause</string>
+    <string name="resume_action">Resume</string>
+
+    <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
 
 </resources>

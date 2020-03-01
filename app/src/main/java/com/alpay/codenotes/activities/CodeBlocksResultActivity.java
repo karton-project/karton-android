@@ -78,6 +78,11 @@ public class CodeBlocksResultActivity extends BaseActivity {
         alertDialog.show();
     }
 
+    @OnClick(R.id.save_function)
+    public void saveFunction(){
+        NavigationManager.openTransferLearning(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

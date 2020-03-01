@@ -55,4 +55,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true" />
 
+    <Button
+        android:id="@+id/save_function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/unit4"
+        android:padding="@dimen/unit4"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
+        android:text="@string/add_function"/>
+
+
 </RelativeLayout>

@@ -14,6 +14,7 @@ import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
+import com.alpay.codenotes.transfer.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -100,5 +101,10 @@ public class NavigationManager {
         appCompatActivity.startActivity(intent);
         appCompatActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         appCompatActivity.finish();
+    }
+
+    public static void openTransferLearning(AppCompatActivity appCompatActivity){
+        Intent intent = new Intent(appCompatActivity, MainActivity.class);
+        appCompatActivity.startActivity(intent);
     }
 }

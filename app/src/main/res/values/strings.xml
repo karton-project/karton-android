@@ -11,6 +11,7 @@
 
     <!-- Compiler -->
     <string name="no_code_dialog_message">No Understandable Code</string>
+    <string name="add_function">Save Function</string>
 
     <!-- Dependencies -->
     <string name="project_website">Project Website:</string>
@@ -84,5 +85,14 @@
 
     <string name="game_flappy_text">Learn the fundamentals of coding with Flappy Bird</string>
     <string name="tip_of_the_day">Tip of the Day</string>
+
+    <string name="inference_mode_title">Inference</string>
+    <string name="capture_mode_title">Capture</string>
+
+    <string name="train_action">Train</string>
+    <string name="pause_action">Pause</string>
+    <string name="resume_action">Resume</string>
+
+    <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
 
 </resources>
