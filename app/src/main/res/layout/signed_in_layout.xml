@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/settings_layout"
         android:clipToPadding="false"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
@@ -70,116 +71,113 @@
                     android:text="@string/sign_out" />
 
             </LinearLayout>
-
         </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/settings_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/unit240"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/account_layout"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
 
             <LinearLayout
-                android:layout_width="@dimen/unit240"
+                android:id="@+id/change_language"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:id="@+id/change_language"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:background="@drawable/warningtoastshape"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/unit8">
-
-                    <TextView
-                        style="@style/text_dark_bold_large"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/unit2"
-                        android:text="@string/change_coding_language" />
-
-
-                    <ImageView
-                        android:id="@+id/change_language_icon"
-                        android:layout_width="@dimen/unit40"
-                        android:layout_height="@dimen/unit40"
-                        android:layout_marginLeft="@dimen/unit8"
-                        app:srcCompat="@drawable/ic_tr" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/project_website"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:background="@drawable/warningtoastshape"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/unit8">
-
-                    <TextView
-                        style="@style/text_dark_bold_large"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/unit8"
-                        android:text="@string/project_website" />
-
-                    <TextView
-                        style="@style/text_light_bold_large"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/unit8"
-                        android:text="@string/karton_website" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/my_notes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/unit4"
-                android:layout_marginTop="@dimen/unit4"
-                android:layout_marginRight="@dimen/unit8"
-                android:layout_weight="1"
+                android:layout_margin="@dimen/unit4"
                 android:background="@drawable/warningtoastshape"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/unit80"
-                    android:layout_height="@dimen/unit80"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@drawable/ic_edit" />
+                android:orientation="horizontal"
+                android:padding="@dimen/unit8">
 
                 <TextView
                     style="@style/text_dark_bold_large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/unit16"
-                    android:text="@string/my_notes" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/unit2"
+                    android:text="@string/change_coding_language" />
 
+
+                <ImageView
+                    android:id="@+id/change_language_icon"
+                    android:layout_width="@dimen/unit40"
+                    android:layout_height="@dimen/unit40"
+                    android:layout_marginLeft="@dimen/unit8"
+                    app:srcCompat="@drawable/ic_tr" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/project_website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit4"
+                android:background="@drawable/warningtoastshape"
+                android:orientation="horizontal"
+                android:padding="@dimen/unit8">
+
+                <TextView
+                    style="@style/text_dark_bold_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit8"
+                    android:text="@string/project_website" />
+
+                <TextView
+                    style="@style/text_light_bold_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit8"
+                    android:text="@string/karton_website" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/my_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/unit4"
+            android:layout_marginTop="@dimen/unit4"
+            android:layout_marginRight="@dimen/unit8"
+            android:layout_weight="1"
+            android:background="@drawable/warningtoastshape"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/unit80"
+                android:layout_height="@dimen/unit80"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_edit" />
+
+            <TextView
+                style="@style/text_dark_bold_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/unit16"
+                android:text="@string/my_notes" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/sign_in_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/settings_layout"
         tools:visibility="gone">
 
         <TextView
@@ -199,7 +197,6 @@
             android:layout_margin="@dimen/unit16"
             android:gravity="center"
             android:text="@string/sign_in_header" />
-
 
     </RelativeLayout>
 
