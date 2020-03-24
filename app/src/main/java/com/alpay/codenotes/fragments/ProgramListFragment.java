@@ -9,6 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
@@ -17,11 +23,6 @@ import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -142,7 +143,7 @@ public class ProgramListFragment extends Fragment {
     }
 
     private void generateExampleListFromGSON() {
-        GroupHelper.readFromAssets(getActivity());
+        GroupHelper.readFromAssets((AppCompatActivity) getActivity());
         if (recyclerView != null) {
             setUpRecyclerView();
             refreshCodeBlockRecyclerView(0);

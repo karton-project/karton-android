@@ -8,23 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alpay.codenotes.R;
-import com.alpay.codenotes.adapter.CodeBlockItemMoveCallback;
-import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
-import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
-import com.alpay.codenotes.vision.CameraSource;
-import com.alpay.codenotes.vision.CameraSourcePreview;
-import com.alpay.codenotes.vision.GraphicOverlay;
-import com.alpay.codenotes.vision.TextRecognitionProcessor;
-import com.alpay.codenotes.view.AutofitVerticalRecyclerView;
-import com.alpay.codenotes.view.utils.MarginDecoration;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -33,6 +16,22 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.alpay.codenotes.R;
+import com.alpay.codenotes.adapter.CodeBlockItemMoveCallback;
+import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
+import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
+import com.alpay.codenotes.view.utils.MarginDecoration;
+import com.alpay.codenotes.vision.CameraSource;
+import com.alpay.codenotes.vision.CameraSourcePreview;
+import com.alpay.codenotes.vision.GraphicOverlay;
+import com.alpay.codenotes.vision.TextRecognitionProcessor;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

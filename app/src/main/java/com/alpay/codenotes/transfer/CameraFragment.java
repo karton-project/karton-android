@@ -34,6 +34,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.camera.core.CameraX;
 import androidx.camera.core.CameraX.LensFacing;
 import androidx.camera.core.ImageAnalysis;
@@ -54,6 +55,7 @@ import com.alpay.codenotes.transfer.api.TransferLearningModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
+
 import java.nio.ByteBuffer;
 import java.util.Locale;
 import java.util.Objects;

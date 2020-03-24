@@ -3,14 +3,14 @@ package com.alpay.codenotes.utils;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.alpay.codenotes.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.ActionCodeSettings;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public final class ConfigurationUtils {
 

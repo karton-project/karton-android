@@ -8,12 +8,12 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-
-import androidx.annotation.Nullable;
 
 /** Utils functions for bitmap conversions. */
 public class BitmapUtils {

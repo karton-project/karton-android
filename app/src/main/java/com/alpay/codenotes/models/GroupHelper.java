@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.utils.Utils;
 import com.crashlytics.android.Crashlytics;
@@ -88,15 +90,15 @@ public class GroupHelper {
         }
     }
 
-    public static void readFromAssets(Context context) {
+    public static void readFromAssets(AppCompatActivity context) {
         AssetManager am = context.getAssets();
         InputStream inputStream;
         BufferedReader bufferedReader = null;
         try {
-            if (Utils.isTR(context)){
-                inputStream = am.open(TR_FILE_NAME);
-            }else{
+            if (Utils.isENCoding(context)){
                 inputStream = am.open(EN_FILE_NAME);
+            }else{
+                inputStream = am.open(TR_FILE_NAME);
             }
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

@@ -6,6 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.ContentViewAdapter;
 import com.alpay.codenotes.models.Content;
@@ -14,10 +19,6 @@ import com.alpay.codenotes.utils.NavigationManager;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -73,7 +74,7 @@ public class ContentListFragment extends Fragment {
     }
 
     private void generateContentListFromGSON() {
-        contentArrayList = ContentHelper.readFromAssets(getActivity());
+        contentArrayList = ContentHelper.readFromAssets((AppCompatActivity) getActivity());
         if (recyclerView != null) {
             setUpRecyclerView();
             populateRecyclerView();

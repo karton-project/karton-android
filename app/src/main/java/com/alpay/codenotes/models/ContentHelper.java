@@ -1,8 +1,9 @@
 package com.alpay.codenotes.models;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.utils.Utils;
 import com.crashlytics.android.Crashlytics;
@@ -25,7 +26,7 @@ public class ContentHelper {
     static String TR_FILE_NAME = "tr_content.json";
     static String EN_FILE_NAME = "en_content.json";
 
-    public static ArrayList<Content> readFromAssets(Context context) {
+    public static ArrayList<Content> readFromAssets(AppCompatActivity context) {
         AssetManager am = context.getAssets();
         InputStream inputStream;
         BufferedReader bufferedReader = null;

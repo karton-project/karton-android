@@ -7,16 +7,16 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
 
@@ -41,39 +41,35 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
         holder.mTitle.setText(mContentList.get(position));
-        holder.mDeleteButton.setOnClickListener(v -> {
-            codeList.remove(position);
-            ((FBVisionActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
-        });
 
         holder.mTitle.setOnClickListener(v -> {
             holder.mTitle.setVisibility(View.GONE);
-            holder.mTextEditLayout.setVisibility(View.VISIBLE);
+            holder.mEditLayout.setVisibility(View.VISIBLE);
             holder.mTextEdit.setText(codeList.get(position));
         });
 
         holder.mNewTextButton.setOnClickListener(v -> {
             codeList.set(position, holder.mTextEdit.getText().toString());
             holder.mTitle.setVisibility(View.VISIBLE);
-            holder.mTextEditLayout.setVisibility(View.GONE);
+            holder.mEditLayout.setVisibility(View.GONE);
             ((FBVisionActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
         });
     }
 
     @Override
     public int getItemCount() {
-        return mContentList.size();
+        return codeList.size();
     }
 
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(mContentList, i, i + 1);
+                Collections.swap(codeList, i, i + 1);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(mContentList, i, i - 1);
+                Collections.swap(codeList, i, i - 1);
             }
         }
         notifyItemMoved(fromPosition, toPosition);
@@ -81,26 +77,27 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
 
     @Override
     public void onItemRemoved(final int position) {
-        mContentList.remove(position);
+        codeList.remove(position);
+        ((FBVisionActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
     }
 }
 
 class CodeBlockViewHolder extends RecyclerView.ViewHolder {
 
+    View view;
     TextView mTitle;
     AppCompatEditText mTextEdit;
-    ImageButton mDeleteButton;
     ImageButton mNewTextButton;
-    LinearLayout mTextEditLayout;
+    LinearLayout mEditLayout;
     CardView mCardView;
 
     CodeBlockViewHolder(View itemView) {
         super(itemView);
+        view = itemView;
         mTitle = itemView.findViewById(R.id.codeblock_text);
         mTextEdit = itemView.findViewById(R.id.codeblock_text_edit);
         mNewTextButton = itemView.findViewById(R.id.codeblock_text_input_button);
-        mDeleteButton = itemView.findViewById(R.id.codeblock_delete);
-        mTextEditLayout = itemView.findViewById(R.id.codeblock_text_input_view);
+        mEditLayout = itemView.findViewById(R.id.codeblock_edit);
         mCardView = itemView.findViewById(R.id.codeblock_card);
     }
 }

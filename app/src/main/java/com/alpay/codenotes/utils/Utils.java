@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alpay.codenotes.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -29,8 +31,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Utils {
 
@@ -53,6 +53,10 @@ public class Utils {
 
     public static boolean isTR(Context context){
        return getStringFromResource(context, R.string.check).contentEquals("tr");
+    }
+
+    public static boolean isENCoding(AppCompatActivity appCompatActivity) {
+        return Utils.getStringFromSharedPreferences(appCompatActivity, "CODE_LANG").contentEquals("UK");
     }
 
     public static void showOKDialog(AppCompatActivity activity, int stringID) {

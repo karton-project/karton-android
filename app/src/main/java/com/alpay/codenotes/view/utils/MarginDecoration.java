@@ -4,9 +4,9 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.alpay.codenotes.R;
-
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.alpay.codenotes.R;
 
 public class MarginDecoration extends RecyclerView.ItemDecoration {
     private int margin;

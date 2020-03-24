@@ -2,6 +2,9 @@ package com.alpay.codenotes.utils;
 
 import android.content.Intent;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
@@ -15,9 +18,6 @@ import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
 import com.alpay.codenotes.transfer.MainActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 public class NavigationManager {
 

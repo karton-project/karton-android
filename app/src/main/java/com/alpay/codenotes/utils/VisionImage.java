@@ -14,13 +14,13 @@ import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Surface;
 
+import androidx.annotation.RequiresApi;
+
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import androidx.annotation.RequiresApi;
 
 import static android.content.Context.CAMERA_SERVICE;
 

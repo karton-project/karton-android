@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
@@ -31,9 +35,6 @@ import com.google.firebase.auth.UserInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -92,7 +93,7 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.signed_in_layout, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("UK")){
+        if (Utils.isENCoding((AppCompatActivity) getActivity())){
             languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_uk));
         }else{
             languageIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_tr));

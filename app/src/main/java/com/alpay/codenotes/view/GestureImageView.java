@@ -33,6 +33,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.alpay.codenotes.view.utils.Animation;
 import com.alpay.codenotes.view.utils.Animator;
 import com.alpay.codenotes.view.utils.GestureImageViewListener;
@@ -41,8 +43,6 @@ import com.alpay.codenotes.view.utils.GestureImageViewTouchListener;
 import java.io.InputStream;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-
-import androidx.appcompat.widget.AppCompatImageView;
 
 public class GestureImageView extends AppCompatImageView {
 

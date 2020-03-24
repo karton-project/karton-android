@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
@@ -15,10 +19,6 @@ import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 

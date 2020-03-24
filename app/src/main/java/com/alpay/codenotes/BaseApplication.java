@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDex;
+
 import com.alpay.codenotes.models.User;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.multidex.MultiDex;
 import io.fabric.sdk.android.Fabric;
 
 public class BaseApplication extends Application {

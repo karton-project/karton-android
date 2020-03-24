@@ -17,10 +17,10 @@ package com.alpay.codenotes.transfer;
 
 import android.os.Bundle;
 
-import com.alpay.codenotes.R;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import com.alpay.codenotes.R;
 
 /**
  * Main activity of the classifier demo app.
