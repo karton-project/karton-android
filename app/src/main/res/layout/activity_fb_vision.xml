@@ -30,14 +30,15 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <com.alpay.codenotes.view.AutofitVerticalRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/codeblocks_recycler_view"
             android:layout_margin="@dimen/unit8"
             android:layout_alignParentRight="true"
             android:background="@color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_above="@+id/read_code_button"/>
+            android:layout_above="@+id/read_code_button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             style="@style/button_floating_nav"

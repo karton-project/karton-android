@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.adapter.CodeBlockItemMoveCallback;
 import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
@@ -28,6 +29,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,7 +56,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @BindView(R.id.read_code_button)
     FloatingActionButton readCodeButton;
     @BindView(R.id.codeblocks_recycler_view)
-    AutofitVerticalRecyclerView blocksRecyclerView;
+    RecyclerView blocksRecyclerView;
 
     CodeBlockViewAdapter codeBlockViewAdapter;
 
@@ -136,6 +142,13 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     public void refreshCodeBlockRecyclerView(int position) {
         codeBlockViewAdapter = new CodeBlockViewAdapter(this, codeList);
+        blocksRecyclerView.setHasFixedSize(true);
+        blocksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        blocksRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        ItemTouchHelper.Callback callback =
+                new CodeBlockItemMoveCallback(codeBlockViewAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(blocksRecyclerView);
         blocksRecyclerView.setAdapter(codeBlockViewAdapter);
         blocksRecyclerView.scrollToPosition(position);
     }

@@ -11,6 +11,7 @@ import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -19,11 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
 
-
-public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> {
+public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements CodeBlockItemMoveCallback.ItemTouchHelperContract {
 
     private AppCompatActivity appCompatActivity;
     private ArrayList<String> mContentList;
+
 
     public  CodeBlockViewAdapter(AppCompatActivity appCompatActivity, ArrayList<String> mContentList) {
         this.appCompatActivity = appCompatActivity;
@@ -62,6 +63,25 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
     @Override
     public int getItemCount() {
         return mContentList.size();
+    }
+
+    @Override
+    public void onItemMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(mContentList, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(mContentList, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onItemRemoved(final int position) {
+        mContentList.remove(position);
     }
 }
 

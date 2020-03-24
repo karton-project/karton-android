@@ -34,11 +34,6 @@
         </activity>
         <activity android:name=".transfer.MainActivity"/>
         <activity
-            android:name=".activities.CodeNotesCompilerActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".activities.FBVisionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
