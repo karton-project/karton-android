@@ -69,12 +69,13 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             graphicOverlay.add(imageGraphic);
         }
         List<FirebaseVisionText.TextBlock> blocks = results.getTextBlocks();
+        Utils.code = "";
         for (int i = 0; i < blocks.size(); i++) {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
             for (int j = 0; j < lines.size(); j++) {
                 GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j));
                 graphicOverlay.add(textGraphic);
-                Utils.code = checkAndCorrectCode(lines.get(j).getText());
+                Utils.code = Utils.code + checkAndCorrectCode(lines.get(j).getText());
             }
         }
         graphicOverlay.postInvalidate();
