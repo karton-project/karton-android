@@ -22,6 +22,7 @@ import com.alpay.codenotes.transfer.api.AssetModelLoader;
 import com.alpay.codenotes.transfer.api.TransferLearningModel;
 
 import java.io.Closeable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -33,17 +34,16 @@ import java.util.concurrent.Future;
  * run-once API of {@link TransferLearningModel}.
  */
 public class TransferLearningModelWrapper implements Closeable {
+
   public static final int IMAGE_SIZE = 224;
-
   private final TransferLearningModel model;
-
   private final ConditionVariable shouldTrain = new ConditionVariable();
   private volatile TransferLearningModel.LossConsumer lossConsumer;
 
   TransferLearningModelWrapper(Context context) {
     model =
         new TransferLearningModel(
-            new AssetModelLoader(context, "model"), Arrays.asList("1", "2", "3", "4"));
+            new AssetModelLoader(context, "model"), Arrays.asList("0", "1", "2", "3"));
 
     new Thread(() -> {
       while (!Thread.interrupted()) {

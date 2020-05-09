@@ -67,15 +67,15 @@
 
     <string name="providers_google">Google</string>
     <string name="providers_email">Email</string>
-    <string name="providers_email_link">Email link</string>
-    <string name="providers_phone">Phone</string>
-    <string name="providers_anonymous">Anonymous</string>
+    <string name="providers_email_link">Email Linki</string>
+    <string name="providers_phone">Telefon</string>
+    <string name="providers_anonymous">Anonim</string>
 
-    <string name="configuration_required">Configuration required - see README.md</string>
+    <string name="configuration_required">Konfigürasyon dosyası eksik</string>
 
-    <string name="sign_in_cancelled">Sign in cancelled</string>
-    <string name="no_internet_connection">No internet connection</string>
-    <string name="unknown_error">An unknown error occurred</string>
+    <string name="sign_in_cancelled">Giriş İptal Edildi</string>
+    <string name="no_internet_connection">İnternet Bağlantısı Bulunamadı</string>
+    <string name="unknown_error">Bir Hata Oluştu</string>
 
     <!-- Auth UI - Signed in -->
     <string name="sign_out"><u>Sign out</u></string>
@@ -89,13 +89,14 @@
     <string name="game_flappy_text">Flappy Bird ile kodlamanın temellerini öğren.</string>
     <string name="tip_of_the_day">Günün Önerisi</string>
 
-    <string name="inference_mode_title">Inference</string>
-    <string name="capture_mode_title">Capture</string>
+    <string name="inference_mode_title">Algıla</string>
+    <string name="capture_mode_title">Tanıt</string>
 
-    <string name="train_action">Train</string>
-    <string name="pause_action">Pause</string>
-    <string name="resume_action">Resume</string>
+    <string name="train_action">Eğit</string>
+    <string name="pause_action">Duraklat</string>
+    <string name="resume_action">Devam Et</string>
+    <string name="wait_for_training_complete">Çıkmak için tanıtımı bitir</string>
 
-    <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
+    <string name="switch_to_inference_hint">Eğitim başladı, artık tanıma moduna geçebilirsin.</string>
 
 </resources>

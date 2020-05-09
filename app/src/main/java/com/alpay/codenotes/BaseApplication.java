@@ -9,10 +9,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
 import com.alpay.codenotes.models.User;
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
-
-import io.fabric.sdk.android.Fabric;
 
 public class BaseApplication extends Application {
 
@@ -22,7 +20,7 @@ public class BaseApplication extends Application {
     public static int version;
 
     static {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
     }
 
     @Override
@@ -35,8 +33,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        Fabric.with(this, new Crashlytics());
-        Crashlytics.log(Log.DEBUG, "init", "start");
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             userID = auth.getUid();

@@ -92,6 +92,7 @@
     <string name="train_action">Train</string>
     <string name="pause_action">Pause</string>
     <string name="resume_action">Resume</string>
+    <string name="wait_for_training_complete">Complete training before exit</string>
 
     <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
 

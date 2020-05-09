@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -85,7 +86,7 @@ public class Utils {
 
     public static boolean isCameraAvailable(AppCompatActivity appCompatActivity) {
         PackageManager pm = appCompatActivity.getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 
     public static void addStringToSharedPreferences(AppCompatActivity appCompatActivity, String key, String value) {
@@ -128,6 +129,14 @@ public class Utils {
 
     public static void initFirebaseAnalytics(AppCompatActivity appCompatActivity) {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(appCompatActivity);
+    }
+
+    public static void sendAnalyticsData(String id, String name) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
     }
 
     public static int convertToDip(Context ctx, float px) {

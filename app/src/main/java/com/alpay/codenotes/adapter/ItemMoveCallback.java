@@ -3,11 +3,11 @@ package com.alpay.codenotes.adapter;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CodeBlockItemMoveCallback extends ItemTouchHelper.Callback {
+public class ItemMoveCallback extends ItemTouchHelper.Callback {
 
     private final ItemTouchHelperContract mAdapter;
 
-    public CodeBlockItemMoveCallback(ItemTouchHelperContract adapter) {
+    public ItemMoveCallback(ItemTouchHelperContract adapter) {
         mAdapter = adapter;
     }
 

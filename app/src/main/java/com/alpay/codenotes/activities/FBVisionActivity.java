@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.adapter.CodeBlockItemMoveCallback;
 import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
+import com.alpay.codenotes.adapter.ItemMoveCallback;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.utils.MarginDecoration;
@@ -145,7 +145,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         blocksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         blocksRecyclerView.setItemAnimator(new DefaultItemAnimator());
         ItemTouchHelper.Callback callback =
-                new CodeBlockItemMoveCallback(codeBlockViewAdapter);
+                new ItemMoveCallback(codeBlockViewAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(blocksRecyclerView);
         blocksRecyclerView.setAdapter(codeBlockViewAdapter);

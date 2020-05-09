@@ -32,7 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".transfer.MainActivity"/>
+        <activity
+            android:name=".activities.TransferLearningActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".activities.FBVisionActivity"
             android:configChanges="orientation|keyboardHidden"

@@ -50,12 +50,20 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.databinding.CameraFragmentBinding;
+import com.alpay.codenotes.adapter.FunctionViewAdapter;
+import com.alpay.codenotes.adapter.ItemMoveCallback;
+import com.alpay.codenotes.databinding.TransferLearningFragmentBinding;
 import com.alpay.codenotes.models.Function;
+import com.alpay.codenotes.models.FunctionHelper;
 import com.alpay.codenotes.transfer.api.TransferLearningModel;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.view.utils.MarginDecoration;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -67,10 +75,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.alpay.codenotes.models.FunctionHelper.currentFunction;
 import static com.alpay.codenotes.models.FunctionHelper.functionList;
 
 /**
@@ -79,52 +89,55 @@ import static com.alpay.codenotes.models.FunctionHelper.functionList;
  * Camera functionality (through CameraX) is heavily based on the official example:
  * https://github.com/android/camera/tree/master/CameraXBasic.
  */
-public class CameraFragment extends Fragment {
+public class TransferLearningFragment extends Fragment {
 
-    private static final int LOWER_BYTE_MASK = 0xFF;
-    private static final String TAG = CameraFragment.class.getSimpleName();
-    private static final LensFacing LENS_FACING = LensFacing.BACK;
-    private TextureView viewFinder;
-    private Integer viewFinderRotation = null;
-    private Size bufferDimens = new Size(0, 0);
-    private Size viewFinderDimens = new Size(0, 0);
-    private CameraFragmentViewModel viewModel;
-    private TransferLearningModelWrapper tlModel;
-
-    // When the user presses the "add sample" button for some class,
-    // that class will be added to this queue. It is later extracted by
-    // InferenceThread and processed.
-    private final ConcurrentLinkedQueue<String> addSampleRequests = new ConcurrentLinkedQueue<>();
-    private final LoggingBenchmark inferenceBenchmark = new LoggingBenchmark("InferenceBench");
-    private Unbinder unbinder;
+    @BindView(R.id.function_recycler_view)
+    RecyclerView functionRecyclerView;
 
     @OnClick(R.id.back_result_button)
     public void backToResult() {
         viewModel.getTrainingState().observe(getViewLifecycleOwner(), trainingState -> {
-            switch (trainingState) {
-                case STARTED:
-                    Toast.makeText(getActivity(), R.string.wait_for_training_complete, Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    getActivity().onBackPressed();
-                    break;
+            if (trainingState == TransferLearningFragmentViewModel.TrainingState.STARTED) {
+                Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
+            } else {
+                getActivity().onBackPressed();
             }
         });
+    }
+
+    @OnClick(R.id.add_function)
+    public void addNewFunction() {
+        functionList.add(new Function());
     }
 
     @OnClick(R.id.function_complete_button)
     public void completeTask() {
         viewModel.getTrainingState().observe(getViewLifecycleOwner(), trainingState -> {
-            switch (trainingState) {
-                case STARTED:
-                    Toast.makeText(getActivity(), R.string.wait_for_training_complete, Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    getActivity().onBackPressed();
-                    break;
+            if (trainingState == TransferLearningFragmentViewModel.TrainingState.STARTED) {
+                Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
+            } else {
+                NavigationManager.openHomeActiviy((AppCompatActivity) getActivity());
             }
         });
     }
+
+    private static final int LOWER_BYTE_MASK = 0xFF;
+    private static final String TAG = TransferLearningFragment.class.getSimpleName();
+    private static final LensFacing LENS_FACING = LensFacing.BACK;
+    private TextureView viewFinder;
+    private Integer viewFinderRotation = null;
+    private Size bufferDimens = new Size(0, 0);
+    private Size viewFinderDimens = new Size(0, 0);
+    private TransferLearningFragmentViewModel viewModel;
+    private TransferLearningModelWrapper tlModel;
+
+    // When the user presses the "add sample" button for some class,
+    // that class will be added to this queue. It is later extracted by
+    // InferenceThread and processed.
+    public static final ConcurrentLinkedQueue<String> addSampleRequests = new ConcurrentLinkedQueue<>();
+    private final LoggingBenchmark inferenceBenchmark = new LoggingBenchmark("InferenceBench");
+    private static FunctionViewAdapter functionViewAdapter;
+    private Unbinder unbinder;
 
     /**
      * Set up a responsive preview for the view finder.
@@ -225,22 +238,6 @@ public class CameraFragment extends Fragment {
                 inferenceBenchmark.finish(imageId);
             };
 
-    public final View.OnClickListener onAddSampleClickListener = view -> {
-        String className;
-        if (view.getId() == R.id.class_btn_1) {
-            className = "1";
-        } else if (view.getId() == R.id.class_btn_2) {
-            className = "2";
-        } else if (view.getId() == R.id.class_btn_3) {
-            className = "3";
-        } else if (view.getId() == R.id.class_btn_4) {
-            className = "4";
-        } else {
-            throw new RuntimeException("Listener called for unexpected view");
-        }
-
-        addSampleRequests.add(className);
-    };
 
     /**
      * Fit the camera preview into [viewFinder].
@@ -249,7 +246,8 @@ public class CameraFragment extends Fragment {
      * @param newBufferDimens     camera preview dimensions.
      * @param newViewFinderDimens view finder dimensions.
      */
-    private void updateTransform(Integer rotation, Size newBufferDimens, Size newViewFinderDimens) {
+    private void updateTransform(Integer rotation, Size newBufferDimens, Size
+            newViewFinderDimens) {
         if (Objects.equals(rotation, viewFinderRotation)
                 && Objects.equals(newBufferDimens, bufferDimens)
                 && Objects.equals(newViewFinderDimens, viewFinderDimens)) {
@@ -310,22 +308,19 @@ public class CameraFragment extends Fragment {
         super.onCreate(bundle);
 
         tlModel = new TransferLearningModelWrapper(getActivity());
-        viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(TransferLearningFragmentViewModel.class);
         viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
+        FunctionHelper.fillEmptyFunctionList((AppCompatActivity) getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        CameraFragmentBinding dataBinding =
-                DataBindingUtil.inflate(inflater, R.layout.camera_fragment, container, false);
+        TransferLearningFragmentBinding dataBinding =
+                DataBindingUtil.inflate(inflater, R.layout.transfer_learning_fragment, container, false);
         dataBinding.setLifecycleOwner(getViewLifecycleOwner());
         dataBinding.setVm(viewModel);
         View rootView = dataBinding.getRoot();
         unbinder = ButterKnife.bind(this, rootView);
-        for (int buttonId : new int[]{
-                R.id.class_btn_1, R.id.class_btn_2, R.id.class_btn_3, R.id.class_btn_4}) {
-            rootView.findViewById(buttonId).setOnClickListener(onAddSampleClickListener);
-        }
 
         ChipGroup chipGroup = (ChipGroup) rootView.findViewById(R.id.mode_chip_group);
         if (viewModel.getCaptureMode().getValue()) {
@@ -342,7 +337,28 @@ public class CameraFragment extends Fragment {
             }
         });
 
+        setUpRecyclerView();
+        refreshRecyclerView(functionList.size() - 1);
+
         return dataBinding.getRoot();
+    }
+
+    private void setUpRecyclerView() {
+        functionRecyclerView.addItemDecoration(new MarginDecoration(getActivity()));
+        functionRecyclerView.setHasFixedSize(true);
+    }
+
+    public void refreshRecyclerView(int position) {
+        functionViewAdapter = new FunctionViewAdapter((AppCompatActivity) getActivity(), functionList);
+        functionRecyclerView.setHasFixedSize(true);
+        functionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        functionRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        ItemTouchHelper.Callback callback =
+                new ItemMoveCallback(functionViewAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(functionRecyclerView);
+        functionRecyclerView.setAdapter(functionViewAdapter);
+        functionRecyclerView.scrollToPosition(position);
     }
 
     @Override
@@ -367,7 +383,7 @@ public class CameraFragment extends Fragment {
                                     tlModel.enableTraining((epoch, loss) -> viewModel.setLastLoss(loss));
                                     if (!viewModel.getInferenceSnackbarWasDisplayed().getValue()) {
                                         Snackbar.make(
-                                                getActivity().findViewById(R.id.classes_bar),
+                                                getActivity().findViewById(R.id.function_recycler_view),
                                                 R.string.switch_to_inference_hint,
                                                 Snackbar.LENGTH_LONG)
                                                 .show();
@@ -387,13 +403,6 @@ public class CameraFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         tlModel.close();
-        tlModel = null;
-    }
-
-    @Override
-    public void onDetach() {
-        unbinder.unbind();
-        super.onDetach();
     }
 
     private static Integer getDisplaySurfaceRotation(Display display) {
@@ -446,7 +455,9 @@ public class CameraFragment extends Fragment {
                 uPlane.getPixelStride(),
                 argbArray);
 
-        return Bitmap.createBitmap(argbArray, width, height, Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(argbArray, width, height, Config.ARGB_8888);
+        functionList.get(currentFunction).setImage(bitmap);
+        return bitmap;
     }
 
     /**
@@ -526,4 +537,11 @@ public class CameraFragment extends Fragment {
         }
         view.setBackground(view.getContext().getDrawable(drawableId));
     }
+
+    @Override
+    public void onDetach() {
+        unbinder.unbind();
+        super.onDetach();
+    }
+
 }

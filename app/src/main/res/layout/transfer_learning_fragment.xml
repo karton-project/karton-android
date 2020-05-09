@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.alpay.codenotes.transfer.CameraFragmentViewModel.TrainingState" />
+        <import type="com.alpay.codenotes.transfer.TransferLearningFragmentViewModel.TrainingState" />
         <variable
             name="vm"
-            type="com.alpay.codenotes.transfer.CameraFragmentViewModel" />
+            type="com.alpay.codenotes.transfer.TransferLearningFragmentViewModel" />
     </data>
 
     <RelativeLayout
@@ -122,124 +122,26 @@
                 android:visibility="@{vm.lastLoss != null}" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/unit16"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/unit4"
+            android:tag="subtitle"
+            android:textSize="@dimen/unit12"
+            app:captureMode='@{vm.captureMode}'
+            app:captureText='@{vm.numSamples["0"]}'
+            app:inferenceText='@{vm.confidence["0"]}' />
 
-        <LinearLayout
-            android:id="@+id/classes_bar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/function_recycler_view"
+            android:layout_margin="@dimen/unit8"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/unit8"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/class_btn_1"
-                style="@style/ClassButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:clickable="@{vm.captureMode}"
-                android:enabled="@{vm.captureMode}"
-                android:orientation="vertical"
-                app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "1"}'>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:src="@drawable/ic_label_triangle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="subtitle"
-                    android:textSize="@dimen/unit12"
-                    app:captureMode='@{vm.captureMode}'
-                    app:captureText='@{vm.numSamples["1"]}'
-                    app:inferenceText='@{vm.confidence["1"]}' />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/class_btn_2"
-                style="@style/ClassButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:clickable="@{vm.captureMode}"
-                android:enabled="@{vm.captureMode}"
-                android:orientation="vertical"
-                app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "2"}'>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:src="@drawable/ic_label_circle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="subtitle"
-                    android:textSize="@dimen/unit12"
-                    app:captureMode='@{vm.captureMode}'
-                    app:captureText='@{vm.numSamples["2"]}'
-                    app:inferenceText='@{vm.confidence["2"]}' />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/class_btn_3"
-                style="@style/ClassButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:clickable="@{vm.captureMode}"
-                android:enabled="@{vm.captureMode}"
-                android:orientation="vertical"
-                app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "3"}'>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:src="@drawable/ic_label_x" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="subtitle"
-                    android:textSize="@dimen/unit12"
-                    app:captureMode='@{vm.captureMode}'
-                    app:captureText='@{vm.numSamples["3"]}'
-                    app:inferenceText='@{vm.confidence["3"]}' />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/class_btn_4"
-                style="@style/ClassButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".25"
-                android:clickable="@{vm.captureMode}"
-                android:enabled="@{vm.captureMode}"
-                android:orientation="vertical"
-                app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "4"}'>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/unit4"
-                    android:src="@drawable/ic_label_square" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="subtitle"
-                    android:textSize="@dimen/unit12"
-                    app:captureMode='@{vm.captureMode}'
-                    app:captureText='@{vm.numSamples["4"]}'
-                    app:inferenceText='@{vm.confidence["4"]}' />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_above="@+id/add_function"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             style="@style/button_floating_nav"
@@ -248,6 +150,15 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_ok"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/button_floating_nav"
+            android:id="@+id/add_function"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

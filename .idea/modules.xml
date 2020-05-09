@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Desktop-karton-android.iml" filepath="$PROJECT_DIR$/Desktop-karton-android.iml" group="karton-android" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/karton-android.iml" filepath="$PROJECT_DIR$/karton-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/karton-android-app.iml" filepath="$PROJECT_DIR$/app/karton-android-app.iml" group="karton-android/app" />
     </modules>
   </component>
 </project>

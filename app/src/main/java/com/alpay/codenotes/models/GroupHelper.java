@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.utils.Utils;
-import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +24,7 @@ import java.util.List;
 
 public class GroupHelper {
 
+    static final String TAG = GroupHelper.class.getSimpleName();
     public static ArrayList<String> codeList = new ArrayList();
     private static ArrayList<Group> groupList = new ArrayList<>();
     private static final String FILE_NAME = "karton_programs.json";
@@ -105,8 +105,7 @@ public class GroupHelper {
                 bufferedReader = new BufferedReader(inputStreamReader);
             }
         } catch (IOException e) {
-            Crashlytics.log(Log.WARN, "group", "group file cannot be read");
-            Crashlytics.logException(e);
+            Utils.sendAnalyticsData(TAG, "Group file cannot be read");
             Log.e("Group", "Can not read file: " + e.toString());
         }
 

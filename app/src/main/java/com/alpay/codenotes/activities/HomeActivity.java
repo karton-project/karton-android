@@ -5,14 +5,13 @@ import android.os.Bundle;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.crashlytics.android.Crashlytics;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.fabric.sdk.android.Fabric;
 
 public class HomeActivity extends BaseActivity {
 
+    final String TAG = HomeActivity.class.getSimpleName();
     String bundleKey = "";
     Bundle bundle;
 
@@ -42,7 +41,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         Utils.initFirebaseAnalytics(this);
-        Fabric.with(this, new Crashlytics());
+        Utils.sendAnalyticsData(TAG, "App starts.");
         bundle = getIntent().getExtras();
         if (bundle != null) {
             bundleKey = bundle.getString(NavigationManager.BUNDLE_KEY);

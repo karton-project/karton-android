@@ -13,19 +13,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.alpay.codenotes.transfer;
+package com.alpay.codenotes.activities;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.transfer.CameraFragment;
+import com.alpay.codenotes.transfer.PermissionsFragment;
+import com.alpay.codenotes.transfer.TransferLearningFragment;
 
 /**
  * Main activity of the classifier demo app.
  */
-public class MainActivity extends FragmentActivity {
+public class TransferLearningActivity extends BaseActivity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {

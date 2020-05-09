@@ -17,7 +17,7 @@ import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
-import com.alpay.codenotes.transfer.MainActivity;
+import com.alpay.codenotes.activities.TransferLearningActivity;
 
 public class NavigationManager {
 
@@ -104,7 +104,7 @@ public class NavigationManager {
     }
 
     public static void openTransferLearning(AppCompatActivity appCompatActivity){
-        Intent intent = new Intent(appCompatActivity, MainActivity.class);
+        Intent intent = new Intent(appCompatActivity, TransferLearningActivity.class);
         appCompatActivity.startActivity(intent);
     }
 }

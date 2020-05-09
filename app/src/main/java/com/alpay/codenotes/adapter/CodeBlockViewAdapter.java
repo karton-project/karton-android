@@ -20,7 +20,7 @@ import java.util.Collections;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
 
-public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements CodeBlockItemMoveCallback.ItemTouchHelperContract {
+public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 
     private AppCompatActivity appCompatActivity;
     private ArrayList<String> mContentList;

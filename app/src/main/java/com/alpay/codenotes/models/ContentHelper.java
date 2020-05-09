@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.utils.Utils;
-import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 
 public class ContentHelper {
 
+    static final String TAG = ContentHelper.class.getSimpleName();
     static Gson gson = new GsonBuilder().create();
     static Type contentListType = new TypeToken<ArrayList<Content>>(){}.getType();
     static String TR_FILE_NAME = "tr_content.json";
@@ -41,8 +41,7 @@ public class ContentHelper {
                 bufferedReader = new BufferedReader(inputStreamReader);
             }
         } catch (IOException e) {
-            Crashlytics.log(Log.WARN, "content", "content file cannot be read");
-            Crashlytics.logException(e);
+            Utils.sendAnalyticsData(TAG, "Group file cannot be read");
             Log.e("Content", "Can not read file: " + e.toString());
         }
 
