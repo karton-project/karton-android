@@ -44,7 +44,7 @@ import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
 public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private static final String TAG = "LivePreviewActivity";
+    private static final String TAG = FBVisionActivity.class.getSimpleName();
     private static final int PERMISSION_REQUESTS = 1;
     private boolean isFlappy = false;
 
@@ -52,8 +52,6 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
 
-    @BindView(R.id.read_code_button)
-    FloatingActionButton readCodeButton;
     @BindView(R.id.codeblocks_recycler_view)
     RecyclerView blocksRecyclerView;
 
