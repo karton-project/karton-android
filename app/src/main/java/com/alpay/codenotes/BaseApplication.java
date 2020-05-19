@@ -3,13 +3,11 @@ package com.alpay.codenotes;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
 import com.alpay.codenotes.models.User;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseApplication extends Application {

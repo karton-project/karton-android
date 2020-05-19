@@ -64,7 +64,7 @@
 
             <TextView
                 style="@style/BigButtonTitle"
-                android:text='@{String.format("Need %d samples", vm.neededSamples)}' />
+                android:text='@string/sample_count' />
         </LinearLayout>
 
         <LinearLayout
@@ -143,6 +143,7 @@
                 app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "1"}'>
 
                 <ImageView
+                    android:id="@+id/class_btn_1_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit4"
@@ -170,6 +171,7 @@
                 app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "2"}'>
 
                 <ImageView
+                    android:id="@+id/class_btn_2_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit4"
@@ -197,6 +199,7 @@
                 app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "3"}'>
 
                 <ImageView
+                    android:id="@+id/class_btn_3_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit4"
@@ -224,6 +227,7 @@
                 app:highlight='@{!vm.captureMode &amp;&amp; vm.firstChoice == "4"}'>
 
                 <ImageView
+                    android:id="@+id/class_btn_4_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit4"

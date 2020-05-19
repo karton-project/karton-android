@@ -33,6 +33,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,9 +54,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.databinding.CameraFragmentBinding;
-import com.alpay.codenotes.models.Function;
+import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.transfer.api.TransferLearningModel;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -67,11 +69,13 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static com.alpay.codenotes.models.FunctionHelper.functionList;
+import static com.alpay.codenotes.models.GroupHelper.groupId;
+
 
 /**
  * The main fragment of the classifier.
@@ -90,6 +94,9 @@ public class CameraFragment extends Fragment {
     private Size viewFinderDimens = new Size(0, 0);
     private CameraFragmentViewModel viewModel;
     private TransferLearningModelWrapper tlModel;
+    private static Bitmap tempBitmap;
+    private String className = "1";
+    String predictionName = "";
 
     // When the user presses the "add sample" button for some class,
     // that class will be added to this queue. It is later extracted by
@@ -120,11 +127,32 @@ public class CameraFragment extends Fragment {
                     Toast.makeText(getActivity(), R.string.wait_for_training_complete, Toast.LENGTH_SHORT).show();
                     break;
                 default:
-                    getActivity().onBackPressed();
+                    String programCode = "";
+                    for (String code : GroupHelper.codeList) {
+                        if (code.contains("group:")) {
+                            groupId = code.substring(6).trim().replaceAll(" +", " ");
+                        } else {
+                            programCode += code;
+                        }
+                    }
+                    GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, programCode, Utils.bitmapToBase64(tempBitmap));
+                    NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.PROGRAM_LIST);
                     break;
             }
         });
     }
+
+    @BindView(R.id.class_btn_1_img)
+    ImageView class1Img;
+
+    @BindView(R.id.class_btn_2_img)
+    ImageView class2Img;
+
+    @BindView(R.id.class_btn_3_img)
+    ImageView class3Img;
+
+    @BindView(R.id.class_btn_4_img)
+    ImageView class4Img;
 
     /**
      * Set up a responsive preview for the view finder.
@@ -218,6 +246,10 @@ public class CameraFragment extends Fragment {
 
                         for (TransferLearningModel.Prediction prediction : predictions) {
                             viewModel.setConfidence(prediction.getClassName(), prediction.getConfidence());
+                            if (prediction.getConfidence() > 0.90) {
+                                if (!predictionName.contentEquals(prediction.getClassName()))
+                                    GroupHelper.codeList.add(GroupHelper.returnCodeByName(prediction.getClassName()));
+                            }
                         }
                     }
                 }
@@ -226,19 +258,25 @@ public class CameraFragment extends Fragment {
             };
 
     public final View.OnClickListener onAddSampleClickListener = view -> {
-        String className;
         if (view.getId() == R.id.class_btn_1) {
             className = "1";
+            class1Img.setImageBitmap(tempBitmap);
+            Utils.tempBitmapList[0] = tempBitmap;
         } else if (view.getId() == R.id.class_btn_2) {
             className = "2";
+            class2Img.setImageBitmap(tempBitmap);
+            Utils.tempBitmapList[1] = tempBitmap;
         } else if (view.getId() == R.id.class_btn_3) {
             className = "3";
+            class3Img.setImageBitmap(tempBitmap);
+            Utils.tempBitmapList[2] = tempBitmap;
         } else if (view.getId() == R.id.class_btn_4) {
             className = "4";
+            class4Img.setImageBitmap(tempBitmap);
+            Utils.tempBitmapList[3] = tempBitmap;
         } else {
             throw new RuntimeException("Listener called for unexpected view");
         }
-
         addSampleRequests.add(className);
     };
 
@@ -308,8 +346,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
-        tlModel = new TransferLearningModelWrapper(getActivity());
+        tlModel = Utils.tlModel;
         viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
         viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
     }
@@ -341,6 +378,11 @@ public class CameraFragment extends Fragment {
                 viewModel.setCaptureMode(false);
             }
         });
+
+        if (Utils.tempBitmapList[0] != null) class1Img.setImageBitmap(Utils.tempBitmapList[0]);
+        if (Utils.tempBitmapList[1] != null) class2Img.setImageBitmap(Utils.tempBitmapList[1]);
+        if (Utils.tempBitmapList[2] != null) class3Img.setImageBitmap(Utils.tempBitmapList[2]);
+        if (Utils.tempBitmapList[3] != null) class4Img.setImageBitmap(Utils.tempBitmapList[3]);
 
         return dataBinding.getRoot();
     }
@@ -446,7 +488,9 @@ public class CameraFragment extends Fragment {
                 uPlane.getPixelStride(),
                 argbArray);
 
-        return Bitmap.createBitmap(argbArray, width, height, Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(argbArray, width, height, Config.ARGB_8888);
+        tempBitmap = Utils.resizeBitmap(bitmap, 40, 40);
+        return bitmap;
     }
 
     /**

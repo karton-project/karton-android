@@ -2,6 +2,7 @@ package com.alpay.codenotes.models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +53,17 @@ public class GroupHelper {
             }
         }
         return id;
+    }
+
+    public static String returnCodeByName(String name){
+        for (int i = 0; i< groupList.size(); i++){
+            for (int j = 0; j < groupList.get(i).getProgramList().size(); j++){
+                if (groupList.get(i).getProgramList().get(i).getName().contentEquals(name)){
+                    return groupList.get(i).getProgramList().get(i).getCode();
+                }
+            }
+        }
+        return "";
     }
 
     private static void writeToFile(String data, Context context) {
@@ -130,6 +142,22 @@ public class GroupHelper {
 
     public static void saveProgram(Context context, String parentName, String name, String code) {
         Program program = new Program(name, code);
+        int pos = getGroupIndex(parentName);
+        if (groupList == null){
+            groupList = new ArrayList<>();
+        }
+        if (pos < 0){
+            groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
+            groupList.get(groupList.size()-1).getProgramList().add(program);
+        }else{
+            groupList.get(pos).getProgramList().add(program);
+        }
+        saveProgramList(context);
+        codeList = new ArrayList<>();
+    }
+
+    public static void saveProgram(Context context, String parentName, String name, String code, String bitmap) {
+        Program program = new Program(name, code, bitmap);
         int pos = getGroupIndex(parentName);
         if (groupList == null){
             groupList = new ArrayList<>();

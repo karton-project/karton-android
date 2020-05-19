@@ -15,14 +15,14 @@ limitations under the License.
 
 package com.alpay.codenotes.transfer;
 
-import android.content.Context;
 import android.os.ConditionVariable;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.transfer.api.AssetModelLoader;
 import com.alpay.codenotes.transfer.api.TransferLearningModel;
 
 import java.io.Closeable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -35,64 +35,65 @@ import java.util.concurrent.Future;
  */
 public class TransferLearningModelWrapper implements Closeable {
 
-  public static final int IMAGE_SIZE = 224;
-  private final TransferLearningModel model;
-  private final ConditionVariable shouldTrain = new ConditionVariable();
-  private volatile TransferLearningModel.LossConsumer lossConsumer;
+    public static final int IMAGE_SIZE = 224;
+    private static TransferLearningModel model;
+    private final ConditionVariable shouldTrain = new ConditionVariable();
+    private volatile TransferLearningModel.LossConsumer lossConsumer;
 
-  TransferLearningModelWrapper(Context context) {
-    model =
-        new TransferLearningModel(
-            new AssetModelLoader(context, "model"), Arrays.asList("0", "1", "2", "3"));
+    public TransferLearningModelWrapper(AppCompatActivity appCompatActivity) {
+        model = new TransferLearningModel(
+                new AssetModelLoader(appCompatActivity, "model"), Arrays.asList("0", "1", "2", "3"));
 
-    new Thread(() -> {
-      while (!Thread.interrupted()) {
-        shouldTrain.block();
-        try {
-          model.train(1, lossConsumer).get();
-        } catch (ExecutionException e) {
-          throw new RuntimeException("Exception occurred during model training", e.getCause());
-        } catch (InterruptedException e) {
-          // no-op
-        }
-      }
-    }).start();
-  }
+        new Thread(() -> {
+            while (!Thread.interrupted()) {
+                shouldTrain.block();
+                try {
+                    model.train(1, lossConsumer).get();
+                } catch (ExecutionException e) {
+                    throw new RuntimeException("Exception occurred during model training", e.getCause());
+                } catch (InterruptedException e) {
+                    // no-op
+                }
+            }
+        }).start();
+    }
 
-  // This method is thread-safe.
-  public Future<Void> addSample(float[] image, String className) {
-    return model.addSample(image, className);
-  }
+    // This method is thread-safe.
+    public Future<Void> addSample(float[] image, String className) {
+        return model.addSample(image, className);
+    }
 
-  // This method is thread-safe, but blocking.
-  public TransferLearningModel.Prediction[] predict(float[] image) {
-    return model.predict(image);
-  }
+    // This method is thread-safe, but blocking.
+    public TransferLearningModel.Prediction[] predict(float[] image) {
+        return model.predict(image);
+    }
 
-  public int getTrainBatchSize() {
-    return model.getTrainBatchSize();
-  }
+    public int getTrainBatchSize() {
+        return model.getTrainBatchSize();
+    }
 
-  /**
-   * Start training the model continuously until {@link #disableTraining() disableTraining} is
-   * called.
-   *
-   * @param lossConsumer callback that the loss values will be passed to.
-   */
-  public void enableTraining(TransferLearningModel.LossConsumer lossConsumer) {
-    this.lossConsumer = lossConsumer;
-    shouldTrain.open();
-  }
+    /**
+     * Start training the model continuously until {@link #disableTraining() disableTraining} is
+     * called.
+     *
+     * @param lossConsumer callback that the loss values will be passed to.
+     */
+    public void enableTraining(TransferLearningModel.LossConsumer lossConsumer) {
+        this.lossConsumer = lossConsumer;
+        shouldTrain.open();
+    }
 
-  /**
-   * Stops training the model.
-   */
-  public void disableTraining() {
-    shouldTrain.close();
-  }
+    /**
+     * Stops training the model.
+     */
+    public void disableTraining() {
+        shouldTrain.close();
+    }
 
-  /** Frees all model resources and shuts down all background threads. */
-  public void close() {
-    model.close();
-  }
+    /**
+     * Frees all model resources and shuts down all background threads.
+     */
+    public void close() {
+        model.close();
+    }
 }

@@ -73,7 +73,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/unit24</item>
         <item name="android:layout_marginTop">@dimen/unit8</item>
-        <item name="android:layout_marginRight">@dimen/unit8</item>
+        <item name="android:layout_marginRight">@dimen/unit3</item>
         <item name="android:textSize">@dimen/unit10</item>
     </style>
 

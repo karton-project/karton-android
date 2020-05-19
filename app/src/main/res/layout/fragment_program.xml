@@ -5,19 +5,32 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/button_floating_nav"
         android:id="@+id/show_examples"
+        style="@style/button_floating_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="7dp"
         app:srcCompat="@drawable/ic_menu" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/open_transfer"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/show_examples"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="7dp"
+        app:srcCompat="@drawable/ic_photo_camera" />
 
     <RelativeLayout
         android:id="@+id/hourofcode_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/show_examples"
+        android:layout_toLeftOf="@id/open_transfer"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit12"
         android:background="@drawable/warningtoastshape"

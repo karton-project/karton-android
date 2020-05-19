@@ -21,10 +21,13 @@
     <string name="card_practice_button_text">Try</string>
 
     <string name="card_change">Change</string>
+    <string name="card_addto">Add to Code</string>
     <string name="card_run">Run</string>
     <string name="card_delete">Remove</string>
     <string name="empty_program_text">Create a new program with + button</string>
     <string name="change_coding_language">Change the coding language to:</string>
+    <string name="code_added">The function is added to your code.</string>
+
     <!-- General -->
     <string name="app_name">Kart-ON</string>
     <string name="ok">OK</string>
@@ -93,7 +96,7 @@
     <string name="pause_action">Pause</string>
     <string name="resume_action">Resume</string>
     <string name="wait_for_training_complete">Complete training before exit</string>
-
+    <string name="sample_count">Add 20 Samples</string>
     <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
 
 </resources>

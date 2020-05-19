@@ -21,6 +21,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.alpay.codenotes.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,9 +47,8 @@ public class CameraFragmentViewModel extends ViewModel {
   private MutableLiveData<Boolean> captureMode = new MutableLiveData<>(false);
   private MutableLiveData<Map<String, Float>> confidence = new MutableLiveData<>(new TreeMap<>());
   private MutableLiveData<Integer> trainBatchSize = new MutableLiveData<>(0);
-  private MutableLiveData<Map<String, Integer>> numSamples = new MutableLiveData<>(new TreeMap<>());
-  private MutableLiveData<TrainingState> trainingState =
-      new MutableLiveData<>(TrainingState.NOT_STARTED);
+  private MutableLiveData<Map<String, Integer>> numSamples = new MutableLiveData<>(Utils.numSamples);
+  private MutableLiveData<TrainingState> trainingState = new MutableLiveData<>(TrainingState.NOT_STARTED);
   private MutableLiveData<Float> lastLoss = new MutableLiveData<>();
   private MutableLiveData<Boolean> inferenceSnackbarWasDisplayed = new MutableLiveData<>(false);
 
@@ -55,6 +56,7 @@ public class CameraFragmentViewModel extends ViewModel {
   private LiveData<String> secondChoice;
   private LiveData<Integer> totalSamples;
   private LiveData<Integer> neededSamples;
+
 
   /**
    * Whether capture mode is enabled.
@@ -84,6 +86,7 @@ public class CameraFragmentViewModel extends ViewModel {
     }
     map.put(className, currentNumber + 1);
     numSamples.postValue(map);
+    Utils.numSamples = map;
   }
 
   /**

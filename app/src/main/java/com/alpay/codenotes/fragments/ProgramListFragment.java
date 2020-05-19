@@ -65,6 +65,11 @@ public class ProgramListFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.open_transfer)
+    public void openTransferLearning() {
+        NavigationManager.openTransferLearning((AppCompatActivity) getActivity());
+    }
+
     @OnClick(R.id.show_examples)
     public void showExamples(){
         if (!isExampleButtonClicked){

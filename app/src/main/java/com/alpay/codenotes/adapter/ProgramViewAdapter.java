@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -17,9 +18,11 @@ import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
+import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
 
+import static com.alpay.codenotes.models.GroupHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 
 
@@ -59,10 +62,17 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
+        holder.mAddToCodeButton.setOnClickListener(v -> {
+            codeList.add(mProgramList.get(position).getCode());
+            Toast.makeText(appCompatActivity, R.string.code_added, Toast.LENGTH_SHORT).show();
+        });
         holder.mDeleteButton.setOnClickListener(v -> {
             GroupHelper.deleteProgram(appCompatActivity, parentName, position);
             this.notifyDataSetChanged();
         });
+        if (mProgramList.get(position).getBitmap() != null){
+            holder.mImage.setImageBitmap(Utils.bitmapFromBase64(mProgramList.get(position).getBitmap()));
+        }
     }
 
     @Override
@@ -82,15 +92,17 @@ class ProgramViewHolder extends RecyclerView.ViewHolder {
     CardView mCardView;
     Button mChangeButton;
     Button mRunButton;
+    Button mAddToCodeButton;
     Button mDeleteButton;
 
     ProgramViewHolder(View itemView) {
         super(itemView);
-        mImage = itemView.findViewById(R.id.program_card_thumbnail);
+        mImage = itemView.findViewById(R.id.program_thumbnail);
         mTitle = itemView.findViewById(R.id.program_card_title);
         mDetail = itemView.findViewById(R.id.program_card_detail);
         mChangeButton = itemView.findViewById(R.id.program_change_code);
         mDeleteButton = itemView.findViewById(R.id.program_delete_code);
+        mAddToCodeButton = itemView.findViewById(R.id.program_addto_code);
         mRunButton = itemView.findViewById(R.id.program_run_code);
         mCardView = itemView.findViewById(R.id.program_card_view);
     }

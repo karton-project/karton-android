@@ -21,10 +21,12 @@
     <string name="card_practice_button_text">Dene</string>
 
     <string name="card_change">Düzenle</string>
+    <string name="card_addto">Koda Ekle</string>
     <string name="card_run">Çalıştır</string>
     <string name="card_delete">Sil</string>
     <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
     <string name="change_coding_language">Kodlama Dilini Değiştir:</string>
+    <string name="code_added">Fonksiyon, koduna eklendi.</string>
 
     <!-- General -->
     <string name="app_name">Kart-ON</string>
@@ -96,7 +98,7 @@
     <string name="pause_action">Duraklat</string>
     <string name="resume_action">Devam Et</string>
     <string name="wait_for_training_complete">Çıkmak için tanıtımı bitir</string>
-
+    <string name="sample_count">Toplam 20 Örnek Ekle</string>
     <string name="switch_to_inference_hint">Eğitim başladı, artık tanıma moduna geçebilirsin.</string>
 
 </resources>

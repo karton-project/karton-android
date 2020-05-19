@@ -9,6 +9,7 @@ import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.activities.HomeActivity;
+import com.alpay.codenotes.activities.TransferLearningActivity;
 import com.alpay.codenotes.activities.WelcomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
 import com.alpay.codenotes.fragments.ContentListFragment;
@@ -17,7 +18,6 @@ import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
-import com.alpay.codenotes.activities.TransferLearningActivity;
 
 public class NavigationManager {
 

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.transfer.TransferLearningModelWrapper;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.BufferedInputStream;
@@ -32,9 +33,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Utils {
 
+
+    public static TransferLearningModelWrapper tlModel;
     public static boolean noConnectionErrorDisplayed = false;
     public static final String USER_NAME_KEY = "user_name";
     public static final String USER_EMAIL_KEY = "user_email";
@@ -42,6 +47,13 @@ public class Utils {
     public static final String IS_FIRST_OPEN_KEY = "isfirst";
     public static final String CLOSE_FLAPPY = "closeflappy";
     public static String code = "";
+    public static final boolean finishTraining = false;
+    public static Bitmap[] tempBitmapList = new Bitmap[4];
+    public static Map<String, Integer> numSamples = new TreeMap<>();
+
+    public static void createTLModel(AppCompatActivity appCompatActivity){
+        tlModel = new TransferLearningModelWrapper(appCompatActivity);
+    }
 
     public static boolean isConnected() throws InterruptedException, IOException {
         String command = "ping -c 1 google.com";
@@ -209,6 +221,11 @@ public class Utils {
         return drawable;
     }
 
+    public static Bitmap bitmapFromBase64(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
     public static String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -230,7 +247,8 @@ public class Utils {
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
+        //bm.recycle();
+        //bm = null;
         return resizedBitmap;
     }
 
