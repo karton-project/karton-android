@@ -1,5 +1,6 @@
 package com.alpay.codenotes.activities;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
+import com.alpay.codenotes.view.SaveProgramDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,36 +53,8 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     @OnClick(R.id.save_code_button)
     public void saveProgram(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Programı Kaydet");
-        alertDialog.setMessage("Program ismini gir:");
-
-        final EditText input = new EditText(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        lp.leftMargin = (int)getResources().getDimension(R.dimen.unit8);
-        input.setLayoutParams(lp);
-        alertDialog.setView(input);
-        alertDialog.setNeutralButton(android.R.string.ok, (dialog, which) -> {
-            String programName = input.getText().toString().trim().replaceAll(" +", " ");
-            String programCode = "";
-            for (String code: p5Code){
-                if (code.contains("group:")){
-                    groupId = code.substring(6).trim().replaceAll(" +", " ");
-                }else{
-                    programCode += code;
-                }
-            }
-            GroupHelper.saveProgram(this, GroupHelper.groupId, programName, programCode);
-            NavigationManager.openFragment(this, NavigationManager.PROGRAM_LIST);
-        });
-        alertDialog.show();
-    }
-
-    @OnClick(R.id.save_function)
-    public void saveFunction(){
-        NavigationManager.openTransferLearning(this);
+        SaveProgramDialog saveProgramDialog = new SaveProgramDialog(this);
+        saveProgramDialog.show();
     }
 
     @Override
@@ -92,6 +66,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
         setWebView();
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onStart() {
         super.onStart();

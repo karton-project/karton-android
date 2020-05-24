@@ -59,7 +59,13 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @OnClick(R.id.read_code_button)
     public void readCode() {
         if (Utils.code != null) {
-            codeList.add(Utils.code);
+            if (Utils.code.contains("\n")){
+                for (String line : Utils.code.split("\\r?\\n")){
+                    codeList.add(line);
+                }
+            }else {
+                codeList.add(Utils.code);
+            }
             refreshCodeBlockRecyclerView(codeList.size() - 1);
         } else {
             Utils.showOKDialog(this, R.string.no_code_dialog_message);

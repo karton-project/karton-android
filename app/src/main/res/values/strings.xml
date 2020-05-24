@@ -12,6 +12,8 @@
     <!-- Compiler -->
     <string name="no_code_dialog_message">No Understandable Code</string>
     <string name="add_function">Save Function</string>
+    <string name="save_program">Save Program</string>
+    <string name="save_program_sub">Enter the program name</string>
 
     <!-- Dependencies -->
     <string name="project_website">Project Website:</string>
@@ -31,6 +33,7 @@
     <!-- General -->
     <string name="app_name">Kart-ON</string>
     <string name="ok">OK</string>
+    <string name="save">SAVE</string>
 
     <!-- Home Page -->
     <string name="home_card_learn">Learn</string>
@@ -98,5 +101,6 @@
     <string name="wait_for_training_complete">Complete training before exit</string>
     <string name="sample_count">Add 20 Samples</string>
     <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
+    <string name="save_program_as_image"><u>... or save it via camera</u></string>
 
 </resources>

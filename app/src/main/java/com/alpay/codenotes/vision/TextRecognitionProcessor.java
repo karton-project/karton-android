@@ -75,7 +75,7 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             for (int j = 0; j < lines.size(); j++) {
                 GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j));
                 graphicOverlay.add(textGraphic);
-                Utils.code = Utils.code + checkAndCorrectCode(lines.get(j).getText());
+                Utils.code = Utils.code + checkAndCorrectCode(lines.get(j).getText()) + "\n";
             }
         }
         graphicOverlay.postInvalidate();

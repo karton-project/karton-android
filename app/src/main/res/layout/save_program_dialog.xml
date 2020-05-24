@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/unit320"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/unit8"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_dark_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/unit4"
+            android:text="@string/save_program" />
+
+        <ImageView
+            android:id="@+id/save_program_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_close" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/program_name_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/unit4"
+        android:hint="@string/save_program_sub" />
+
+    <Button
+        android:id="@+id/save_program_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:background="@color/colorAccent"
+        android:text="@string/save"
+        android:textColor="@color/colorWhite" />
+
+
+    <TextView
+        android:id="@+id/save_via_camera"
+        style="@style/text_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:gravity="center"
+        android:text="@string/save_program_as_image" />
+
+</LinearLayout>
