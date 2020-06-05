@@ -1,6 +1,7 @@
 package com.alpay.codenotes.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,12 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.show_examples)
     FloatingActionButton showExamplesButton;
 
+    @BindView(R.id.open_transfer)
+    FloatingActionButton transferLearningButton;
+
+    @BindView(R.id.new_program_button)
+    FloatingActionButton newProgramButton;
+
     @OnClick(R.id.close_flappy_bird)
     public void closeFlappyBirdAnnouncement() {
         hourOfCodeView.setVisibility(View.GONE);
@@ -75,9 +82,15 @@ public class ProgramListFragment extends Fragment {
         if (!isExampleButtonClicked){
             generateExampleListFromGSON();
             showExamplesButton.setImageResource(R.drawable.ic_close);
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorError)));
+            newProgramButton.hide();
+            transferLearningButton.hide();
         }else{
             generateProgramListFromGSON();
             showExamplesButton.setImageResource(R.drawable.ic_menu);
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            newProgramButton.show();
+            transferLearningButton.show();
         }
         isExampleButtonClicked = !isExampleButtonClicked;
     }

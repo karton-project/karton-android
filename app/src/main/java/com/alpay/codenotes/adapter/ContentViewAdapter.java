@@ -1,5 +1,6 @@
 package com.alpay.codenotes.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.Content;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public class ContentViewAdapter extends RecyclerView.Adapter<ContentViewHolder> 
 
     @Override
     public void onBindViewHolder(final ContentViewHolder holder, int position) {
-        holder.mImage.setImageDrawable(Utils.encodeImageDrawableFromBase64(appCompatActivity, mContentList.get(position).getImage()));
+        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/content_img/" + position + ".png")).into(holder.mImage);
         holder.mTitle.setText(mContentList.get(position).getName());
         holder.mDetail.setText(mContentList.get(position).getDetail());
         holder.mWatchButton.setOnClickListener(v ->

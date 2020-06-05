@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/unit240"
-    android:layout_height="@dimen/unit160">
+    android:layout_height="@dimen/unit240">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/program_card_view"
@@ -83,7 +83,7 @@
                     android:layout_marginTop="@dimen/unit4"
                     android:layout_marginBottom="@dimen/unit4"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/unit10"
+                    android:textSize="@dimen/unit12"
                     tools:text="@tools:sample/lorem/random" />
 
             </ScrollView>

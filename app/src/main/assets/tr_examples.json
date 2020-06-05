@@ -37,5 +37,27 @@
         "code": "dörtgen x: 100 y: 150 w: 100 h: 200\ndoldur r: 200 g:100 b:100\nelips x: 100 y: 350 w:50 h:50\nelips x: 200 y: 350 w: 50 h: 50\nüçgen x: 60 y: 60 w: 50 h: 40\nüçgen x: 190 y: 60 w: 50 h: 40\ndoldur r: 100 g: 90 b:120\nelips x: 150 y: 150 w: 200 h: 200\ndoldur r: 255 g: 255 b: 255\nelips x: 120 y: 100 w: 50 h:50\nelips x: 180 y: 100 w: 50 h: 50\ndoldur r: 0 g: 0 b: 0\nelips x: 120 y: 100 w: 20 h: 20\nelips x: 180 y: 100 w: 20 h: 20\nkenar r: 255 g: 255 b: 255\nçizgi sx: 150 sy: 170 ex: 120 ey: 180\nçizgi sx: 150 sy: 170 ex: 130 ey: 190\nçizgi sx: 150 sy: 170 ex: 180 ey: 180\n çizgi sx: 150 sy: 170 ex: 170 ey: 190\n"
       }
     ]
+  },
+  {
+    "name": "Değişkenler ve Animasyon",
+    "programList": [
+      {
+        "name": "Uçan Dörtgen",
+        "code": "değişken tanımla n: artis v: 0\ndörtgen x: artis y: 0 w: 50 h: 50\n değerini artır n: artis v: 3"
+      }
+    ]
+  },
+  {
+    "name": "Fonksiyon ve Döngüler",
+    "programList": [
+      {
+        "name": "On İki Araba",
+        "code": "fonksiyon tanımla: araba\ndoldur r: 232 g: 103 b: 103\nkenar r: 165 g: 165 b: 165\ndörtgen x:100 y:50 w:150 h:100\nelips x:125 y:175 w:50 h:50\nelips x:225 y:175 w:50 h:50\nbitir\ndöngü: 12\nçağır: araba\nötele x: 50 y: 20\nbitir"
+      },
+      {
+        "name": "İç İçe Döngü",
+        "code": "değişken tanımla n: konumx v: 40\ndeğişken tanımla n: konumy v: 40\ndöngü: 5\ndöngü: 5\nelips x: konumx y: konumy w: 30 h: 30\ndeğerini artır n: konumx v: 50\nbitir\ndeğer ata n: konumx v: 40\ndeğerini artır n: konumy v: 50\nbitir"
+      }
+    ]
   }
 ]
