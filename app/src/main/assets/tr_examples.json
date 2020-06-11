@@ -8,7 +8,7 @@
       },
       {
         "name": "Mavi Dikdörtgen",
-        "code": "doldur r: 0 g: 0 b: 255;\ndörtgen x:200 y:200 w:100 h:150"
+        "code": "doldur r: 0 g: 0 b: 255\ndörtgen x:200 y:200 w:100 h:150"
       }
     ]
   },
@@ -42,8 +42,12 @@
     "name": "Değişkenler ve Animasyon",
     "programList": [
       {
-        "name": "Uçan Dörtgen",
-        "code": "değişken tanımla n: artis v: 0\ndörtgen x: artis y: 0 w: 50 h: 50\n değerini artır n: artis v: 3"
+        "name": "Dokunmatik Çizgiler",
+        "code": "doldur r: 0 g: 0 b: 0\nçizgi sx: dokunX sy: 0 ex: dokunX ey: height"
+      },
+      {
+        "name": "Dokunmatik Renkler",
+        "code": "eğer: dokunX > 250\ndoldur r: 0 g: 0 b: 255\ndeğilse\ndoldur r: 255 g: 0 b: 0\nbitir\nellipse x: 100 y: 100 w: 100 h: 100"
       }
     ]
   },

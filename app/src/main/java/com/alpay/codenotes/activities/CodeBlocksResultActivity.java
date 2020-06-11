@@ -110,22 +110,23 @@ public class CodeBlocksResultActivity extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         webView.setPadding(0, 0, 0, 0);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
 
     public void runCode() {
         for (String codeLine : p5Code) {
             codeLine = codeLine.replace("\n", "").replace("\r", "");
-            evalCode("addCodeInput('" + codeLine + "')");
+            evalCode("addCodeInput('" + codeLine + "');");
         }
         if (!isFlappy){
-            evalCode("runP5Code()");
+            evalCode("runP5Code();");
         }
     }
 
