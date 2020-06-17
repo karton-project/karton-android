@@ -29,6 +29,7 @@
     <string name="empty_program_text">Create a new program with + button</string>
     <string name="change_coding_language">Change the coding language to:</string>
     <string name="code_added">The function is added to your code.</string>
+    <string name="code_randomly_added">Added a new random code block!</string>
 
     <!-- General -->
     <string name="app_name">Kart-ON</string>

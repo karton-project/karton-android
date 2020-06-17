@@ -28,6 +28,7 @@
     <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
     <string name="change_coding_language">Kodlama Dilini Değiştir:</string>
     <string name="code_added">Fonksiyon, koduna eklendi.</string>
+    <string name="code_randomly_added">Rastgele bir kod parçası eklendi!</string>
 
     <!-- General -->
     <string name="app_name">Kart-ON</string>

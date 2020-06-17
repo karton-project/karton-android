@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
 import com.alpay.codenotes.adapter.ItemMoveCallback;
+import com.alpay.codenotes.utils.CodePool;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.utils.MarginDecoration;
@@ -27,6 +29,7 @@ import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
 import com.alpay.codenotes.vision.TextRecognitionProcessor;
+import com.squareup.seismic.ShakeDetector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
 
-public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, ShakeDetector.Listener {
 
     private static final String TAG = FBVisionActivity.class.getSimpleName();
     private static final int PERMISSION_REQUESTS = 1;
@@ -50,6 +53,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private com.alpay.codenotes.vision.CameraSource cameraSource = null;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
+    private CodePool codePool = new CodePool();
 
     @BindView(R.id.codeblocks_recycler_view)
     RecyclerView blocksRecyclerView;
@@ -58,13 +62,23 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @OnClick(R.id.read_code_button)
     public void readCode() {
-        if (Utils.code != null) {
-            if (Utils.code.contains("\n")){
-                for (String line : Utils.code.split("\\r?\\n")){
+        addCodeToCodeList(Utils.code);
+    }
+
+    @Override
+    public void hearShake() {
+        addCodeToCodeList(codePool.drawRandomCodeFromPool());
+        Toast.makeText(this, "Added a new random code!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void addCodeToCodeList(String code){
+        if (code != null) {
+            if (code.contains("\n")){
+                for (String line : code.split("\\r?\\n")){
                     codeList.add(line);
                 }
             }else {
-                codeList.add(Utils.code);
+                codeList.add(code);
             }
             refreshCodeBlockRecyclerView(codeList.size() - 1);
         } else {
@@ -108,6 +122,10 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             }
         }
 
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        ShakeDetector sd = new ShakeDetector(this);
+        sd.start(sensorManager);
+
         preview = findViewById(R.id.firePreview);
         if (preview == null) {
             Log.d(TAG, "Preview is null");
@@ -124,6 +142,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         }
         setUpRecyclerView();
         refreshCodeBlockRecyclerView(codeList.size() - 1);
+
     }
 
     private void openHintView(String instructions) {
