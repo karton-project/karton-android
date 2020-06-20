@@ -30,7 +30,7 @@
     "programList": [
       {
         "name": "Araba",
-        "code": "doldur r: 232 g: 103 b: 103\nkenar r: 165 g: 165 b: 165\ndörtgen x:150 y:50 w:150 h:100\nelips x:125 y:175 w:50 h:50\nelips x:225 y:175 w:50 h:50\n"
+        "code": "doldur r: 232 g: 103 b: 103\nkenar r: 165 g: 165 b: 165\ndörtgen x:100 y:50 w:150 h:100\nelips x:125 y:175 w:50 h:50\nelips x:225 y:175 w:50 h:50\n"
       },
       {
         "name": "Kedi",
@@ -47,7 +47,7 @@
       },
       {
         "name": "Dokunmatik Renkler",
-        "code": "eğer: dokunX > 250\ndoldur r: 0 g: 0 b: 255\ndeğilse\ndoldur r: 255 g: 0 b: 0\nbitir\nellipse x: 100 y: 100 w: 100 h: 100"
+        "code": "eğer: dokunX > 250\ndoldur r: 0 g: 0 b: 255\ndeğilse\ndoldur r: 255 g: 0 b: 0\nbitir\nelips x: 100 y: 100 w: 100 h: 100"
       }
     ]
   },
@@ -56,11 +56,11 @@
     "programList": [
       {
         "name": "On İki Araba",
-        "code": "fonksiyon tanımla: araba\ndoldur r: 232 g: 103 b: 103\nkenar r: 165 g: 165 b: 165\ndörtgen x:100 y:50 w:150 h:100\nelips x:125 y:175 w:50 h:50\nelips x:225 y:175 w:50 h:50\nbitir\ndöngü: 12\nçağır: araba\nötele x: 50 y: 20\nbitir"
+        "code": "fonksiyon tanımla: araba\ndoldur r: 232 g: 103 b: 103\nkenar r: 165 g: 165 b: 165\ndörtgen x:100 y:50 w:150 h:100\nelips x:125 y:175 w:50 h:50\nelips x:225 y:175 w:50 h:50\nbitir\ntekrarla: 12\nçağır: araba\nötele x: 50 y: 20\nbitir"
       },
       {
         "name": "İç İçe Döngü",
-        "code": "değişken tanımla n: konumx v: 40\ndeğişken tanımla n: konumy v: 40\ndöngü: 5\ndöngü: 5\nelips x: konumx y: konumy w: 30 h: 30\ndeğerini artır n: konumx v: 50\nbitir\ndeğer ata n: konumx v: 40\ndeğerini artır n: konumy v: 50\nbitir"
+        "code": "değişken tanımla n: konumx v: 40\ndeğişken tanımla n: konumy v: 40\ntekrarla: 5\ntekrarla: 5\nelips x: konumx y: konumy w: 30 h: 30\ndeğerini artır n: konumx v: 50\nbitir\ndeğer ata n: konumx v: 40\ndeğerini artır n: konumy v: 50\nbitir"
       }
     ]
   }
