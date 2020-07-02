@@ -21,6 +21,7 @@ import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
@@ -63,7 +64,7 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             appCompatActivity.startActivity(intent);
         });
         holder.mAddToCodeButton.setOnClickListener(v -> {
-            codeList.add(mProgramList.get(position).getCode());
+            codeList.addAll(Arrays.asList(mProgramList.get(position).getCode().split("[\\r\\n]+")));
             Toast.makeText(appCompatActivity, R.string.code_added, Toast.LENGTH_SHORT).show();
         });
         holder.mDeleteButton.setOnClickListener(v -> {

@@ -3,9 +3,11 @@ package com.alpay.codenotes.activities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -74,15 +76,15 @@ public class CodeBlocksResultActivity extends BaseActivity {
             p5Code = bundle.getStringArray(NavigationManager.BUNDLE_CODE_KEY);
             isFlappy = bundle.getBoolean(NavigationManager.BUNDLE_FLAPPY_KEY);
             webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    view.loadUrl(url);
-                    return true;
-                }
-
                 public void onPageFinished(WebView view, String url) {
                     mHandler.postDelayed(mLauncher, 500);
                 }
+
+                @Override
+                public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                    handler.proceed();
+                }
+
                 @Override
                 public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
                     if (url.equals(failingUrl)) {

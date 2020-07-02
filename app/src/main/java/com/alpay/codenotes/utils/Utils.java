@@ -51,7 +51,19 @@ public class Utils {
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();
 
-    public static void createTLModel(AppCompatActivity appCompatActivity){
+    public static final String[] command_array_en =
+            {"fill", "stroke", "background", "ellipse", "rectangle", "triangle", "line", "text",
+                    "animation", "animation", "ghost animation", "end", "call", "new variable",
+                    "increase value", "decrease value", "set new value", "if", "else", "loop",
+                    "random number", "translate", "rotate"};
+
+    public static final String[] command_array_tr =
+            {"doldur", "kenar", "arkaplan", "elips", "dörtgen", "üçgen", "çizgi", "yazı",
+                    "hayalet animasyonu", "bitir", "çağır", "değişken tanımla",
+                    "değerini artır", "değerini azalt", "değer ata", "eğer", "değilse", "tekrarla",
+                    "rastgele sayı", "ötele", "döndür"};
+
+    public static void createTLModel(AppCompatActivity appCompatActivity) {
         tlModel = new TransferLearningModelWrapper(appCompatActivity);
     }
 
@@ -60,12 +72,12 @@ public class Utils {
         return (Runtime.getRuntime().exec(command).waitFor() == 0);
     }
 
-    public static final String getDeviceLanguage(){
+    public static final String getDeviceLanguage() {
         return Locale.getDefault().getDisplayLanguage();
     }
 
-    public static boolean isTR(Context context){
-       return getStringFromResource(context, R.string.check).contentEquals("tr");
+    public static boolean isTR(Context context) {
+        return getStringFromResource(context, R.string.check).contentEquals("tr");
     }
 
     public static boolean isENCoding(AppCompatActivity appCompatActivity) {

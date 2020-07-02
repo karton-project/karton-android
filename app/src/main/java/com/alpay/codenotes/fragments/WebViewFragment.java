@@ -1,11 +1,13 @@
 package com.alpay.codenotes.fragments;
 
 import android.content.Context;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -71,6 +73,11 @@ public class WebViewFragment extends Fragment {
             public void onPageFinished(WebView view, String url) {
                 if (loadAnim != null)
                     loadAnim.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed();
             }
 
             @Override

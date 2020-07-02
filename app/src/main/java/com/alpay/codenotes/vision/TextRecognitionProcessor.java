@@ -27,7 +27,11 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 /**
  * Processor for the text recognition demo.
@@ -75,22 +79,10 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             for (int j = 0; j < lines.size(); j++) {
                 GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, lines.get(j));
                 graphicOverlay.add(textGraphic);
-                Utils.code = Utils.code + checkAndCorrectCode(lines.get(j).getText()) + "\n";
+                Utils.code = Utils.code + lines.get(j).getText() + "\n";
             }
         }
         graphicOverlay.postInvalidate();
-    }
-
-    private String checkAndCorrectCode(String code) {
-        code = code.toLowerCase();
-        int pos = code.indexOf(":");
-        if (pos > 0) {
-            String rest = code.substring(pos);
-            rest = rest.replaceAll("o", "0");
-            rest = rest.replaceAll("s", "5");
-            code = code.substring(0, pos) + rest;
-        }
-        return code;
     }
 
     @Override

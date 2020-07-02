@@ -33,11 +33,13 @@ import com.squareup.seismic.ShakeDetector;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 import static com.alpay.codenotes.models.GroupHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
@@ -62,7 +64,28 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @OnClick(R.id.read_code_button)
     public void readCode() {
-        addCodeToCodeList(Utils.code);
+        addCodeToCodeList(checkAndCorrectCode(Utils.code));
+    }
+
+    private String checkAndCorrectCode(String code) {
+        String result = "";
+        String searchResult = "";
+        if (code.length() > 3){
+            code = code.toLowerCase();
+            String[] parsedCode = code.split(" ");
+            if(Utils.isENCoding(this))
+                searchResult = FuzzySearch.extractOne(parsedCode[0] + " " + parsedCode[1] + " " + parsedCode[2], Arrays.asList(Utils.command_array_en)).getString();
+            else
+                searchResult = FuzzySearch.extractOne(parsedCode[0] + " " + parsedCode[1] + " " + parsedCode[2], Arrays.asList(Utils.command_array_tr)).getString();
+            String[] parsedResult = searchResult.split(" ");
+            for (int i =0; i< parsedResult.length; i++){
+                parsedCode[i] = parsedResult[i];
+            }
+            for (int i =0; i< parsedCode.length; i++){
+                result = result + parsedCode[i] + " ";
+            }
+        }
+        return result.trim();
     }
 
     @Override

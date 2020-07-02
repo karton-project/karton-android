@@ -104,4 +104,31 @@
     <string name="switch_to_inference_hint">You can switch back to inference mode now.</string>
     <string name="save_program_as_image"><u>... or save it via camera</u></string>
 
+    <!-- Card Block Commands -->
+    <string-array name="command_array">
+        <item>fill</item>
+        <item>stroke</item>
+        <item>background</item>
+        <item>ellipse</item>
+        <item>rectangle</item>
+        <item>triangle</item>
+        <item>line</item>
+        <item>text</item>
+        <item>animation</item>
+        <item>animation</item>
+        <item>ghost animation</item>
+        <item>end</item>
+        <item>call</item>
+        <item>new variable</item>
+        <item>increase value</item>
+        <item>decrease value</item>
+        <item>set new value</item>
+        <item>if</item>
+        <item>else</item>
+        <item>loop</item>
+        <item>random number</item>
+        <item>translate</item>
+        <item>rotate</item>
+    </string-array>
+
 </resources>
