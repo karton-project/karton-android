@@ -16,14 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
+import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static com.alpay.codenotes.models.GroupHelper.codeList;
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 
 
@@ -48,23 +49,27 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
 
     @Override
     public void onBindViewHolder(final ProgramViewHolder holder, int position) {
-        String p5Code = mProgramList.get(position).getCode();
+        String p5Code = "";
+        for (CodeLine codeLine : mProgramList.get(position).getCode()) {
+            p5Code = p5Code + CodeLineHelper.codeLineToCode(codeLine);
+        }
         holder.mTitle.setText(mProgramList.get(position).getName());
         holder.mDetail.setText(p5Code);
+        String finalP5Code = p5Code;
         holder.mRunButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, CodeBlocksResultActivity.class);
-            String[] p5CodeArr = p5Code.split("\n");
+            String[] p5CodeArr = finalP5Code.split("\n");
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
-            String[] p5CodeArr = p5Code.split("\n");
+            String[] p5CodeArr = finalP5Code.split("\n");
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mAddToCodeButton.setOnClickListener(v -> {
-            codeList.addAll(Arrays.asList(mProgramList.get(position).getCode().split("[\\r\\n]+")));
+            codeList.addAll(mProgramList.get(position).getCode());
             Toast.makeText(appCompatActivity, R.string.code_added, Toast.LENGTH_SHORT).show();
         });
         holder.mDeleteButton.setOnClickListener(v -> {

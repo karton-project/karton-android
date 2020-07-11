@@ -2,7 +2,6 @@ package com.alpay.codenotes.models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +25,6 @@ import java.util.List;
 public class GroupHelper {
 
     static final String TAG = GroupHelper.class.getSimpleName();
-    public static ArrayList<String> codeList = new ArrayList();
     private static ArrayList<Group> groupList = new ArrayList<>();
     private static final String FILE_NAME = "karton_programs.json";
     public static String groupId = "Default";
@@ -55,7 +53,7 @@ public class GroupHelper {
         return id;
     }
 
-    public static String returnCodeByName(String name){
+    public static ArrayList<CodeLine> returnCodeByName(String name){
         for (int i = 0; i< groupList.size(); i++){
             for (int j = 0; j < groupList.get(i).getProgramList().size(); j++){
                 if (groupList.get(i).getProgramList().get(i).getName().contentEquals(name)){
@@ -63,7 +61,7 @@ public class GroupHelper {
                 }
             }
         }
-        return "";
+        return new ArrayList<>();
     }
 
     private static void writeToFile(String data, Context context) {
@@ -140,7 +138,7 @@ public class GroupHelper {
         saveProgramList(context);
     }
 
-    public static void saveProgram(Context context, String parentName, String name, String code) {
+    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code) {
         Program program = new Program(name, code);
         int pos = getGroupIndex(parentName);
         if (groupList == null){
@@ -153,10 +151,10 @@ public class GroupHelper {
             groupList.get(pos).getProgramList().add(program);
         }
         saveProgramList(context);
-        codeList = new ArrayList<>();
+        CodeLineHelper.codeList = new ArrayList<>();
     }
 
-    public static void saveProgram(Context context, String parentName, String name, String code, String bitmap) {
+    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code, String bitmap) {
         Program program = new Program(name, code, bitmap);
         int pos = getGroupIndex(parentName);
         if (groupList == null){
@@ -169,7 +167,7 @@ public class GroupHelper {
             groupList.get(pos).getProgramList().add(program);
         }
         saveProgramList(context);
-        codeList = new ArrayList<>();
+        CodeLineHelper.codeList = new ArrayList<>();
     }
 
     public static String toJson(List<Program> programList) {

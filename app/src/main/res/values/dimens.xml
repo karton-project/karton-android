@@ -42,4 +42,6 @@
 
     <dimen name="unit320">320.00dp</dimen>
 
+    <dimen name="unit360">360.00dp</dimen>
+
 </resources>

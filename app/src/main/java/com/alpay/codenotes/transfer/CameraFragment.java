@@ -54,6 +54,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.databinding.CameraFragmentBinding;
+import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.transfer.api.TransferLearningModel;
 import com.alpay.codenotes.utils.NavigationManager;
@@ -127,15 +129,12 @@ public class CameraFragment extends Fragment {
                     Toast.makeText(getActivity(), R.string.wait_for_training_complete, Toast.LENGTH_SHORT).show();
                     break;
                 default:
-                    String programCode = "";
-                    for (String code : GroupHelper.codeList) {
-                        if (code.contains("group:")) {
-                            groupId = code.substring(6).trim().replaceAll(" +", " ");
-                        } else {
-                            programCode += code;
+                    for (CodeLine code : CodeLineHelper.codeList) {
+                        if (code.getCommand().contains("group:")) {
+                            groupId = code.getInput();
                         }
                     }
-                    GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, programCode, Utils.bitmapToBase64(tempBitmap));
+                    GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, CodeLineHelper.codeList, Utils.bitmapToBase64(tempBitmap));
                     NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.PROGRAM_LIST);
                     break;
             }
@@ -248,7 +247,7 @@ public class CameraFragment extends Fragment {
                             viewModel.setConfidence(prediction.getClassName(), prediction.getConfidence());
                             if (prediction.getConfidence() > 0.90) {
                                 if (!predictionName.contentEquals(prediction.getClassName()))
-                                    GroupHelper.codeList.add(GroupHelper.returnCodeByName(prediction.getClassName()));
+                                    CodeLineHelper.codeList.addAll(GroupHelper.returnCodeByName(prediction.getClassName()));
                             }
                         }
                     }

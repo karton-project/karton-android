@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.Content;
 import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

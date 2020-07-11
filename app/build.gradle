@@ -124,8 +124,6 @@ dependencies {
 }
 
 // The code below downloads a transfer learning model used in the example app automatically.
-// Remove it if you are using your own model!
-
 def modelUrl = 'https://storage.googleapis.com/download.tensorflow.org/models/tflite/transfer_learning_mobilenet_v2_100_224x224_quant_softmax_4_sgd.zip'
 def modelArchivePath = "${buildDir}/model.zip"
 def modelTargetLocation = 'src/main/assets/model'

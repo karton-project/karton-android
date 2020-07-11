@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.adapter.CodeBlockViewAdapter;
 import com.alpay.codenotes.adapter.ItemMoveCallback;
+import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.utils.CodePool;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
@@ -33,15 +35,13 @@ import com.squareup.seismic.ShakeDetector;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 
-import static com.alpay.codenotes.models.GroupHelper.codeList;
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 
@@ -68,24 +68,8 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     }
 
     private String checkAndCorrectCode(String code) {
-        String result = "";
-        String searchResult = "";
-        if (code.length() > 3){
-            code = code.toLowerCase();
-            String[] parsedCode = code.split(" ");
-            if(Utils.isENCoding(this))
-                searchResult = FuzzySearch.extractOne(parsedCode[0] + " " + parsedCode[1] + " " + parsedCode[2], Arrays.asList(Utils.command_array_en)).getString();
-            else
-                searchResult = FuzzySearch.extractOne(parsedCode[0] + " " + parsedCode[1] + " " + parsedCode[2], Arrays.asList(Utils.command_array_tr)).getString();
-            String[] parsedResult = searchResult.split(" ");
-            for (int i =0; i< parsedResult.length; i++){
-                parsedCode[i] = parsedResult[i];
-            }
-            for (int i =0; i< parsedCode.length; i++){
-                result = result + parsedCode[i] + " ";
-            }
-        }
-        return result.trim();
+        CodeLine codeLine = CodeLineHelper.codeToCodeLine(this, code);
+        return CodeLineHelper.codeLineToCode(codeLine);
     }
 
     @Override
@@ -98,10 +82,10 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         if (code != null) {
             if (code.contains("\n")){
                 for (String line : code.split("\\r?\\n")){
-                    codeList.add(line);
+                    codeList.add(CodeLineHelper.codeToCodeLine(this, line));
                 }
             }else {
-                codeList.add(code);
+                codeList.add(CodeLineHelper.codeToCodeLine(this, code));
             }
             refreshCodeBlockRecyclerView(codeList.size() - 1);
         } else {
@@ -111,7 +95,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @OnClick(R.id.send_code_button)
     public void sendCode() {
-        String[] p5Code = codeList.toArray(new String[codeList.size()]);
+        String[] p5Code = CodeLineHelper.programToCodeTextArray(codeList);
         Intent intent = new Intent(this, CodeBlocksResultActivity.class);
         intent.putExtra(BUNDLE_CODE_KEY, p5Code);
         intent.putExtra(BUNDLE_FLAPPY_KEY, isFlappy);
@@ -134,7 +118,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             if (bundle.getStringArray(BUNDLE_CODE_KEY) != null) {
                 String[] p5code = bundle.getStringArray(BUNDLE_CODE_KEY);
                 for (String code : p5code) {
-                    codeList.add(code);
+                    codeList.add(CodeLineHelper.codeToCodeLine(this,code));
                 }
             }
             if (bundle.getString(NavigationManager.BUNDLE_KEY) != null) {

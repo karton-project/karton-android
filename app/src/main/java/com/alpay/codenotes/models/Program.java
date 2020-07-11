@@ -1,24 +1,23 @@
 package com.alpay.codenotes.models;
 
-import android.graphics.Bitmap;
-import android.graphics.SurfaceTexture;
+import java.util.ArrayList;
 
 public class Program {
 
     String name = "";
-    String code = "";
+    ArrayList<CodeLine> code = new ArrayList<>();
     String bitmap = "";
 
     public Program() {
 
     }
 
-    public Program(String name, String code) {
+    public Program(String name, ArrayList<CodeLine> code) {
         this.name = name;
         this.code = code;
     }
 
-    public Program(String name, String code, String bitmap) {
+    public Program(String name, ArrayList<CodeLine> code, String bitmap) {
         this.name = name;
         this.code = code;
         this.bitmap = bitmap;
@@ -32,11 +31,20 @@ public class Program {
         this.name = name;
     }
 
-    public String getCode() {
+    public ArrayList<CodeLine> getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public String getCodeText() {
+        String codeText = "";
+        for (CodeLine codeLine : this.code){
+            codeText = codeText + codeLine;
+        }
+        return codeText;
+    }
+
+
+    public void setCode(ArrayList<CodeLine> code) {
         this.code = code;
     }
 

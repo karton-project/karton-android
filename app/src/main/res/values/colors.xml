@@ -7,7 +7,7 @@
     <color name="colorAccent">#F57F17</color>
 
     <color name="colorDarkGrey">#455a64</color>
-    <color name="colorLightGrey">#eeeeee</color>
+    <color name="colorLightGrey">#efefef</color>
     <color name="colorWhite">#ffffff</color>
     <color name="transparent">#00ffffff</color>
 
@@ -28,5 +28,11 @@
 
     <color name="colorWarning">#fbc02d</color>
     <color name="colorWarningDark">#c49000</color>
+
+    <color name="command_color">#EEF6E8</color>
+    <color name="command_shape">#FFFDEB</color>
+    <color name="command_def">#F4E9F4</color>
+    <color name="command_control">#F2E9E9</color>
+    <color name="command_move">#EEFAFF</color>
 
 </resources>

@@ -27,11 +27,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
-
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 /**
  * Processor for the text recognition demo.

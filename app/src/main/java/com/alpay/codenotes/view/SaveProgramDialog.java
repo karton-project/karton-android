@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
 
@@ -21,7 +23,6 @@ public class SaveProgramDialog extends Dialog implements
         android.view.View.OnClickListener {
 
     public AppCompatActivity appCompatActivity;
-    private String[] p5Code = {};
 
     AppCompatEditText editText;
     Button saveButton;
@@ -30,15 +31,12 @@ public class SaveProgramDialog extends Dialog implements
 
     public void saveCode() {
         String programName = editText.getText().toString().trim().replaceAll(" +", " ");
-        String programCode = "";
-        for (String code: p5Code){
-            if (code.contains("group:")){
-                groupId = code.substring(6).trim().replaceAll(" +", " ");
-            }else{
-                programCode += code;
+        for (CodeLine codeLine : CodeLineHelper.codeList){
+            if (codeLine.getCommand().contains("group")){
+                groupId = codeLine.getInput();
             }
         }
-        GroupHelper.saveProgram(appCompatActivity, GroupHelper.groupId, programName, programCode);
+        GroupHelper.saveProgram(appCompatActivity, GroupHelper.groupId, programName, CodeLineHelper.codeList);
     }
 
     public SaveProgramDialog(AppCompatActivity appCompatActivity) {

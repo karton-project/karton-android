@@ -3,30 +3,29 @@ package com.alpay.codenotes.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
+import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.view.CodeBlockDetailDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.alpay.codenotes.models.GroupHelper.codeList;
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 
 public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 
     private AppCompatActivity appCompatActivity;
-    private ArrayList<String> mContentList;
+    private ArrayList<CodeLine> mContentList;
 
 
-    public  CodeBlockViewAdapter(AppCompatActivity appCompatActivity, ArrayList<String> mContentList) {
+    public  CodeBlockViewAdapter(AppCompatActivity appCompatActivity, ArrayList<CodeLine> mContentList) {
         this.appCompatActivity = appCompatActivity;
         this.mContentList = mContentList;
     }
@@ -40,20 +39,16 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
 
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
-        holder.mTitle.setText(mContentList.get(position));
-
-        holder.mTitle.setOnClickListener(v -> {
-            holder.mTitle.setVisibility(View.GONE);
-            holder.mEditLayout.setVisibility(View.VISIBLE);
-            holder.mTextEdit.setText(codeList.get(position));
+        holder.mTitle.setText(mContentList.get(position).getCommand() + " " + mContentList.get(position).getInput());
+        holder.mCardView.setBackgroundTintList(appCompatActivity.getResources().getColorStateList(R.color.command_color));
+        holder.mCardView.setOnClickListener(v -> {
+            showDialogPrompt(mContentList.get(position), position);
         });
+    }
 
-        holder.mNewTextButton.setOnClickListener(v -> {
-            codeList.set(position, holder.mTextEdit.getText().toString());
-            holder.mTitle.setVisibility(View.VISIBLE);
-            holder.mEditLayout.setVisibility(View.GONE);
-            ((FBVisionActivity) appCompatActivity).refreshCodeBlockRecyclerView(position);
-        });
+    public void showDialogPrompt(CodeLine codeLine, int position){
+        CodeBlockDetailDialog codeBlockDetailDialog = new CodeBlockDetailDialog(appCompatActivity, codeLine);
+        codeBlockDetailDialog.show();
     }
 
     @Override
@@ -86,18 +81,12 @@ class CodeBlockViewHolder extends RecyclerView.ViewHolder {
 
     View view;
     TextView mTitle;
-    AppCompatEditText mTextEdit;
-    ImageButton mNewTextButton;
-    LinearLayout mEditLayout;
     CardView mCardView;
 
     CodeBlockViewHolder(View itemView) {
         super(itemView);
         view = itemView;
         mTitle = itemView.findViewById(R.id.codeblock_text);
-        mTextEdit = itemView.findViewById(R.id.codeblock_text_edit);
-        mNewTextButton = itemView.findViewById(R.id.codeblock_text_input_button);
-        mEditLayout = itemView.findViewById(R.id.codeblock_edit);
         mCardView = itemView.findViewById(R.id.codeblock_card);
     }
 }

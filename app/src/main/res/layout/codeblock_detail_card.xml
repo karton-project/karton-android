@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true">
+
+    <LinearLayout
+        android:id="@+id/codeblock_detail_card"
+        android:layout_width="@dimen/unit360"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/unit10"
+        android:backgroundTint="@color/colorLightGrey"
+        android:elevation="3dp"
+        android:padding="@dimen/unit4">
+
+        <LinearLayout
+            android:id="@+id/codeblock_standard"
+            android:layout_width="@dimen/unit120"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="@dimen/unit1"
+            android:orientation="horizontal"
+            android:padding="@dimen/unit4"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/codedetail_text"
+                style="@style/text_dark_bold_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit4"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/unit16"
+                tool:text="background" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/color_sliders"
+            android:layout_width="@dimen/unit240"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <TextView
+                    android:id="@+id/color_rval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/color_r"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:progress="5" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <TextView
+                    android:id="@+id/color_gval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/color_g"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:progress="5" />
+
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <TextView
+                    android:id="@+id/color_bval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/color_b"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:progress="5" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/codedetail_color_box"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/unit20"
+                android:layout_marginLeft="@dimen/unit20"
+                android:layout_marginRight="@dimen/unit20"
+                tool:background="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shape_sliders"
+            android:layout_width="@dimen/unit200"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/shape_x"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="500"
+                    android:progress="10" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/shape_y"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="500"
+                    android:progress="10" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/shape_w"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="500"
+                    android:progress="10" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/shape_h"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:max="500"
+                    android:progress="10" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:tint="@color/textColorDark"
+                    app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/card_detail_ok"
+        android:layout_width="@dimen/unit360"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/codeblock_detail_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/unit8"
+        android:background="@drawable/btn_big_green"
+        android:clickable="true"
+        android:tint="@color/colorWhite"
+        app:srcCompat="@drawable/ic_ok" />
+
+
+</RelativeLayout>

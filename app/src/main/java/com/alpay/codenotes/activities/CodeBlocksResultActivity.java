@@ -1,7 +1,6 @@
 package com.alpay.codenotes.activities;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.pm.ActivityInfo;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -11,11 +10,9 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
@@ -24,8 +21,6 @@ import com.alpay.codenotes.view.SaveProgramDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.alpay.codenotes.models.GroupHelper.groupId;
 
 public class CodeBlocksResultActivity extends BaseActivity {
 

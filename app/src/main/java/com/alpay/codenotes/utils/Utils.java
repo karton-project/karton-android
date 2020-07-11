@@ -52,16 +52,37 @@ public class Utils {
     public static Map<String, Integer> numSamples = new TreeMap<>();
 
     public static final String[] command_array_en =
-            {"fill", "stroke", "background", "ellipse", "rectangle", "triangle", "line", "text",
-                    "animation", "animation", "ghost animation", "end", "call", "new variable",
-                    "increase value", "decrease value", "set new value", "if", "else", "loop",
+            {"fill", "stroke", "background",
+                    "ellipse", "rectangle", "triangle", "line", "text", "ghost animation",
+                    "define function:", "end", "call", "new variable",
+                    "increase value", "decrease value", "set new value",
+                    "if:", "else", "loop:",
                     "random number", "translate", "rotate"};
 
     public static final String[] command_array_tr =
-            {"doldur", "kenar", "arkaplan", "elips", "dörtgen", "üçgen", "çizgi", "yazı",
-                    "hayalet animasyonu", "bitir", "çağır", "değişken tanımla",
-                    "değerini artır", "değerini azalt", "değer ata", "eğer", "değilse", "tekrarla",
+            {"doldur", "kenar", "arkaplan",
+                    "elips", "dörtgen", "üçgen", "çizgi", "yazı", "hayalet animasyonu",
+                    "fonksiyon tanımla:", "bitir", "çağır:", "değişken tanımla",
+                    "değerini artır", "değerini azalt", "değer ata",
+                    "eğer:", "değilse", "tekrarla:",
                     "rastgele sayı", "ötele", "döndür"};
+
+    public static final String[] command_colors =
+            {"#EEF6E8", "#EEF6E8", "#EEF6E8",
+                    "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB",
+                    "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4",
+                    "#F4E9F4", "#F4E9F4","#F4E9F4",
+                    "#F2E9E9", "#F2E9E9", "#F2E9E9",
+                    "#F4E9F4", "#EEFAFF", "#EEFAFF"
+            };
+
+    public static final String[] command_types =
+            {"color", "color", "color",
+                    "shape", "shape", "shape", "shape", "shape", "shape",
+                    "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4","#F4E9F4",
+                    "#F2E9E9", "#F2E9E9", "#F2E9E9",
+                    "#F4E9F4", "#EEFAFF", "#EEFAFF"
+            };
 
     public static void createTLModel(AppCompatActivity appCompatActivity) {
         tlModel = new TransferLearningModelWrapper(appCompatActivity);

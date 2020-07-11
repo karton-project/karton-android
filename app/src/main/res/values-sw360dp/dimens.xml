@@ -46,6 +46,8 @@
 
     <dimen name="unit320">320.00dp</dimen>
 
+    <dimen name="unit360">360.00dp</dimen>
+
     <!--Current Width : 360.0 END -->
 
 </resources>
