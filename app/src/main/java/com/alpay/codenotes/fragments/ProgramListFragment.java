@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.adapter.GroupViewAdapter;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +71,7 @@ public class ProgramListFragment extends Fragment {
 
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
+        CodeLineHelper.codeList = new ArrayList<>();
         Intent intent = new Intent(getActivity(), FBVisionActivity.class);
         startActivity(intent);
     }

@@ -14,7 +14,6 @@ import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.models.CodeLine;
 import com.alpay.codenotes.view.CodeBlockDetailDialog;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.alpay.codenotes.models.CodeLineHelper.codeList;
@@ -22,12 +21,10 @@ import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 
     private AppCompatActivity appCompatActivity;
-    private ArrayList<CodeLine> mContentList;
 
 
-    public  CodeBlockViewAdapter(AppCompatActivity appCompatActivity, ArrayList<CodeLine> mContentList) {
+    public  CodeBlockViewAdapter(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
-        this.mContentList = mContentList;
     }
 
     @Override
@@ -39,15 +36,15 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
 
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
-        holder.mTitle.setText(mContentList.get(position).getCommand() + " " + mContentList.get(position).getInput());
+        holder.mTitle.setText(codeList.get(position).getCommand() + " " + codeList.get(position).getInput());
         holder.mCardView.setBackgroundTintList(appCompatActivity.getResources().getColorStateList(R.color.command_color));
         holder.mCardView.setOnClickListener(v -> {
-            showDialogPrompt(mContentList.get(position), position);
+            showDialogPrompt(codeList.get(position), position);
         });
     }
 
     public void showDialogPrompt(CodeLine codeLine, int position){
-        CodeBlockDetailDialog codeBlockDetailDialog = new CodeBlockDetailDialog(appCompatActivity, codeLine);
+        CodeBlockDetailDialog codeBlockDetailDialog = new CodeBlockDetailDialog(appCompatActivity, codeLine, position);
         codeBlockDetailDialog.show();
     }
 

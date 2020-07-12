@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true">
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/codeblock_detail_card"
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|center_vertical"
             android:layout_margin="@dimen/unit1"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="@dimen/unit4"
             android:visibility="visible">
 
@@ -33,10 +33,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/unit4"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:textSize="@dimen/unit16"
                 tool:text="background" />
+
+            <View
+                android:id="@+id/codedetail_color_box"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/unit20"
+                android:layout_marginRight="@dimen/unit20"
+                android:layout_gravity="center"
+                tool:background="@color/colorAccent" />
 
         </LinearLayout>
 
@@ -49,22 +58,22 @@
             android:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/bar1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/unit8">
 
                 <TextView
-                    android:id="@+id/color_rval"
+                    android:id="@+id/seek1Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0" />
 
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/color_r"
+                    android:id="@+id/seek1"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:max="255"
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
@@ -77,51 +86,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/bar2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/unit8">
 
                 <TextView
-                    android:id="@+id/color_gval"
+                    android:id="@+id/seek2Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0" />
 
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/color_g"
+                    android:id="@+id/seek2"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:max="255"
-                    android:progress="5" />
-
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="@dimen/unit20"
-                    android:layout_height="@dimen/unit20"
-                    android:layout_marginLeft="@dimen/unit3"
-                    android:tint="@color/textColorDark"
-                    app:srcCompat="@drawable/ic_save" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/unit8">
-
-                <TextView
-                    android:id="@+id/color_bval"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0" />
-
-                <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/color_b"
-                    android:layout_width="@dimen/unit160"
-                    android:layout_height="wrap_content"
-                    android:max="255"
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
@@ -133,122 +113,74 @@
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/codedetail_color_box"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/unit20"
-                android:layout_marginLeft="@dimen/unit20"
-                android:layout_marginRight="@dimen/unit20"
-                tool:background="@color/colorAccent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/shape_sliders"
-            android:layout_width="@dimen/unit200"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:orientation="vertical"
-            android:visibility="gone">
-
             <LinearLayout
+                android:id="@+id/bar3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/unit8">
 
+                <TextView
+                    android:id="@+id/seek3Val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/shape_x"
+                    android:id="@+id/seek3"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:max="500"
-                    android:progress="10" />
+                    android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:layout_width="@dimen/unit20"
                     android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3"
                     android:tint="@color/textColorDark"
                     app:srcCompat="@drawable/ic_save" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/bar4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/unit8">
 
+                <TextView
+                    android:id="@+id/seek4Val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
                 <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/shape_y"
+                    android:id="@+id/seek4"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:max="500"
-                    android:progress="10" />
+                    android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:layout_width="@dimen/unit20"
                     android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3"
                     android:tint="@color/textColorDark"
                     app:srcCompat="@drawable/ic_save" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/unit8">
-
-                <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/shape_w"
-                    android:layout_width="@dimen/unit160"
-                    android:layout_height="wrap_content"
-                    android:max="500"
-                    android:progress="10" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="@dimen/unit20"
-                    android:layout_height="@dimen/unit20"
-                    android:tint="@color/textColorDark"
-                    app:srcCompat="@drawable/ic_save" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/unit8">
-
-                <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/shape_h"
-                    android:layout_width="@dimen/unit160"
-                    android:layout_height="wrap_content"
-                    android:max="500"
-                    android:progress="10" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="@dimen/unit20"
-                    android:layout_height="@dimen/unit20"
-                    android:tint="@color/textColorDark"
-                    app:srcCompat="@drawable/ic_save" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/card_detail_ok"
         android:layout_width="@dimen/unit360"
         android:layout_height="wrap_content"
         android:layout_below="@+id/codeblock_detail_card"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/unit8"
         android:background="@drawable/btn_big_green"
-        android:clickable="true"
         android:tint="@color/colorWhite"
         app:srcCompat="@drawable/ic_ok" />
-
-
-</RelativeLayout>
+</LinearLayout>

@@ -57,17 +57,14 @@ public class CodeLineHelper {
         return codeTextArray.toArray(new String[0]);
     }
 
-    public static int[] extractRGB(CodeLine codeLine){
-        int[] colorVals = {0, 0, 0};
+    public static int[] extractValues(CodeLine codeLine){
+        int[] vals = new int[5];
         Matcher matcher = Pattern.compile("\\d+").matcher(codeLine.getInput());
         int i = 0;
         while (matcher.find()){
-            colorVals[i] = Integer.valueOf(matcher.group());
+            vals[i] = Integer.valueOf(matcher.group());
             i++;
-            if (i > 2){
-                break;
-            }
         }
-        return colorVals;
+        return vals;
     }
 }

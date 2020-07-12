@@ -51,38 +51,73 @@ public class Utils {
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();
 
-    public static final String[] command_array_en =
-            {"fill", "stroke", "background",
-                    "ellipse", "rectangle", "triangle", "line", "text", "ghost animation",
-                    "define function:", "end", "call", "new variable",
-                    "increase value", "decrease value", "set new value",
-                    "if:", "else", "loop:",
-                    "random number", "translate", "rotate"};
-
-    public static final String[] command_array_tr =
-            {"doldur", "kenar", "arkaplan",
-                    "elips", "dörtgen", "üçgen", "çizgi", "yazı", "hayalet animasyonu",
-                    "fonksiyon tanımla:", "bitir", "çağır:", "değişken tanımla",
-                    "değerini artır", "değerini azalt", "değer ata",
-                    "eğer:", "değilse", "tekrarla:",
-                    "rastgele sayı", "ötele", "döndür"};
-
     public static final String[] command_colors =
             {"#EEF6E8", "#EEF6E8", "#EEF6E8",
                     "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB", "#FFFDEB",
                     "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4",
-                    "#F4E9F4", "#F4E9F4","#F4E9F4",
+                    "#F4E9F4", "#F4E9F4", "#F4E9F4",
                     "#F2E9E9", "#F2E9E9", "#F2E9E9",
                     "#F4E9F4", "#EEFAFF", "#EEFAFF"
             };
 
-    public static final String[] command_types =
-            {"color", "color", "color",
-                    "shape", "shape", "shape", "shape", "shape", "shape",
-                    "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4", "#F4E9F4","#F4E9F4",
-                    "#F2E9E9", "#F2E9E9", "#F2E9E9",
-                    "#F4E9F4", "#EEFAFF", "#EEFAFF"
-            };
+    public static final String[] command_array_en =
+            {"fill", "stroke", "background",
+                    "ellipse", "rectangle", "triangle", "line", "text",
+                    "ghost animation", "translate",
+                    "rotate:", "define function:", "call:", "loop:", "if:",
+                    "new variable", "increase value", "decrease value", "set value", "random number",
+                    "else", "end"};
+
+    public static final String[] command_array_tr =
+            {"doldur", "kenar", "arkaplan",
+                    "elips", "dörtgen", "üçgen", "çizgi", "yazı",
+                    "hayalet animasyonu", "ötele",
+                    "döndür:", "fonksiyon tanımla:", "çağır:", "tekrarla:", "eğer:",
+                    "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı",
+                    "değilse", "bitir"};
+
+
+    public static final String[] rgb_commands = {
+            // english
+            "fill", "stroke", "background",
+            // turkish
+            "doldur", "kenar", "arkaplan"
+    };
+
+    public static final String[] xywh_commands = {
+            // english
+            "ellipse", "rectangle", "triangle", "line",
+            // turkish
+            "elips", "dörtgen", "üçgen", "çizgi"
+    };
+
+    public static final String[] xy_commands = {
+            // english
+            "ghost animation", "translate",
+            // turkish
+            "hayalet animasyonu", "ötele"
+    };
+
+    public static final String[] x_commands = {
+            // english
+            "rotate:", "define function:", "call:", "loop:", "if:",
+            // turkish
+            "döndür:", "fonksiyon tanımla:", "çağır:", "tekrarla:", "eğer:",
+    };
+
+    public static final String[] nv_commands = {
+            // english
+            "new variable", "increase value", "decrease value", "set value", "random number",
+            // turkish
+            "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı"
+    };
+
+    public static final String[] end_commands = {
+            // english
+            "else", "end",
+            // turkish
+            "değilse", "bitir"
+    };
 
     public static void createTLModel(AppCompatActivity appCompatActivity) {
         tlModel = new TransferLearningModelWrapper(appCompatActivity);

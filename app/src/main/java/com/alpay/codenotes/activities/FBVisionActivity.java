@@ -169,7 +169,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     }
 
     public void refreshCodeBlockRecyclerView(int position) {
-        codeBlockViewAdapter = new CodeBlockViewAdapter(this, codeList);
+        codeBlockViewAdapter = new CodeBlockViewAdapter(this);
         blocksRecyclerView.setHasFixedSize(true);
         blocksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         blocksRecyclerView.setItemAnimator(new DefaultItemAnimator());
