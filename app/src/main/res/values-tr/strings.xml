@@ -13,6 +13,7 @@
     <string name="add_function">Fonksiyonu Kaydet</string>
     <string name="save_program">Programı Kaydet</string>
     <string name="save_program_sub">Programın İsmini Gir</string>
+    <string name="variable_name">Değişken İsmi</string>
 
     <!-- Dependencies -->
     <string name="project_website">Proje Web sitesi:</string>

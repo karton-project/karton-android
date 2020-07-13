@@ -33,6 +33,6 @@
     <color name="command_shape">#FFFDEB</color>
     <color name="command_def">#F4E9F4</color>
     <color name="command_control">#F2E9E9</color>
-    <color name="command_move">#EEFAFF</color>
+    <color name="command_motion">#EEFAFF</color>
 
 </resources>

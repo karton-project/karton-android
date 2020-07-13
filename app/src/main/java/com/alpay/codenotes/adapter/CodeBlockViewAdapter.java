@@ -36,7 +36,7 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
 
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
-        holder.mTitle.setText(codeList.get(position).getCommand() + " " + codeList.get(position).getInput());
+        holder.mTitle.setText(codeList.get(position).getCommand().trim() + " " + codeList.get(position).getInput());
         holder.mCardView.setBackgroundTintList(appCompatActivity.getResources().getColorStateList(R.color.command_color));
         holder.mCardView.setOnClickListener(v -> {
             showDialogPrompt(codeList.get(position), position);

@@ -1,10 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <style name="icon_home">
@@ -62,13 +61,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="button_learn">
-        <item name="android:background">@drawable/learn_button_shape</item>
+    <style name="button_learn" parent="@style/Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/colorLearnLight</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="button_program">
-        <item name="android:background">@drawable/learn_button_shape</item>
+    <style name="button_program" parent="@style/Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/colorLearnLight</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/unit24</item>

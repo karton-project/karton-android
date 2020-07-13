@@ -1,6 +1,5 @@
 package com.alpay.codenotes.models;
 
-import com.alpay.codenotes.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
@@ -21,6 +20,8 @@ public class CodeLine {
         RGB,
         @SerializedName("NV")
         NV,
+        @SerializedName("N")
+        N,
         @SerializedName("END")
         END,
         @SerializedName("NONE")
@@ -30,19 +31,23 @@ public class CodeLine {
     public CodeLine(String command, String input) {
         this.command = command;
         this.input = input;
-        if (Arrays.asList(Utils.x_commands).contains(command.trim())){
+        if (Arrays.asList(CodeLineHelper.x_commands).contains(command.trim())) {
             this.type = Type.X;
-        }else if (Arrays.asList(Utils.xy_commands).contains(command.trim())){
+        } else if (Arrays.asList(CodeLineHelper.xy_commands).contains(command.trim())) {
             this.type = Type.XY;
-        }else if (Arrays.asList(Utils.xywh_commands).contains(command.trim())){
+        } else if (Arrays.asList(CodeLineHelper.xywh_commands).contains(command.trim())) {
             this.type = Type.XYWH;
-        }else if (Arrays.asList(Utils.rgb_commands).contains(command.trim())){
+        } else if (Arrays.asList(CodeLineHelper.rgb_commands).contains(command.trim())) {
             this.type = Type.RGB;
-        }else if (Arrays.asList(Utils.nv_commands).contains(command.trim())){
+        } else if (Arrays.asList(CodeLineHelper.nv_commands).contains(command.trim())) {
             this.type = Type.NV;
-        }else if (Arrays.asList(Utils.end_commands).contains(command.trim())){
+            if (Arrays.asList(CodeLineHelper.def_commands).contains(command.trim()))
+                CodeLineHelper.varNames.add(getVarName().trim());
+        } else if (Arrays.asList(CodeLineHelper.n_commands).contains(command.trim())) {
+            this.type = Type.N;
+        } else if (Arrays.asList(CodeLineHelper.end_commands).contains(command.trim())) {
             this.type = Type.END;
-        }else{
+        } else {
             this.type = Type.NONE;
         }
     }
@@ -69,5 +74,16 @@ public class CodeLine {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getVarName() {
+        try {
+            String substr = this.input.substring(this.input.indexOf("n:") + 2);
+            substr = substr.substring(0, substr.indexOf("v:"));
+            return substr;
+        } catch (StringIndexOutOfBoundsException e) {
+            this.input = "n: v: ";
+            return "";
+        }
     }
 }

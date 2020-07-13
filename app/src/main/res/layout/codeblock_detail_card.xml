@@ -32,8 +32,8 @@
                 style="@style/text_dark_bold_large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit4"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/unit4"
                 android:gravity="center"
                 android:textSize="@dimen/unit16"
                 tool:text="background" />
@@ -42,9 +42,9 @@
                 android:id="@+id/codedetail_color_box"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/unit20"
                 android:layout_marginRight="@dimen/unit20"
-                android:layout_gravity="center"
                 tool:background="@color/colorAccent" />
 
         </LinearLayout>
@@ -58,6 +58,31 @@
             android:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/bar0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="n:" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/varNameET"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/variable_name" />
+
+                <View
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/bar1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +93,26 @@
                     android:id="@+id/seek1Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0" />
+
+                <HorizontalScrollView
+                    android:id="@+id/varChipsScroll1"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/unit8"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:scrollbars="none"
+                    android:visibility="gone">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/varChipGroup1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="@dimen/unit4"
+                        app:singleSelection="true" />
+
+                </HorizontalScrollView>
 
                 <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/seek1"
@@ -77,6 +121,7 @@
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bar1VarButton"
                     android:layout_width="@dimen/unit20"
                     android:layout_height="@dimen/unit20"
                     android:layout_marginLeft="@dimen/unit3"
@@ -96,7 +141,26 @@
                     android:id="@+id/seek2Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0" />
+
+                <HorizontalScrollView
+                    android:id="@+id/varChipsScroll2"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/unit8"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:scrollbars="none"
+                    android:visibility="gone">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/varChipGroup2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="@dimen/unit4"
+                        app:singleSelection="true" />
+
+                </HorizontalScrollView>
 
                 <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/seek2"
@@ -105,6 +169,7 @@
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bar2VarButton"
                     android:layout_width="@dimen/unit20"
                     android:layout_height="@dimen/unit20"
                     android:layout_marginLeft="@dimen/unit3"
@@ -124,7 +189,26 @@
                     android:id="@+id/seek3Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0" />
+
+                <HorizontalScrollView
+                    android:id="@+id/varChipsScroll3"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/unit8"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:scrollbars="none"
+                    android:visibility="gone">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/varChipGroup3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="@dimen/unit4"
+                        app:singleSelection="true" />
+
+                </HorizontalScrollView>
 
                 <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/seek3"
@@ -133,8 +217,9 @@
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bar3VarButton"
                     android:layout_width="@dimen/unit20"
-                    android:layout_height="@dimen/unit20"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/unit3"
                     android:tint="@color/textColorDark"
                     app:srcCompat="@drawable/ic_save" />
@@ -152,7 +237,26 @@
                     android:id="@+id/seek4Val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0" />
+
+                <HorizontalScrollView
+                    android:id="@+id/varChipsScroll4"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/unit8"
+                    android:layout_marginBottom="@dimen/unit8"
+                    android:scrollbars="none"
+                    android:visibility="gone">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/varChipGroup4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="@dimen/unit4"
+                        app:singleSelection="true" />
+
+                </HorizontalScrollView>
 
                 <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/seek4"
@@ -161,6 +265,7 @@
                     android:progress="5" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bar4VarButton"
                     android:layout_width="@dimen/unit20"
                     android:layout_height="@dimen/unit20"
                     android:layout_marginLeft="@dimen/unit3"

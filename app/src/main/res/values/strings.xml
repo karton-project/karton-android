@@ -14,6 +14,7 @@
     <string name="add_function">Save Function</string>
     <string name="save_program">Save Program</string>
     <string name="save_program_sub">Enter the program name</string>
+    <string name="variable_name">Variable Name</string>
 
     <!-- Dependencies -->
     <string name="project_website">Project Website:</string>
