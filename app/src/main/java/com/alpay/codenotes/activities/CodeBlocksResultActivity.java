@@ -30,6 +30,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
     private boolean isFlappy = false;
     private final Handler mHandler = new Handler();
     private final Launcher mLauncher = new Launcher();
+
     private class Launcher implements Runnable {
         @Override
         public void run() {
@@ -44,12 +45,12 @@ public class CodeBlocksResultActivity extends BaseActivity {
     LinearLayout errorLayout;
 
     @OnClick(R.id.back_code_button)
-    public void backToProgramming(){
+    public void backToProgramming() {
         super.onBackPressed();
     }
 
     @OnClick(R.id.save_code_button)
-    public void saveProgram(){
+    public void saveProgram() {
         SaveProgramDialog saveProgramDialog = new SaveProgramDialog(this);
         saveProgramDialog.show();
     }
@@ -81,7 +82,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                     if (url.equals(failingUrl)) {
                         view.setVisibility(View.GONE);
                         errorLayout.setVisibility(View.VISIBLE);
@@ -89,13 +90,13 @@ public class CodeBlocksResultActivity extends BaseActivity {
                     super.onReceivedError(view, errorCode, description, failingUrl);
                 }
             });
-            if (isFlappy){
+            if (isFlappy) {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 url = Constants.FLAPPY;
-            } else{
-                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")){
+            } else {
+                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
                     url = Constants.EN_CODE;
-                }else{
+                } else {
                     url = Constants.TR_CODE;
                 }
             }
@@ -122,16 +123,12 @@ public class CodeBlocksResultActivity extends BaseActivity {
             codeLine = codeLine.replace("\n", "").replace("\r", "");
             evalCode("addCodeInput('" + codeLine + "');");
         }
-        if (!isFlappy){
+        if (!isFlappy) {
             evalCode("runP5Code();");
         }
     }
 
     public void evalCode(String code) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            webView.evaluateJavascript(code, null);
-        } else {
-            webView.loadUrl("javascript: (function () {" + code + "}());");
-        }
+        webView.loadUrl("javascript: (function () {" + code + "}());");
     }
 }

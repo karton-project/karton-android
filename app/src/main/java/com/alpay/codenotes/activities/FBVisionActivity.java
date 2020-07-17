@@ -78,13 +78,14 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         Toast.makeText(this, "Added a new random code!", Toast.LENGTH_SHORT).show();
     }
 
-    public void addCodeToCodeList(String code){
+    public void addCodeToCodeList(String code) {
         if (code != null) {
-            if (code.contains("\n")){
-                for (String line : code.split("\\r?\\n")){
-                    codeList.add(CodeLineHelper.codeToCodeLine(this, line));
+            if (code.contains("\n")) {
+                for (String line : code.split("\\r?\\n")) {
+                    if (line.length() > 3)
+                        codeList.add(CodeLineHelper.codeToCodeLine(this, line.trim()));
                 }
-            }else {
+            } else {
                 codeList.add(CodeLineHelper.codeToCodeLine(this, code));
             }
             refreshCodeBlockRecyclerView(codeList.size() - 1);
@@ -118,7 +119,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             if (bundle.getStringArray(BUNDLE_CODE_KEY) != null) {
                 String[] p5code = bundle.getStringArray(BUNDLE_CODE_KEY);
                 for (String code : p5code) {
-                    codeList.add(CodeLineHelper.codeToCodeLine(this,code));
+                    codeList.add(CodeLineHelper.codeToCodeLine(this, code));
                 }
             }
             if (bundle.getString(NavigationManager.BUNDLE_KEY) != null) {
