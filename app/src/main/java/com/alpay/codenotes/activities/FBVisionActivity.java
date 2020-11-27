@@ -44,6 +44,7 @@ import butterknife.OnClick;
 import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 
 public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, ShakeDetector.Listener {
@@ -51,8 +52,9 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private static final String TAG = FBVisionActivity.class.getSimpleName();
     private static final int PERMISSION_REQUESTS = 1;
     private boolean isFlappy = false;
+    private boolean turtleMode = false;
 
-    private com.alpay.codenotes.vision.CameraSource cameraSource = null;
+    private CameraSource cameraSource;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
     private CodePool codePool = new CodePool();
@@ -68,8 +70,12 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     }
 
     private String checkAndCorrectCode(String code) {
-        CodeLine codeLine = CodeLineHelper.codeToCodeLine(this, code);
-        return CodeLineHelper.codeLineToCode(codeLine);
+        ArrayList<CodeLine> codeLines = new ArrayList<>();
+        String[] lines = code.split("\\r?\\n");
+        for (String line: lines){
+            codeLines.add(CodeLineHelper.codeToCodeLine(this, line));
+        }
+        return CodeLineHelper.programToCodeText(codeLines);
     }
 
     @Override
@@ -100,6 +106,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         Intent intent = new Intent(this, CodeBlocksResultActivity.class);
         intent.putExtra(BUNDLE_CODE_KEY, p5Code);
         intent.putExtra(BUNDLE_FLAPPY_KEY, isFlappy);
+        intent.putExtra(BUNDLE_TURTLE, turtleMode);
         startActivity(intent);
     }
 
@@ -127,6 +134,9 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             }
             if (bundle.getBoolean(BUNDLE_FLAPPY_KEY)) {
                 isFlappy = true;
+            }
+            if (bundle.getBoolean(BUNDLE_TURTLE)) {
+                turtleMode = true;
             }
         }
 
@@ -243,9 +253,9 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (cameraSource != null) {
+        /*if (cameraSource != null) {
             cameraSource.release();
-        }
+        }*/
     }
 
     private String[] getRequiredPermissions() {

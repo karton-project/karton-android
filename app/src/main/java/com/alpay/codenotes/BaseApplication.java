@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
 import com.alpay.codenotes.models.User;
+import com.alpay.codenotes.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class BaseApplication extends Application {

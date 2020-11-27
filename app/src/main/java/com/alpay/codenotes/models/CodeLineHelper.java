@@ -25,7 +25,9 @@ public class CodeLineHelper {
             "ghost animation", "translate",
             "rotate:", "define function:", "call:", "loop:", "if:",
             "new variable", "increase value", "decrease value", "set value", "random number",
-            "else", "end"
+            "else", "end",
+            "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
+            "pen down", "pen up", "hide pen", "show pen", "clear"
     };
 
     public static final String[] command_array_tr = {
@@ -34,7 +36,23 @@ public class CodeLineHelper {
             "hayalet animasyonu", "ötele",
             "döndür:", "fonksiyon tanımla:", "çağır:", "tekrarla:", "eğer:",
             "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı",
-            "değilse", "bitir"
+            "değilse", "bitir",
+            "ileri", "sağa", "sola", "tekrarla", "başlangıç x:", "başlangıç y:", "genişlik", "renk",
+            "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
+    };
+
+    public static final String[] turtle_none_commands = {
+            // english
+            "pen down", "pen up", "hide pen", "show pen", "clear",
+            // turkish
+            "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
+    };
+
+    public static final String[] turtle_num_commands = {
+            // english
+            "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
+            // turkish
+            "ileri", "sağa", "sola", "tekrarla", "başlangıç x:", "başlangıç y:", "genişlik", "renk",
     };
 
 
@@ -97,10 +115,15 @@ public class CodeLineHelper {
     public static CodeLine codeToCodeLine(AppCompatActivity appCompatActivity, String code){
         String input = "";
         String searchResult = "";
+        String raw_command = "";
         try {
             if (code.length() > 3){
                 code = code.toLowerCase();
-                String raw_command = code.substring(0, code.indexOf(":"));
+                if (code.contains(":")){
+                    raw_command = code.substring(0, code.indexOf(":"));
+                } else {
+                    raw_command = code;
+                }
                 String[] parsedCode = code.split(" ");
                 if(Utils.isENCoding(appCompatActivity))
                     searchResult = FuzzySearch.extractOne(raw_command, Arrays.asList(command_array_en)).getString();
@@ -112,7 +135,7 @@ public class CodeLineHelper {
                 }
             }
         }catch (Exception e){
-            Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_error), Toast.LENGTH_SHORT).show();
+            Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
         }
         return new CodeLine(searchResult, input);
     }

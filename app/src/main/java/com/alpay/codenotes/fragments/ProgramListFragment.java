@@ -41,6 +41,7 @@ public class ProgramListFragment extends Fragment {
     private GroupViewAdapter groupViewAdapter;
     private Unbinder unbinder;
     private boolean isExampleButtonClicked = false;
+    private boolean turtleMode = false;
 
     @BindView(R.id.program_recycler_view)
     RecyclerView recyclerView;
@@ -60,6 +61,9 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.open_transfer)
     FloatingActionButton transferLearningButton;
 
+    @BindView(R.id.turtle_mode)
+    FloatingActionButton turtleModeButton;
+
     @BindView(R.id.new_program_button)
     FloatingActionButton newProgramButton;
 
@@ -71,8 +75,8 @@ public class ProgramListFragment extends Fragment {
 
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
-        CodeLineHelper.codeList = new ArrayList<>();
         Intent intent = new Intent(getActivity(), FBVisionActivity.class);
+        intent.putExtra(NavigationManager.BUNDLE_TURTLE, turtleMode);
         startActivity(intent);
     }
 
@@ -81,15 +85,32 @@ public class ProgramListFragment extends Fragment {
         NavigationManager.openTransferLearning((AppCompatActivity) getActivity());
     }
 
+    @OnClick(R.id.turtle_mode)
+    public void switchToTurtleMode() {
+        if (!turtleMode) {
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+            newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+            turtleModeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+            transferLearningButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+            turtleMode = true;
+        } else {
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            turtleModeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            transferLearningButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            turtleMode = false;
+        }
+    }
+
     @OnClick(R.id.show_examples)
-    public void showExamples(){
-        if (!isExampleButtonClicked){
+    public void showExamples() {
+        if (!isExampleButtonClicked) {
             generateExampleListFromGSON();
             showExamplesButton.setImageResource(R.drawable.ic_close);
             showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorError)));
             newProgramButton.hide();
             transferLearningButton.hide();
-        }else{
+        } else {
             generateProgramListFromGSON();
             showExamplesButton.setImageResource(R.drawable.ic_menu);
             showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));

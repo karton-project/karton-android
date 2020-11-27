@@ -24,6 +24,10 @@ public class CodeLine {
         N,
         @SerializedName("END")
         END,
+        @SerializedName("TURTLE_NONE")
+        TURTLE_NONE,
+        @SerializedName("TURTLE_NUM")
+        TURTLE_NUM,
         @SerializedName("NONE")
         NONE
     }
@@ -47,6 +51,10 @@ public class CodeLine {
             this.type = Type.N;
         } else if (Arrays.asList(CodeLineHelper.end_commands).contains(command.trim())) {
             this.type = Type.END;
+        } else if (Arrays.asList(CodeLineHelper.turtle_none_commands).contains(command.trim())) {
+            this.type = Type.TURTLE_NONE;
+        } else if (Arrays.asList(CodeLineHelper.turtle_num_commands).contains(command.trim())) {
+            this.type = Type.TURTLE_NUM;
         } else {
             this.type = Type.NONE;
         }

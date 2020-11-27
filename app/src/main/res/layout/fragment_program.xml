@@ -16,12 +16,23 @@
         app:srcCompat="@drawable/ic_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/open_transfer"
+        android:id="@+id/turtle_mode"
         style="@style/button_floating_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/show_examples"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="7dp"
+        app:srcCompat="@drawable/ic_turtle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/open_transfer"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/turtle_mode"
         android:layout_marginTop="10dp"
         android:layout_marginRight="7dp"
         app:srcCompat="@drawable/ic_photo_camera" />

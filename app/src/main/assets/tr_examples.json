@@ -243,7 +243,7 @@
         "name": "On İki Araba",
         "code": [
           {
-            "command": "fonksiyon tanımla:",
+            "command": "fonksiyon tanımla :",
             "input": "araba"
           },
           {
@@ -275,7 +275,7 @@
             "input": "12"
           },
           {
-            "command": "çağır",
+            "command": "çağır:",
             "input": "araba"
           },
           {

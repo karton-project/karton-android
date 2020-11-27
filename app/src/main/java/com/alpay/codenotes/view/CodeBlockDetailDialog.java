@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -292,6 +291,16 @@ public class CodeBlockDetailDialog extends Dialog {
             sb1.setMax(600);
             sb1.setProgress(vals[0]);
             seek1Val.setText("x: " + String.valueOf(vals[0]));
+        } else if (codeLine.getType() == CodeLine.Type.TURTLE_NUM) {
+            bar0.setVisibility(View.GONE);
+            bar1.setVisibility(View.VISIBLE);
+            bar2.setVisibility(View.GONE);
+            bar3.setVisibility(View.GONE);
+            bar4.setVisibility(View.GONE);
+            seek1 = vals[0];
+            sb1.setMax(100);
+            sb1.setProgress(vals[0]);
+            seek1Val.setText(" : " + String.valueOf(vals[0]));
         } else if (codeLine.getType() == CodeLine.Type.NV) {
             bar0.setVisibility(View.VISIBLE);
             bar1.setVisibility(View.VISIBLE);
@@ -310,6 +319,12 @@ public class CodeBlockDetailDialog extends Dialog {
             bar3.setVisibility(View.GONE);
             bar4.setVisibility(View.GONE);
             varNameET.setText(codeLine.getInput());
+        } else {
+            bar0.setVisibility(View.GONE);
+            bar1.setVisibility(View.GONE);
+            bar2.setVisibility(View.GONE);
+            bar3.setVisibility(View.GONE);
+            bar4.setVisibility(View.GONE);
         }
 
     }
@@ -335,6 +350,10 @@ public class CodeBlockDetailDialog extends Dialog {
 
     private void changeX() {
         seek1Val.setText("x: " + String.valueOf(seek1));
+    }
+
+    private void changeTurtleNum() {
+        seek1Val.setText(" : " + String.valueOf(seek1));
     }
 
     private void changeNV() {
@@ -381,6 +400,9 @@ public class CodeBlockDetailDialog extends Dialog {
             }
             if (codeLine.getType() == CodeLine.Type.X) {
                 changeX();
+            }
+            if (codeLine.getType() == CodeLine.Type.TURTLE_NUM) {
+                changeTurtleNum();
             }
             if (codeLine.getType() == CodeLine.Type.NV) {
                 changeNV();

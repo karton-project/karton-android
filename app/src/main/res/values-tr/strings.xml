@@ -105,6 +105,7 @@
     <string name="sample_count">Toplam 20 Örnek Ekle</string>
     <string name="switch_to_inference_hint">Eğitim başladı, artık tanıma moduna geçebilirsin.</string>
     <string name="save_program_as_image"><u>... ya da kamera ile kaydet</u></string>
+    <string name="unknown_code_error">Kart-ON Kodu Algılanamadı</string>
 
 
 </resources>

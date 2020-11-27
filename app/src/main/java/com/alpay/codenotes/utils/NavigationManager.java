@@ -24,6 +24,7 @@ public class NavigationManager {
     public static final String BUNDLE_KEY = "bundlekey";
     public static final String BUNDLE_CODE_KEY = "codekey";
     public static final String BUNDLE_FLAPPY_KEY = "flappykey";
+    public static final String BUNDLE_TURTLE = "turtle";
     public static final String GAMES = "games";
     public static final String CONTENT = "content";
     public static final String SKETCH = "sketch";
