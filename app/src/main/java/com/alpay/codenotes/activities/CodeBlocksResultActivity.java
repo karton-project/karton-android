@@ -124,7 +124,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     public void runCode() {
         for (String codeLine : p5Code) {
-            codeLine = codeLine.replace("\n", "").replace("\r", "");
+            codeLine = codeLine.replace("#", "");
             evalCode("addCodeInput('" + codeLine + "');");
         }
         if (!isFlappy) {

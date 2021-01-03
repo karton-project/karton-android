@@ -51,20 +51,19 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
     public void onBindViewHolder(final ProgramViewHolder holder, int position) {
         String p5Code = "";
         for (CodeLine codeLine : mProgramList.get(position).getCode()) {
-            p5Code = p5Code + CodeLineHelper.codeLineToCode(codeLine);
+            p5Code = p5Code + CodeLineHelper.prettyPrintCodeLine(codeLine);
         }
         holder.mTitle.setText(mProgramList.get(position).getName());
         holder.mDetail.setText(p5Code);
-        String finalP5Code = p5Code;
         holder.mRunButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, CodeBlocksResultActivity.class);
-            String[] p5CodeArr = finalP5Code.split("\n");
+            String[] p5CodeArr = (String[]) mProgramList.get(position).getCodeArray();
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
-            String[] p5CodeArr = finalP5Code.split("\n");
+            String[] p5CodeArr = (String[]) mProgramList.get(position).getCodeArray();
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });

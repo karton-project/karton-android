@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.models.CodeLine;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.view.CodeBlockDetailDialog;
 
 import java.util.Collections;
@@ -36,7 +37,7 @@ public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHold
 
     @Override
     public void onBindViewHolder(final CodeBlockViewHolder holder, int position) {
-        holder.mTitle.setText(codeList.get(position).getCommand().trim() + " " + codeList.get(position).getInput());
+        holder.mTitle.setText(CodeLineHelper.prettyPrintCodeLine(codeList.get(position)));
         holder.mCardView.setBackgroundTintList(appCompatActivity.getResources().getColorStateList(R.color.command_color));
         holder.mCardView.setOnClickListener(v -> {
             showDialogPrompt(codeList.get(position), position);

@@ -33,7 +33,7 @@ public class SaveProgramDialog extends Dialog implements
         String programName = editText.getText().toString().trim().replaceAll(" +", " ");
         for (CodeLine codeLine : CodeLineHelper.codeList){
             if (codeLine.getCommand().contains("group")){
-                groupId = codeLine.getInput();
+                groupId = codeLine.getVarName();
             }
         }
         GroupHelper.saveProgram(appCompatActivity, GroupHelper.groupId, programName, CodeLineHelper.codeList);

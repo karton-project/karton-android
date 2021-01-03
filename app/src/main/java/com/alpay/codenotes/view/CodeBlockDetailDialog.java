@@ -2,7 +2,6 @@ package com.alpay.codenotes.view;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.graphics.ColorUtils;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
@@ -39,28 +40,16 @@ public class CodeBlockDetailDialog extends Dialog {
     SeekBar sb1;
     @BindView(R.id.seek2)
     SeekBar sb2;
-    @BindView(R.id.seek3)
-    SeekBar sb3;
-    @BindView(R.id.seek4)
-    SeekBar sb4;
     @BindView(R.id.bar0)
     LinearLayout bar0;
     @BindView(R.id.bar1)
     LinearLayout bar1;
     @BindView(R.id.bar2)
     LinearLayout bar2;
-    @BindView(R.id.bar3)
-    LinearLayout bar3;
-    @BindView(R.id.bar4)
-    LinearLayout bar4;
     @BindView(R.id.seek1Val)
     TextView seek1Val;
     @BindView(R.id.seek2Val)
     TextView seek2Val;
-    @BindView(R.id.seek3Val)
-    TextView seek3Val;
-    @BindView(R.id.seek4Val)
-    TextView seek4Val;
     @BindView(R.id.varNameET)
     EditText varNameET;
     @BindView(R.id.codedetail_color_box)
@@ -69,18 +58,10 @@ public class CodeBlockDetailDialog extends Dialog {
     HorizontalScrollView varChipsScroll1;
     @BindView(R.id.varChipsScroll2)
     HorizontalScrollView varChipsScroll2;
-    @BindView(R.id.varChipsScroll3)
-    HorizontalScrollView varChipsScroll3;
-    @BindView(R.id.varChipsScroll4)
-    HorizontalScrollView varChipsScroll4;
     @BindView(R.id.varChipGroup1)
     ChipGroup chipGroup1;
     @BindView(R.id.varChipGroup2)
     ChipGroup chipGroup2;
-    @BindView(R.id.varChipGroup3)
-    ChipGroup chipGroup3;
-    @BindView(R.id.varChipGroup4)
-    ChipGroup chipGroup4;
 
     @OnClick(R.id.bar1VarButton)
     public void showVariableChips1() {
@@ -134,72 +115,15 @@ public class CodeBlockDetailDialog extends Dialog {
         }
     }
 
-    @OnClick(R.id.bar3VarButton)
-    public void showVariableChips3() {
-        if (CodeLineHelper.varNames.size() > 0) {
-            sb3.setVisibility(View.GONE);
-            varChipsScroll3.setVisibility(View.VISIBLE);
-            findViewById(R.id.bar3VarButton).setVisibility(View.INVISIBLE);
-            if (chipGroup3.getChildCount() < CodeLineHelper.varNames.size()) {
-                for (int i = chipGroup3.getChildCount(); i < CodeLineHelper.varNames.size(); i++) {
-                    final String varName = CodeLineHelper.varNames.get(i);
-                    Chip chip = new Chip(chipGroup3.getContext());
-                    chip.setText(varName);
-                    chip.setCheckable(true);
-                    chip.setClickable(true);
-                    chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        if (isChecked) {
-                            fill1 = varName;
-                        }
-                    });
-                    chipGroup3.addView(chip);
-                }
-            }
-        } else {
-            Toast.makeText(c, "No var", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @OnClick(R.id.bar4VarButton)
-    public void showVariableChips4() {
-        if (CodeLineHelper.varNames.size() > 0) {
-            sb4.setVisibility(View.GONE);
-            varChipsScroll4.setVisibility(View.VISIBLE);
-            findViewById(R.id.bar4VarButton).setVisibility(View.INVISIBLE);
-            if (chipGroup4.getChildCount() < CodeLineHelper.varNames.size()) {
-                for (int i = chipGroup4.getChildCount(); i < CodeLineHelper.varNames.size(); i++) {
-                    final String varName = CodeLineHelper.varNames.get(i);
-                    Chip chip = new Chip(chipGroup4.getContext());
-                    chip.setText(varName);
-                    chip.setCheckable(true);
-                    chip.setClickable(true);
-                    chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        if (isChecked) {
-                            fill1 = varName;
-                        }
-                    });
-                    chipGroup4.addView(chip);
-                }
-            }
-        } else {
-            Toast.makeText(c, "No var", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @OnClick(R.id.card_detail_ok)
     public void changeInputVals() {
         fill1 = (fill1.length() > 1) ? fill1 : String.valueOf(seek1);
         fill2 = (fill2.length() > 1) ? fill2 : String.valueOf(seek2);
-        fill3 = (fill3.length() > 1) ? fill3 : String.valueOf(seek3);
-        fill4 = (fill4.length() > 1) ? fill4 : String.valueOf(seek4);
-        if (codeLine.getType() == CodeLine.Type.RGB) {
-            codeLine.setInput("r: " + fill1 + " g: " + fill2 + " b: " + fill3);
-        } else if (codeLine.getType() == CodeLine.Type.XYWH) {
-            codeLine.setInput("x: " + fill1 + " y: " + fill2 + " w: " + fill3 + " h: " + fill4);
-        } else if (codeLine.getType() == CodeLine.Type.XY) {
-            codeLine.setInput("x: " + fill1 + " y: " + fill2);
+        if (codeLine.getType() == CodeLine.Type.XY) {
+            codeLine.setInput(fill1, fill2);
         } else if (codeLine.getType() == CodeLine.Type.NV) {
-            codeLine.setInput("n: " + varNameET.getText().toString() + " v: " + fill1);
+            codeLine.setInput(varNameET.getText().toString(), fill1);
         }
         CodeLineHelper.codeList.set(position, codeLine);
         ((FBVisionActivity) c).refreshCodeBlockRecyclerView(position);
@@ -223,56 +147,12 @@ public class CodeBlockDetailDialog extends Dialog {
         codeTitleTW.setText(codeLine.getCommand());
         sb1.setOnSeekBarChangeListener(onSeekBarChangeListener);
         sb2.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        sb3.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        sb4.setOnSeekBarChangeListener(onSeekBarChangeListener);
 
         int[] vals = CodeLineHelper.extractValues(codeLine);
-        if (codeLine.getType() == CodeLine.Type.RGB) {
+        if (codeLine.getType() == CodeLine.Type.XY) {
             bar0.setVisibility(View.GONE);
             bar1.setVisibility(View.VISIBLE);
             bar2.setVisibility(View.VISIBLE);
-            bar3.setVisibility(View.VISIBLE);
-            bar4.setVisibility(View.GONE);
-            seek1 = vals[0];
-            seek2 = vals[1];
-            seek3 = vals[2];
-            sb1.setMax(255);
-            sb2.setMax(255);
-            sb3.setMax(255);
-            sb1.setProgress(vals[0]);
-            seek1Val.setText("r: " + String.valueOf(vals[0]));
-            sb2.setProgress(vals[1]);
-            seek2Val.setText("g: " + String.valueOf(vals[1]));
-            sb3.setProgress(vals[2]);
-            seek3Val.setText("b: " + String.valueOf(vals[2]));
-        } else if (codeLine.getType() == CodeLine.Type.XYWH) {
-            bar0.setVisibility(View.GONE);
-            bar1.setVisibility(View.VISIBLE);
-            bar2.setVisibility(View.VISIBLE);
-            bar3.setVisibility(View.VISIBLE);
-            bar4.setVisibility(View.VISIBLE);
-            seek1 = vals[0];
-            seek2 = vals[1];
-            seek3 = vals[2];
-            seek4 = vals[3];
-            sb1.setMax(600);
-            sb2.setMax(400);
-            sb3.setMax(600);
-            sb4.setMax(400);
-            sb1.setProgress(vals[0]);
-            seek1Val.setText("x: " + String.valueOf(vals[0]));
-            sb2.setProgress(vals[1]);
-            seek2Val.setText("y: " + String.valueOf(vals[1]));
-            sb3.setProgress(vals[2]);
-            seek3Val.setText("w: " + String.valueOf(vals[2]));
-            sb4.setProgress(vals[3]);
-            seek4Val.setText("h: " + String.valueOf(vals[3]));
-        } else if (codeLine.getType() == CodeLine.Type.XY) {
-            bar0.setVisibility(View.GONE);
-            bar1.setVisibility(View.VISIBLE);
-            bar2.setVisibility(View.VISIBLE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
             seek1 = vals[0];
             seek2 = vals[1];
             sb1.setMax(600);
@@ -285,18 +165,15 @@ public class CodeBlockDetailDialog extends Dialog {
             bar0.setVisibility(View.GONE);
             bar1.setVisibility(View.VISIBLE);
             bar2.setVisibility(View.GONE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
             seek1 = vals[0];
             sb1.setMax(600);
             sb1.setProgress(vals[0]);
             seek1Val.setText("x: " + String.valueOf(vals[0]));
+            colorBox.setBackgroundColor(ColorUtils.HSLToColor(new float[] {seek1, 50, 75}));
         } else if (codeLine.getType() == CodeLine.Type.TURTLE_NUM) {
             bar0.setVisibility(View.GONE);
             bar1.setVisibility(View.VISIBLE);
             bar2.setVisibility(View.GONE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
             seek1 = vals[0];
             sb1.setMax(100);
             sb1.setProgress(vals[0]);
@@ -305,8 +182,6 @@ public class CodeBlockDetailDialog extends Dialog {
             bar0.setVisibility(View.VISIBLE);
             bar1.setVisibility(View.VISIBLE);
             bar2.setVisibility(View.GONE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
             varNameET.setText(codeLine.getVarName());
             seek1 = vals[0];
             sb1.setMax(600);
@@ -316,31 +191,13 @@ public class CodeBlockDetailDialog extends Dialog {
             bar0.setVisibility(View.VISIBLE);
             bar1.setVisibility(View.GONE);
             bar2.setVisibility(View.GONE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
-            varNameET.setText(codeLine.getInput());
+            varNameET.setText(codeLine.getVarName());
         } else {
             bar0.setVisibility(View.GONE);
             bar1.setVisibility(View.GONE);
             bar2.setVisibility(View.GONE);
-            bar3.setVisibility(View.GONE);
-            bar4.setVisibility(View.GONE);
         }
 
-    }
-
-    private void changeRGB() {
-        seek1Val.setText("r: " + String.valueOf(seek1));
-        seek2Val.setText("g: " + String.valueOf(seek2));
-        seek3Val.setText("b: " + String.valueOf(seek3));
-        colorBox.setBackgroundColor(Color.rgb(seek1, seek2, seek3));
-    }
-
-    private void changeXYWH() {
-        seek1Val.setText("x: " + String.valueOf(seek1));
-        seek2Val.setText("y: " + String.valueOf(seek2));
-        seek3Val.setText("w: " + String.valueOf(seek3));
-        seek4Val.setText("h: " + String.valueOf(seek4));
     }
 
     private void changeXY() {
@@ -379,21 +236,8 @@ public class CodeBlockDetailDialog extends Dialog {
                 case R.id.seek2:
                     seek2 = progress;
                     break;
-                case R.id.seek3:
-                    seek3 = progress;
-                    break;
-                case R.id.seek4:
-                    seek4 = progress;
-                    break;
                 default:
                     break;
-
-            }
-            if (codeLine.getType() == CodeLine.Type.RGB) {
-                changeRGB();
-            }
-            if (codeLine.getType() == CodeLine.Type.XYWH) {
-                changeXYWH();
             }
             if (codeLine.getType() == CodeLine.Type.XY) {
                 changeXY();

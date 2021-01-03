@@ -35,9 +35,16 @@ public class Program {
         return code;
     }
 
+    public String[] getCodeArray() {
+        ArrayList<String> codeList = new ArrayList<String>();
+        for (CodeLine codeLine : this.code)
+            codeList.add(codeLine.getCommand() + "\n" + codeLine.getInputText());
+        return codeList.toArray(new String[0]);
+    }
+
     public String getCodeText() {
         String codeText = "";
-        for (CodeLine codeLine : this.code){
+        for (CodeLine codeLine : this.code) {
             codeText = codeText + codeLine;
         }
         return codeText;

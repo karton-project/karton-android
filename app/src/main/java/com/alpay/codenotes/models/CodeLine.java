@@ -5,19 +5,17 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Arrays;
 
 public class CodeLine {
-    String command;
-    String input;
-    Type type;
+    String command = "";
+    String[] params = {"", ""};
+    Type type = Type.NONE;
 
     public enum Type {
         @SerializedName("X")
         X,
         @SerializedName("XY")
         XY,
-        @SerializedName("XYWH")
-        XYWH,
-        @SerializedName("RGB")
-        RGB,
+        @SerializedName("S")
+        S,
         @SerializedName("NV")
         NV,
         @SerializedName("N")
@@ -32,17 +30,19 @@ public class CodeLine {
         NONE
     }
 
-    public CodeLine(String command, String input) {
+    public CodeLine() {
+
+    }
+
+    public CodeLine(String command, String[] params) {
         this.command = command;
-        this.input = input;
+        this.params = params;
         if (Arrays.asList(CodeLineHelper.x_commands).contains(command.trim())) {
             this.type = Type.X;
         } else if (Arrays.asList(CodeLineHelper.xy_commands).contains(command.trim())) {
             this.type = Type.XY;
-        } else if (Arrays.asList(CodeLineHelper.xywh_commands).contains(command.trim())) {
-            this.type = Type.XYWH;
-        } else if (Arrays.asList(CodeLineHelper.rgb_commands).contains(command.trim())) {
-            this.type = Type.RGB;
+        } else if (Arrays.asList(CodeLineHelper.s_commands).contains(command.trim())) {
+            this.type = Type.S;
         } else if (Arrays.asList(CodeLineHelper.nv_commands).contains(command.trim())) {
             this.type = Type.NV;
             if (Arrays.asList(CodeLineHelper.def_commands).contains(command.trim()))
@@ -68,12 +68,24 @@ public class CodeLine {
         this.command = command;
     }
 
-    public String getInput() {
-        return input;
+    public String[] getInput() {
+        return params;
     }
 
-    public void setInput(String input) {
-        this.input = input;
+    public void setInput(String param1) {
+        this.params[0] = param1;
+    }
+
+    public void setInput(String param1, String param2) {
+        this.params[0] = param1;
+        this.params[1] = param2;
+    }
+
+    public String getInputText() {
+        String inputText = "";
+        if (params.length > 0) inputText += this.params[0];
+        if (params.length > 1) inputText += "\n" + this.params[1];
+        return inputText;
     }
 
     public Type getType() {
@@ -85,13 +97,6 @@ public class CodeLine {
     }
 
     public String getVarName() {
-        try {
-            String substr = this.input.substring(this.input.indexOf("n:") + 2);
-            substr = substr.substring(0, substr.indexOf("v:"));
-            return substr;
-        } catch (StringIndexOutOfBoundsException e) {
-            this.input = "n: v: ";
-            return "";
-        }
+        return this.params[0];
     }
 }

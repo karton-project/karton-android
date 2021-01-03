@@ -32,12 +32,12 @@ public class TextGraphic extends GraphicOverlay.Graphic {
 
   private final Paint rectPaint;
   //private final Paint textPaint;
-  private final FirebaseVisionText.Line text;
+  private final FirebaseVisionText.TextBlock textBlock;
 
-  TextGraphic(GraphicOverlay overlay, FirebaseVisionText.Line text) {
+  TextGraphic(GraphicOverlay overlay, FirebaseVisionText.TextBlock text) {
     super(overlay);
 
-    this.text = text;
+    this.textBlock = text;
 
     rectPaint = new Paint();
     rectPaint.setColor(TEXT_COLOR);
@@ -52,12 +52,12 @@ public class TextGraphic extends GraphicOverlay.Graphic {
   /** Draws the text block annotations for position, size, and raw value on the supplied canvas. */
   @Override
   public void draw(Canvas canvas) {
-    if (text == null) {
+    if (textBlock == null) {
       throw new IllegalStateException("Attempting to draw a null text.");
     }
 
     // Draws the bounding box around the TextBlock.
-    RectF rect = new RectF(text.getBoundingBox());
+    RectF rect = new RectF(textBlock.getBoundingBox());
     rect.left = translateX(rect.left);
     rect.top = translateY(rect.top);
     rect.right = translateX(rect.right);

@@ -9,8 +9,6 @@ import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
@@ -21,9 +19,9 @@ public class CodeLineHelper {
 
     public static final String[] command_array_en = {
             "fill", "stroke", "background",
-            "ellipse", "rectangle", "triangle", "line", "text",
-            "ghost animation", "translate",
-            "rotate:", "define function:", "call:", "loop:", "if:",
+            "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
+            "rotate", "define function", "call", "loop", "if",
+            "dimension", "location", "translate",
             "new variable", "increase value", "decrease value", "set value", "random number",
             "else", "end",
             "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
@@ -32,9 +30,9 @@ public class CodeLineHelper {
 
     public static final String[] command_array_tr = {
             "doldur", "kenar", "arkaplan",
-            "elips", "dörtgen", "üçgen", "çizgi", "yazı",
-            "hayalet animasyonu", "ötele",
-            "döndür:", "fonksiyon tanımla:", "çağır:", "tekrarla:", "eğer:",
+            "elips", "dikdörtgen", "üçgen", "kukla", "şekle başla", "şekli bitir",
+            "döndür", "fonksiyon tanımla", "çağır", "tekrarla", "eğer",
+            "boyutlar", "konum", "ötele",
             "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı",
             "değilse", "bitir",
             "ileri", "sağa", "sola", "tekrarla", "başlangıç x:", "başlangıç y:", "genişlik", "renk",
@@ -56,46 +54,40 @@ public class CodeLineHelper {
     };
 
 
-    public static final String[] rgb_commands = {
+    public static final String[] x_commands = {
             // english
-            "fill", "stroke", "background",
+            "fill", "stroke", "background", "rotate", "loop",
             // turkish
-            "doldur", "kenar", "arkaplan"
-    };
-
-    public static final String[] xywh_commands = {
-            // english
-            "ellipse", "rectangle", "triangle", "line",
-            // turkish
-            "elips", "dörtgen", "üçgen", "çizgi"
+            "doldur", "kenar", "arkaplan", "döndür", "tekrarla"
     };
 
     public static final String[] xy_commands = {
             // english
-            "ghost animation", "translate",
+            "point", "translate", "dimension", "location",
             // turkish
-            "hayalet animasyonu", "ötele"
+            "nokta", "ötele", "boyutlar", "konum"
     };
 
-    public static final String[] x_commands = {
+
+    public static final String[] s_commands = {
             // english
-            "rotate:", "loop:",
+            "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
             // turkish
-            "döndür:", "tekrarla:"
+            "elips", "dikdörtgen", "üçgen", "kukla", "şekle başla", "şekli bitir"
     };
 
     public static final String[] n_commands = {
             // english
-           "define function:", "call:", "if:",
+            "define function", "call", "if", "text",
             // turkish
-           "fonksiyon tanımla:", "çağır:", "eğer:"
+            "fonksiyon tanımla", "çağır", "eğer", "yazı"
     };
 
     public static final String[] nv_commands = {
             // english
             "new variable", "increase value", "decrease value", "set value", "random number",
             // turkish
-            "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı"
+            "değişken oluştur", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı"
     };
 
     public static final String[] def_commands = {
@@ -112,60 +104,67 @@ public class CodeLineHelper {
             "değilse", "bitir"
     };
 
-    public static CodeLine codeToCodeLine(AppCompatActivity appCompatActivity, String code){
-        String input = "";
-        String searchResult = "";
-        String raw_command = "";
+    public static CodeLine codeToCodeLine(AppCompatActivity appCompatActivity, String code) {
+        String command = "";
+        String[] params = new String[0];
         try {
-            if (code.length() > 3){
+            if (code.length() > 3) {
                 code = code.toLowerCase();
-                if (code.contains(":")){
-                    raw_command = code.substring(0, code.indexOf(":"));
+                if (code.contains("\n")) {
+                    String[] parsedCode = code.split("\n");
+                    command = parsedCode[0];
+                    params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
                 } else {
-                    raw_command = code;
+                    command = code;
                 }
-                String[] parsedCode = code.split(" ");
-                if(Utils.isENCoding(appCompatActivity))
-                    searchResult = FuzzySearch.extractOne(raw_command, Arrays.asList(command_array_en)).getString();
+                if (Utils.isENCoding(appCompatActivity))
+                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_en)).getString();
                 else
-                    searchResult = FuzzySearch.extractOne(raw_command, Arrays.asList(command_array_tr)).getString();
-                String[] parsedResult = searchResult.split(" ");
-                for (int i = parsedResult.length; i< parsedCode.length; i++){
-                    input = input + parsedCode[i] + " ";
-                }
+                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_tr)).getString();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
         }
-        return new CodeLine(searchResult, input);
+        return new CodeLine(command, params);
     }
 
-    public static String codeLineToCode(CodeLine codeLine){
-        return codeLine.getCommand() + " " + codeLine.getInput() + "\n";
+    public static String prettyPrintCodeLine(CodeLine codeLine) {
+        String code = codeLine.getCommand() + " ";
+        for (String c : codeLine.getInput()) {
+            code = code + c + " ";
+        }
+        return code + "\n";
     }
 
-    public static String programToCodeText(ArrayList<CodeLine> codeLines){
+    public static String codeLineToCode(CodeLine codeLine) {
+        String code = codeLine.getCommand() + "\n";
+        for (String c : codeLine.getInput()) {
+            code = code + c + "\n";
+        }
+        return code;
+    }
+
+    public static String programToCodeText(ArrayList<CodeLine> codeLines) {
         String codeText = "";
-        for (CodeLine codeLine : codeLines){
+        for (CodeLine codeLine : codeLines) {
             codeText += codeLineToCode(codeLine);
         }
-        return codeText;
+        return codeText + "#";
     }
 
-    public static String[] programToCodeTextArray(ArrayList<CodeLine> codeLines){
+    public static String[] programToCodeTextArray(ArrayList<CodeLine> codeLines) {
         ArrayList<String> codeTextArray = new ArrayList<>();
-        for (CodeLine codeLine : codeLines){
+        for (CodeLine codeLine : codeLines) {
             codeTextArray.add(codeLineToCode(codeLine));
         }
         return codeTextArray.toArray(new String[0]);
     }
 
-    public static int[] extractValues(CodeLine codeLine){
-        int[] vals = new int[5];
-        Matcher matcher = Pattern.compile("\\d+").matcher(codeLine.getInput());
+    public static int[] extractValues(CodeLine codeLine) {
+        int[] vals = new int[4];
         int i = 0;
-        while (matcher.find()){
-            vals[i] = Integer.valueOf(matcher.group());
+        for (String param : codeLine.getInput()) {
+            vals[i] = Integer.valueOf(param);
             i++;
         }
         return vals;

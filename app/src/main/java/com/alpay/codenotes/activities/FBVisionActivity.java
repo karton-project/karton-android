@@ -71,7 +71,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     private String checkAndCorrectCode(String code) {
         ArrayList<CodeLine> codeLines = new ArrayList<>();
-        String[] lines = code.split("\\r?\\n");
+        String[] lines = code.split("#");
         for (String line: lines){
             codeLines.add(CodeLineHelper.codeToCodeLine(this, line));
         }
@@ -86,8 +86,8 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     public void addCodeToCodeList(String code) {
         if (code != null) {
-            if (code.contains("\n")) {
-                for (String line : code.split("\\r?\\n")) {
+            if (code.contains("#")) {
+                for (String line : code.split("#")) {
                     if (line.length() > 3)
                         codeList.add(CodeLineHelper.codeToCodeLine(this, line.trim()));
                 }
