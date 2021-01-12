@@ -76,9 +76,9 @@
         <item name="android:textSize">@dimen/unit10</item>
     </style>
 
-    <style name="button_floating_nav">
-        <item name="android:background">@color/colorAccent</item>
-        <item name="android:tint">@color/colorLightGrey</item>
+    <style name="button_floating_nav" parent="Widget.Design.FloatingActionButton">
+        <item name="background">@color/colorAccent</item>
+        <item name="tint">@color/colorLightGrey</item>
         <item name="android:layout_margin">@dimen/unit10</item>
     </style>
 

@@ -38,6 +38,8 @@
                 android:id="@+id/toDoRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_anchor="@+id/toDoEmptyView"
+                app:layout_anchorGravity="center"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -45,6 +47,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_new_note_button"
+        style="@style/button_floating_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/unit16"

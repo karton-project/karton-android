@@ -83,8 +83,8 @@ dependencies {
 
     implementation 'com.uxcam:uxcam:3.2.1@aar'
     implementation 'me.xdrop:fuzzywuzzy:1.3.1'
-    implementation 'com.google.firebase:firebase-analytics:17.4.1'
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.squareup:seismic:1.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'pub.devrel:easypermissions:3.0.0'
@@ -92,11 +92,11 @@ dependencies {
     implementation 'com.github.duanhong169:colorpicker:1.1.5'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:24.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-ml-vision-object-detection-model:19.0.3'
-    implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.google.firebase:firebase-analytics:17.0.0'
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
@@ -107,6 +107,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly'
     // If you want to use custom Keras models from TFLiteTransferConverter
     // Python API, uncomment the following Flex AAR dependency.
     // implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly'

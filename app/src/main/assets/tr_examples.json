@@ -13,22 +13,6 @@
             "type": "X"
           },
           {
-            "command": "boyutlar",
-            "params": [
-              "150",
-              "150"
-            ],
-            "type": "XY"
-          },
-          {
-            "command": "konum",
-            "params": [
-              "150",
-              "150"
-            ],
-            "type": "XY"
-          },
-          {
             "command": "elips",
             "params": [],
             "type": "S"
@@ -46,9 +30,68 @@
             "type": "RGB"
           },
           {
+            "command": "boyutlar",
+            "params": [
+              "150",
+              "80"
+            ],
+            "type": "XY"
+          },
+          {
+            "command": "konum",
+            "params": [
+              "120",
+              "145"
+            ],
+            "type": "XY"
+          },
+          {
             "command": "dörtgen",
             "params": [],
-            "type": "XYWH"
+            "type": "S"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Renkler ve Şekiller",
+    "programList": [
+      {
+        "name": "Turuncu Daire ve Kare",
+        "code": [
+          {
+            "command": "doldur",
+            "input": "r: 255 g: 130 b: 0"
+          },
+          {
+            "command": "elips",
+            "input": "x:200 y:200 w:100 h:100"
+          },
+          {
+            "command": "dörtgen",
+            "input": "x:150 y:150 w:50 h:50"
+          }
+        ]
+      },
+      {
+        "name": "Turuncu Daire ve Pembe Kare",
+        "code": [
+          {
+            "command": "doldur",
+            "input": "r: 255 g: 130 b: 0"
+          },
+          {
+            "command": "elips",
+            "input": "x:200 y:200 w:100 h:100"
+          },
+          {
+            "command": "doldur",
+            "input": "r: 255 g: 0 b: 190"
+          },
+          {
+            "command": "dörtgen",
+            "input": "x:150 y:150 w:50 h:50"
           }
         ]
       }

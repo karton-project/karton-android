@@ -24,7 +24,7 @@
         android:layout_toLeftOf="@+id/show_examples"
         android:layout_marginTop="10dp"
         android:layout_marginRight="7dp"
-        app:srcCompat="@drawable/ic_turtle" />
+        app:srcCompat="@drawable/ic_draw" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/open_transfer"
