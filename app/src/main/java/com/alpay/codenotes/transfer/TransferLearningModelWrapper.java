@@ -36,7 +36,7 @@ import java.util.concurrent.Future;
 public class TransferLearningModelWrapper implements Closeable {
 
     public static final int IMAGE_SIZE = 224;
-    private static TransferLearningModel model;
+    private TransferLearningModel model;
     private final ConditionVariable shouldTrain = new ConditionVariable();
     private volatile TransferLearningModel.LossConsumer lossConsumer;
 

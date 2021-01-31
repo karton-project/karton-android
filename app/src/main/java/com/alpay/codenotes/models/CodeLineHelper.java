@@ -21,7 +21,7 @@ public class CodeLineHelper {
             "fill", "stroke", "background",
             "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
             "rotate", "define function", "call", "loop", "if",
-            "dimension", "location", "translate",
+            "vertex", "dimension", "location", "translate",
             "new variable", "increase value", "decrease value", "set value", "random number",
             "else", "end",
             "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
@@ -32,10 +32,10 @@ public class CodeLineHelper {
             "doldur", "kenar", "arkaplan",
             "elips", "dikdörtgen", "üçgen", "kukla", "şekle başla", "şekli bitir",
             "döndür", "fonksiyon tanımla", "çağır", "tekrarla", "eğer",
-            "boyutlar", "konum", "ötele",
+            "nokta", "ötele", "boyut", "konum",
             "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı",
             "değilse", "bitir",
-            "ileri", "sağa", "sola", "tekrarla", "başlangıç x:", "başlangıç y:", "genişlik", "renk",
+            "ileri", "sağa", "sola", "tekrarla", "başlangıç x", "başlangıç y", "genişlik", "renk",
             "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
     };
 
@@ -65,7 +65,7 @@ public class CodeLineHelper {
             // english
             "point", "translate", "dimension", "location",
             // turkish
-            "nokta", "ötele", "boyutlar", "konum"
+            "nokta", "ötele", "boyut", "konum"
     };
 
 
@@ -110,8 +110,8 @@ public class CodeLineHelper {
         try {
             if (code.length() > 3) {
                 code = code.toLowerCase();
-                if (code.contains("\n")) {
-                    String[] parsedCode = code.split("\n");
+                if (code.contains("#")) {
+                    String[] parsedCode = code.split("#");
                     command = parsedCode[0];
                     params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
                 } else {
@@ -137,9 +137,9 @@ public class CodeLineHelper {
     }
 
     public static String codeLineToCode(CodeLine codeLine) {
-        String code = codeLine.getCommand() + "\n";
+        String code = codeLine.getCommand();
         for (String c : codeLine.getInput()) {
-            code = code + c + "\n";
+            code = code + " # " + c;
         }
         return code;
     }
@@ -149,7 +149,7 @@ public class CodeLineHelper {
         for (CodeLine codeLine : codeLines) {
             codeText += codeLineToCode(codeLine);
         }
-        return codeText + "#";
+        return codeText + "\n";
     }
 
     public static String[] programToCodeTextArray(ArrayList<CodeLine> codeLines) {
@@ -164,7 +164,7 @@ public class CodeLineHelper {
         int[] vals = new int[4];
         int i = 0;
         for (String param : codeLine.getInput()) {
-            vals[i] = Integer.valueOf(param);
+            vals[i] = Integer.valueOf(param.trim());
             i++;
         }
         return vals;

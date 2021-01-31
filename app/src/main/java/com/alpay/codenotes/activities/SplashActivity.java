@@ -22,7 +22,6 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         UXCam.startWithKey("x2f5tx2k2fpvspv");
-        Utils.createTLModel(this);
     }
 
     @Override

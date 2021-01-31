@@ -2,11 +2,9 @@ package com.alpay.codenotes.activities;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
-import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -76,11 +74,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
             webView.setWebViewClient(new WebViewClient() {
                 public void onPageFinished(WebView view, String url) {
                     mHandler.postDelayed(mLauncher, 500);
-                }
-
-                @Override
-                public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                    handler.proceed();
                 }
 
                 @Override

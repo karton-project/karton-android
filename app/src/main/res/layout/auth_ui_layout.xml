@@ -4,14 +4,15 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:background="@color/colorAccent">
 
     <ImageView
-        android:layout_width="@dimen/unit200"
+        android:layout_width="@dimen/unit240"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:padding="@dimen/unit12"
-        android:layout_above="@+id/sign_options"
         android:src="@drawable/w_byaz" />
 
 

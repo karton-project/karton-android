@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
     
     <ImageView
-        android:layout_width="@dimen/unit200"
+        android:layout_width="@dimen/unit240"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="@dimen/unit12"

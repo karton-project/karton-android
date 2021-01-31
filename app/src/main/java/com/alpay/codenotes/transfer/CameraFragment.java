@@ -345,7 +345,10 @@ public class CameraFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        tlModel = Utils.tlModel;
+        if (Utils.tlModel == null)
+            tlModel = Utils.createTLModel((AppCompatActivity) getActivity());
+        else
+            tlModel = Utils.tlModel;
         viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
         viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
     }
