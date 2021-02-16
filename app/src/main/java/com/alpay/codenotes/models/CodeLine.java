@@ -47,6 +47,8 @@ public class CodeLine {
             this.type = Type.NV;
             if (Arrays.asList(CodeLineHelper.def_commands).contains(command.trim()))
                 CodeLineHelper.varNames.add(getVarName().trim());
+            else
+                this.params = CodeLineHelper.checkAndCorrectVarParams(command, params);
         } else if (Arrays.asList(CodeLineHelper.n_commands).contains(command.trim())) {
             this.type = Type.N;
         } else if (Arrays.asList(CodeLineHelper.end_commands).contains(command.trim())) {
@@ -72,7 +74,11 @@ public class CodeLine {
         return params;
     }
 
-    public void setInput(String param1) {
+    public String getFirstInput(){
+        return params[0];
+    }
+
+    public void setFirstInput(String param1) {
         this.params[0] = param1;
     }
 

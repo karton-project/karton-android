@@ -100,6 +100,7 @@ public class ProgramListFragment extends Fragment {
             transferLearningButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
             turtleMode = false;
         }
+        CodeLineHelper.codeList = new ArrayList();
     }
 
     @OnClick(R.id.show_examples)

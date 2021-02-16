@@ -22,7 +22,7 @@ public class CodeLineHelper {
             "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
             "rotate", "define function", "call", "loop", "if",
             "vertex", "dimension", "location", "translate",
-            "new variable", "increase value", "decrease value", "set value", "random number",
+            "variable", "increase value", "decrease value", "set value", "random number",
             "else", "end",
             "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
             "pen down", "pen up", "hide pen", "show pen", "clear"
@@ -33,7 +33,7 @@ public class CodeLineHelper {
             "elips", "dikdörtgen", "üçgen", "kukla", "şekle başla", "şekli bitir",
             "döndür", "fonksiyon tanımla", "çağır", "tekrarla", "eğer",
             "nokta", "ötele", "boyut", "konum",
-            "değişken tanımla", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı",
+            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele sayı",
             "değilse", "bitir",
             "ileri", "sağa", "sola", "tekrarla", "başlangıç x", "başlangıç y", "genişlik", "renk",
             "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
@@ -85,16 +85,16 @@ public class CodeLineHelper {
 
     public static final String[] nv_commands = {
             // english
-            "new variable", "increase value", "decrease value", "set value", "random number",
+            "variable", "increase value", "decrease value", "set value", "random number",
             // turkish
-            "değişken oluştur", "değerini artır", "değerini azalt", "değer ata", "rastgele sayı"
+            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele sayı"
     };
 
     public static final String[] def_commands = {
             // english
-            "new variable", "random number", "define function:",
+            "variable", "random number", "define function:",
             // turkish
-            "değişken tanımla", "rastgele sayı", "fonksiyon tanımla:",
+            "değişken", "rastgele sayı", "fonksiyon tanımla:",
     };
 
     public static final String[] end_commands = {
@@ -126,6 +126,11 @@ public class CodeLineHelper {
             Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
         }
         return new CodeLine(command, params);
+    }
+
+    public static String[] checkAndCorrectVarParams(String command, String[] params){
+        params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
+        return params;
     }
 
     public static String prettyPrintCodeLine(CodeLine codeLine) {
