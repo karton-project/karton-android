@@ -62,9 +62,9 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {
+            codeList = new ArrayList<>();
+            codeList.addAll(mProgramList.get(position).getCode());
             Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
-            String[] p5CodeArr = (String[]) mProgramList.get(position).getCodeArray();
-            intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
             appCompatActivity.startActivity(intent);
         });
         holder.mAddToCodeButton.setOnClickListener(v -> {

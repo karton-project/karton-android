@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class CodeLine {
     String command = "";
-    String[] params = {"", ""};
+    String[] params = new String[0];
     Type type = Type.NONE;
 
     public enum Type {
@@ -46,7 +46,7 @@ public class CodeLine {
         } else if (Arrays.asList(CodeLineHelper.nv_commands).contains(command.trim())) {
             this.type = Type.NV;
             if (Arrays.asList(CodeLineHelper.def_commands).contains(command.trim()))
-                CodeLineHelper.varNames.add(getVarName().trim());
+                CodeLineHelper.varNames.add(getFirstInput().trim());
             else
                 this.params = CodeLineHelper.checkAndCorrectVarParams(command, params);
         } else if (Arrays.asList(CodeLineHelper.n_commands).contains(command.trim())) {
@@ -71,15 +71,27 @@ public class CodeLine {
     }
 
     public String[] getInput() {
+        for (int i = 0; i < params.length; i++)
+            params[i] = params[i].trim();
         return params;
     }
 
     public String getFirstInput(){
-        return params[0];
+        if(params.length > 0) return params[0].trim();
+        else return "";
+    }
+
+    public String getSecondInput(){
+        if(params.length > 1) return params[1].trim();
+        else return "";
     }
 
     public void setFirstInput(String param1) {
         this.params[0] = param1;
+    }
+
+    public void setSecondInput(String param2) {
+        this.params[1] = param2;
     }
 
     public void setInput(String param1, String param2) {

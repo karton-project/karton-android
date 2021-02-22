@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="n:" />
+                    android:text="# " />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/varNameET"
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="0" />
+                    android:text="# " />
 
                 <HorizontalScrollView
                     android:id="@+id/varChipsScroll1"
@@ -118,7 +118,7 @@
                     android:id="@+id/seek1"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:progress="5" />
+                    android:progress="10"/>
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/bar1VarButton"
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="0" />
+                    android:text="# " />
 
                 <HorizontalScrollView
                     android:id="@+id/varChipsScroll2"
@@ -166,7 +166,7 @@
                     android:id="@+id/seek2"
                     android:layout_width="@dimen/unit160"
                     android:layout_height="wrap_content"
-                    android:progress="5" />
+                    android:progress="10"/>
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/bar2VarButton"
@@ -175,6 +175,31 @@
                     android:layout_marginLeft="@dimen/unit3"
                     android:tint="@color/textColorDark"
                     app:srcCompat="@drawable/ic_save" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bar3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/unit8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="# " />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/valNameET"
+                    android:layout_width="@dimen/unit160"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/variable_name" />
+
+                <View
+                    android:layout_width="@dimen/unit20"
+                    android:layout_height="@dimen/unit20"
+                    android:layout_marginLeft="@dimen/unit3" />
 
             </LinearLayout>
 

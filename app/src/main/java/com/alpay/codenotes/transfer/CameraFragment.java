@@ -130,8 +130,8 @@ public class CameraFragment extends Fragment {
                     break;
                 default:
                     for (CodeLine code : CodeLineHelper.codeList) {
-                        if (code.getCommand().contains("group:")) {
-                            groupId = code.getVarName();
+                        if (code.getCommand().contains("group")) {
+                            groupId = code.getFirstInput();
                         }
                     }
                     GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, CodeLineHelper.codeList, Utils.bitmapToBase64(tempBitmap));

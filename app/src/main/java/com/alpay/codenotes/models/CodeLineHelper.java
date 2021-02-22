@@ -9,6 +9,8 @@ import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
@@ -165,13 +167,12 @@ public class CodeLineHelper {
         return codeTextArray.toArray(new String[0]);
     }
 
-    public static int[] extractValues(CodeLine codeLine) {
-        int[] vals = new int[4];
-        int i = 0;
-        for (String param : codeLine.getInput()) {
-            vals[i] = Integer.valueOf(param.trim());
-            i++;
+    public static Set<String> getVariableNames(){
+        HashMap<String,String> hm = new HashMap<>();
+        for (int i = 0; i < varNames.size(); i++) {
+            hm.put(varNames.get(i), varNames.get(i));
         }
-        return vals;
+        // Using hm.keySet() to print output reduces time complexity. - Lokesh
+        return hm.keySet();
     }
 }
