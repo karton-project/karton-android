@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020 Google LLC. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.alpay.codenotes.vision;
 
 import android.Manifest;
@@ -8,33 +24,34 @@ import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.WindowManager;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-
 import com.google.android.gms.common.images.Size;
-
 import java.io.IOException;
-import java.lang.Thread.State;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Manages the camera and allows UI updates on top of it (e.g. overlaying extra Graphics or
  * displaying extra information). This receives preview frames from the camera at a specified rate,
  * sending those frames to child classes' detectors / classifiers as fast as it is able to process.
  */
-@SuppressLint("MissingPermission")
 public class CameraSource {
   @SuppressLint("InlinedApi")
   public static final int CAMERA_FACING_BACK = CameraInfo.CAMERA_FACING_BACK;
+
+  @SuppressLint("InlinedApi")
+  public static final int CAMERA_FACING_FRONT = CameraInfo.CAMERA_FACING_FRONT;
+
+  public static final int IMAGE_FORMAT = ImageFormat.NV21;
+  public static final int DEFAULT_REQUESTED_CAMERA_PREVIEW_WIDTH = 480;
+  public static final int DEFAULT_REQUESTED_CAMERA_PREVIEW_HEIGHT = 360;
 
   private static final String TAG = "MIDemoApp:CameraSource";
 
@@ -55,35 +72,22 @@ public class CameraSource {
 
   private Camera camera;
 
-  protected int facing = CAMERA_FACING_BACK;
+  private int facing = CAMERA_FACING_BACK;
 
-  /**
-   * Rotation of the device, and thus the associated preview images captured from the device. See
-   * Frame.Metadata#getRotation().
-   */
-  private int rotation;
+  /** Rotation of the device, and thus the associated preview images captured from the device. */
+  private int rotationDegrees;
 
   private Size previewSize;
 
-  // These values may be requested by the caller.  Due to hardware limitations, we may need to
-  // select close, but not exactly the same values for these.
-  private final float requestedFps = 15.0f;
-  private int requestedPreviewWidth = 480;
-  private int requestedPreviewHeight = 360;
-  private final boolean requestedAutoFocus = true;
+  private static final float REQUESTED_FPS = 30.0f;
+  private static final boolean REQUESTED_AUTO_FOCUS = true;
 
-  // These instances need to be held onto to avoid GC of their underlying resources.  Even though
-  // these aren't used outside of the method that creates them, they still must have hard
-  // references maintained to them.
+  // This instance needs to be held onto to avoid GC of its underlying resources. Even though it
+  // isn't used outside of the method that creates it, it still must have hard references maintained
+  // to it.
   private SurfaceTexture dummySurfaceTexture;
-  private final GraphicOverlay graphicOverlay;
 
-  // True if a SurfaceTexture is being used for the preview, false if a SurfaceHolder is being
-  // used for the preview.  We want to be compatible back to Gingerbread, but SurfaceTexture
-  // wasn't introduced until Honeycomb.  Since the interface cannot use a SurfaceTexture, if the
-  // developer wants to display a preview we must use a SurfaceHolder.  If the developer doesn't
-  // want to display a preview we use a SurfaceTexture if we are running at least Honeycomb.
-  private boolean usingSurfaceTexture;
+  private final GraphicOverlay graphicOverlay;
 
   /**
    * Dedicated thread and associated runnable for calling into the detector with frames, as the
@@ -92,9 +96,8 @@ public class CameraSource {
   private Thread processingThread;
 
   private final FrameProcessingRunnable processingRunnable;
-
   private final Object processorLock = new Object();
-  // @GuardedBy("processorLock")
+
   private VisionImageProcessor frameProcessor;
 
   /**
@@ -106,21 +109,13 @@ public class CameraSource {
    * equals, hashCode and toString methods is both useless and unexpected. IdentityHashMap enforces
    * identity ('==') check on the keys.
    */
-  private final Map<byte[], ByteBuffer> bytesToByteBuffer = new IdentityHashMap<>();
+  private final IdentityHashMap<byte[], ByteBuffer> bytesToByteBuffer = new IdentityHashMap<>();
 
   public CameraSource(Activity activity, GraphicOverlay overlay) {
     this.activity = activity;
-    //requestedPreviewHeight = activity.getResources().getDisplayMetrics().heightPixels;
-    //requestedPreviewWidth = activity.getResources().getDisplayMetrics().widthPixels;
     graphicOverlay = overlay;
     graphicOverlay.clear();
     processingRunnable = new FrameProcessingRunnable();
-
-    if (Camera.getNumberOfCameras() == 1) {
-      CameraInfo cameraInfo = new CameraInfo();
-      Camera.getCameraInfo(0, cameraInfo);
-      facing = cameraInfo.facing;
-    }
   }
 
   // ==============================================================================================
@@ -131,7 +126,6 @@ public class CameraSource {
   public void release() {
     synchronized (processorLock) {
       stop();
-      processingRunnable.release();
       cleanScreen();
 
       if (frameProcessor != null) {
@@ -146,7 +140,6 @@ public class CameraSource {
    *
    * @throws IOException if the camera's preview texture or display could not be initialized
    */
-  @SuppressLint("MissingPermission")
   @RequiresPermission(Manifest.permission.CAMERA)
   public synchronized CameraSource start() throws IOException {
     if (camera != null) {
@@ -156,7 +149,6 @@ public class CameraSource {
     camera = createCamera();
     dummySurfaceTexture = new SurfaceTexture(DUMMY_TEXTURE_NAME);
     camera.setPreviewTexture(dummySurfaceTexture);
-    usingSurfaceTexture = true;
     camera.startPreview();
 
     processingThread = new Thread(processingRunnable);
@@ -185,8 +177,6 @@ public class CameraSource {
     processingThread = new Thread(processingRunnable);
     processingRunnable.setActive(true);
     processingThread.start();
-
-    usingSurfaceTexture = false;
     return this;
   }
 
@@ -217,11 +207,9 @@ public class CameraSource {
       camera.stopPreview();
       camera.setPreviewCallbackWithBuffer(null);
       try {
-        if (usingSurfaceTexture) {
-          camera.setPreviewTexture(null);
-        } else {
-          camera.setPreviewDisplay(null);
-        }
+        camera.setPreviewTexture(null);
+        dummySurfaceTexture = null;
+        camera.setPreviewDisplay(null);
       } catch (Exception e) {
         Log.e(TAG, "Failed to clear camera preview: " + e);
       }
@@ -233,11 +221,23 @@ public class CameraSource {
     bytesToByteBuffer.clear();
   }
 
+  /** Changes the facing of the camera. */
+  public synchronized void setFacing(int facing) {
+    if ((facing != CAMERA_FACING_BACK) && (facing != CAMERA_FACING_FRONT)) {
+      throw new IllegalArgumentException("Invalid camera: " + facing);
+    }
+    this.facing = facing;
+  }
+
   /** Returns the preview size that is currently in use by the underlying camera. */
   public Size getPreviewSize() {
     return previewSize;
   }
 
+  /**
+   * Returns the selected camera; one of {@link #CAMERA_FACING_BACK} or {@link
+   * #CAMERA_FACING_FRONT}.
+   */
   public int getCameraFacing() {
     return facing;
   }
@@ -255,35 +255,47 @@ public class CameraSource {
     }
     Camera camera = Camera.open(requestedCameraId);
 
-    SizePair sizePair = selectSizePair(camera, requestedPreviewWidth, requestedPreviewHeight);
+    SizePair sizePair = PreferenceUtils.getCameraPreviewSizePair(activity, requestedCameraId);
+    if (sizePair == null) {
+      sizePair =
+              selectSizePair(
+                      camera,
+                      DEFAULT_REQUESTED_CAMERA_PREVIEW_WIDTH,
+                      DEFAULT_REQUESTED_CAMERA_PREVIEW_HEIGHT);
+    }
+
     if (sizePair == null) {
       throw new IOException("Could not find suitable preview size.");
     }
-    Size pictureSize = sizePair.pictureSize();
-    previewSize = sizePair.previewSize();
 
-    int[] previewFpsRange = selectPreviewFpsRange(camera, requestedFps);
+    previewSize = sizePair.preview;
+    Log.v(TAG, "Camera preview size: " + previewSize);
+
+    int[] previewFpsRange = selectPreviewFpsRange(camera, REQUESTED_FPS);
     if (previewFpsRange == null) {
       throw new IOException("Could not find suitable preview frames per second range.");
     }
 
     Camera.Parameters parameters = camera.getParameters();
 
+    Size pictureSize = sizePair.picture;
     if (pictureSize != null) {
+      Log.v(TAG, "Camera picture size: " + pictureSize);
       parameters.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
     }
     parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
     parameters.setPreviewFpsRange(
-        previewFpsRange[Camera.Parameters.PREVIEW_FPS_MIN_INDEX],
-        previewFpsRange[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]);
-    parameters.setPreviewFormat(ImageFormat.NV21);
+            previewFpsRange[Camera.Parameters.PREVIEW_FPS_MIN_INDEX],
+            previewFpsRange[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]);
+    // Use YV12 so that we can exercise YV12->NV21 auto-conversion logic for OCR detection
+    parameters.setPreviewFormat(IMAGE_FORMAT);
 
     setRotation(camera, parameters, requestedCameraId);
 
-    if (requestedAutoFocus) {
+    if (REQUESTED_AUTO_FOCUS) {
       if (parameters
-          .getSupportedFocusModes()
-          .contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+              .getSupportedFocusModes()
+              .contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
       } else {
         Log.i(TAG, "Camera auto focus is not supported on this device.");
@@ -342,7 +354,7 @@ public class CameraSource {
    * @param desiredHeight the desired height of the camera preview frames
    * @return the selected preview and picture size pair
    */
-  private static SizePair selectSizePair(Camera camera, int desiredWidth, int desiredHeight) {
+  public static SizePair selectSizePair(Camera camera, int desiredWidth, int desiredHeight) {
     List<SizePair> validPreviewSizes = generateValidPreviewSizeList(camera);
 
     // The method for selecting the best size is to minimize the sum of the differences between
@@ -352,9 +364,9 @@ public class CameraSource {
     SizePair selectedPair = null;
     int minDiff = Integer.MAX_VALUE;
     for (SizePair sizePair : validPreviewSizes) {
-      Size size = sizePair.previewSize();
+      Size size = sizePair.preview;
       int diff =
-          Math.abs(size.getWidth() - desiredWidth) + Math.abs(size.getHeight() - desiredHeight);
+              Math.abs(size.getWidth() - desiredWidth) + Math.abs(size.getHeight() - desiredHeight);
       if (diff < minDiff) {
         selectedPair = sizePair;
         minDiff = diff;
@@ -370,26 +382,18 @@ public class CameraSource {
    * ratio as the preview size or the preview may end up being distorted. If the picture size is
    * null, then there is no picture size with the same aspect ratio as the preview size.
    */
-  private static class SizePair {
-    private final Size preview;
-    private Size picture;
+  public static class SizePair {
+    public final Size preview;
+    @Nullable public final Size picture;
 
-    SizePair(
-        Camera.Size previewSize,
-        @Nullable Camera.Size pictureSize) {
+    SizePair(Camera.Size previewSize, @Nullable Camera.Size pictureSize) {
       preview = new Size(previewSize.width, previewSize.height);
-      if (pictureSize != null) {
-        picture = new Size(pictureSize.width, pictureSize.height);
-      }
+      picture = pictureSize != null ? new Size(pictureSize.width, pictureSize.height) : null;
     }
 
-    Size previewSize() {
-      return preview;
-    }
-
-    @Nullable
-    Size pictureSize() {
-      return picture;
+    public SizePair(Size previewSize, @Nullable Size pictureSize) {
+      preview = previewSize;
+      picture = pictureSize;
     }
   }
 
@@ -402,12 +406,10 @@ public class CameraSource {
    * be set to a size that is the same aspect ratio as the preview size we choose. Otherwise, the
    * preview images may be distorted on some devices.
    */
-  private static List<SizePair> generateValidPreviewSizeList(Camera camera) {
+  public static List<SizePair> generateValidPreviewSizeList(Camera camera) {
     Camera.Parameters parameters = camera.getParameters();
-    List<Camera.Size> supportedPreviewSizes =
-        parameters.getSupportedPreviewSizes();
-    List<Camera.Size> supportedPictureSizes =
-        parameters.getSupportedPictureSizes();
+    List<Camera.Size> supportedPreviewSizes = parameters.getSupportedPreviewSizes();
+    List<Camera.Size> supportedPictureSizes = parameters.getSupportedPictureSizes();
     List<SizePair> validPreviewSizes = new ArrayList<>();
     for (Camera.Size previewSize : supportedPreviewSizes) {
       float previewAspectRatio = (float) previewSize.width / (float) previewSize.height;
@@ -451,21 +453,22 @@ public class CameraSource {
     // rates.
     int desiredPreviewFpsScaled = (int) (desiredPreviewFps * 1000.0f);
 
-    // The method for selecting the best range is to minimize the sum of the differences between
-    // the desired value and the upper and lower bounds of the range.  This may select a range
-    // that the desired value is outside of, but this is often preferred.  For example, if the
-    // desired frame rate is 29.97, the range (30, 30) is probably more desirable than the
-    // range (15, 30).
+    // Selects a range with whose upper bound is as close as possible to the desired fps while its
+    // lower bound is as small as possible to properly expose frames in low light conditions. Note
+    // that this may select a range that the desired value is outside of. For example, if the
+    // desired frame rate is 30.5, the range (30, 30) is probably more desirable than (30, 40).
     int[] selectedFpsRange = null;
-    int minDiff = Integer.MAX_VALUE;
+    int minUpperBoundDiff = Integer.MAX_VALUE;
+    int minLowerBound = Integer.MAX_VALUE;
     List<int[]> previewFpsRangeList = camera.getParameters().getSupportedPreviewFpsRange();
     for (int[] range : previewFpsRangeList) {
-      int deltaMin = desiredPreviewFpsScaled - range[Camera.Parameters.PREVIEW_FPS_MIN_INDEX];
-      int deltaMax = desiredPreviewFpsScaled - range[Camera.Parameters.PREVIEW_FPS_MAX_INDEX];
-      int diff = Math.abs(deltaMin) + Math.abs(deltaMax);
-      if (diff < minDiff) {
+      int upperBoundDiff =
+              Math.abs(desiredPreviewFpsScaled - range[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]);
+      int lowerBound = range[Camera.Parameters.PREVIEW_FPS_MIN_INDEX];
+      if (upperBoundDiff <= minUpperBoundDiff && lowerBound <= minLowerBound) {
         selectedFpsRange = range;
-        minDiff = diff;
+        minUpperBoundDiff = upperBoundDiff;
+        minLowerBound = lowerBound;
       }
     }
     return selectedFpsRange;
@@ -502,21 +505,22 @@ public class CameraSource {
     CameraInfo cameraInfo = new CameraInfo();
     Camera.getCameraInfo(cameraId, cameraInfo);
 
-    int angle;
     int displayAngle;
     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT) {
-      angle = (cameraInfo.orientation + degrees) % 360;
-      displayAngle = (360 - angle) % 360; // compensate for it being mirrored
+      this.rotationDegrees = (cameraInfo.orientation + degrees) % 360;
+      displayAngle = (360 - this.rotationDegrees) % 360; // compensate for it being mirrored
     } else { // back-facing
-      angle = (cameraInfo.orientation - degrees + 360) % 360;
-      displayAngle = angle;
+      this.rotationDegrees = (cameraInfo.orientation - degrees + 360) % 360;
+      displayAngle = this.rotationDegrees;
     }
-
-    // This corresponds to the rotation constants.
-    this.rotation = angle / 90;
+    Log.d(TAG, "Display rotation is: " + rotation);
+    Log.d(TAG, "Camera face is: " + cameraInfo.facing);
+    Log.d(TAG, "Camera rotation is: " + cameraInfo.orientation);
+    // This value should be one of the degrees that ImageMetadata accepts: 0, 90, 180 or 270.
+    Log.d(TAG, "RotationDegrees is: " + this.rotationDegrees);
 
     camera.setDisplayOrientation(displayAngle);
-    parameters.setRotation(angle);
+    parameters.setRotation(this.rotationDegrees);
   }
 
   /**
@@ -527,7 +531,7 @@ public class CameraSource {
    */
   @SuppressLint("InlinedApi")
   private byte[] createPreviewBuffer(Size previewSize) {
-    int bitsPerPixel = ImageFormat.getBitsPerPixel(ImageFormat.NV21);
+    int bitsPerPixel = ImageFormat.getBitsPerPixel(IMAGE_FORMAT);
     long sizeInBits = (long) previewSize.getHeight() * previewSize.getWidth() * bitsPerPixel;
     int bufferSize = (int) Math.ceil(sizeInBits / 8.0d) + 1;
 
@@ -588,15 +592,6 @@ public class CameraSource {
 
     FrameProcessingRunnable() {}
 
-    /**
-     * Releases the underlying receiver. This is only safe to do after the associated thread has
-     * completed, which is managed in camera source's release method above.
-     */
-    @SuppressLint("Assert")
-    void release() {
-      assert (processingThread.getState() == State.TERMINATED);
-    }
-
     /** Marks the runnable as active/not active. Signals any blocked threads to continue. */
     void setActive(boolean active) {
       synchronized (lock) {
@@ -609,6 +604,7 @@ public class CameraSource {
      * Sets the frame data received from the camera. This adds the previous unused frame buffer (if
      * present) back to the camera, and keeps a pending reference to the frame data for future use.
      */
+    @SuppressWarnings("ByteBufferBackingArray")
     void setNextFrame(byte[] data, Camera camera) {
       synchronized (lock) {
         if (pendingFrameData != null) {
@@ -618,9 +614,9 @@ public class CameraSource {
 
         if (!bytesToByteBuffer.containsKey(data)) {
           Log.d(
-              TAG,
-              "Skipping frame. Could not find ByteBuffer associated with the image "
-                  + "data from the camera.");
+                  TAG,
+                  "Skipping frame. Could not find ByteBuffer associated with the image "
+                          + "data from the camera.");
           return;
         }
 
@@ -645,7 +641,7 @@ public class CameraSource {
      * FPS setting above to allow for some idle time in between frames.
      */
     @SuppressLint("InlinedApi")
-    @SuppressWarnings("GuardedBy")
+    @SuppressWarnings({"GuardedBy", "ByteBufferBackingArray"})
     @Override
     public void run() {
       ByteBuffer data;
@@ -684,18 +680,16 @@ public class CameraSource {
 
         try {
           synchronized (processorLock) {
-            Log.d(TAG, "Process an image");
-            frameProcessor.process(
-                data,
-                new FrameMetadata.Builder()
-                    .setWidth(previewSize.getWidth())
-                    .setHeight(previewSize.getHeight())
-                    .setRotation(rotation)
-                    .setCameraFacing(facing)
-                    .build(),
-                graphicOverlay);
+            frameProcessor.processByteBuffer(
+                    data,
+                    new FrameMetadata.Builder()
+                            .setWidth(previewSize.getWidth())
+                            .setHeight(previewSize.getHeight())
+                            .setRotation(rotationDegrees)
+                            .build(),
+                    graphicOverlay);
           }
-        } catch (Throwable t) {
+        } catch (Exception t) {
           Log.e(TAG, "Exception thrown from receiver.", t);
         } finally {
           camera.addCallbackBuffer(data.array());

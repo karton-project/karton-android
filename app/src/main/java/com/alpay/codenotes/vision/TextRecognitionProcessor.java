@@ -1,94 +1,138 @@
-// Copyright 2018 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Copyright 2020 Google LLC. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.alpay.codenotes.vision;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.core.ImageProxy;
 
-import com.alpay.codenotes.utils.Utils;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
-import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.mlkit.common.MlKitException;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.Text.Element;
+import com.google.mlkit.vision.text.Text.Line;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
-import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.List;
 
-/**
- * Processor for the text recognition demo.
- */
-public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVisionText> {
+/** Processor for the text detector demo. */
+public class TextRecognitionProcessor extends VisionProcessorBase<Text> {
 
-    private static final String TAG = "TextRecProc";
+  private static final String TAG = "TextRecProcessor";
+  protected static final String MANUAL_TESTING_LOG = "LogTagForTest";
+  private final TextRecognizer textRecognizer;
 
-    private final FirebaseVisionTextRecognizer detector;
+  public TextRecognitionProcessor(Context context) {
+    super(context);
+    textRecognizer = TextRecognition.getClient();
+  }
 
-    public TextRecognitionProcessor() {
-        detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
-    }
+  @Override
+  public void processBitmap(Bitmap bitmap, GraphicOverlay graphicOverlay) {
 
-    @Override
-    public void stop() {
-        try {
-            detector.close();
-        } catch (IOException e) {
-            Log.e(TAG, "Exception thrown while trying to close Text Detector: " + e);
-        }
-    }
+  }
 
-    @Override
-    protected Task<FirebaseVisionText> detectInImage(FirebaseVisionImage image) {
-        return detector.processImage(image);
-    }
+  @Override
+  public void processByteBuffer(ByteBuffer data, FrameMetadata frameMetadata, GraphicOverlay graphicOverlay) throws MlKitException {
 
-    @Override
-    protected void onSuccess(
-            @Nullable Bitmap originalCameraImage,
-            @NonNull FirebaseVisionText results,
-            @NonNull FrameMetadata frameMetadata,
-            @NonNull GraphicOverlay graphicOverlay) {
-        graphicOverlay.clear();
-        if (originalCameraImage != null) {
-            CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay,
-                    originalCameraImage);
-            graphicOverlay.add(imageGraphic);
-        }
-        List<FirebaseVisionText.TextBlock> blocks = results.getTextBlocks();
-        Utils.code = "";
-        for (int i = 0; i < blocks.size(); i++) {
-            GraphicOverlay.Graphic textGraphic = new TextGraphic(graphicOverlay, blocks.get(i));
-            graphicOverlay.add(textGraphic);
-            if ((i < blocks.size() - 1)) {
-                if (Math.abs(blocks.get(i).getCornerPoints()[0].y - blocks.get(i + 1).getCornerPoints()[0].y) < 20) {
-                    Utils.code = Utils.code + blocks.get(i).getText() + blocks.get(i + 1).getText();
-                    i++;
-                } else {
-                    Utils.code = Utils.code + blocks.get(i).getText() + "\n";
-                }
-            } else {
-                Utils.code = Utils.code + blocks.get(i).getText() + "\n";
+  }
+
+  @Override
+  public void processImageProxy(ImageProxy image, GraphicOverlay graphicOverlay) throws MlKitException {
+
+  }
+
+  @Override
+  public void stop() {
+    super.stop();
+    textRecognizer.close();
+  }
+
+  @Override
+  protected Task<Text> detectInImage(FirebaseVisionImage image) {
+    return null;
+  }
+
+  @Override
+  protected void onSuccess(@Nullable Bitmap originalCameraImage, @NonNull Text results, @NonNull FrameMetadata frameMetadata, @NonNull GraphicOverlay graphicOverlay) {
+
+  }
+
+  protected Task<Text> detectInImage(InputImage image) {
+    return textRecognizer.process(image);
+  }
+
+  protected void onSuccess(@NonNull Text text, @NonNull GraphicOverlay graphicOverlay) {
+    Log.d(TAG, "On-device Text detection successful");
+    logExtrasForTesting(text);
+    graphicOverlay.add(new TextGraphic(graphicOverlay, text));
+  }
+
+  private static void logExtrasForTesting(Text text) {
+    if (text != null) {
+      Log.v(MANUAL_TESTING_LOG, "Detected text has : " + text.getTextBlocks().size() + " blocks");
+      for (int i = 0; i < text.getTextBlocks().size(); ++i) {
+        List<Line> lines = text.getTextBlocks().get(i).getLines();
+        Log.v(
+            MANUAL_TESTING_LOG,
+            String.format("Detected text block %d has %d lines", i, lines.size()));
+        for (int j = 0; j < lines.size(); ++j) {
+          List<Element> elements = lines.get(j).getElements();
+          Log.v(
+              MANUAL_TESTING_LOG,
+              String.format("Detected text line %d has %d elements", j, elements.size()));
+          for (int k = 0; k < elements.size(); ++k) {
+            Element element = elements.get(k);
+            Log.v(
+                MANUAL_TESTING_LOG,
+                String.format("Detected text element %d says: %s", k, element.getText()));
+            Log.v(
+                MANUAL_TESTING_LOG,
+                String.format(
+                    "Detected text element %d has a bounding box: %s",
+                    k, element.getBoundingBox().flattenToString()));
+            Log.v(
+                MANUAL_TESTING_LOG,
+                String.format(
+                    "Expected corner point size is 4, get %d", element.getCornerPoints().length));
+            for (Point point : element.getCornerPoints()) {
+              Log.v(
+                  MANUAL_TESTING_LOG,
+                  String.format(
+                      "Corner point for element %d is located at: x - %d, y = %d",
+                      k, point.x, point.y));
             }
+          }
         }
-        graphicOverlay.postInvalidate();
+      }
     }
+  }
 
-    @Override
-    protected void onFailure(@NonNull Exception e) {
-        Log.w(TAG, "Text detection failed." + e);
-    }
+  @Override
+  protected void onFailure(@NonNull Exception e) {
+    Log.w(TAG, "Text detection failed." + e);
+  }
 }

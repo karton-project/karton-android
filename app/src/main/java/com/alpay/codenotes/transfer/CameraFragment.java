@@ -39,9 +39,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
-import androidx.camera.core.CameraX.LensFacing;
 import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.ImageAnalysis.ImageReaderMode;
 import androidx.camera.core.ImageAnalysisConfig;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.ImageProxy.PlaneProxy;
@@ -89,7 +87,7 @@ public class CameraFragment extends Fragment {
 
     private static final int LOWER_BYTE_MASK = 0xFF;
     private static final String TAG = CameraFragment.class.getSimpleName();
-    private static final LensFacing LENS_FACING = LensFacing.BACK;
+    private static final CameraX.LensFacing LENS_FACING = CameraX.LensFacing.BACK;
     private TextureView viewFinder;
     private Integer viewFinderRotation = null;
     private Size bufferDimens = new Size(0, 0);
@@ -197,7 +195,7 @@ public class CameraFragment extends Fragment {
         ImageAnalysisConfig analysisConfig = new ImageAnalysisConfig.Builder()
                 .setLensFacing(LENS_FACING)
                 .setCallbackHandler(new Handler(inferenceThread.getLooper()))
-                .setImageReaderMode(ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+                .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
                 .setTargetRotation(viewFinder.getDisplay().getRotation())
                 .build();
 

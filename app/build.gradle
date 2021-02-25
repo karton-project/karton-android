@@ -16,7 +16,7 @@ repositories {
     maven {
         url 'https://maven.fabric.io/public'
     }
-    maven{
+    maven {
         url 'https://sdk.uxcam.com/android/'
     }
     google()
@@ -81,6 +81,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    implementation 'com.google.guava:guava:27.1-android'
     implementation 'com.uxcam:uxcam:3.2.1@aar'
     implementation 'me.xdrop:fuzzywuzzy:1.3.1'
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
@@ -93,7 +94,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-ml-vision:24.0.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-ml-vision-object-detection-model:19.0.3'
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
@@ -102,7 +103,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation "androidx.appcompat:appcompat:1.1.0-rc01"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0-rc01'
@@ -114,8 +116,8 @@ dependencies {
 
     // https://developer.android.com/jetpack/androidx/releases/camera
     def camerax_version = "1.0.0-alpha04"
-    implementation "androidx.camera:camera-core:$camerax_version"
-    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
 
     // https://developer.android.com/jetpack/androidx/releases/lifecycle
     def lifecycle_version = '2.1.0-rc01'

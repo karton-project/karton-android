@@ -1,19 +1,21 @@
-// Copyright 2018 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Copyright 2020 Google LLC. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.alpay.codenotes.vision;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.AttributeSet;
@@ -30,8 +32,8 @@ import java.io.IOException;
 public class CameraSourcePreview extends ViewGroup {
   private static final String TAG = "MIDemoApp:Preview";
 
-  private Context context;
-  private SurfaceView surfaceView;
+  private final Context context;
+  private final SurfaceView surfaceView;
   private boolean startRequested;
   private boolean surfaceAvailable;
   private CameraSource cameraSource;
@@ -49,11 +51,7 @@ public class CameraSourcePreview extends ViewGroup {
     addView(surfaceView);
   }
 
-  public void start(CameraSource cameraSource) throws IOException {
-    if (cameraSource == null) {
-      stop();
-    }
-
+  private void start(CameraSource cameraSource) throws IOException {
     this.cameraSource = cameraSource;
 
     if (this.cameraSource != null) {
@@ -78,22 +76,29 @@ public class CameraSourcePreview extends ViewGroup {
       cameraSource.release();
       cameraSource = null;
     }
+    surfaceView.getHolder().getSurface().release();
   }
 
-  @SuppressLint("MissingPermission")
-  private void startIfReady() throws IOException {
+  private void startIfReady() throws IOException, SecurityException {
     if (startRequested && surfaceAvailable) {
-      cameraSource.start();
+      if (PreferenceUtils.isCameraLiveViewportEnabled(context)) {
+        cameraSource.start(surfaceView.getHolder());
+      } else {
+        cameraSource.start();
+      }
+      requestLayout();
+
       if (overlay != null) {
         Size size = cameraSource.getPreviewSize();
         int min = Math.min(size.getWidth(), size.getHeight());
         int max = Math.max(size.getWidth(), size.getHeight());
+        boolean isImageFlipped = cameraSource.getCameraFacing() == CameraSource.CAMERA_FACING_FRONT;
         if (isPortraitMode()) {
-          // Swap width and height sizes when in portrait, since it will be rotated by
-          // 90 degrees
-          overlay.setCameraInfo(min, max, cameraSource.getCameraFacing());
+          // Swap width and height sizes when in portrait, since it will be rotated by 90 degrees.
+          // The camera preview and the image being processed have the same size.
+          overlay.setImageSourceInfo(min, max, isImageFlipped);
         } else {
-          overlay.setCameraInfo(max, min, cameraSource.getCameraFacing());
+          overlay.setImageSourceInfo(max, min, isImageFlipped);
         }
         overlay.clear();
       }
@@ -123,8 +128,8 @@ public class CameraSourcePreview extends ViewGroup {
 
   @Override
   protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    int width = getResources().getDisplayMetrics().widthPixels;
-    int height = getResources().getDisplayMetrics().heightPixels;
+    int width = 320;
+    int height = 240;
     if (cameraSource != null) {
       Size size = cameraSource.getPreviewSize();
       if (size != null) {
@@ -140,28 +145,20 @@ public class CameraSourcePreview extends ViewGroup {
       height = tmp;
     }
 
-    final int layoutWidth = right - left;
-    final int layoutHeight = bottom - top;
-
-    // Computes height and width for potentially doing fit width.
-    int childWidth = layoutWidth;
-    int childHeight = (int) (((float) layoutWidth / (float) width) * height);
-
-    // If height is too tall using fit width, does fit height instead.
-    if (childHeight > layoutHeight) {
-      childHeight = layoutHeight;
-      childWidth = (int) (((float) layoutHeight / (float) height) * width);
-    }
-
-    for (int i = 0; i < getChildCount(); ++i) {
-      getChildAt(i).layout(0, 0, childWidth, childHeight);
-      Log.d(TAG, "Assigned view: " + i);
-    }
-
-    try {
-      startIfReady();
-    } catch (IOException e) {
-      Log.e(TAG, "Could not start camera source.", e);
+    float previewAspectRatio = (float) width / height;
+    int layoutWidth = right - left;
+    int layoutHeight = bottom - top;
+    float layoutAspectRatio = (float) layoutWidth / layoutHeight;
+    if (previewAspectRatio > layoutAspectRatio) {
+      // The preview input is wider than the layout area. Fit the layout height and crop
+      // the preview input horizontally while keep the center.
+      int horizontalOffset = (int) (previewAspectRatio * layoutHeight - layoutWidth) / 2;
+      surfaceView.layout(-horizontalOffset, 0, layoutWidth + horizontalOffset, layoutHeight);
+    } else {
+      // The preview input is taller than the layout area. Fit the layout width and crop the preview
+      // input vertically while keep the center.
+      int verticalOffset = (int) (layoutWidth / previewAspectRatio - layoutHeight) / 2;
+      surfaceView.layout(0, -verticalOffset, layoutWidth, layoutHeight + verticalOffset);
     }
   }
 
