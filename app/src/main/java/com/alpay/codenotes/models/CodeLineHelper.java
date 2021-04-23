@@ -154,7 +154,7 @@ public class CodeLineHelper {
     public static String programToCodeText(ArrayList<CodeLine> codeLines) {
         String codeText = "";
         for (CodeLine codeLine : codeLines) {
-            codeText += codeLineToCode(codeLine);
+            codeText += codeLineToCode(codeLine) + "\n";
         }
         return codeText + "\n";
     }
