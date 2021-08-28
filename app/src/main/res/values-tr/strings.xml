@@ -35,6 +35,8 @@
     <string name="app_name">Kart-ON</string>
     <string name="ok">OK</string>
     <string name="save">KAYDET</string>
+    <string name="pen">kalem</string>
+    <string name="karton">karton</string>
 
     <!-- Home Page -->
     <string name="home_card_learn">Öğren</string>

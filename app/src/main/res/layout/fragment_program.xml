@@ -15,33 +15,26 @@
         android:layout_marginRight="7dp"
         app:srcCompat="@drawable/ic_menu" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <androidx.appcompat.widget.AppCompatToggleButton
         android:id="@+id/turtle_mode"
-        style="@style/button_floating_nav"
+        android:textOff="@string/pen"
+        android:textOn="@string/karton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/unit10"
+        android:background="@drawable/turtle_bg_selector"
         android:layout_toLeftOf="@+id/show_examples"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="7dp"
-        app:srcCompat="@drawable/ic_draw" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/open_transfer"
-        style="@style/button_floating_nav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/turtle_mode"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="7dp"
-        app:srcCompat="@drawable/ic_photo_camera" />
+        android:drawableLeft="@drawable/turtle_icon_selector"
+        android:drawableTint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="7dp" />
 
     <RelativeLayout
-        android:id="@+id/hourofcode_view"
+        android:id="@+id/code_info_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/open_transfer"
+        android:layout_toLeftOf="@id/turtle_mode"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit12"
         android:background="@drawable/warningtoastshape"
@@ -49,7 +42,7 @@
         android:padding="@dimen/unit8">
 
         <ImageView
-            android:id="@+id/flappy_icon"
+            android:id="@+id/code_info_icon"
             android:layout_width="@dimen/unit48"
             android:layout_height="@dimen/unit48"
             android:layout_alignParentLeft="true"
@@ -57,7 +50,7 @@
             app:srcCompat="@drawable/ic_flappy" />
 
         <ImageView
-            android:id="@+id/close_flappy_bird"
+            android:id="@+id/close_code_info"
             android:layout_width="@dimen/unit24"
             android:layout_height="@dimen/unit24"
             android:layout_alignParentRight="true"
@@ -79,7 +72,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hourofcode_view">
+        android:layout_below="@+id/code_info_view">
 
         <ProgressBar
             android:id="@+id/program_progress_bar"

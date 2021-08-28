@@ -8,8 +8,23 @@ public class CodePool {
 
     public CodePool() {
         poolList = new ArrayList();
-        fillPoolList();
+        if (Utils.turtleMode)
+            fillTurtleList();
+        else
+            fillPoolList();
     }
+
+    private void fillTurtleList() {
+        Random random = new Random();
+        poolList.add("ileri #" + random.nextInt(100));
+        poolList.add("tekrarla #" + random.nextInt(20));
+        poolList.add("genislik #" + random.nextInt(10));
+        poolList.add("renk #" + random.nextInt(100));
+        poolList.add("sola #" + random.nextInt(100));
+        poolList.add("saga #" + random.nextInt(100));
+        poolList.add("bitir");
+    }
+
 
     private void fillPoolList() {
         Random random = new Random();

@@ -1,7 +1,6 @@
 package com.alpay.codenotes.activities;
 
 import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,7 +24,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
     private String[] p5Code = {};
     Bundle bundle;
     private String url = "";
-    private boolean isFlappy = false;
     private boolean turtleMode = false;
     private final Handler mHandler = new Handler();
     private final Launcher mLauncher = new Launcher();
@@ -69,7 +67,6 @@ public class CodeBlocksResultActivity extends BaseActivity {
         super.onStart();
         if (bundle != null) {
             p5Code = bundle.getStringArray(NavigationManager.BUNDLE_CODE_KEY);
-            isFlappy = bundle.getBoolean(NavigationManager.BUNDLE_FLAPPY_KEY);
             turtleMode = bundle.getBoolean(NavigationManager.BUNDLE_TURTLE);
             webView.setWebViewClient(new WebViewClient() {
                 public void onPageFinished(WebView view, String url) {
@@ -85,10 +82,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
                     super.onReceivedError(view, errorCode, description, failingUrl);
                 }
             });
-            if (isFlappy) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                url = Constants.FLAPPY;
-            } else if (turtleMode) {
+            if (turtleMode) {
                 url = Constants.TURTLE_TR_CODE;
             } else {
                 if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
@@ -120,9 +114,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
             codeLine = codeLine.trim().replace("\n", "#");
             evalCode("addCodeInput('" + codeLine + "');");
         }
-        if (!isFlappy) {
-            evalCode("runP5Code();");
-        }
+        evalCode("runP5Code();");
     }
 
     public void evalCode(String code) {

@@ -43,7 +43,6 @@ import butterknife.OnClick;
 
 import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_FLAPPY_KEY;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 
@@ -80,10 +79,8 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @Override
     public void hearShake() {
-        if (!turtleMode){
-            addCodeToCodeList(codePool.drawRandomCodeFromPool());
-            Toast.makeText(this, "Added a new random code!", Toast.LENGTH_SHORT).show();
-        }
+        addCodeToCodeList(codePool.drawRandomCodeFromPool());
+        Toast.makeText(this, "Added a new random code!", Toast.LENGTH_SHORT).show();
     }
 
     public void addCodeToCodeList(String code) {
@@ -107,7 +104,6 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         String[] p5Code = CodeLineHelper.programToCodeTextArray(codeList);
         Intent intent = new Intent(this, CodeBlocksResultActivity.class);
         intent.putExtra(BUNDLE_CODE_KEY, p5Code);
-        intent.putExtra(BUNDLE_FLAPPY_KEY, isFlappy);
         intent.putExtra(BUNDLE_TURTLE, turtleMode);
         startActivity(intent);
     }
@@ -133,9 +129,6 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             }
             if (bundle.getString(NavigationManager.BUNDLE_KEY) != null) {
                 openHintView(bundle.getString(NavigationManager.BUNDLE_KEY));
-            }
-            if (bundle.getBoolean(BUNDLE_FLAPPY_KEY)) {
-                isFlappy = true;
             }
             if (bundle.getBoolean(BUNDLE_TURTLE)) {
                 turtleMode = true;

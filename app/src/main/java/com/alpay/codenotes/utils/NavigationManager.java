@@ -13,7 +13,6 @@ import com.alpay.codenotes.activities.TransferLearningActivity;
 import com.alpay.codenotes.activities.WelcomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
 import com.alpay.codenotes.fragments.ContentListFragment;
-import com.alpay.codenotes.fragments.GameFragment;
 import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
@@ -23,7 +22,6 @@ public class NavigationManager {
 
     public static final String BUNDLE_KEY = "bundlekey";
     public static final String BUNDLE_CODE_KEY = "codekey";
-    public static final String BUNDLE_FLAPPY_KEY = "flappykey";
     public static final String BUNDLE_TURTLE = "turtle";
     public static final String GAMES = "games";
     public static final String CONTENT = "content";
@@ -49,9 +47,6 @@ public class NavigationManager {
         } else if (fragmentID.contentEquals(NOTES)) {
             StudyNotesFragment studyNotesFragment = new StudyNotesFragment();
             ft.replace(R.id.fragment_container, studyNotesFragment);
-        } else if (fragmentID.contentEquals(GAMES)) {
-            GameFragment gameFragment  = new GameFragment();
-            ft.replace(R.id.fragment_container, gameFragment);
         } else if (fragmentID.contentEquals(PROGRAM_LIST)) {
             ProgramListFragment programListFragment = new ProgramListFragment();
             ft.replace(R.id.fragment_container, programListFragment);
@@ -69,12 +64,6 @@ public class NavigationManager {
         ft.replace(R.id.fragment_container, webViewFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-    }
-
-    public static void openFlappyBirdHourOfCode(AppCompatActivity appCompatActivity) {
-        Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
-        intent.putExtra(NavigationManager.BUNDLE_FLAPPY_KEY, true);
-        appCompatActivity.startActivity(intent);
     }
 
     public static void openPracticeWithInstructions(AppCompatActivity appCompatActivity, String instructions) {

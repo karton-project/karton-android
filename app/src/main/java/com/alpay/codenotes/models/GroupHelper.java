@@ -26,37 +26,41 @@ public class GroupHelper {
 
     static final String TAG = GroupHelper.class.getSimpleName();
     private static ArrayList<Group> groupList = new ArrayList<>();
-    private static final String FILE_NAME = "karton_programs.json";
+    private static final String FILE_NAME_KARTON = "karton_programs.json";
+    private static final String FILE_NAME_TURTLE = "turtle_programs.json";
     public static String groupId = "Default";
-    private static Type groupListType = new TypeToken<ArrayList<Group>>() {}.getType();
-    static String TR_FILE_NAME = "tr_examples.json";
-    static String EN_FILE_NAME = "en_examples.json";
+    private static Type groupListType = new TypeToken<ArrayList<Group>>() {
+    }.getType();
+    static String TR_EXAMPLES_KARTON = "tr_examples.json";
+    static String EN_EXAMPLES_KARTON = "en_examples.json";
+    static String TR_EXAMPLES_TURTLE = "tr_turtle_examples.json";
+    static String EN_EXAMPLES_TURTLE = "en_turtle_examples.json";
 
     static Gson gson = new GsonBuilder().create();
 
-    public static ArrayList<Group> getGroupList(){
-        return  groupList;
+    public static ArrayList<Group> getGroupList() {
+        return groupList;
     }
 
-    public static int getListSize(){
+    public static int getListSize() {
         return groupList.size();
     }
 
 
-    private static int getGroupIndex(String groupID){
+    private static int getGroupIndex(String groupID) {
         int id = -1;
-        for (int i= 0; i < groupList.size(); i++){
-            if (groupID.contentEquals(groupList.get(i).getName())){
+        for (int i = 0; i < groupList.size(); i++) {
+            if (groupID.contentEquals(groupList.get(i).getName())) {
                 id = i;
             }
         }
         return id;
     }
 
-    public static ArrayList<CodeLine> returnCodeByName(String name){
-        for (int i = 0; i< groupList.size(); i++){
-            for (int j = 0; j < groupList.get(i).getProgramList().size(); j++){
-                if (groupList.get(i).getProgramList().get(i).getName().contentEquals(name)){
+    public static ArrayList<CodeLine> returnCodeByName(String name) {
+        for (int i = 0; i < groupList.size(); i++) {
+            for (int j = 0; j < groupList.get(i).getProgramList().size(); j++) {
+                if (groupList.get(i).getProgramList().get(i).getName().contentEquals(name)) {
                     return groupList.get(i).getProgramList().get(i).getCode();
                 }
             }
@@ -66,7 +70,11 @@ public class GroupHelper {
 
     private static void writeToFile(String data, Context context) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter;
+            if (Utils.turtleMode)
+                outputStreamWriter = new OutputStreamWriter(context.openFileOutput(FILE_NAME_TURTLE, Context.MODE_PRIVATE));
+            else
+                outputStreamWriter = new OutputStreamWriter(context.openFileOutput(FILE_NAME_KARTON, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
@@ -80,11 +88,16 @@ public class GroupHelper {
         writeToFile(programListString, context);
     }
 
-    public static void readProgramList(Context context){
+    public static void readProgramList(Context context) {
         groupList = new ArrayList<>();
         BufferedReader bufferedReader;
         try {
-            InputStream inputStream = context.openFileInput(FILE_NAME);
+            InputStream inputStream;
+            if (Utils.turtleMode)
+                inputStream = context.openFileInput(FILE_NAME_TURTLE);
+            else
+                inputStream = context.openFileInput(FILE_NAME_KARTON);
+
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
@@ -92,7 +105,7 @@ public class GroupHelper {
                     JsonReader reader = new JsonReader(bufferedReader);
                     groupList = gson.fromJson(reader, groupListType);
                 }
-            }else{
+            } else {
                 groupList = new ArrayList<>();
             }
         } catch (IOException e) {
@@ -105,12 +118,18 @@ public class GroupHelper {
         InputStream inputStream;
         BufferedReader bufferedReader = null;
         try {
-            if (Utils.isENCoding(context)){
-                inputStream = am.open(EN_FILE_NAME);
-            }else{
-                inputStream = am.open(TR_FILE_NAME);
+            if (Utils.isENCoding(context)) {
+                if (Utils.turtleMode)
+                    inputStream = am.open(EN_EXAMPLES_TURTLE);
+                else
+                    inputStream = am.open(EN_EXAMPLES_KARTON);
+            } else {
+                if (Utils.turtleMode)
+                    inputStream = am.open(TR_EXAMPLES_TURTLE);
+                else
+                    inputStream = am.open(TR_EXAMPLES_KARTON);
             }
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
             }
@@ -120,7 +139,7 @@ public class GroupHelper {
         }
 
         ArrayList<Group> data = new ArrayList<>();
-        if(bufferedReader != null){
+        if (bufferedReader != null) {
             JsonReader reader = new JsonReader(bufferedReader);
             groupList = gson.fromJson(reader, groupListType);
         }
@@ -141,13 +160,13 @@ public class GroupHelper {
     public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code) {
         Program program = new Program(name, code);
         int pos = getGroupIndex(parentName);
-        if (groupList == null){
+        if (groupList == null) {
             groupList = new ArrayList<>();
         }
-        if (pos < 0){
+        if (pos < 0) {
             groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
-            groupList.get(groupList.size()-1).getProgramList().add(program);
-        }else{
+            groupList.get(groupList.size() - 1).getProgramList().add(program);
+        } else {
             groupList.get(pos).getProgramList().add(program);
         }
         saveProgramList(context);
@@ -157,13 +176,13 @@ public class GroupHelper {
     public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code, String bitmap) {
         Program program = new Program(name, code, bitmap);
         int pos = getGroupIndex(parentName);
-        if (groupList == null){
+        if (groupList == null) {
             groupList = new ArrayList<>();
         }
-        if (pos < 0){
+        if (pos < 0) {
             groupList.add(new Group(GroupHelper.groupId, new ArrayList<>()));
-            groupList.get(groupList.size()-1).getProgramList().add(program);
-        }else{
+            groupList.get(groupList.size() - 1).getProgramList().add(program);
+        } else {
             groupList.get(pos).getProgramList().add(program);
         }
         saveProgramList(context);
