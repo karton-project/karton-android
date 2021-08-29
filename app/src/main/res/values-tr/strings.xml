@@ -55,6 +55,9 @@
     <!-- Notes -->
     <string name="no_to_dos">You don\'t have any notes</string>
 
+    <!-- Level -->
+    <string name="select_level">Örnek Seç:</string>
+
     <!-- Tutorial -->
     <string name="cancel">İptal</string>
     <string name="or_text">veya</string>
@@ -109,5 +112,38 @@
     <string name="save_program_as_image"><u>... ya da kamera ile kaydet</u></string>
     <string name="unknown_code_error">Kart-ON Kodu Algılanamadı</string>
 
+
+    <string-array name="command_array">
+        <item>doldur</item>
+        <item>kenar</item>
+        <item>arkaplan</item>
+        <item>elips</item>
+        <item>dikdörtgen</item>
+        <item>üçgen</item>
+        <item>çizgi</item>
+        <item>yazı</item>
+        <item>animasyon</item>
+        <item>hayalet</item>
+        <item>bitir</item>
+        <item>çağır</item>
+        <item>değişken</item>
+        <item>değer artır</item>
+        <item>değer azalt</item>
+        <item>değer ata</item>
+        <item>eğer</item>
+        <item>değilse</item>
+        <item>tekrarla</item>
+        <item>rastgele</item>
+        <item>ötele</item>
+        <item>döndür</item>
+    </string-array>
+
+    <string-array name="levels_array">
+        <item>1: Kare</item>
+        <item>2: Üçgen</item>
+        <item>3: Döngü Kare</item>
+        <item>4: Döngü Yıldız</item>
+        <item>5: Stil</item>
+    </string-array>
 
 </resources>

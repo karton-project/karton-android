@@ -55,6 +55,9 @@
     <!-- Notes -->
     <string name="no_to_dos">You don\'t have any notes</string>
 
+    <!-- Level -->
+    <string name="select_level">Select Level:</string>
+
     <!-- Tutorial -->
     <string name="cancel">Cancel</string>
     <string name="or_text">or</string>
@@ -119,7 +122,6 @@
         <item>line</item>
         <item>text</item>
         <item>animation</item>
-        <item>animation</item>
         <item>ghost animation</item>
         <item>end</item>
         <item>call</item>
@@ -133,6 +135,15 @@
         <item>random number</item>
         <item>translate</item>
         <item>rotate</item>
+    </string-array>
+
+
+    <string-array name="levels_array">
+        <item>1: Square</item>
+        <item>2: Triangle</item>
+        <item>3: Loop Square</item>
+        <item>4: Loop Star</item>
+        <item>5: Style</item>
     </string-array>
 
 </resources>

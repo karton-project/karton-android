@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.models.LevelBlock;
 import com.alpay.codenotes.transfer.TransferLearningModelWrapper;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -32,6 +33,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;

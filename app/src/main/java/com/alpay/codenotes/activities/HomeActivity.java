@@ -27,7 +27,7 @@ public class HomeActivity extends BaseActivity {
 
     @OnClick(R.id.nav_game)
     public void openHourOfCodeGame() {
-        NavigationManager.openFragment(this, NavigationManager.GAMES);
+        NavigationManager.openFragment(this, NavigationManager.LEVEL);
     }
 
     @OnClick(R.id.nav_user)

@@ -9,6 +9,7 @@ import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.activities.HomeActivity;
+import com.alpay.codenotes.fragments.LevelFragment;
 import com.alpay.codenotes.activities.TransferLearningActivity;
 import com.alpay.codenotes.activities.WelcomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
@@ -23,7 +24,7 @@ public class NavigationManager {
     public static final String BUNDLE_KEY = "bundlekey";
     public static final String BUNDLE_CODE_KEY = "codekey";
     public static final String BUNDLE_TURTLE = "turtle";
-    public static final String GAMES = "games";
+    public static final String LEVEL = "level";
     public static final String CONTENT = "content";
     public static final String SKETCH = "sketch";
     public static final String NOTES = "notes";
@@ -41,6 +42,9 @@ public class NavigationManager {
         if (fragmentID.contentEquals(CONTENT)) {
             ContentListFragment contentListFragment = new ContentListFragment();
             ft.replace(R.id.fragment_container, contentListFragment);
+        } else if (fragmentID.contentEquals(LEVEL)) {
+            LevelFragment levelFragment = new LevelFragment();
+            ft.replace(R.id.fragment_container, levelFragment);
         } else if (fragmentID.contentEquals(SKETCH)) {
             SketchFragment sketchFragment = new SketchFragment();
             ft.replace(R.id.fragment_container, sketchFragment);
@@ -72,6 +76,11 @@ public class NavigationManager {
         appCompatActivity.startActivity(intent);
     }
 
+    public static void openLevelActivity(AppCompatActivity appCompatActivity) {
+        Intent intent = new Intent(appCompatActivity, LevelFragment.class);
+        appCompatActivity.startActivity(intent);
+    }
+
     public static void openWelcomeActivity(AppCompatActivity appCompatActivity) {
         Intent intent = new Intent(appCompatActivity, WelcomeActivity.class);
         appCompatActivity.startActivity(intent);
@@ -93,7 +102,7 @@ public class NavigationManager {
         appCompatActivity.finish();
     }
 
-    public static void openTransferLearning(AppCompatActivity appCompatActivity){
+    public static void openTransferLearning(AppCompatActivity appCompatActivity) {
         Intent intent = new Intent(appCompatActivity, TransferLearningActivity.class);
         appCompatActivity.startActivity(intent);
     }
