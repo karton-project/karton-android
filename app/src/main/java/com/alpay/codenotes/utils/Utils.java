@@ -50,6 +50,8 @@ public class Utils {
     public static final String CLOSE_CODEINFO = "closecodeinfo";
     public static boolean turtleMode = false;
     public static String code = "";
+    public static String levelCode = "";
+    public static String checkCode = "";
     public static final boolean finishTraining = false;
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();

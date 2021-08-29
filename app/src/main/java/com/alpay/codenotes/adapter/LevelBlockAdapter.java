@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.LevelBlock;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -38,8 +39,17 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder
     @Override
     public void onBindViewHolder(final LevelBlockViewHolder holder, int position) {
         Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/level_img/" + mLevelBlockList.get(position).getImage())).into(holder.mImage);
-        holder.mLevelBlockCard.setOnClickListener(v ->
-                NavigationManager.openWelcomeActivity(appCompatActivity));
+        if (mLevelBlockList.get(position).isContainCode()){
+            holder.mLevelBlockCard.setOnClickListener(v -> {
+                Utils.checkCode = mLevelBlockList.get(position).getCode();
+            });
+            holder.mImage.setOnClickListener(view -> {
+                Utils.checkCode = mLevelBlockList.get(position).getCode();
+            });
+        } else {
+            Utils.checkCode = "";
+        }
+
 
     }
 
