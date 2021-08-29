@@ -127,23 +127,23 @@ public class LevelFragment extends Fragment {
 
     private void openLevel(int level){
         switch (level){
-            case 1:
+            case 0:
                 adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels1);
                 break;
 
-            case 2:
+            case 1:
                 adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels2);
                 break;
 
-            case 3:
+            case 2:
                 adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels3);
                 break;
 
-            case 4:
+            case 3:
                 adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels4);
                 break;
 
-            case 5:
+            case 4:
                 adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels5);
             default:
                 break;
