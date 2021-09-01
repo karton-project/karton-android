@@ -30,7 +30,8 @@
         android:id="@+id/level_blocks"
         android:layout_width="@dimen/unit240"
         android:layout_height="match_parent"
-        android:layout_below="@+id/spinner_container" />
+        android:layout_below="@+id/spinner_container"
+        android:clickable="true"/>
 
 
     <RelativeLayout

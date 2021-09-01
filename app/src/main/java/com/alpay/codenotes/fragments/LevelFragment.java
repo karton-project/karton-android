@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +25,13 @@ import android.widget.Toast;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.adapter.LevelBlockAdapter;
+import com.alpay.codenotes.listener.RecyclerItemClickListener;
 import com.alpay.codenotes.models.Level;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
+import com.alpay.codenotes.vision.LevelBlockRecognitionProcessor;
 import com.alpay.codenotes.vision.TextRecognitionProcessor;
 
 import java.io.IOException;
@@ -59,8 +62,8 @@ public class LevelFragment extends Fragment {
     RecyclerView recyclerView;
 
     @OnClick(R.id.level_ok)
-    public void checkLevelCode(){
-        if (Utils.checkCode.contentEquals(Utils.levelCode)){
+    public void checkLevelCode() {
+        if (Utils.levelCode.replaceAll("\\s+","").contentEquals(Utils.checkCode)) {
             Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
         }
     }
@@ -99,14 +102,32 @@ public class LevelFragment extends Fragment {
     }
 
 
-    public void setupRecyclerView(){
-        adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels1);
+    public void setupRecyclerView() {
+        openLevel(0);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        if (Level.levelBlockList.get(position).isContainCode()) {
+                            GradientDrawable border = new GradientDrawable();
+                            border.setColor(0xFFFFFFFF); //white background
+                            border.setStroke(2, 0xFF000000);
+                            view.setBackground(border);
+                            Utils.checkCode = Level.levelBlockList.get(position).getCode();
+                        }
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
     }
 
-    private void setSpinner(){
+    private void setSpinner() {
         Spinner spinner = (Spinner) view.findViewById(R.id.levels_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.levels_array, android.R.layout.simple_spinner_item);
@@ -125,29 +146,30 @@ public class LevelFragment extends Fragment {
     }
 
 
-    private void openLevel(int level){
-        switch (level){
+    private void openLevel(int level) {
+        switch (level) {
             case 0:
-                adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels1);
+                Level.levelBlockList = Level.turtleLevels1;
                 break;
 
             case 1:
-                adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels2);
+                Level.levelBlockList = Level.turtleLevels2;
                 break;
 
             case 2:
-                adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels3);
+                Level.levelBlockList = Level.turtleLevels3;
                 break;
 
             case 3:
-                adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels4);
+                Level.levelBlockList = Level.turtleLevels4;
                 break;
 
             case 4:
-                adapter = new LevelBlockAdapter((AppCompatActivity) getActivity(), Level.turtleLevels5);
+                Level.levelBlockList = Level.turtleLevels5;
             default:
                 break;
         }
+        adapter = new LevelBlockAdapter((AppCompatActivity) getActivity());
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
@@ -160,7 +182,7 @@ public class LevelFragment extends Fragment {
 
         try {
             Log.i(TAG, "Using Text Detector Processor");
-            cameraSource.setMachineLearningFrameProcessor(new TextRecognitionProcessor());
+            cameraSource.setMachineLearningFrameProcessor(new LevelBlockRecognitionProcessor());
         } catch (Exception e) {
             Toast.makeText(
                     getActivity().getApplicationContext(),

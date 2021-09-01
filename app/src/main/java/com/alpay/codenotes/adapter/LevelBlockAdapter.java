@@ -11,22 +11,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.models.Level;
 import com.alpay.codenotes.models.LevelBlock;
-import com.alpay.codenotes.utils.NavigationManager;
-import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 
-public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder> {
+public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder>  {
 
     private AppCompatActivity appCompatActivity;
-    private ArrayList<LevelBlock> mLevelBlockList;
 
-    public LevelBlockAdapter(AppCompatActivity appCompatActivity, ArrayList<LevelBlock> mLevelBlockList) {
+    public LevelBlockAdapter(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
-        this.mLevelBlockList = mLevelBlockList;
     }
 
     @Override
@@ -38,34 +35,27 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder
 
     @Override
     public void onBindViewHolder(final LevelBlockViewHolder holder, int position) {
-        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/level_img/" + mLevelBlockList.get(position).getImage())).into(holder.mImage);
-        if (mLevelBlockList.get(position).isContainCode()){
-            holder.mLevelBlockCard.setOnClickListener(v -> {
-                Utils.checkCode = mLevelBlockList.get(position).getCode();
-            });
-            holder.mImage.setOnClickListener(view -> {
-                Utils.checkCode = mLevelBlockList.get(position).getCode();
-            });
-        } else {
-            Utils.checkCode = "";
+        if (!Level.levelBlockList.get(position).isContainCode()) {
+            Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/level_img/" + Level.levelBlockList.get(position).getImage())).into(holder.mImage);
         }
-
-
     }
 
     @Override
     public int getItemCount() {
-        return mLevelBlockList.size();
+        return Level.levelBlockList.size();
     }
+
 }
 
 class LevelBlockViewHolder extends RecyclerView.ViewHolder {
 
+    View mView;
     CardView mLevelBlockCard;
     ImageView mImage;
 
     LevelBlockViewHolder(View itemView) {
         super(itemView);
+        mView = itemView.findViewById(R.id.level_block_layout);
         mImage = itemView.findViewById(R.id.block_image);
         mLevelBlockCard = itemView.findViewById(R.id.levelblock_card);
     }
