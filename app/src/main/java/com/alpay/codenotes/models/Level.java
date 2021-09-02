@@ -55,4 +55,18 @@ public class Level {
         turtleLevels5.add(new LevelBlock("5", false,"card-sola144.png"));
         turtleLevels5.add(new LevelBlock("6", false, "card-bitir.png"));
     }
+
+    public static  boolean[] returnCheckCodeArray(ArrayList<LevelBlock> levelBlockList){
+        boolean[] checkArray  =  new boolean[levelBlockList.size()];
+        for (int i = 0; i < levelBlockList.size(); i++){
+            checkArray[i] = levelBlockList.get(i).isContainCode();
+        }
+        return checkArray;
+    }
+
+    public static boolean isAllFalse(boolean... array)
+    {
+        for(boolean b : array) if(b) return false;
+        return true;
+    }
 }

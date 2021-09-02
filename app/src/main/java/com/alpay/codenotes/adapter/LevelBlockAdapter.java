@@ -7,20 +7,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.Level;
-import com.alpay.codenotes.models.LevelBlock;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 
-
-public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder>  {
+public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.LevelBlockViewHolder>  {
 
     private AppCompatActivity appCompatActivity;
+    private int selected_position = RecyclerView.NO_POSITION;
 
     public LevelBlockAdapter(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
@@ -35,9 +32,14 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder
 
     @Override
     public void onBindViewHolder(final LevelBlockViewHolder holder, int position) {
+        holder.itemView.setSelected(selected_position == position);
         if (!Level.levelBlockList.get(position).isContainCode()) {
-            Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/level_img/" + Level.levelBlockList.get(position).getImage())).into(holder.mImage);
+            addCurrentPicture(holder, position);
         }
+    }
+
+    public void addCurrentPicture(LevelBlockViewHolder holder, int position) {
+        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/level_img/" + Level.levelBlockList.get(position).getImage())).into(holder.mImage);
     }
 
     @Override
@@ -45,18 +47,29 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockViewHolder
         return Level.levelBlockList.size();
     }
 
-}
 
-class LevelBlockViewHolder extends RecyclerView.ViewHolder {
+    public class LevelBlockViewHolder extends RecyclerView.ViewHolder {
 
-    View mView;
-    CardView mLevelBlockCard;
-    ImageView mImage;
+        View mView;
+        ImageView mImage;
 
-    LevelBlockViewHolder(View itemView) {
-        super(itemView);
-        mView = itemView.findViewById(R.id.level_block_layout);
-        mImage = itemView.findViewById(R.id.block_image);
-        mLevelBlockCard = itemView.findViewById(R.id.levelblock_card);
+        LevelBlockViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView.findViewById(R.id.level_block_layout);
+            mImage = itemView.findViewById(R.id.block_image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Redraw the old selection and the new
+                    notifyItemChanged(selected_position);
+                    selected_position = getLayoutPosition();
+                    notifyItemChanged(selected_position);
+                }
+            });
+        }
     }
+
+
 }
+

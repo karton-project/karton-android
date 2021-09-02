@@ -23,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.activities.FBVisionActivity;
 import com.alpay.codenotes.adapter.LevelBlockAdapter;
 import com.alpay.codenotes.listener.RecyclerItemClickListener;
 import com.alpay.codenotes.models.Level;
@@ -32,7 +31,6 @@ import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
 import com.alpay.codenotes.vision.LevelBlockRecognitionProcessor;
-import com.alpay.codenotes.vision.TextRecognitionProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,6 +55,9 @@ public class LevelFragment extends Fragment {
     private GraphicOverlay graphicOverlay;
 
     LevelBlockAdapter adapter;
+    private int currentPos = 0;
+    private int currentLevel = 0;
+    boolean[] checkArray;
 
     @BindView(R.id.level_blocks)
     RecyclerView recyclerView;
@@ -64,7 +65,13 @@ public class LevelFragment extends Fragment {
     @OnClick(R.id.level_ok)
     public void checkLevelCode() {
         if (Utils.levelCode.replaceAll("\\s+","").contentEquals(Utils.checkCode)) {
-            Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
+            adapter.addCurrentPicture((LevelBlockAdapter.LevelBlockViewHolder) recyclerView.findViewHolderForAdapterPosition(currentPos), currentPos);
+            adapter.notifyDataSetChanged();
+            checkArray[currentPos] = false;
+            if (Level.isAllFalse(checkArray)){
+                Toast.makeText(getActivity(), "yes", Toast.LENGTH_LONG).show();
+                openLevel(currentLevel++);
+            }
         }
     }
 
@@ -111,11 +118,9 @@ public class LevelFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         if (Level.levelBlockList.get(position).isContainCode()) {
-                            GradientDrawable border = new GradientDrawable();
-                            border.setColor(0xFFFFFFFF); //white background
-                            border.setStroke(2, 0xFF000000);
-                            view.setBackground(border);
+                            view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.levelblock_selector));
                             Utils.checkCode = Level.levelBlockList.get(position).getCode();
+                            currentPos = position;
                         }
                     }
 
@@ -169,6 +174,7 @@ public class LevelFragment extends Fragment {
             default:
                 break;
         }
+        checkArray = Level.returnCheckCodeArray(Level.levelBlockList);
         adapter = new LevelBlockAdapter((AppCompatActivity) getActivity());
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
