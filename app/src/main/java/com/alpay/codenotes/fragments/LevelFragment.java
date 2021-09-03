@@ -1,6 +1,7 @@
 package com.alpay.codenotes.fragments;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -8,10 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,19 +57,19 @@ public class LevelFragment extends Fragment {
     private int currentPos = 0;
     private int currentLevel = 0;
     boolean[] checkArray;
+    Level.MOD currentMod = Level.MOD.TURTLE;
 
     @BindView(R.id.level_blocks)
     RecyclerView recyclerView;
 
     @OnClick(R.id.level_ok)
     public void checkLevelCode() {
-        if (Utils.levelCode.replaceAll("\\s+","").contentEquals(Utils.checkCode)) {
+        if (Utils.levelCode.replaceAll("\\s+", "").contentEquals(Utils.checkCode)) {
             adapter.addCurrentPicture((LevelBlockAdapter.LevelBlockViewHolder) recyclerView.findViewHolderForAdapterPosition(currentPos), currentPos);
             adapter.notifyDataSetChanged();
             checkArray[currentPos] = false;
-            if (Level.isAllFalse(checkArray)){
-                Toast.makeText(getActivity(), "yes", Toast.LENGTH_LONG).show();
-                openLevel(currentLevel++);
+            if (Level.isAllFalse(checkArray)) {
+                openCompletedView(R.layout.layout_level_1);
             }
         }
     }
@@ -80,10 +79,11 @@ public class LevelFragment extends Fragment {
         super.onCreate(savedInstanceState);
         view = inflater.inflate(R.layout.fragment_level, container, false);
         unbinder = ButterKnife.bind(this, view);
-        setSpinner();
+        setLevelSpinner(R.array.turtle_levels_array);
+        setModSpinner();
         Level.populateTurtleLevels();
+        Level.populateKartONLevels();
         setupRecyclerView();
-
         preview = view.findViewById(R.id.firePreview);
         if (preview == null) {
             Log.d(TAG, "Preview is null");
@@ -108,9 +108,20 @@ public class LevelFragment extends Fragment {
         super.onDetach();
     }
 
+    private void openCompletedView(int layoutID) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.task_title)
+                .setView(layoutID)
+                .setNeutralButton(android.R.string.ok, (dialog, which) -> {
+                    openLevel(currentLevel++);
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
 
     public void setupRecyclerView() {
-        openLevel(0);
+        openLevel(currentPos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnItemTouchListener(
@@ -132,10 +143,10 @@ public class LevelFragment extends Fragment {
         );
     }
 
-    private void setSpinner() {
+    private void setLevelSpinner(int levels_array) {
         Spinner spinner = (Spinner) view.findViewById(R.id.levels_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.levels_array, android.R.layout.simple_spinner_item);
+                levels_array, R.layout.spinner_text);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -150,29 +161,75 @@ public class LevelFragment extends Fragment {
         });
     }
 
+    private void setModSpinner() {
+        Spinner spinner = (Spinner) view.findViewById(R.id.mode_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.mod_array, R.layout.spinner_text);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    currentMod = Level.MOD.TURTLE;
+                    setLevelSpinner(R.array.turtle_levels_array);
+                } else {
+                    currentMod = Level.MOD.KARTON;
+                    setLevelSpinner(R.array.karton_levels_array);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
 
     private void openLevel(int level) {
-        switch (level) {
-            case 0:
-                Level.levelBlockList = Level.turtleLevels1;
-                break;
+        if (currentMod == Level.MOD.TURTLE){
+            switch (level) {
+                case 0:
+                    Level.levelBlockList = Level.turtleLevels1;
+                    break;
 
-            case 1:
-                Level.levelBlockList = Level.turtleLevels2;
-                break;
+                case 1:
+                    Level.levelBlockList = Level.turtleLevels2;
+                    break;
 
-            case 2:
-                Level.levelBlockList = Level.turtleLevels3;
-                break;
+                case 2:
+                    Level.levelBlockList = Level.turtleLevels3;
+                    break;
 
-            case 3:
-                Level.levelBlockList = Level.turtleLevels4;
-                break;
+                case 3:
+                    Level.levelBlockList = Level.turtleLevels4;
+                    break;
 
-            case 4:
-                Level.levelBlockList = Level.turtleLevels5;
-            default:
-                break;
+                case 4:
+                    Level.levelBlockList = Level.turtleLevels5;
+                    break;
+
+                default:
+                    break;
+            }
+        } else {
+            switch (level) {
+                case 0:
+                    Level.levelBlockList = Level.kartonLevels1;
+                    break;
+
+                case 1:
+                    Level.levelBlockList = Level.kartonLevels2;
+                    break;
+
+                case 2:
+                    Level.levelBlockList = Level.kartonLevels3;
+                    break;
+
+                default:
+                    break;
+
+            }
         }
         checkArray = Level.returnCheckCodeArray(Level.levelBlockList);
         adapter = new LevelBlockAdapter((AppCompatActivity) getActivity());
@@ -255,7 +312,7 @@ public class LevelFragment extends Fragment {
 
     private boolean allPermissionsGranted() {
         for (String permission : getRequiredPermissions()) {
-            if (!isPermissionGranted(getActivity(), permission)) {
+            if (!isPermissionGranted((AppCompatActivity) getActivity(), permission)) {
                 return false;
             }
         }
@@ -265,7 +322,7 @@ public class LevelFragment extends Fragment {
     private void getRuntimePermissions() {
         List<String> allNeededPermissions = new ArrayList<>();
         for (String permission : getRequiredPermissions()) {
-            if (!isPermissionGranted(getActivity(), permission)) {
+            if (!isPermissionGranted((AppCompatActivity) getActivity(), permission)) {
                 allNeededPermissions.add(permission);
             }
         }
@@ -286,8 +343,8 @@ public class LevelFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private static boolean isPermissionGranted(Context context, String permission) {
-        if (ContextCompat.checkSelfPermission(context, permission)
+    private static boolean isPermissionGranted(AppCompatActivity appCompatActivity, String permission) {
+        if (ContextCompat.checkSelfPermission(appCompatActivity, permission)
                 == PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Permission granted: " + permission);
             return true;

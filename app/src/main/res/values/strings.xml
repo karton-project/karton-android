@@ -57,6 +57,7 @@
 
     <!-- Level -->
     <string name="select_level">Select Level:</string>
+    <string name="select_mode">From mode:</string>
 
     <!-- Tutorial -->
     <string name="cancel">Cancel</string>
@@ -138,12 +139,26 @@
     </string-array>
 
 
-    <string-array name="levels_array">
+    <string-array name="turtle_levels_array">
         <item>1: Square</item>
         <item>2: Triangle</item>
         <item>3: Loop Square</item>
         <item>4: Loop Star</item>
         <item>5: Style</item>
+    </string-array>
+
+    <string-array name="karton_levels_array">
+        <item>1: Basics</item>
+        <item>2: Input</item>
+        <item>3: Conditionals</item>
+        <item>4: For Loop</item>
+        <item>5: While Loop</item>
+        <item>6: Animation</item>
+    </string-array>
+
+    <string-array name="mod_array">
+        <item>Pen</item>
+        <item>Kart-ON</item>
     </string-array>
 
 </resources>

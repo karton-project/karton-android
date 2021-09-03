@@ -57,6 +57,7 @@
 
     <!-- Level -->
     <string name="select_level">Örnek Seç:</string>
+    <string name="select_mode">Mod:</string>
 
     <!-- Tutorial -->
     <string name="cancel">İptal</string>
@@ -138,12 +139,27 @@
         <item>döndür</item>
     </string-array>
 
-    <string-array name="levels_array">
+    <string-array name="turtle_levels_array">
         <item>1: Kare</item>
         <item>2: Üçgen</item>
         <item>3: Döngü Kare</item>
         <item>4: Döngü Yıldız</item>
         <item>5: Stil</item>
     </string-array>
+
+    <string-array name="karton_levels_array">
+        <item>1: Temel</item>
+        <item>2: Girdi</item>
+        <item>3: Koşul Yapısı</item>
+        <item>4: For Döngüsü</item>
+        <item>5: While Döngüsü</item>
+        <item>6: Animasyon</item>
+    </string-array>
+
+    <string-array name="mod_array">
+        <item>Kalem</item>
+        <item>Kart-ON</item>
+    </string-array>
+
 
 </resources>

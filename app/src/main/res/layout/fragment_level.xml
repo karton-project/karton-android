@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/unit8">
 
+
     <LinearLayout
         android:id="@+id/spinner_container"
         android:layout_width="match_parent"
@@ -14,14 +15,40 @@
         android:layout_marginBottom="@dimen/unit10">
 
         <TextView
+            style="@style/text_dark_bold_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/select_mode"
+            android:layout_marginRight="@dimen/unit10"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/mode_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/unit10"
+            android:background="@drawable/spinner_item_background"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            style="@style/text_dark_bold_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/unit10"
             android:text="@string/select_level" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/levels_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/spinner_item_background"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
 
 
     </LinearLayout>
@@ -31,7 +58,7 @@
         android:layout_width="@dimen/unit240"
         android:layout_height="match_parent"
         android:layout_below="@+id/spinner_container"
-        android:clickable="true"/>
+        android:clickable="true" />
 
 
     <RelativeLayout
@@ -42,10 +69,10 @@
 
         <com.alpay.codenotes.vision.CameraSourcePreview
             android:id="@+id/firePreview"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
 
             <com.alpay.codenotes.vision.GraphicOverlay
                 android:id="@+id/fireFaceOverlay"
