@@ -50,8 +50,14 @@
             android:gravity="center"
             android:spinnerMode="dropdown" />
 
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/recognized_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/level_blocks"

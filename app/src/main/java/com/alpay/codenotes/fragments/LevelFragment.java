@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,18 +19,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alpay.codenotes.R;
+import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.adapter.LevelBlockAdapter;
 import com.alpay.codenotes.listener.RecyclerItemClickListener;
+import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.Level;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
 import com.alpay.codenotes.vision.LevelBlockRecognitionProcessor;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +46,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 public class LevelFragment extends Fragment {
 
@@ -56,21 +66,29 @@ public class LevelFragment extends Fragment {
     LevelBlockAdapter adapter;
     private int currentPos = 0;
     private int currentLevel = 0;
+    View currentView;
     boolean[] checkArray;
     Level.MOD currentMod = Level.MOD.TURTLE;
+    int imageRes, textRes;
 
     @BindView(R.id.level_blocks)
     RecyclerView recyclerView;
 
+    @BindView(R.id.recognized_text)
+    TextView recognizedTextContainer;
+
     @OnClick(R.id.level_ok)
     public void checkLevelCode() {
-        if (Utils.levelCode.replaceAll("\\s+", "").contentEquals(Utils.checkCode)) {
+        String result = CodeLineHelper.clearCode((AppCompatActivity) getActivity(), Utils.levelCode.replaceAll("\\s+", ""));
+        if (result.contentEquals(Utils.checkCode)) {
             adapter.addCurrentPicture((LevelBlockAdapter.LevelBlockViewHolder) recyclerView.findViewHolderForAdapterPosition(currentPos), currentPos);
             adapter.notifyDataSetChanged();
             checkArray[currentPos] = false;
             if (Level.isAllFalse(checkArray)) {
-                openCompletedView(R.layout.layout_level_1);
+                openCompletedView(imageRes, textRes);
             }
+        } else {
+            recognizedTextContainer.setText(result);
         }
     }
 
@@ -108,11 +126,23 @@ public class LevelFragment extends Fragment {
         super.onDetach();
     }
 
-    private void openCompletedView(int layoutID) {
+    private void openCompletedView(int imageResource, int textResource) {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.layout_level_result, null);
+        ImageView imageView = dialogLayout.findViewById(R.id.dialog_imageview);
+        TextView textView = dialogLayout.findViewById(R.id.explain_text);
+        imageView.setImageResource(imageResource);
+        textView.setText(textResource);
         new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.task_title)
-                .setView(layoutID)
-                .setNeutralButton(android.R.string.ok, (dialog, which) -> {
+                .setView(dialogLayout)
+                .setNeutralButton(R.string.see_result, (dialog, which) -> {
+                    Intent intent = new Intent(getActivity(), CodeBlocksResultActivity.class);
+                    String[] p5CodeArr = (String[]) Level.getCodeArray();
+                    intent.putExtra(BUNDLE_TURTLE, true);
+                    intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
+                    getActivity().startActivity(intent);
+                })
+                .setPositiveButton(R.string.open_next_level, (dialog, which) -> {
                     openLevel(currentLevel++);
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -129,9 +159,14 @@ public class LevelFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         if (Level.levelBlockList.get(position).isContainCode()) {
-                            view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.levelblock_selector));
+                            if (currentPos != position) {
+                                view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+                                if (currentView != null)
+                                    currentView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+                            }
                             Utils.checkCode = Level.levelBlockList.get(position).getCode();
                             currentPos = position;
+                            currentView = view;
                         }
                     }
 
@@ -187,26 +222,36 @@ public class LevelFragment extends Fragment {
 
 
     private void openLevel(int level) {
-        if (currentMod == Level.MOD.TURTLE){
+        if (currentMod == Level.MOD.TURTLE) {
             switch (level) {
                 case 0:
                     Level.levelBlockList = Level.turtleLevels1;
+                    imageRes = R.drawable.result_square;
+                    textRes = R.string.level1;
                     break;
 
                 case 1:
                     Level.levelBlockList = Level.turtleLevels2;
+                    imageRes = R.drawable.result_triangle;
+                    textRes = R.string.level2;
                     break;
 
                 case 2:
                     Level.levelBlockList = Level.turtleLevels3;
+                    imageRes = R.drawable.result_square_loop;
+                    textRes = R.string.level3;
                     break;
 
                 case 3:
                     Level.levelBlockList = Level.turtleLevels4;
+                    imageRes = R.drawable.result_star_loop;
+                    textRes = R.string.level4;
                     break;
 
                 case 4:
                     Level.levelBlockList = Level.turtleLevels5;
+                    imageRes = R.drawable.result_penta_style;
+                    textRes = R.string.level5;
                     break;
 
                 default:
@@ -216,14 +261,26 @@ public class LevelFragment extends Fragment {
             switch (level) {
                 case 0:
                     Level.levelBlockList = Level.kartonLevels1;
+                    imageRes = R.drawable.result_basic;
+                    textRes = R.string.level6;
                     break;
 
                 case 1:
                     Level.levelBlockList = Level.kartonLevels2;
+                    imageRes = R.drawable.result_input;
+                    textRes = R.string.level7;
                     break;
 
                 case 2:
                     Level.levelBlockList = Level.kartonLevels3;
+                    imageRes = R.drawable.result_conditionals;
+                    textRes = R.string.level8;
+                    break;
+
+                case 3:
+                    Level.levelBlockList = Level.kartonLevels4;
+                    imageRes = R.drawable.result_forloop;
+                    textRes = R.string.level9;
                     break;
 
                 default:
@@ -231,6 +288,7 @@ public class LevelFragment extends Fragment {
 
             }
         }
+        currentLevel = level;
         checkArray = Level.returnCheckCodeArray(Level.levelBlockList);
         adapter = new LevelBlockAdapter((AppCompatActivity) getActivity());
         adapter.notifyDataSetChanged();

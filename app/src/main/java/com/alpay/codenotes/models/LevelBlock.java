@@ -18,12 +18,6 @@ public class LevelBlock {
         this.image = image;
     }
 
-    public LevelBlock(String id, boolean containCode, String image) {
-        this.id = id;
-        this.containCode = containCode;
-        this.image = image;
-    }
-
     public String getId() {
         return id;
     }

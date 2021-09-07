@@ -58,6 +58,19 @@
     <!-- Level -->
     <string name="select_level">Örnek Seç:</string>
     <string name="select_mode">Mod:</string>
+    <string name="see_result">Oluşan Kodu Gör</string>
+    <string name="levelcomplete_title">Tebrikler! Bölümü çözdün.</string>
+    <string name="open_next_level">Sonraki Bölüm</string>
+    <string name="level1">Yaptığımız her sola dönüş kalemin ucunu döndürür. İleri gittiğimizde de kalem belirttiğimiz miktar kadar çizim yapar.</string>
+    <string name="level2"></string>
+    <string name="level3"></string>
+    <string name="level4"></string>
+    <string name="level5"></string>
+    <string name="level6"></string>
+    <string name="level7"></string>
+    <string name="level8"></string>
+    <string name="level9"></string>
+    <string name="level10"></string>
 
     <!-- Tutorial -->
     <string name="cancel">İptal</string>
@@ -152,8 +165,6 @@
         <item>2: Girdi</item>
         <item>3: Koşul Yapısı</item>
         <item>4: For Döngüsü</item>
-        <item>5: While Döngüsü</item>
-        <item>6: Animasyon</item>
     </string-array>
 
     <string-array name="mod_array">

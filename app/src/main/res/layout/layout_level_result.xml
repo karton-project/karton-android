@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/text_light_bold_large"
+        android:background="@color/colorPrimaryDark"
+        android:padding="@dimen/unit8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/levelcomplete_title"
+        android:layout_centerHorizontal="true"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieanim"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/unit40"
+        android:layout_gravity="center_horizontal"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/stars"
+        app:lottie_repeatCount="0"
+        app:lottie_speed="0.75" />
+
+    <ImageView
+        android:id="@+id/dialog_imageview"
+        android:layout_below="@+id/lottieanim"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/result_square" />
+
+    <TextView
+        android:id="@+id/explain_text"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/unit4"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/ok" />
+
+</RelativeLayout>

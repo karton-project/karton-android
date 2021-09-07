@@ -3,10 +3,12 @@ package com.alpay.codenotes.adapter;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
@@ -14,7 +16,7 @@ import com.alpay.codenotes.models.Level;
 import com.bumptech.glide.Glide;
 
 
-public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.LevelBlockViewHolder>  {
+public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.LevelBlockViewHolder> {
 
     private AppCompatActivity appCompatActivity;
     private int selected_position = RecyclerView.NO_POSITION;
@@ -32,7 +34,6 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.Le
 
     @Override
     public void onBindViewHolder(final LevelBlockViewHolder holder, int position) {
-        holder.itemView.setSelected(selected_position == position);
         if (!Level.levelBlockList.get(position).isContainCode()) {
             addCurrentPicture(holder, position);
         }
@@ -48,7 +49,7 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.Le
     }
 
 
-    public class LevelBlockViewHolder extends RecyclerView.ViewHolder {
+    public class LevelBlockViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         View mView;
         ImageView mImage;
@@ -58,15 +59,15 @@ public class LevelBlockAdapter extends RecyclerView.Adapter<LevelBlockAdapter.Le
             mView = itemView.findViewById(R.id.level_block_layout);
             mImage = itemView.findViewById(R.id.block_image);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Redraw the old selection and the new
-                    notifyItemChanged(selected_position);
-                    selected_position = getLayoutPosition();
-                    notifyItemChanged(selected_position);
-                }
-            });
+        }
+
+        @Override
+        public void onClick (View v){
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
+            // Redraw the old selection and the new
+            notifyItemChanged(selected_position);
+            selected_position = getLayoutPosition();
+            notifyItemChanged(selected_position);
         }
     }
 

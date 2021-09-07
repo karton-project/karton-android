@@ -130,6 +130,32 @@ public class CodeLineHelper {
         return new CodeLine(command, params);
     }
 
+    public static String clearCode(AppCompatActivity appCompatActivity, String code) {
+        String command = "";
+        String paramString = "";
+        String[] params = new String[0];
+        try {
+            if (code.length() > 3) {
+                code = code.toLowerCase();
+                if (code.contains("#")) {
+                    String[] parsedCode = code.split("#");
+                    command = parsedCode[0];
+                    params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
+                } else {
+                    command = code;
+                }
+                if (Utils.isENCoding(appCompatActivity))
+                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_en)).getString();
+                else
+                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_tr)).getString();
+            }
+        } catch (Exception e) {
+            Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
+        }
+        for (String p : params) paramString += "#" + p;
+        return command  + paramString;
+    }
+
     public static String[] checkAndCorrectVarParams(String command, String[] params){
         params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
         return params;

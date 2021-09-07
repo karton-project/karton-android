@@ -58,6 +58,19 @@
     <!-- Level -->
     <string name="select_level">Select Level:</string>
     <string name="select_mode">From mode:</string>
+    <string name="see_result">See Resulted Code</string>
+    <string name="levelcomplete_title">Congrats! You solved the level.</string>
+    <string name="open_next_level">Next Level</string>
+    <string name="level1">Each left return changes the direction of the pen\'s tip. Then moving forward draws a straight line.</string>
+    <string name="level2"></string>
+    <string name="level3"></string>
+    <string name="level4"></string>
+    <string name="level5"></string>
+    <string name="level6"></string>
+    <string name="level7"></string>
+    <string name="level8"></string>
+    <string name="level9"></string>
+    <string name="level10"></string>
 
     <!-- Tutorial -->
     <string name="cancel">Cancel</string>
@@ -152,8 +165,6 @@
         <item>2: Input</item>
         <item>3: Conditionals</item>
         <item>4: For Loop</item>
-        <item>5: While Loop</item>
-        <item>6: Animation</item>
     </string-array>
 
     <string-array name="mod_array">
