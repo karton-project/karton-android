@@ -48,6 +48,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_KARTON;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 public class LevelFragment extends Fragment {
@@ -64,11 +65,10 @@ public class LevelFragment extends Fragment {
     private GraphicOverlay graphicOverlay;
 
     LevelBlockAdapter adapter;
-    private int currentPos = 0;
-    private int currentLevel = 0;
+    static int currentPos = -1;
     View currentView;
     boolean[] checkArray;
-    Level.MOD currentMod = Level.MOD.TURTLE;
+    String currentMod = BUNDLE_TURTLE;
     int imageRes, textRes;
 
     @BindView(R.id.level_blocks)
@@ -76,6 +76,9 @@ public class LevelFragment extends Fragment {
 
     @BindView(R.id.recognized_text)
     TextView recognizedTextContainer;
+
+    @BindView(R.id.levels_spinner)
+    Spinner levelsSpinner;
 
     @OnClick(R.id.level_ok)
     public void checkLevelCode() {
@@ -138,12 +141,13 @@ public class LevelFragment extends Fragment {
                 .setNeutralButton(R.string.see_result, (dialog, which) -> {
                     Intent intent = new Intent(getActivity(), CodeBlocksResultActivity.class);
                     String[] p5CodeArr = (String[]) Level.getCodeArray();
-                    intent.putExtra(BUNDLE_TURTLE, true);
+                    intent.putExtra(currentMod, true);
                     intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
                     getActivity().startActivity(intent);
                 })
                 .setPositiveButton(R.string.open_next_level, (dialog, which) -> {
-                    openLevel(currentLevel++);
+                    Utils.currentLevel+=1;
+                    openLevel(Utils.currentLevel);
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
@@ -151,7 +155,7 @@ public class LevelFragment extends Fragment {
 
 
     public void setupRecyclerView() {
-        openLevel(currentPos);
+        openLevel(Utils.currentLevel);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnItemTouchListener(
@@ -159,7 +163,7 @@ public class LevelFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         if (Level.levelBlockList.get(position).isContainCode()) {
-                            if (currentPos != position) {
+                            if (view != currentView) {
                                 view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
                                 if (currentView != null)
                                     currentView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
@@ -179,11 +183,10 @@ public class LevelFragment extends Fragment {
     }
 
     private void setLevelSpinner(int levels_array) {
-        Spinner spinner = (Spinner) view.findViewById(R.id.levels_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 levels_array, R.layout.spinner_text);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        levelsSpinner.setAdapter(adapter);
+        levelsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 openLevel(i);
@@ -205,10 +208,10 @@ public class LevelFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
-                    currentMod = Level.MOD.TURTLE;
+                    currentMod = BUNDLE_TURTLE;
                     setLevelSpinner(R.array.turtle_levels_array);
                 } else {
-                    currentMod = Level.MOD.KARTON;
+                    currentMod = BUNDLE_KARTON;
                     setLevelSpinner(R.array.karton_levels_array);
                 }
             }
@@ -222,36 +225,36 @@ public class LevelFragment extends Fragment {
 
 
     private void openLevel(int level) {
-        if (currentMod == Level.MOD.TURTLE) {
+        if (currentMod == BUNDLE_TURTLE) {
             switch (level) {
                 case 0:
                     Level.levelBlockList = Level.turtleLevels1;
                     imageRes = R.drawable.result_square;
-                    textRes = R.string.level1;
+                    textRes = R.string.t_level1;
                     break;
 
                 case 1:
                     Level.levelBlockList = Level.turtleLevels2;
                     imageRes = R.drawable.result_triangle;
-                    textRes = R.string.level2;
+                    textRes = R.string.t_level2;
                     break;
 
                 case 2:
                     Level.levelBlockList = Level.turtleLevels3;
                     imageRes = R.drawable.result_square_loop;
-                    textRes = R.string.level3;
+                    textRes = R.string.t_level3;
                     break;
 
                 case 3:
                     Level.levelBlockList = Level.turtleLevels4;
                     imageRes = R.drawable.result_star_loop;
-                    textRes = R.string.level4;
+                    textRes = R.string.t_level4;
                     break;
 
                 case 4:
                     Level.levelBlockList = Level.turtleLevels5;
                     imageRes = R.drawable.result_penta_style;
-                    textRes = R.string.level5;
+                    textRes = R.string.t_level5;
                     break;
 
                 default:
@@ -262,25 +265,25 @@ public class LevelFragment extends Fragment {
                 case 0:
                     Level.levelBlockList = Level.kartonLevels1;
                     imageRes = R.drawable.result_basic;
-                    textRes = R.string.level6;
+                    textRes = R.string.k_level1;
                     break;
 
                 case 1:
                     Level.levelBlockList = Level.kartonLevels2;
                     imageRes = R.drawable.result_input;
-                    textRes = R.string.level7;
+                    textRes = R.string.k_level2;
                     break;
 
                 case 2:
                     Level.levelBlockList = Level.kartonLevels3;
                     imageRes = R.drawable.result_conditionals;
-                    textRes = R.string.level8;
+                    textRes = R.string.k_level3;
                     break;
 
                 case 3:
                     Level.levelBlockList = Level.kartonLevels4;
                     imageRes = R.drawable.result_forloop;
-                    textRes = R.string.level9;
+                    textRes = R.string.k_level4;
                     break;
 
                 default:
@@ -288,7 +291,8 @@ public class LevelFragment extends Fragment {
 
             }
         }
-        currentLevel = level;
+        Utils.currentLevel = level;
+        levelsSpinner.post(() -> levelsSpinner.setSelection(level));
         checkArray = Level.returnCheckCodeArray(Level.levelBlockList);
         adapter = new LevelBlockAdapter((AppCompatActivity) getActivity());
         adapter.notifyDataSetChanged();

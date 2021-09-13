@@ -61,16 +61,15 @@
     <string name="see_result">See Resulted Code</string>
     <string name="levelcomplete_title">Congrats! You solved the level.</string>
     <string name="open_next_level">Next Level</string>
-    <string name="level1">Each left return changes the direction of the pen\'s tip. Then moving forward draws a straight line.</string>
-    <string name="level2"></string>
-    <string name="level3"></string>
-    <string name="level4"></string>
-    <string name="level5"></string>
-    <string name="level6"></string>
-    <string name="level7"></string>
-    <string name="level8"></string>
-    <string name="level9"></string>
-    <string name="level10"></string>
+    <string name="t_level1">Each left return changes the direction of the pen\'s tip. Then moving forward draws a straight line.</string>
+    <string name="t_level2">Drawing a triangle requires drawing three straight lines. Having equal 120 angle rotations allow us to draw an equilateral-triangle.</string>
+    <string name="t_level3">Using a for loop is simply telling computer we will repeat certain steps for a specific amount.</string>
+    <string name="t_level4">Drawing a star is not really different than drawing a pentagon, right?</string>
+    <string name="t_level5">Commands like width and color changes the style of the pen.</string>
+    <string name="k_level1">First define the attributes, then draw the shape. It is the main rule of using Kart-ON!</string>
+    <string name="k_level2">Using the touch input, you can create responsive drawings.</string>
+    <string name="k_level3">Conditional are simple comparison functions that we can use to check if a certain condition is met.</string>
+    <string name="k_level4">Using variables we can store, decrement and increment values and use them in our code.</string>
 
     <!-- Tutorial -->
     <string name="cancel">Cancel</string>

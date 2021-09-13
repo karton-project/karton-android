@@ -38,7 +38,6 @@ public class Level {
         turtleLevels1.add(new LevelBlock("6", false, "sola#90", "card-sola90.png"));
         turtleLevels1.add(new LevelBlock("7", false, "ileri#100", "card-ileri100.png"));
 
-
         // Triangle
         turtleLevels2.add(new LevelBlock("1", false, "ileri#100", "card-ileri100.png"));
         turtleLevels2.add(new LevelBlock("2", true, "sola#120", "card-sola120.png"));

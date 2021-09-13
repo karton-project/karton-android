@@ -61,16 +61,15 @@
     <string name="see_result">Oluşan Kodu Gör</string>
     <string name="levelcomplete_title">Tebrikler! Bölümü çözdün.</string>
     <string name="open_next_level">Sonraki Bölüm</string>
-    <string name="level1">Yaptığımız her sola dönüş kalemin ucunu döndürür. İleri gittiğimizde de kalem belirttiğimiz miktar kadar çizim yapar.</string>
-    <string name="level2"></string>
-    <string name="level3"></string>
-    <string name="level4"></string>
-    <string name="level5"></string>
-    <string name="level6"></string>
-    <string name="level7"></string>
-    <string name="level8"></string>
-    <string name="level9"></string>
-    <string name="level10"></string>
+    <string name="t_level1">Yaptığımız her sola dönüş kalemin ucunu döndürür. İleri gittiğimizde de kalem belirttiğimiz miktar kadar çizim yapar.</string>
+    <string name="t_level2">Üç düz çizginin birleşimi ile bir üçgen çizebiliriz. Kalemi her seferinde 120 derece döndürdüğümüzde bu bir eşkenar üçgen olur.</string>
+    <string name="t_level3">For döngüsü ile bilgisayara belirli adımları kaç kere tekrarlayacağımızı söyleriz.</string>
+    <string name="t_level4">Bir yıldızın çizimi aslında bir beşgen çiziminin adımlarına çok benziyordu, değil mi?</string>
+    <string name="t_level5">Genişlik ve renk gibi komutlar ile kalemin stilini değiştirebilirsiniz.</string>
+    <string name="k_level1">Kart-ON kullanırken önce özellikleri belirtip, sonrasında şekilleri çizmemiz gerekiyor!</string>
+    <string name="k_level2">Dokunma girdisini kullanarak, kullanıcı ile etkileşime geçebilen kodlar yaratabiliriz.</string>
+    <string name="k_level3">Eğer/değilse yapısında kullandığımız koşul ifadeleri aslında basıt karşılaştırma operatörleridir.</string>
+    <string name="k_level4">Değişkenleri kullanarak, kod içinde bazı değerleri depolayabilir, artırabilir veya azaltabiliriz.</string>
 
     <!-- Tutorial -->
     <string name="cancel">İptal</string>

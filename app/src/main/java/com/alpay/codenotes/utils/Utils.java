@@ -52,6 +52,7 @@ public class Utils {
     public static String code = "";
     public static String levelCode = "";
     public static String checkCode = "";
+    public static int currentLevel = 0;
     public static final boolean finishTraining = false;
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();
