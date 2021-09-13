@@ -102,8 +102,13 @@ public class LevelFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         setLevelSpinner(R.array.turtle_levels_array);
         setModSpinner();
-        Level.populateTurtleLevels();
-        Level.populateKartONLevels();
+        if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("UK")){
+            Level.populateTurtleLevelsEN();
+            Level.populateKartONLevelsEN();
+        } else {
+            Level.populateTurtleLevelsTR();
+            Level.populateKartONLevelsTR();
+        }
         setupRecyclerView();
         preview = view.findViewById(R.id.firePreview);
         if (preview == null) {

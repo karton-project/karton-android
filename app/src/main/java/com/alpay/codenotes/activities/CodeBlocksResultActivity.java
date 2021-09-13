@@ -83,7 +83,11 @@ public class CodeBlocksResultActivity extends BaseActivity {
                 }
             });
             if (turtleMode) {
-                url = Constants.TURTLE_TR_CODE;
+                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                    url = Constants.TURTLE_EN_CODE;
+                } else {
+                    url = Constants.TURTLE_TR_CODE;
+                }
             } else {
                 if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
                     url = Constants.EN_CODE;

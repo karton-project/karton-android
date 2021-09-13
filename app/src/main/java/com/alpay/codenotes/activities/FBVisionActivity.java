@@ -87,7 +87,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         if (code != null) {
             if (code.contains("\n")) {
                 for (String line : code.split("\n")) {
-                    if (line.length() > 3)
+                    if (line.length() > 2)
                         codeList.add(CodeLineHelper.codeToCodeLine(this, line.trim()));
                 }
             } else {

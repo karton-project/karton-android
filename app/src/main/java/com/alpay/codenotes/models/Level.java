@@ -22,7 +22,7 @@ public class Level {
     public static ArrayList<LevelBlock> kartonLevels5 = new ArrayList<>();
     public static ArrayList<LevelBlock> kartonLevels6 = new ArrayList<>();
 
-    public static void populateTurtleLevels(){
+    public static void populateTurtleLevelsTR(){
         turtleLevels1 = new ArrayList<>();
         turtleLevels2 = new ArrayList<>();
         turtleLevels3 = new ArrayList<>();
@@ -66,7 +66,51 @@ public class Level {
         turtleLevels5.add(new LevelBlock("6", false, "bitir", "card-bitir.png"));
     }
 
-    public static void populateKartONLevels(){
+    public static void populateTurtleLevelsEN(){
+        turtleLevels1 = new ArrayList<>();
+        turtleLevels2 = new ArrayList<>();
+        turtleLevels3 = new ArrayList<>();
+        turtleLevels4 = new ArrayList<>();
+        turtleLevels5 = new ArrayList<>();
+
+        // Square
+        turtleLevels1.add(new LevelBlock("1", false, "forward#100","card-forward100.png"));
+        turtleLevels1.add(new LevelBlock("2", true, "left#90", "card-left90.png"));
+        turtleLevels1.add(new LevelBlock("3", false, "forward#100","card-forward100.png"));
+        turtleLevels1.add(new LevelBlock("4", false, "left#90", "card-left90.png"));
+        turtleLevels1.add(new LevelBlock("5", true, "forward#100", "card-forward100.png"));
+        turtleLevels1.add(new LevelBlock("6", false, "left#90", "card-left90.png"));
+        turtleLevels1.add(new LevelBlock("7", false, "forward#100", "card-forward100.png"));
+
+        // Triangle
+        turtleLevels2.add(new LevelBlock("1", false, "forward#100", "card-forward100.png"));
+        turtleLevels2.add(new LevelBlock("2", true, "left#120", "card-left120.png"));
+        turtleLevels2.add(new LevelBlock("3", true, "forward#100","card-forward100.png"));
+        turtleLevels2.add(new LevelBlock("4", false, "left#120", "card-left120.png"));
+        turtleLevels2.add(new LevelBlock("5", false, "forward#100", "card-forward100.png"));
+
+        // Square Loop
+        turtleLevels3.add(new LevelBlock("1", true, "repeat#4", "card-repeat4.png"));
+        turtleLevels3.add(new LevelBlock("2", false, "forward#100", "card-forward100.png"));
+        turtleLevels3.add(new LevelBlock("3", false, "left#90", "card-left90.png"));
+        turtleLevels3.add(new LevelBlock("4", true, "end", "card-end.png"));
+
+        // Star Loop
+        turtleLevels4.add(new LevelBlock("1", true, "repeat#5", "card-repeat5.png"));
+        turtleLevels4.add(new LevelBlock("2", false, "forward#80", "card-forward80.png"));
+        turtleLevels4.add(new LevelBlock("3", true, "left#144","card-left144.png"));
+        turtleLevels4.add(new LevelBlock("4", false, "end", "card-end.png"));
+
+        // Stylized Star
+        turtleLevels5.add(new LevelBlock("1", true, "width#5", "card-width5.png"));
+        turtleLevels5.add(new LevelBlock("2", true, "color#195", "card-color195.png"));
+        turtleLevels5.add(new LevelBlock("3", false, "repeat#5", "card-repeat5.png"));
+        turtleLevels5.add(new LevelBlock("4", false, "forward#80", "card-forward80.png"));
+        turtleLevels5.add(new LevelBlock("5", false, "left#72","card-left144.png"));
+        turtleLevels5.add(new LevelBlock("6", false, "end", "card-end.png"));
+    }
+
+    public static void populateKartONLevelsTR(){
         kartonLevels1 = new ArrayList<>();
         kartonLevels2 = new ArrayList<>();
         kartonLevels3 = new ArrayList<>();
@@ -97,6 +141,39 @@ public class Level {
         kartonLevels4.add(new LevelBlock("3", false, "ucgen", "ucgen.png"));
         kartonLevels4.add(new LevelBlock("4", true, "değer artır#y#100", "artir-y-100.png"));
         kartonLevels4.add(new LevelBlock("5", false, "bitir", "bitir.png"));
+    }
+
+    public static void populateKartONLevelsEN(){
+        kartonLevels1 = new ArrayList<>();
+        kartonLevels2 = new ArrayList<>();
+        kartonLevels3 = new ArrayList<>();
+        kartonLevels4 = new ArrayList<>();
+        kartonLevels5 = new ArrayList<>();
+        kartonLevels6 = new ArrayList<>();
+
+        kartonLevels1.add(new LevelBlock("1", true, "fill#50", "fill50.png"));
+        kartonLevels1.add(new LevelBlock("2", false, "size#100#100", "size100-100.png"));
+        kartonLevels1.add(new LevelBlock("3", false, "location#80#120", "location80-120.png"));
+        kartonLevels1.add(new LevelBlock("4", false, "ellipse","ellipse.png"));
+
+        kartonLevels2.add(new LevelBlock("1", false, "fill#240", "fill240.png"));
+        kartonLevels2.add(new LevelBlock("2", true, "size#120#60", "size120-60.png"));
+        kartonLevels2.add(new LevelBlock("3", false, "location#touchx#touchy", "locationx-y.png"));
+        kartonLevels2.add(new LevelBlock("4", true, "ellipse", "ellipse.png"));
+
+        kartonLevels3.add(new LevelBlock("1", false, "if#touchx>100", "if-touchx-100.png"));
+        kartonLevels3.add(new LevelBlock("2", true, "fill#50", "fill50.png"));
+        kartonLevels3.add(new LevelBlock("3", false, "else", "else.png"));
+        kartonLevels3.add(new LevelBlock("4", true, "fill#240", "fill240.png"));
+        kartonLevels3.add(new LevelBlock("5", false, "end", "end.png"));
+        kartonLevels3.add(new LevelBlock("6", false, "rectangle", "rectangle.png"));
+
+        kartonLevels4.add(new LevelBlock("1", false, "variable#y#100", "variable-y-100.png"));
+        kartonLevels4.add(new LevelBlock("2", true, "repeat#3", "repeat3.png"));
+        kartonLevels4.add(new LevelBlock("2", true, "location#100#y", "location100-y.png"));
+        kartonLevels4.add(new LevelBlock("3", false, "triangle", "triangle.png"));
+        kartonLevels4.add(new LevelBlock("4", true, "increase value#y#100", "increase-y-100.png"));
+        kartonLevels4.add(new LevelBlock("5", false, "end", "end.png"));
     }
 
     public static  boolean[] returnCheckCodeArray(ArrayList<LevelBlock> levelBlockList){

@@ -26,7 +26,7 @@ public class CodeLineHelper {
             "vertex", "dimension", "location", "translate",
             "variable", "increase value", "decrease value", "set value", "random number",
             "else", "end",
-            "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
+            "forward", "right", "left", "repeat", "start x", "start y", "width", "colour",
             "pen down", "pen up", "hide pen", "show pen", "clear"
     };
 
@@ -43,16 +43,16 @@ public class CodeLineHelper {
 
     public static final String[] turtle_none_commands = {
             // english
-            "pen down", "pen up", "hide pen", "show pen", "clear",
+            "pen down", "pen up", "hide pen", "show pen", "clear", "end",
             // turkish
-            "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
+            "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle", "bitir"
     };
 
     public static final String[] turtle_num_commands = {
             // english
-            "forward", "right", "left", "repeat", "start x:", "start y:", "width", "colour",
+            "forward", "right", "left", "repeat", "start x", "start y", "width", "colour",
             // turkish
-            "ileri", "sağa", "sola", "tekrarla", "başlangıç x:", "başlangıç y:", "genişlik", "renk",
+            "ileri", "sağa", "sola", "tekrarla", "başlangıç x", "başlangıç y", "genişlik", "renk",
     };
 
 
@@ -110,7 +110,7 @@ public class CodeLineHelper {
         String command = "";
         String[] params = new String[0];
         try {
-            if (code.length() > 3) {
+            if (code.length() > 2) {
                 code = code.toLowerCase();
                 if (code.contains("#")) {
                     String[] parsedCode = code.split("#");
@@ -135,7 +135,7 @@ public class CodeLineHelper {
         String paramString = "";
         String[] params = new String[0];
         try {
-            if (code.length() > 3) {
+            if (code.length() > 2) {
                 code = code.toLowerCase();
                 if (code.contains("#")) {
                     String[] parsedCode = code.split("#");
