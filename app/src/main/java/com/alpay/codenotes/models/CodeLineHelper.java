@@ -115,7 +115,7 @@ public class CodeLineHelper {
                 if (code.contains("#")) {
                     String[] parsedCode = code.split("#");
                     command = parsedCode[0];
-                    params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
+                    params = correctParams(Arrays.copyOfRange(parsedCode, 1, parsedCode.length));
                 } else {
                     command = code;
                 }
@@ -131,29 +131,23 @@ public class CodeLineHelper {
     }
 
     public static String clearCode(AppCompatActivity appCompatActivity, String code) {
-        String command = "";
         String paramString = "";
-        String[] params = new String[0];
-        try {
-            if (code.length() > 2) {
-                code = code.toLowerCase();
-                if (code.contains("#")) {
-                    String[] parsedCode = code.split("#");
-                    command = parsedCode[0];
-                    params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
-                } else {
-                    command = code;
-                }
-                if (Utils.isENCoding(appCompatActivity))
-                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_en)).getString();
-                else
-                    command = FuzzySearch.extractOne(command, Arrays.asList(command_array_tr)).getString();
-            }
-        } catch (Exception e) {
-            Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
+        CodeLine codeLine = codeToCodeLine(appCompatActivity, code);
+        for (String p : codeLine.getInput()) paramString += "#" + p;
+        return codeLine.getCommand()  + paramString;
+    }
+
+    public static String[] correctParams(String[] params) {
+        for (int i = 0; i < params.length; i++) {
+            params[i] = params[i].toLowerCase().trim();
+            params[i] = params[i].replace("o", "0");
+            params[i] = params[i].replace("s", "5");
+            params[i] = params[i].replace("g", "9");
+            params[i] = params[i].replace("b", "6");
+            params[i] = params[i].replace("i", "1");
+            params[i] = params[i].replace("l", "1");
         }
-        for (String p : params) paramString += "#" + p;
-        return command  + paramString;
+        return params;
     }
 
     public static String[] checkAndCorrectVarParams(String command, String[] params){
