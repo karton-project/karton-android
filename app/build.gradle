@@ -23,14 +23,14 @@ repositories {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '29.0.3'
     defaultConfig {
         applicationId "com.alpay.codenotes"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 27
-        versionName "2.3.6"
+        targetSdkVersion 30
+        versionCode 28
+        versionName "2.3.7"
         multiDexEnabled true
         resConfigs "tr"
         vectorDrawables.useSupportLibrary = true

@@ -99,7 +99,7 @@ public class Level {
 
         // Stylized Star
         turtleLevels5.add(new LevelBlock("1", true, "width#5", "card-width5.png"));
-        turtleLevels5.add(new LevelBlock("2", true, "color#195", "card-color195.png"));
+        turtleLevels5.add(new LevelBlock("2", true, "colour#195", "card-color195.png"));
         turtleLevels5.add(new LevelBlock("3", false, "repeat#5", "card-repeat5.png"));
         turtleLevels5.add(new LevelBlock("4", false, "forward#80", "card-forward80.png"));
         turtleLevels5.add(new LevelBlock("5", false, "left#72","card-left144.png"));

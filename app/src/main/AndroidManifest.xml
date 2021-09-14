@@ -33,7 +33,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".fragments.LevelFragment"></activity>
         <activity
             android:name=".activities.CodeBlocksResultActivity"
             android:configChanges="orientation|keyboardHidden"

@@ -46,7 +46,6 @@
             android:layout_width="@dimen/unit48"
             android:layout_height="@dimen/unit48"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_flappy" />
 
         <ImageView
@@ -64,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/unit8"
-            android:layout_toRightOf="@+id/flappy_icon"
+            android:layout_toRightOf="@+id/code_info_icon"
             android:text="@string/hour_of_code_play"/>
 
     </RelativeLayout>
