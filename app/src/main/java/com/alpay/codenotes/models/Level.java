@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public class Level {
 
-    public enum MOD {
-        TURTLE, KARTON
-    }
-
     public static ArrayList<LevelBlock> levelBlockList = new ArrayList<>();
     public static ArrayList<LevelBlock> turtleLevels1 = new ArrayList<>();
     public static ArrayList<LevelBlock> turtleLevels2 = new ArrayList<>();
@@ -161,18 +157,18 @@ public class Level {
         kartonLevels2.add(new LevelBlock("3", false, "location#touchx#touchy", "locationx-y.png"));
         kartonLevels2.add(new LevelBlock("4", true, "ellipse", "ellipse.png"));
 
-        kartonLevels3.add(new LevelBlock("1", false, "if#touchx>100", "if-touchx-100.png"));
+        kartonLevels3.add(new LevelBlock("1", false, "if#touchx>100", "ifx-100.png"));
         kartonLevels3.add(new LevelBlock("2", true, "fill#50", "fill50.png"));
         kartonLevels3.add(new LevelBlock("3", false, "else", "else.png"));
         kartonLevels3.add(new LevelBlock("4", true, "fill#240", "fill240.png"));
         kartonLevels3.add(new LevelBlock("5", false, "end", "end.png"));
         kartonLevels3.add(new LevelBlock("6", false, "rectangle", "rectangle.png"));
 
-        kartonLevels4.add(new LevelBlock("1", false, "variable#y#100", "variable-y-100.png"));
+        kartonLevels4.add(new LevelBlock("1", false, "variable#y#100", "variabley-100.png"));
         kartonLevels4.add(new LevelBlock("2", true, "repeat#3", "repeat3.png"));
         kartonLevels4.add(new LevelBlock("2", true, "location#100#y", "location100-y.png"));
         kartonLevels4.add(new LevelBlock("3", false, "triangle", "triangle.png"));
-        kartonLevels4.add(new LevelBlock("4", true, "increase value#y#100", "increase-y-100.png"));
+        kartonLevels4.add(new LevelBlock("4", true, "increase value#y#100", "increase-valy-100.png"));
         kartonLevels4.add(new LevelBlock("5", false, "end", "end.png"));
     }
 
