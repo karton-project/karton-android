@@ -7,64 +7,73 @@
     android:background="@color/colorDarkGrey"
     android:keepScreenOn="true">
 
-        <com.alpay.codenotes.vision.CameraSourcePreview
-            android:id="@+id/firePreview"
+    <com.alpay.codenotes.vision.CameraSourcePreview
+        android:id="@+id/firePreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <com.alpay.codenotes.vision.GraphicOverlay
+            android:id="@+id/fireFaceOverlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true">
+            android:layout_height="match_parent" />
 
-                <com.alpay.codenotes.vision.GraphicOverlay
-                    android:id="@+id/fireFaceOverlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+    </com.alpay.codenotes.vision.CameraSourcePreview>
 
-        </com.alpay.codenotes.vision.CameraSourcePreview>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="80dp"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="80dp"
-            android:textColor="#FFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/codeblocks_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/read_code_button"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/unit8"
+        android:background="@color/transparent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/codeblocks_recycler_view"
-            android:layout_margin="@dimen/unit8"
-            android:layout_alignParentRight="true"
-            android:background="@color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/read_code_button"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/codeblocks_clear_all"
+        android:layout_margin="@dimen/unit8"
+        android:layout_width="@dimen/unit24"
+        android:layout_height="@dimen/unit24"
+        android:layout_toLeftOf="@id/codeblocks_recycler_view"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_close" />
 
-        <com.alpay.codenotes.view.SoundButton
-            style="@style/button_floating_nav"
-            android:id="@+id/send_code_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_ok"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true" />
+    <com.alpay.codenotes.view.SoundButton
+        android:id="@+id/send_code_button"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_ok" />
 
-        <com.alpay.codenotes.view.SoundButton
-            style="@style/button_floating_nav"
-            android:id="@+id/read_code_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true" />
+    <com.alpay.codenotes.view.SoundButton
+        android:id="@+id/read_code_button"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add" />
 
-        <com.alpay.codenotes.view.SoundButton
-            style="@style/button_floating_nav"
-            android:id="@+id/back_code_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_back"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" />
+    <com.alpay.codenotes.view.SoundButton
+        android:id="@+id/back_code_button"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ic_back" />
 
 </RelativeLayout>

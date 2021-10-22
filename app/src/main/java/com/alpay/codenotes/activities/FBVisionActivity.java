@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,6 +65,25 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     CodeBlockViewAdapter codeBlockViewAdapter;
 
+    @BindView(R.id.codeblocks_clear_all)
+    ImageView clearCodeButton;
+
+    @OnClick(R.id.codeblocks_clear_all)
+    public void clearCodeBlocks() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.clear_code_title)
+                .setMessage(R.string.clear_code_exp)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    codeList = new ArrayList();
+                    refreshCodeBlockRecyclerView(0);
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    // do nothing
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
     @OnClick(R.id.read_code_button)
     public void readCode() {
         addCodeToCodeList(checkAndCorrectCode(Utils.code));
@@ -71,7 +92,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private String checkAndCorrectCode(String code) {
         ArrayList<CodeLine> codeLines = new ArrayList<>();
         String[] lines = code.split("\n");
-        for (String line: lines){
+        for (String line : lines) {
             codeLines.add(CodeLineHelper.codeToCodeLine(this, line + "\n"));
         }
         return CodeLineHelper.programToCodeText(codeLines);
@@ -138,7 +159,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);
         sd.start(sensorManager);
-
+        clearCodeButton.setVisibility(View.GONE);
         preview = findViewById(R.id.firePreview);
         if (preview == null) {
             Log.d(TAG, "Preview is null");
@@ -185,6 +206,11 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         touchHelper.attachToRecyclerView(blocksRecyclerView);
         blocksRecyclerView.setAdapter(codeBlockViewAdapter);
         blocksRecyclerView.scrollToPosition(position);
+        if (codeList.size() > 0) {
+            clearCodeButton.setVisibility(View.VISIBLE);
+        } else {
+            clearCodeButton.setVisibility(View.GONE);
+        }
     }
 
 

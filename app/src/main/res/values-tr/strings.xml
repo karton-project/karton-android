@@ -14,6 +14,8 @@
     <string name="save_program">Programı Kaydet</string>
     <string name="save_program_sub">Programın İsmini Gir</string>
     <string name="variable_name">Değişken İsmi</string>
+    <string name="clear_code_title">Kodu Sil</string>
+    <string name="clear_code_exp">Oluşturduğun kod silinecek. Devam etmek istiyor musun?</string>
 
     <!-- Dependencies -->
     <string name="project_website">Proje Web sitesi:</string>

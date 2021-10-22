@@ -23,7 +23,7 @@ public class CodeLineHelper {
             "fill", "stroke", "background",
             "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
             "rotate", "define function", "call", "loop", "if",
-            "vertex", "dimension", "location", "translate",
+            "vertex", "size", "location", "translate",
             "variable", "increase value", "decrease value", "set value", "random number",
             "else", "end",
             "forward", "right", "left", "repeat", "start x", "start y", "width", "colour",
@@ -65,7 +65,7 @@ public class CodeLineHelper {
 
     public static final String[] xy_commands = {
             // english
-            "point", "translate", "dimension", "location",
+            "point", "translate", "size", "location",
             // turkish
             "nokta", "ötele", "boyut", "konum"
     };
