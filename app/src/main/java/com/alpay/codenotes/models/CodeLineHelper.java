@@ -140,12 +140,15 @@ public class CodeLineHelper {
     public static String[] correctParams(String[] params) {
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].toLowerCase().trim();
-            params[i] = params[i].replace("o", "0");
+            if(!params[i].contains("dokun")){
+                params[i] = params[i].replace("o", "0");
+            }
             params[i] = params[i].replace("s", "5");
             params[i] = params[i].replace("g", "9");
             params[i] = params[i].replace("b", "6");
             params[i] = params[i].replace("i", "1");
             params[i] = params[i].replace("l", "1");
+            params[i] = params[i].replace("*", "x");
         }
         return params;
     }
