@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/page_text"
         android:layout_marginTop="@dimen/unit16"
-        app:srcCompat="@drawable/w2"/>
+        app:srcCompat="@drawable/w2" />
 
 </RelativeLayout>

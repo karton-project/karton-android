@@ -26,7 +26,7 @@
     <color name="colorErrorLight">#ff6659</color>
     <color name="colorErrorDark">#9a0007</color>
 
-    <color name="colorWarning">#fbc02d</color>
+    <color name="colorWarning">#FFE39D</color>
     <color name="colorWarningDark">#c49000</color>
 
     <color name="command_color">#EEF6E8</color>

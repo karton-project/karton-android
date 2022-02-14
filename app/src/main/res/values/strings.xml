@@ -79,7 +79,7 @@
     <string name="save_text">Save</string>
 
     <!-- Welcome -->
-    <string name="welcome_text">Welcome to Kart-ON, learn programming, and technology with different applications</string>
+    <string name="welcome_text">Welcome to Kart-ON! You can code drawings and animations on your phone by scanning printed programming cards via your camera .</string>
     <string name="welcome_page_2">Use cardboards to program sketches and animations</string>
     <string name="welcome_page_3">or start with hour of code and program your first game</string>
     <string name="welcome_page_4">Learn programming in a fun and interactive way</string>

@@ -80,7 +80,7 @@
 
     <!-- Welcome -->
 
-    <string name="welcome_text">Kart-ON ile programlama ve teknolojiyi deneyerek keşfet</string>
+    <string name="welcome_text">Kart-ON ile Programlamaya Hoşgeldin! Yazıcıdan çıktı aldığın kartları, telefon kamerası ile okutarak, çizim ve animasyonlar hazırlayabilirsin.</string>
     <string name="welcome_page_2">Karton blokları kullanarak çizim ve animasyon programları oluştur</string>
     <string name="welcome_page_3">veya Kod Saati oyunu ile başla ve ilk oyununu yarat</string>
     <string name="welcome_page_4">Programlamayı deneyerek ve keşfederek öğren!</string>
