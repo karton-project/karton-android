@@ -52,7 +52,6 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     private static final String TAG = FBVisionActivity.class.getSimpleName();
     private static final int PERMISSION_REQUESTS = 1;
-    private boolean isFlappy = false;
     private boolean turtleMode = false;
 
     private CameraSource cameraSource;
@@ -63,10 +62,10 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @BindView(R.id.codeblocks_recycler_view)
     RecyclerView blocksRecyclerView;
 
-    CodeBlockViewAdapter codeBlockViewAdapter;
-
     @BindView(R.id.codeblocks_clear_all)
     ImageView clearCodeButton;
+
+    CodeBlockViewAdapter codeBlockViewAdapter = new CodeBlockViewAdapter(this);
 
     @OnClick(R.id.codeblocks_clear_all)
     public void clearCodeBlocks() {
@@ -174,9 +173,12 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         } else {
             getRuntimePermissions();
         }
-        setUpRecyclerView();
-        refreshCodeBlockRecyclerView(codeList.size() - 1);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setUpRecyclerView();
     }
 
     private void openHintView(String instructions) {
@@ -191,20 +193,20 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     }
 
     private void setUpRecyclerView() {
-        blocksRecyclerView.addItemDecoration(new MarginDecoration(this));
-        blocksRecyclerView.setHasFixedSize(true);
-    }
-
-    public void refreshCodeBlockRecyclerView(int position) {
-        codeBlockViewAdapter = new CodeBlockViewAdapter(this);
         blocksRecyclerView.setHasFixedSize(true);
         blocksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         blocksRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        ItemTouchHelper.Callback callback =
-                new ItemMoveCallback(codeBlockViewAdapter);
+        blocksRecyclerView.addItemDecoration(new MarginDecoration(this));
+
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(codeBlockViewAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(blocksRecyclerView);
+
         blocksRecyclerView.setAdapter(codeBlockViewAdapter);
+    }
+
+    public void refreshCodeBlockRecyclerView(int position) {
+        codeBlockViewAdapter.notifyDataSetChanged();
         blocksRecyclerView.scrollToPosition(position);
         if (codeList.size() > 0) {
             clearCodeButton.setVisibility(View.VISIBLE);

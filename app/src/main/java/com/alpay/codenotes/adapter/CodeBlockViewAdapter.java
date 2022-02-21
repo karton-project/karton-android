@@ -3,6 +3,7 @@ package com.alpay.codenotes.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,12 +80,12 @@ class CodeBlockViewHolder extends RecyclerView.ViewHolder {
 
     View view;
     TextView mTitle;
-    CardView mCardView;
+    LinearLayout mCardView;
 
     CodeBlockViewHolder(View itemView) {
         super(itemView);
         view = itemView;
         mTitle = itemView.findViewById(R.id.codeblock_text);
-        mCardView = itemView.findViewById(R.id.codeblock_card);
+        mCardView = itemView.findViewById(R.id.codeblock_standard);
     }
 }

@@ -60,12 +60,13 @@ public class WebViewFragment extends Fragment {
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.addJavascriptInterface(new JavaScriptInterface(this.getContext()), "Android");
         WebSettings webSettings = webView.getSettings();
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowContentAccess(true);
         webSettings.setDomStorageEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {

@@ -3,12 +3,20 @@ package com.alpay.codenotes.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.webkit.ConsoleMessage;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
@@ -34,6 +42,10 @@ public class CodeBlocksResultActivity extends BaseActivity {
             runCode();
         }
     }
+
+    @Nullable
+    @BindView(R.id.webview_load_anim)
+    LottieAnimationView loadAnim;
 
     @BindView(R.id.result_webview)
     WebView webView;
@@ -70,6 +82,8 @@ public class CodeBlocksResultActivity extends BaseActivity {
             turtleMode = bundle.getBoolean(NavigationManager.BUNDLE_TURTLE);
             webView.setWebViewClient(new WebViewClient() {
                 public void onPageFinished(WebView view, String url) {
+                    if (loadAnim != null)
+                        loadAnim.setVisibility(View.GONE);
                     mHandler.postDelayed(mLauncher, 500);
                 }
 
@@ -110,7 +124,16 @@ public class CodeBlocksResultActivity extends BaseActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                Log.d("webview:", message + result.toString());
+                return super.onJsAlert(view, url, message, result);
+            }
+        });
     }
 
     public void runCode() {

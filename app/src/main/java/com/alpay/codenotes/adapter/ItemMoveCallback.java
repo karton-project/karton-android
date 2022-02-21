@@ -39,6 +39,8 @@ public class ItemMoveCallback extends ItemTouchHelper.Callback {
         return true;
     }
 
+
+
     public interface ItemTouchHelperContract {
 
         void onItemMoved(int fromPosition, int toPosition);
