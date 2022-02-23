@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +31,14 @@ import com.alpay.codenotes.utils.CodePool;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.utils.MarginDecoration;
+import com.alpay.codenotes.vision.BitmapUtils;
 import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
 import com.alpay.codenotes.vision.TextRecognitionProcessor;
 import com.squareup.seismic.ShakeDetector;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +89,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @OnClick(R.id.read_code_button)
     public void readCode() {
+        saveImage();
         addCodeToCodeList(checkAndCorrectCode(Utils.code));
     }
 
@@ -116,6 +121,18 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
             refreshCodeBlockRecyclerView(codeList.size() - 1);
         } else {
             Utils.showOKDialog(this, R.string.no_code_dialog_message);
+        }
+    }
+
+    protected void saveImage(){
+        Bitmap cameraImage = Bitmap.createBitmap(480, 360, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(cameraImage);
+        graphicOverlay.draw(c);
+        try (FileOutputStream out = new FileOutputStream(BitmapUtils.getOutputMediaFile("kartonblocks"))) {
+            cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
