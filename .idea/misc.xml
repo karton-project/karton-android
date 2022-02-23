@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout/activity_code_blocks_result.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/codeblock_card.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/codeblock_detail_card.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_program.xml" value="0.23020833333333332" />
+        <entry key="app/src/main/res/layout/fragment_sketch.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_web_view.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/welcome_page_1.xml" value="0.25" />
         <entry key="app/src/main/res/layout/welcome_page_2.xml" value="0.32395833333333335" />
