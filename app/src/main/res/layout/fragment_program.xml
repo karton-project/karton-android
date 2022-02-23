@@ -11,32 +11,39 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="7dp"
+        android:layout_marginTop="@dimen/unit10"
+        android:layout_marginRight="@dimen/unit7"
         app:srcCompat="@drawable/ic_menu" />
 
     <androidx.appcompat.widget.AppCompatToggleButton
         android:id="@+id/turtle_mode"
-        android:textOff="@string/pen"
-        android:textOn="@string/karton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/unit7"
         android:layout_marginTop="@dimen/unit10"
-        android:background="@drawable/turtle_bg_selector"
+        android:layout_marginEnd="@dimen/unit7"
+        android:layout_marginRight="@dimen/unit18"
+        android:layout_marginBottom="@dimen/unit7"
         android:layout_toLeftOf="@+id/show_examples"
+        android:background="@drawable/turtle_bg_selector"
         android:drawableLeft="@drawable/turtle_icon_selector"
         android:drawableTint="@color/colorWhite"
+        android:padding="@dimen/unit7"
         android:textColor="@color/colorWhite"
-        android:layout_margin="7dp" />
+        android:textOff="@string/pen"
+        android:textOn="@string/karton" />
 
     <RelativeLayout
         android:id="@+id/code_info_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/turtle_mode"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit12"
+        android:layout_marginStart="@dimen/unit12"
+        android:layout_marginTop="@dimen/unit12"
+        android:layout_marginEnd="@dimen/unit12"
+        android:layout_marginBottom="@dimen/unit12"
+        android:layout_toLeftOf="@id/turtle_mode"
         android:background="@drawable/warningtoastshape"
         android:clickable="true"
         android:padding="@dimen/unit8">
@@ -64,7 +71,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/unit8"
             android:layout_toRightOf="@+id/code_info_icon"
-            android:text="@string/hour_of_code_play"/>
+            android:text="@string/hour_of_code_play" />
 
     </RelativeLayout>
 

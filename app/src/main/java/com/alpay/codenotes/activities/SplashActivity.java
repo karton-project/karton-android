@@ -41,11 +41,7 @@ public class SplashActivity extends BaseActivity {
             Utils.addBooleanToSharedPreferences(this, Utils.IS_FIRST_OPEN_KEY, true);
             NavigationManager.openWelcomeActivity(this);
         }else{
-            if (auth.getCurrentUser() == null && !Utils.getBooleanFromSharedPreferences(this, Utils.USER_LOGIN_KEY)) {
-                NavigationManager.openAuthUIActivity(this);
-            } else {
-                NavigationManager.openHomeActiviy(this);
-            }
+            NavigationManager.openHomeActiviy(this);
         }
     }
 
