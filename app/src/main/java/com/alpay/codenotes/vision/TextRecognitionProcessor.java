@@ -68,12 +68,14 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay,
                     originalCameraImage);
             graphicOverlay.add(imageGraphic);
+            /*
             try (FileOutputStream out = new FileOutputStream(BitmapUtils.getOutputMediaFile("karton"))) {
                 originalCameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
                 // PNG is a lossless format, the compression factor (100) is ignored
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            */
         }
         List<FirebaseVisionText.TextBlock> blocks = results.getTextBlocks();
         Utils.code = "";

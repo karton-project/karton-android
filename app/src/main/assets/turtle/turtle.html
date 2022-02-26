@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Javascript Turtle</title>
+    <script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="style/turtle.css"/>
+</head>
+<body>
+<script src="../processing/lib/fuse/fuse.js"></script>
+<script>
+    if (!String.prototype.format) {
+        String.prototype.format = function () {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] !== 'undefined' ? args[number] : match;
+            });
+        };
+    }
+</script>
+<div>
+    <canvas id="turtlecanvas"></canvas>
+    <canvas id="imagecanvas" style="display:none"></canvas>
+</div> <!-- wrap-->
+<script type="text/javascript" src="js/turtle.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+<script type="text/javascript" src="js/interpreter.js"></script>
+</body>
+</html>

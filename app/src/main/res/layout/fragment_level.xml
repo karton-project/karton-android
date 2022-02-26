@@ -19,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/select_mode"
-            android:layout_marginRight="@dimen/unit10"/>
+            android:layout_marginRight="@dimen/unit10"
+            android:text="@string/select_mode" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/mode_spinner"

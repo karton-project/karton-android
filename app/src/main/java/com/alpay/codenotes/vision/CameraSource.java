@@ -67,9 +67,9 @@ public class CameraSource {
 
   // These values may be requested by the caller.  Due to hardware limitations, we may need to
   // select close, but not exactly the same values for these.
-  private final float requestedFps = 15.0f;
-  private int requestedPreviewWidth = 480;
-  private int requestedPreviewHeight = 360;
+  private final float requestedFps = 24.0f;
+  private int requestedPreviewWidth = 720;
+  private int requestedPreviewHeight = 540;
   private final boolean requestedAutoFocus = true;
 
   // These instances need to be held onto to avoid GC of their underlying resources.  Even though

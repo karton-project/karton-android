@@ -154,18 +154,18 @@
     </string-array>
 
     <string-array name="turtle_levels_array">
-        <item>1: Kare</item>
-        <item>2: Üçgen</item>
-        <item>3: Döngü Kare</item>
-        <item>4: Döngü Yıldız</item>
-        <item>5: Stil</item>
+        <item>1: Kare Çiz</item>
+        <item>2: Üçgen Çiz</item>
+        <item>3: Döngü ile Kare Çiz</item>
+        <item>4: Döngü ile Yıldız Çiz</item>
+        <item>5: Genişlik 5 Renk 195</item>
     </string-array>
 
     <string-array name="karton_levels_array">
-        <item>1: Temel</item>
-        <item>2: Girdi</item>
-        <item>3: Koşul Yapısı</item>
-        <item>4: For Döngüsü</item>
+        <item>1: Temel: doldur 50</item>
+        <item>2: Girdi: boyut 120 60 / elips</item>
+        <item>3: Koşul: doldur 50 / doldur 240</item>
+        <item>4: Döngü: tekrarla 3 / konum 100 y / bitir</item>
     </string-array>
 
     <string-array name="mod_array">

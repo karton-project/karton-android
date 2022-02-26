@@ -15,6 +15,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
@@ -62,9 +65,34 @@ public class Utils {
         return tlModel;
     }
 
-    public static boolean isConnected() throws InterruptedException, IOException {
-        String command = "ping -c 1 google.com";
-        return (Runtime.getRuntime().exec(command).waitFor() == 0);
+    private static boolean isNetworkAvailable(AppCompatActivity appCompatActivity) {
+        ConnectivityManager manager =
+                (ConnectivityManager) appCompatActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Network is present and connected
+            isAvailable = true;
+        }
+        return isAvailable;
+    }
+
+    public static boolean isConnected(AppCompatActivity appCompatActivity) {
+        if (isNetworkAvailable(appCompatActivity)) {
+            try {
+                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+                urlc.setRequestProperty("User-Agent", "Test");
+                urlc.setRequestProperty("Connection", "close");
+                urlc.setConnectTimeout(1500);
+                urlc.connect();
+                return (urlc.getResponseCode() == 200);
+            } catch (IOException e) {
+                Log.e("Karton", "Error: ", e);
+            }
+        } else {
+            Log.d("Karton", "No network present");
+        }
+        return false;
     }
 
     public static final String getDeviceLanguage() {

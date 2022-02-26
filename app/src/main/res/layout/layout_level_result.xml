@@ -8,13 +8,13 @@
     <TextView
         android:id="@+id/title"
         style="@style/text_light_bold_large"
-        android:background="@color/colorPrimaryDark"
-        android:padding="@dimen/unit8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:padding="@dimen/unit8"
         android:text="@string/levelcomplete_title"
-        android:layout_centerHorizontal="true"/>
+        android:textAlignment="center" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieanim"
@@ -30,20 +30,21 @@
 
     <ImageView
         android:id="@+id/dialog_imageview"
-        android:layout_below="@+id/lottieanim"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lottieanim"
+        android:layout_centerInParent="true"
         android:scaleType="fitCenter"
         android:src="@drawable/result_square" />
 
     <TextView
         android:id="@+id/explain_text"
+        style="@style/text_dark_large"
         android:layout_width="wrap_content"
-        android:padding="@dimen/unit4"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_imageview"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:padding="@dimen/unit12"
         android:text="@string/ok" />
 
 </RelativeLayout>

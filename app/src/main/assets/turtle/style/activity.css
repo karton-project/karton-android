@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+root {
+    --bg: #d6ffcb;
+    --card-bg: #387002;
+}
+
+body {
+    background-color: #242424;
+    margin: 0 auto;
+    max-width: 960px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+html, body {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body, input {
+    font-size: 16px;
+    color: #ecf0f1;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+.parent {
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 10px 0;
+    padding: 10px;
+}
+
+input {
+    border: none;
+    outline: none;
+    background-color: #ecf0f1;
+    padding: 10px;
+    color: #942A57;
+    border: 0;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+}
+
+button {
+    background-color: #ecf0f1;
+    color: #942A57;
+    border: 0;
+    padding: 8px 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover {
+    background-color: #e74c3c;
+    color: #ecf0f1;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+/* dragula-specific example page styles */
+.wrapper {
+    display: table;
+}
+
+.container {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.title-container {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    height: 4vh;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    height: 6vh;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+}
+
+.container-left {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.container-right {
+    display: table-cell;
+    background-color: #71deff;
+    width: 100%;
+}
+
+.container > div,
+.gu-mirror {
+    margin: 10px;
+    padding: 10px;
+    background-color: #20a572;
+    transition: opacity 0.4s ease-in-out;
+}
+.container > div {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+.gu-mirror {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+#left-lovehandles > div,
+#right-lovehandles > div {
+    cursor: initial;
+}
+
+#turtlecanvas {
+    border: black solid 10px;
+    background: white;
+}

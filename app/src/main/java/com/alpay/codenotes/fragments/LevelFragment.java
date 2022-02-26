@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import com.alpay.codenotes.listener.RecyclerItemClickListener;
 import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.Level;
 import com.alpay.codenotes.utils.Utils;
+import com.alpay.codenotes.vision.BitmapUtils;
 import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
@@ -38,6 +41,7 @@ import com.alpay.codenotes.vision.LevelBlockRecognitionProcessor;
 
 import org.w3c.dom.Text;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +97,19 @@ public class LevelFragment extends Fragment {
         } else {
             recognizedTextContainer.setText(result);
         }
+        saveImage();
+    }
+
+    protected void saveImage(){
+        Bitmap cameraImage = Bitmap.createBitmap(480, 360, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(cameraImage);
+        graphicOverlay.draw(c);
+        try (FileOutputStream out = new FileOutputStream(BitmapUtils.getOutputMediaFile("kartonlevels"))) {
+            cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -132,6 +149,30 @@ public class LevelFragment extends Fragment {
     public void onDetach() {
         unbinder.unbind();
         super.onDetach();
+    }
+
+    private void openInitView(int imageResource, int textResource) {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.layout_level_result, null);
+        ImageView imageView = dialogLayout.findViewById(R.id.dialog_imageview);
+        TextView textView = dialogLayout.findViewById(R.id.explain_text);
+        imageView.setImageResource(imageResource);
+        textView.setText(textResource);
+        new AlertDialog.Builder(getActivity())
+                .setView(dialogLayout)
+                .setNeutralButton(R.string.see_result, (dialog, which) -> {
+                    Intent intent = new Intent(getActivity(), CodeBlocksResultActivity.class);
+                    String[] p5CodeArr = (String[]) Level.getCodeArray();
+                    intent.putExtra(currentMod, true);
+                    intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
+                    getActivity().startActivity(intent);
+                })
+                .setPositiveButton(R.string.open_next_level, (dialog, which) -> {
+                    Utils.currentLevel+=1;
+                    openLevel(Utils.currentLevel);
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void openCompletedView(int imageResource, int textResource) {

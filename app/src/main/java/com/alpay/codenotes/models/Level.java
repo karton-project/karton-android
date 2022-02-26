@@ -135,8 +135,8 @@ public class Level {
         kartonLevels4.add(new LevelBlock("2", true, "tekrarla#3", "tekrarla3.png"));
         kartonLevels4.add(new LevelBlock("2", true, "konum#100#y", "konum100-y.png"));
         kartonLevels4.add(new LevelBlock("3", false, "ucgen", "ucgen.png"));
-        kartonLevels4.add(new LevelBlock("4", true, "değer artır#y#100", "artir-y-100.png"));
-        kartonLevels4.add(new LevelBlock("5", false, "bitir", "bitir.png"));
+        kartonLevels4.add(new LevelBlock("4", false, "değer artır#y#100", "artir-y-100.png"));
+        kartonLevels4.add(new LevelBlock("5", true, "bitir", "bitir.png"));
     }
 
     public static void populateKartONLevelsEN(){

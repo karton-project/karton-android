@@ -96,17 +96,33 @@ public class CodeBlocksResultActivity extends BaseActivity {
                     super.onReceivedError(view, errorCode, description, failingUrl);
                 }
             });
-            if (turtleMode) {
-                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                    url = Constants.TURTLE_EN_CODE;
+            if (Utils.isConnected(this)){
+                if (turtleMode) {
+                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                        url = Constants.TURTLE_EN_CODE;
+                    } else {
+                        url = Constants.TURTLE_TR_CODE;
+                    }
                 } else {
-                    url = Constants.TURTLE_TR_CODE;
+                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                        url = Constants.EN_CODE;
+                    } else {
+                        url = Constants.TR_CODE;
+                    }
                 }
-            } else {
-                if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                    url = Constants.EN_CODE;
+            }else {
+                if (turtleMode) {
+                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                        url = Constants.TURTLE_EN_CODE_OFFLINE;
+                    } else {
+                        url = Constants.TURTLE_TR_CODE_OFFLINE;
+                    }
                 } else {
-                    url = Constants.TR_CODE;
+                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                        url = Constants.EN_CODE_OFFLINE;
+                    } else {
+                        url = Constants.TR_CODE_OFFLINE;
+                    }
                 }
             }
             webView.loadUrl(url);
