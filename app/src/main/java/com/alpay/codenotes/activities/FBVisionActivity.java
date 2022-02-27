@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.utils.CodePool;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
+import com.alpay.codenotes.view.SoundButton;
 import com.alpay.codenotes.view.utils.MarginDecoration;
 import com.alpay.codenotes.vision.BitmapUtils;
 import com.alpay.codenotes.vision.CameraSource;
@@ -68,6 +71,15 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
     @BindView(R.id.codeblocks_clear_all)
     ImageView clearCodeButton;
+
+    @BindView(R.id.read_code_button)
+    SoundButton readCodeButton;
+
+    @BindView(R.id.send_code_button)
+    SoundButton sendCodeButton;
+
+    @BindView(R.id.back_code_button)
+    SoundButton backButton;
 
     CodeBlockViewAdapter codeBlockViewAdapter = new CodeBlockViewAdapter(this);
 
@@ -150,6 +162,20 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         super.onBackPressed();
     }
 
+    private void setupTurtleToggle(Boolean isTurtle){
+            if (isTurtle) {
+                sendCodeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+                readCodeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+                backButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+                Utils.turtleMode = true;
+            } else {
+                sendCodeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                readCodeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                backButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+                Utils.turtleMode = false;
+            }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +185,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             if (bundle.getStringArray(BUNDLE_CODE_KEY) != null) {
+                codeList = new ArrayList<>();
                 String[] p5code = bundle.getStringArray(BUNDLE_CODE_KEY);
                 for (String code : p5code) {
                     codeList.add(CodeLineHelper.codeToCodeLine(this, code));
@@ -196,6 +223,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     protected void onStart() {
         super.onStart();
         setUpRecyclerView();
+        setupTurtleToggle(turtleMode);
     }
 
     private void openHintView(String instructions) {

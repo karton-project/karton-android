@@ -7,6 +7,7 @@
     <string name="karton_website"><u>karton.ku.edu.tr</u> web sitesinde, yazıcıdan çıkarabileceğiniz blokları, aktivite açıklamalarını, araştırmalarımızı ve çok daha fazla bilgiyi bulabilirsiniz.</string>
     <!-- Actionbar Headers -->
     <string name="task_title">Görevin</string>
+    <string name="not_ready">İçerik henüz hazır değil, üzerinde çalışıyoruz!</string>
 
     <!-- Compiler -->
     <string name="no_code_dialog_message">Üzgünüm! Herhangi bir kod algılayamadım...</string>
@@ -22,7 +23,8 @@
 
     <!-- Exercises -->
     <string name="card_watch_video_button_text">Öğren</string>
-    <string name="card_practice_button_text">Dene</string>
+    <string name="card_practice_button_text">Çalış</string>
+    <string name="card_practice_code_text"> Kodunu Gör</string>
 
     <string name="card_change">Düzenle</string>
     <string name="card_addto">Koda Ekle</string>

@@ -1,97 +1,118 @@
 [{
-    "detail" : "Learn the steps and techniques of problem solving.",
-    "docsLink" : "https://codenotesalpay.web.app/1.html",
-    "id" : 0,
-    "instruction" : "https://codenotesalpay.web.app/1-problem/index.html",
-    "name" : "Sheep, Wolf ve Grass",
-    "practiceType" : "url"
-  },
-  {
-    "detail" : "Let's see how using different parameters result in the same algorithm",
-    "docsLink" : "https://codenotesalpay.web.app/2.html",
-    "id" : 1,
-    "instruction" : "https://codenotesalpay.web.app/2-hanoi-tower/index.html",
-    "name" : "Hanoi Kuleleri",
-    "practiceType" : "url"
-  },
-  {
-    "detail" : "Colors, Pixels, Photos",
-    "docsLink" : "https://codenotesalpay.web.app/3.html#0",
-    "id" : 2,
-    "instruction" : "https://codenotesalpay.web.app/3-color-picker/colorwheel.html",
-    "name" : "Piksel ve Renk",
-    "practiceType" : "url"
-  },
-  {
-    "detail" : "Share the pictures with your friends",
-    "docsLink" : "https://codenotesalpay.web.app/4.html",
-    "id" : 3,
-    "instruction" : "processing kartları ile ilk program",
-    "name" : "Yönergeleri Takip Et",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "Maps are the coding system for the navigation1",
-    "docsLink" : "https://codenotesalpay.web.app/5.html",
-    "id" : 4,
-    "instruction" : "https://codenotesalpay.web.app/5-maps/index.html",
-    "name" : "Haritalar",
-    "practiceType" : "url"
-  },
-  {
-    "detail" : "Le's use the boolean operations in a small game",
-    "docsLink" : "https://codenotesalpay.web.app/6.html",
-    "id" : 5,
-    "instruction" : "https://codenotesalpay.web.app/6-guess-game/index.html",
-    "name" : "İşlemler ve Mantık",
-    "practiceType" : "url"
-  },
-  {
-    "detail" : "Send secret messages with coding!",
-    "docsLink" : "https://codenotesalpay.web.app/7.html",
-    "id" : 6,
-    "instruction" : "encrypt ve decrypt komutlarını kullanın.",
-    "name" : "Kriptografi",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "We created lots of different algoritms. But, what is an algorithm?",
-    "docsLink" : "https://codenotesalpay.web.app/8.html",
-    "id" : 7,
-    "instruction" : "ilk algoritmamızı yapalım.",
-    "name" : "Algoritma Nedir?",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "Composing a musical piece is very similar to programming.",
-    "docsLink" : "https://codenotesalpay.web.app/9.html",
-    "id" : 8,
-    "instruction" : "ilk algoritmamızı yapalım.",
-    "name" : "Müzik Aleti Yapalım",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "Tangrams: Abstract to Complex Shapes",
-    "docsLink" : "https://codenotesalpay.web.app/10.html",
-    "id" : 9,
-    "instruction" : "ilk algoritmamızı yapalım.",
-    "name" : "Tangram ve Algoritma",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "Saving some of the parts in a code.",
-    "docsLink" : "https://codenotesalpay.web.app/11.html",
-    "id" : 10,
-    "instruction" : "ilk algoritmamızı yapalım.",
-    "name" : "Veriler ve Değişkenler",
-    "practiceType" : "demo"
-  },
-  {
-    "detail" : "Fish bone technique to solve porblems.",
-    "docsLink" : "https://codenotesalpay.web.app/12.html",
-    "id" : 11,
-    "instruction" : "ilk algoritmamızı yapalım.",
-    "name" : "Balık Kılçığı",
-    "practiceType" : "demo"
-  }
-]
+  "detail": "Problem çözmedeki temel adımları görelim.",
+  "docsLink": "https://codenotesalpay.web.app/1.html",
+  "id": 0,
+  "instruction": "https://drive.google.com/file/d/1eJXTNbg7XF9lcowBAe1Xl_1P2bgBbam-/view?usp=sharing",
+  "codeExp": "",
+  "code": [],
+  "name": "Kurt, Kuzu ve Ot",
+  "practiceType": "url"
+}, {
+  "detail": "Bir algoritmanın, farklı parametreler için nasıl uygulandığını görelim.",
+  "docsLink": "https://codenotesalpay.web.app/2.html",
+  "id": 1,
+  "instruction": "https://drive.google.com/file/d/1ZbLBbQLENko7CgucCXzgNz7eby9bAjNZ/view?usp=sharing",
+  "codeExp": "",
+  "code": [],
+  "name": "Hanoi Kuleleri",
+  "practiceType": "url"
+}, {
+  "detail": "Kalem Modunda çizim yapmak için bir kaleme gerçekleştireceği komutları sıralarız.",
+  "docsLink": "https://codenotesalpay.web.app/100.html",
+  "id": 100,
+  "instruction": "https://drive.google.com/file/d/1_utB-_LjWnljwy39lk2p-tGdpj7wwwtn/view?usp=sharing",
+  "codeExp": "Kalem Modu ile Dikdörtgen Çizimi",
+  "code": ["renk#40", "ileri#100", "sola#90", "ileri#100", "sola#90", "ileri#100", "sola#90", "ileri#100"],
+  "name": "Kalem Modu ile Kodlamaya Giriş",
+  "practiceType": "pen"
+},{
+  "detail": "Kalem Modunda farklı yollarla çizimler yapmak için yeni komutlar öğrenelim.",
+  "docsLink": "https://codenotesalpay.web.app/2.html",
+  "id": 101,
+  "instruction": "https://drive.google.com/file/d/1ZbLBbQLENko7CgucCXzgNz7eby9bAjNZ/view?usp=sharing",
+  "codeExp": "Kalem modunda tekrar komutunu kullanarak bir altıgen çizelim.",
+  "code": ["renk#185", "genişlik#5", "tekrarla#6", "sola#60", "ileri#100", "bitir"],
+  "name": "Kalem Modunda Gelişmiş Çizimler",
+  "practiceType": "pen"
+}, {
+  "detail": "Renkler ve resimler bilgisayarda nasıl depolanır?",
+  "docsLink": "https://codenotesalpay.web.app/3.html",
+  "id": 2,
+  "instruction": "https://drive.google.com/file/d/1RmkewaE4MB-omLrG7L4iKnuSiypms-8S/view?usp=sharing",
+  "codeExp": "",
+  "code": [],
+  "name": "Piksel ve Renk",
+  "practiceType": "url"
+}, {
+  "detail": "Gördüğün çizimleri arkadaşlarına anlatmada ne kadar başarılı olacaksın?",
+  "docsLink": "https://codenotesalpay.web.app/4.html",
+  "id": 3,
+  "instruction": "https://drive.google.com/file/d/11hiJXGTnpK3F-xsxYG_x6YZbKotuI1-I/view?usp=sharing",
+  "codeExp": "",
+  "code": ["doldur#40", "dikdörtgen"],
+  "name": "Yönergeleri Takip Et",
+  "practiceType": "karton"
+}, {
+  "detail": "Kodlama, bir program yazmak için ne anlama geliyorsa, haritalar da yön bulmak için aynı anlama gelir.",
+  "docsLink": "https://codenotesalpay.web.app/5.html",
+  "id": 4,
+  "instruction": "https://codenotesalpay.web.app/5-maps/index.html",
+  "codeExp": "",
+  "code": [],
+  "name": "Haritalar",
+  "practiceType": "url"
+}, {
+  "detail": "Mantık operatörlerini küçük bir oyun ile anlayalım",
+  "docsLink": "https://codenotesalpay.web.app/6.html",
+  "id": 5,
+  "instruction": "https://codenotesalpay.web.app/6-guess-game/index.html",
+  "codeExp": "",
+  "code": [],
+  "name": "İşlemler ve Mantık",
+  "practiceType": "url"
+}, {
+  "detail": "Mesajlarımızın başkaları tarafından okunmamasını nasıl sağlarız?",
+  "docsLink": "https://codenotesalpay.web.app/7.html",
+  "id": 6,
+  "instruction": "encrypt ve decrypt komutlarını kullanın.",
+  "codeExp": "",
+  "code": [],
+  "name": "Kriptografi",
+  "practiceType": "karton"
+}, {
+  "detail": "Farkında olmadan birçok algoritma oluşturdun. Artık tanımını öğrenme zamanı geldi.",
+  "docsLink": "https://codenotesalpay.web.app/8.html",
+  "id": 7,
+  "instruction": "ilk algoritmamızı yapalım.",
+  "codeExp": "",
+  "code": [],
+  "name": "Algoritma Nedir?",
+  "practiceType": "karton"
+}, {
+  "detail": "Beste yazmak ve kod yazmak birbirinden çok farklı işler değildir.",
+  "docsLink": "https://codenotesalpay.web.app/9.html",
+  "id": 8,
+  "instruction": "ilk algoritmamızı yapalım.",
+  "codeExp": "",
+  "code": [],
+  "name": "Müzik Aleti Yapalım",
+  "practiceType": "karton"
+}, {
+  "detail": "Tangram, basit şekillerden karmaşık yapıları oluşturmamızı sağlar.",
+  "docsLink": "https://codenotesalpay.web.app/10.html",
+  "id": 9,
+  "instruction": "ilk algoritmamızı yapalım.",
+  "codeExp": "",
+  "code": [],
+  "name": "Tangram ve Algoritma",
+  "practiceType": "karton"
+}, {
+  "detail": "Oluşturduğumuz yapılar içinde, bazı özellikleri kaydetmek isteyebiliriz.",
+  "docsLink": "https://codenotesalpay.web.app/11.html",
+  "id": 10,
+  "instruction": "ilk algoritmamızı yapalım.",
+  "codeExp": "",
+  "code": [],
+  "name": "Veriler ve Değişkenler",
+  "practiceType": "karton"
+}]

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.models.LevelBlock;
@@ -35,7 +36,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
@@ -77,22 +80,9 @@ public class Utils {
         return isAvailable;
     }
 
-    public static boolean isConnected(AppCompatActivity appCompatActivity) {
-        if (isNetworkAvailable(appCompatActivity)) {
-            try {
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-                urlc.setRequestProperty("User-Agent", "Test");
-                urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(1500);
-                urlc.connect();
-                return (urlc.getResponseCode() == 200);
-            } catch (IOException e) {
-                Log.e("Karton", "Error: ", e);
-            }
-        } else {
-            Log.d("Karton", "No network present");
-        }
-        return false;
+    public static boolean isConnected() throws InterruptedException, IOException {
+        String command = "ping -c 1 google.com";
+        return Runtime.getRuntime().exec(command).waitFor() == 0;
     }
 
     public static final String getDeviceLanguage() {

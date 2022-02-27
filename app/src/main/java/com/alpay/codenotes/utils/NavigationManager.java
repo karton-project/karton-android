@@ -18,6 +18,7 @@ import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
 import com.alpay.codenotes.fragments.StudyNotesFragment;
 import com.alpay.codenotes.fragments.WebViewFragment;
+import com.alpay.codenotes.models.CodeLineHelper;
 
 public class NavigationManager {
 
@@ -71,9 +72,11 @@ public class NavigationManager {
         ft.commit();
     }
 
-    public static void openPracticeWithInstructions(AppCompatActivity appCompatActivity, String instructions) {
+    public static void openPracticeWithInstructions(AppCompatActivity appCompatActivity, String[] code, String codeExp, Boolean isTurtle) {
         Intent intent = new Intent(appCompatActivity, FBVisionActivity.class);
-        intent.putExtra(NavigationManager.BUNDLE_KEY, instructions);
+        intent.putExtra(NavigationManager.BUNDLE_KEY, codeExp);
+        intent.putExtra(NavigationManager.BUNDLE_CODE_KEY, code);
+        intent.putExtra(NavigationManager.BUNDLE_TURTLE, isTurtle);
         appCompatActivity.startActivity(intent);
     }
 

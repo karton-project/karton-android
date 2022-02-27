@@ -130,17 +130,34 @@ public class CodeLineHelper {
         return new CodeLine(command, params);
     }
 
+    public static ArrayList<CodeLine> codeArrayToCodeLineList(String[] codeArray) {
+        ArrayList<CodeLine> codeLineList = new ArrayList();
+        for (String code : codeArray) {
+            String command = "";
+            String[] params = new String[0];
+            if (code.contains("#")) {
+                String[] parsedCode = code.split("#");
+                command = parsedCode[0];
+                params = Arrays.copyOfRange(parsedCode, 1, parsedCode.length);
+            } else {
+                command = code;
+            }
+            codeLineList.add(new CodeLine(command, params));
+        }
+        return codeLineList;
+    }
+
     public static String clearCode(AppCompatActivity appCompatActivity, String code) {
         String paramString = "";
         CodeLine codeLine = codeToCodeLine(appCompatActivity, code);
         for (String p : codeLine.getInput()) paramString += "#" + p;
-        return codeLine.getCommand()  + paramString;
+        return codeLine.getCommand() + paramString;
     }
 
     public static String[] correctParams(String[] params) {
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].toLowerCase().trim();
-            if(!params[i].contains("dokun")){
+            if (!params[i].contains("dokun")) {
                 params[i] = params[i].replace("o", "0");
             }
             params[i] = params[i].replace("s", "5");
@@ -153,7 +170,7 @@ public class CodeLineHelper {
         return params;
     }
 
-    public static String[] checkAndCorrectVarParams(String command, String[] params){
+    public static String[] checkAndCorrectVarParams(String command, String[] params) {
         params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
         return params;
     }
@@ -190,8 +207,8 @@ public class CodeLineHelper {
         return codeTextArray.toArray(new String[0]);
     }
 
-    public static Set<String> getVariableNames(){
-        HashMap<String,String> hm = new HashMap<>();
+    public static Set<String> getVariableNames() {
+        HashMap<String, String> hm = new HashMap<>();
         for (int i = 0; i < varNames.size(); i++) {
             hm.put(varNames.get(i), varNames.get(i));
         }

@@ -5,6 +5,8 @@ public class Content{
     private String id;
     private String name;
     private String detail;
+    private String[] code;
+    private String codeExp;
     private String image;
     private String docsLink;
     private String instruction;
@@ -46,6 +48,23 @@ public class Content{
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public String[] getCode() {
+        return code;
+    }
+
+    public void setCode(String[] code) {
+        this.code = code;
+    }
+
+    public String getCodeExp() {
+        return codeExp;
+    }
+
+    public void setCodeExp(String codeExp) {
+        this.codeExp = codeExp;
+    }
+
 
     public String getImage() {
         return image;

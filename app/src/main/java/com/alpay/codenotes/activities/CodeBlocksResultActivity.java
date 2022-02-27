@@ -23,6 +23,8 @@ import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.SaveProgramDialog;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -96,34 +98,40 @@ public class CodeBlocksResultActivity extends BaseActivity {
                     super.onReceivedError(view, errorCode, description, failingUrl);
                 }
             });
-            if (Utils.isConnected(this)){
-                if (turtleMode) {
-                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                        url = Constants.TURTLE_EN_CODE;
+            try {
+                if (Utils.isConnected()){
+                    if (turtleMode) {
+                        if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                            url = Constants.TURTLE_EN_CODE;
+                        } else {
+                            url = Constants.TURTLE_TR_CODE;
+                        }
                     } else {
-                        url = Constants.TURTLE_TR_CODE;
+                        if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                            url = Constants.EN_CODE;
+                        } else {
+                            url = Constants.TR_CODE;
+                        }
                     }
-                } else {
-                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                        url = Constants.EN_CODE;
+                }else {
+                    if (turtleMode) {
+                        if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                            url = Constants.TURTLE_EN_CODE_OFFLINE;
+                        } else {
+                            url = Constants.TURTLE_TR_CODE_OFFLINE;
+                        }
                     } else {
-                        url = Constants.TR_CODE;
+                        if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
+                            url = Constants.EN_CODE_OFFLINE;
+                        } else {
+                            url = Constants.TR_CODE_OFFLINE;
+                        }
                     }
                 }
-            }else {
-                if (turtleMode) {
-                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                        url = Constants.TURTLE_EN_CODE_OFFLINE;
-                    } else {
-                        url = Constants.TURTLE_TR_CODE_OFFLINE;
-                    }
-                } else {
-                    if (Utils.getStringFromSharedPreferences(this, "CODE_LANG").contentEquals("UK")) {
-                        url = Constants.EN_CODE_OFFLINE;
-                    } else {
-                        url = Constants.TR_CODE_OFFLINE;
-                    }
-                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             webView.loadUrl(url);
         }

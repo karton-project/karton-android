@@ -41,8 +41,8 @@
                 android:weightSum="2">
 
                 <Button
-                    style="@style/button_learn"
                     android:id="@+id/content_card_watch_video_button"
+                    style="@style/button_learn"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_marginTop="@dimen/unit10"
@@ -52,8 +52,8 @@
                     android:textSize="@dimen/unit12" />
 
                 <Button
-                    style="@style/button_learn"
                     android:id="@+id/content_card_practice_button"
+                    style="@style/button_learn"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/unit40"
                     android:layout_margin="@dimen/unit10"
@@ -64,8 +64,8 @@
             </LinearLayout>
 
             <TextView
-                style="@style/text_light"
                 android:id="@+id/content_card_detail"
+                style="@style/text_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_line"
@@ -76,14 +76,30 @@
                 tools:text="@tools:sample/lorem/random" />
 
             <TextView
-                style="@style/text_light_bold_large"
                 android:id="@+id/content_card_title"
+                style="@style/text_light_bold_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="@dimen/unit4"
                 android:gravity="center_vertical"
                 tools:text="Card Title" />
+
+            <TextView
+                android:id="@+id/content_code_button"
+                style="@style/text_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/unit10"
+                android:background="@color/transparent"
+                android:backgroundTint="@color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawableLeft="@drawable/ic_baseline_code_24"
+                android:gravity="center"
+                android:paddingTop="0dp"
+                android:text="@string/card_practice_code_text" />
 
             <View
                 android:id="@+id/title_line"

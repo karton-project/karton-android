@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -39,21 +40,29 @@ public class ContentViewAdapter extends RecyclerView.Adapter<ContentViewHolder> 
 
     @Override
     public void onBindViewHolder(final ContentViewHolder holder, int position) {
-        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/content_img/" + position + ".png")).into(holder.mImage);
+        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/content_img/" + mContentList.get(position).getContentID() + ".png")).into(holder.mImage);
         holder.mTitle.setText(mContentList.get(position).getName());
         holder.mDetail.setText(mContentList.get(position).getDetail());
         holder.mWatchButton.setOnClickListener(v ->
                 NavigationManager.openWebViewFragment(appCompatActivity, mContentList.get(position).getDocsLink()));
         holder.mPracticeButton.setOnClickListener(v -> {
-            String practiceType = mContentList.get(position).getPracticeType();
-            if (practiceType.contentEquals("url")) {
-                NavigationManager.openWebViewFragment(appCompatActivity, mContentList.get(position).getInstruction());
-            }else if(practiceType.contentEquals("demo")){
-                NavigationManager.openPracticeWithInstructions(appCompatActivity, mContentList.get(position).getInstruction());
-            }else{
-                // do nothing
-            }
+            NavigationManager.openWebViewFragment(appCompatActivity, mContentList.get(position).getInstruction());
         });
+        if (mContentList.get(position).getCode().length > 0){
+            holder.mSeeCodeButton.setOnClickListener(v -> {
+                String practiceType = mContentList.get(position).getPracticeType();
+                if(practiceType.contentEquals("karton")){
+                    NavigationManager.openPracticeWithInstructions(appCompatActivity, mContentList.get(position).getCode(), mContentList.get(position).getCodeExp(), false);
+                }else if(practiceType.contentEquals("pen")){
+                    NavigationManager.openPracticeWithInstructions(appCompatActivity, mContentList.get(position).getCode(), mContentList.get(position).getCodeExp(), true);
+                }else{
+                    Toast.makeText(appCompatActivity, appCompatActivity.getResources().getText(R.string.not_ready), Toast.LENGTH_LONG).show();
+                }
+            });
+        }else {
+            holder.mSeeCodeButton.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -70,6 +79,7 @@ class ContentViewHolder extends RecyclerView.ViewHolder {
     CardView mCardView;
     Button mWatchButton;
     Button mPracticeButton;
+    TextView mSeeCodeButton;
 
     ContentViewHolder(View itemView) {
         super(itemView);
@@ -79,5 +89,6 @@ class ContentViewHolder extends RecyclerView.ViewHolder {
         mWatchButton = itemView.findViewById(R.id.content_card_watch_video_button);
         mPracticeButton = itemView.findViewById(R.id.content_card_practice_button);
         mCardView = itemView.findViewById(R.id.content_card_view);
+        mSeeCodeButton = itemView.findViewById(R.id.content_code_button);
     }
 }
