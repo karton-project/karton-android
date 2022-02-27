@@ -90,15 +90,15 @@
                 style="@style/text_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_above="@id/button_holder"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/unit10"
-                android:background="@color/transparent"
-                android:backgroundTint="@color/transparent"
+                android:background="@drawable/btn_default_highlight"
                 android:clickable="true"
-                android:focusable="true"
                 android:drawableLeft="@drawable/ic_baseline_code_24"
+                android:focusable="true"
                 android:gravity="center"
-                android:paddingTop="0dp"
+                android:padding="@dimen/unit3"
                 android:text="@string/card_practice_code_text" />
 
             <View

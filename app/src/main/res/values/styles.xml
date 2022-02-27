@@ -36,6 +36,11 @@
         <item name="android:textSize">@dimen/unit12</item>
     </style>
 
+    <style name="text_light_large">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/unit14</item>
+    </style>
+
     <style name="text_dark_title">
         <item name="android:textColor">@color/colorDarkGrey</item>
         <item name="android:textSize">@dimen/unit24</item>

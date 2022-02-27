@@ -1,4 +1,5 @@
-[{
+[
+  {
     "detail": "Problem çözmedeki temel adımları görelim.",
     "docsLink": "https://codenotesalpay.web.app/1.html",
     "id": 0,
@@ -7,7 +8,8 @@
     "code": [],
     "name": "Kurt, Kuzu ve Ot",
     "practiceType": "url"
-}, {
+  },
+  {
     "detail": "Bir algoritmanın, farklı parametreler için nasıl uygulandığını görelim.",
     "docsLink": "https://codenotesalpay.web.app/2.html",
     "id": 1,
@@ -16,25 +18,44 @@
     "code": [],
     "name": "Hanoi Kuleleri",
     "practiceType": "url"
-}, {
+  },
+  {
     "detail": "Kalem Modunda çizim yapmak için bir kaleme gerçekleştireceği komutları sıralarız.",
     "docsLink": "https://codenotesalpay.web.app/100.html",
     "id": 100,
     "instruction": "https://drive.google.com/file/d/1_utB-_LjWnljwy39lk2p-tGdpj7wwwtn/view?usp=sharing",
     "codeExp": "Kalem Modu ile Dikdörtgen Çizimi",
-    "code": ["renk#40", "ileri#100", "sola#90", "ileri#100", "sola#90", "ileri#100", "sola#90", "ileri#100"],
+    "code": [
+      "renk#40",
+      "ileri#100",
+      "sola#90",
+      "ileri#100",
+      "sola#90",
+      "ileri#100",
+      "sola#90",
+      "ileri#100"
+    ],
     "name": "Kalem Modu ile Kodlamaya Giriş",
     "practiceType": "pen"
-},{
+  },
+  {
     "detail": "Kalem Modunda farklı yollarla çizimler yapmak için yeni komutlar öğrenelim.",
-    "docsLink": "https://codenotesalpay.web.app/2.html",
+    "docsLink": "https://codenotesalpay.web.app/101.html",
     "id": 101,
     "instruction": "https://drive.google.com/file/d/1ZbLBbQLENko7CgucCXzgNz7eby9bAjNZ/view?usp=sharing",
     "codeExp": "Kalem modunda tekrar komutunu kullanarak bir altıgen çizelim.",
-    "code": ["renk#185", "genişlik#5", "tekrarla#6", "sola#60", "ileri#100", "bitir"],
+    "code": [
+      "renk#185",
+      "genişlik#5",
+      "tekrarla#6",
+      "sola#60",
+      "ileri#100",
+      "bitir"
+    ],
     "name": "Kalem Modunda Gelişmiş Çizimler",
     "practiceType": "pen"
-}, {
+  },
+  {
     "detail": "Renkler ve resimler bilgisayarda nasıl depolanır?",
     "docsLink": "https://codenotesalpay.web.app/3.html",
     "id": 2,
@@ -43,61 +64,119 @@
     "code": [],
     "name": "Piksel ve Renk",
     "practiceType": "url"
-}, {
-    "detail": "Gördüğün çizimleri arkadaşlarına anlatmada ne kadar başarılı olacaksın?",
+  },
+  {
+    "detail": "Kart-ON'un temel çizim komutlarını kullanarak farklı figürler çizelim.",
     "docsLink": "https://codenotesalpay.web.app/4.html",
     "id": 3,
     "instruction": "https://drive.google.com/file/d/11hiJXGTnpK3F-xsxYG_x6YZbKotuI1-I/view?usp=sharing",
-    "codeExp": "",
-    "code": ["doldur#40", "dikdörtgen"],
+    "codeExp": "Turuncu renkli bir dikdörtgen çizelim.",
+    "code": [
+      "doldur#40",
+      "boyut#120#160",
+      "konum#200#250",
+      "dikdörtgen"
+    ],
     "name": "Yönergeleri Takip Et",
     "practiceType": "karton"
-}, {
-    "detail": "Kodlama, bir program yazmak için ne anlama geliyorsa, haritalar da yön bulmak için aynı anlama gelir.",
+  },
+  {
+    "detail": "Ekrana dokunduğumuzda parmağımızın konumunu program içinde kullanalım",
     "docsLink": "https://codenotesalpay.web.app/5.html",
     "id": 4,
-    "instruction": "https://codenotesalpay.web.app/5-maps/index.html",
-    "codeExp": "",
-    "code": [],
-    "name": "Haritalar",
-    "practiceType": "url"
-}, {
-    "detail": "Mantık operatörlerini küçük bir oyun ile anlayalım",
+    "instruction": "https://drive.google.com/file/d/1Spy3i-lS7dcLhVlV85deP0jvBKXsmir4/view?usp=sharing",
+    "codeExp": "dokunx ve dokuny komutlarını kullanarak bir çizgiyi hareket ettirelim.",
+    "code": [
+      "doldur # 200",
+      "şekle başla",
+      "nokta # dokunx # 0",
+      "nokta # dokunx # 500",
+      "şekli bitir"
+    ],
+    "name": "Girdi ve Çıktı",
+    "practiceType": "karton"
+  },
+  {
+    "detail": "Mantık operatörlerini kullanarak girdi olarak verdiğimiz değerleri etkileşim oluşturmak için kullanabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/6.html",
     "id": 5,
-    "instruction": "https://codenotesalpay.web.app/6-guess-game/index.html",
+    "instruction": "https://drive.google.com/file/d/1Spy3i-lS7dcLhVlV85deP0jvBKXsmir4/view?usp=sharing",
     "codeExp": "",
-    "code": [],
+    "code": [
+      "eğer # dokunx > 200",
+      "doldur # 212",
+      "değilse",
+      "doldur # 12",
+      "bitir",
+      "konum # 100 # 100",
+      "boyutlar # 100 # 100",
+      "elips"
+    ],
     "name": "İşlemler ve Mantık",
-    "practiceType": "url"
-}, {
-    "detail": "Mesajlarımızın başkaları tarafından okunmamasını nasıl sağlarız?",
+    "practiceType": "karton"
+  },
+  {
+    "detail": "Değişkenleri kullanarak bilgileri depolayabilir, değiştirebilir ve kullanabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/7.html",
     "id": 6,
-    "instruction": "encrypt ve decrypt komutlarını kullanın.",
-    "codeExp": "",
-    "code": [],
-    "name": "Kriptografi",
+    "instruction": "",
+    "codeExp": "x ve y değişkenlerine atadığımız değerleri konum ve boyut bilgisi olarak kullanalım.",
+    "code": [
+      "değişken # x # 200",
+      "değişken # y # 100",
+      "boyut # x # x",
+      "konum # x # y",
+      "elips"
+    ],
+    "name": "Değişkenler",
     "practiceType": "karton"
-}, {
-    "detail": "Farkında olmadan birçok algoritma oluşturdun. Artık tanımını öğrenme zamanı geldi.",
+  },
+  {
+    "detail": "Döngü yapısı ile tekrarlayan ifadeleri daha az komut kullanarak programlayabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/8.html",
     "id": 7,
-    "instruction": "ilk algoritmamızı yapalım.",
-    "codeExp": "",
-    "code": [],
-    "name": "Algoritma Nedir?",
+    "instruction": "",
+    "codeExp": "x değişkeninin döngü içinde değerini artırarak, yan yana dizilmiş elipsler oluştur.",
+    "code": [
+      "değişken oluştur # x # 40",
+      "tekrarla # 5",
+      "konum # x # 100",
+      "elips",
+      "değer artır # x # 150",
+      "bitir"
+    ],
+    "name": "Döngü Yapısı",
     "practiceType": "karton"
-}, {
-    "detail": "Beste yazmak ve kod yazmak birbirinden çok farklı işler değildir.",
+  },
+  {
+    "detail": "Fonksiyon oluşturarak kod parçalarını tekrar tekrar kullanabiliriz. ",
     "docsLink": "https://codenotesalpay.web.app/9.html",
     "id": 8,
-    "instruction": "ilk algoritmamızı yapalım.",
+    "instruction": "Fonksiyon tanımla komutu bir kelime ile fonksiyonu hafızasına kaydeder. Çağır komutu ile de bu kelimeyi kullanarak fonksiyonu yeniden kullanabilirsin.",
     "codeExp": "",
-    "code": [],
-    "name": "Müzik Aleti Yapalım",
+    "code": [
+      "fonksiyon tanımla # araba",
+      "doldur # 232",
+      "kenar # 165",
+      "boyutlar # 150 # 100",
+      "konum # 100 # 50",
+      "dikdörtgen",
+      "boyutlar # 50 # 50",
+      "konum # 125 # 175",
+      "elips",
+      "boyutlar # 50 # 50",
+      "konum # 225 # 175",
+      "elips",
+      "bitir",
+      "tekrarla # 12",
+      "çağır # araba",
+      "ötele # 50 # 20",
+      "bitir"
+    ],
+    "name": "Fonksiyon ve Döngü",
     "practiceType": "karton"
-}, {
+  },
+  {
     "detail": "Tangram, basit şekillerden karmaşık yapıları oluşturmamızı sağlar.",
     "docsLink": "https://codenotesalpay.web.app/10.html",
     "id": 9,
@@ -106,7 +185,8 @@
     "code": [],
     "name": "Tangram ve Algoritma",
     "practiceType": "karton"
-}, {
+  },
+  {
     "detail": "Oluşturduğumuz yapılar içinde, bazı özellikleri kaydetmek isteyebiliriz.",
     "docsLink": "https://codenotesalpay.web.app/11.html",
     "id": 10,
@@ -115,4 +195,5 @@
     "code": [],
     "name": "Veriler ve Değişkenler",
     "practiceType": "karton"
-}]
+  }
+]

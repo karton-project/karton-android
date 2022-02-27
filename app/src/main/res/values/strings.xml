@@ -26,7 +26,7 @@
     <!-- Exercises -->
     <string name="card_watch_video_button_text">Tutorial</string>
     <string name="card_practice_button_text">Worksheet</string>
-    <string name="card_practice_code_text"> See the Code</string>
+    <string name="card_practice_code_text"><u> See Sample Code</u></string>
 
     <string name="card_change">Change</string>
     <string name="card_addto">Add to Code</string>

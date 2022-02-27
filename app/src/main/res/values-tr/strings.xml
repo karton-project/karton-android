@@ -24,7 +24,7 @@
     <!-- Exercises -->
     <string name="card_watch_video_button_text">Öğren</string>
     <string name="card_practice_button_text">Çalış</string>
-    <string name="card_practice_code_text"> Kodunu Gör</string>
+    <string name="card_practice_code_text"><u> Örnek Kodu Gör</u></string>
 
     <string name="card_change">Düzenle</string>
     <string name="card_addto">Koda Ekle</string>
