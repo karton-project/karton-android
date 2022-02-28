@@ -62,6 +62,12 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.turtle_mode)
     AppCompatToggleButton turtleModeButton;
 
+    @OnClick(R.id.turtle_mode)
+    public void setupTurtleMode(){
+        setupTurtleToggle(!Utils.turtleMode);
+        CodeLineHelper.codeList = new ArrayList();
+    }
+
     @BindView(R.id.new_program_button)
     FloatingActionButton newProgramButton;
 
@@ -113,7 +119,7 @@ public class ProgramListFragment extends Fragment {
         generateProgramListFromGSON();
         setUpRecyclerView();
         refreshCodeBlockRecyclerView(0);
-        setupTurtleToggle();
+        setupTurtleToggle(Utils.turtleMode);
         if (Utils.getBooleanFromSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_CODEINFO)) {
             codeInfoView.setVisibility(View.GONE);
         }
@@ -126,20 +132,15 @@ public class ProgramListFragment extends Fragment {
         super.onDetach();
     }
 
-    private void setupTurtleToggle(){
-        turtleModeButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
-                newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
-                Utils.turtleMode = true;
-            } else {
-                showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
-                newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
-                Utils.turtleMode = false;
-            }
-            CodeLineHelper.codeList = new ArrayList();
-        });
-
+    private void setupTurtleToggle(Boolean turtleMode) {
+        if (turtleMode) {
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+            newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorCode)));
+        } else {
+            showExamplesButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+            newProgramButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+        }
+        Utils.turtleMode = turtleMode;
     }
 
     private void setUpRecyclerView() {

@@ -233,7 +233,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
                 .setNeutralButton(android.R.string.ok, (dialog, which) -> {
                     // Continue with operation
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.ic_draw)
                 .show();
     }
 

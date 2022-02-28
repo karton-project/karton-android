@@ -48,7 +48,8 @@ public class ContentViewAdapter extends RecyclerView.Adapter<ContentViewHolder> 
         holder.mPracticeButton.setOnClickListener(v -> {
             NavigationManager.openWebViewFragment(appCompatActivity, mContentList.get(position).getInstruction());
         });
-        if (mContentList.get(position).getCode().length > 0){
+        if (mContentList.get(position).getCode().length > 1){
+            holder.mSeeCodeButton.setVisibility(View.VISIBLE);
             holder.mSeeCodeButton.setOnClickListener(v -> {
                 String practiceType = mContentList.get(position).getPracticeType();
                 if(practiceType.contentEquals("karton")){
