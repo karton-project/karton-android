@@ -1,6 +1,6 @@
 [
   {
-    "detail": "Problem çözmedeki temel adımları görelim.",
+    "detail": "Problem çözmedeki temel adımları Kurt-Kuzu-Ot probleminin olası çözümleri ile keşfedelim.",
     "docsLink": "https://codenotesalpay.web.app/1.html",
     "id": 0,
     "instruction": "https://drive.google.com/file/d/1eJXTNbg7XF9lcowBAe1Xl_1P2bgBbam-/view?usp=sharing",
@@ -10,7 +10,7 @@
     "practiceType": "url"
   },
   {
-    "detail": "Bir algoritmanın, farklı parametreler için nasıl uygulandığını görelim.",
+    "detail": "Bir algoritmanın, farklı parametreler için nasıl uygulandığını ve çözümler arasındaki ilişkiyi görelim.",
     "docsLink": "https://codenotesalpay.web.app/2.html",
     "id": 1,
     "instruction": "https://drive.google.com/file/d/1ZbLBbQLENko7CgucCXzgNz7eby9bAjNZ/view?usp=sharing",
@@ -20,7 +20,7 @@
     "practiceType": "url"
   },
   {
-    "detail": "Kalem Modunda çizim yapmak için bir kaleme gerçekleştireceği komutları sıralarız.",
+    "detail": "Kalem Modunda çizim yapmak için bir kaleme gerçekleştireceği komutları sıralarız. Temel komutları kullanarak kalemimiz ile bir dikdörtgen çizelim.",
     "docsLink": "https://codenotesalpay.web.app/100.html",
     "id": 100,
     "instruction": "https://drive.google.com/file/d/1_utB-_LjWnljwy39lk2p-tGdpj7wwwtn/view?usp=sharing",
@@ -29,11 +29,11 @@
       "renk#40",
       "ileri#100",
       "sola#90",
-      "ileri#100",
+      "ileri#150",
       "sola#90",
       "ileri#100",
       "sola#90",
-      "ileri#100"
+      "ileri#150"
     ],
     "name": "Kalem Modu ile Kodlamaya Giriş",
     "practiceType": "pen"
@@ -56,7 +56,7 @@
     "practiceType": "pen"
   },
   {
-    "detail": "Renkler ve resimler bilgisayarda nasıl depolanır?",
+    "detail": "Renkler ve resimler bilgisayarda nasıl depolanır? Renk seçici kullanarak renklerin ton değerini nasıl bulacağımızı görelim.",
     "docsLink": "https://codenotesalpay.web.app/3.html",
     "id": 2,
     "instruction": "https://drive.google.com/file/d/1RmkewaE4MB-omLrG7L4iKnuSiypms-8S/view?usp=sharing",
@@ -66,7 +66,7 @@
     "practiceType": "url"
   },
   {
-    "detail": "Kart-ON'un temel çizim komutlarını kullanarak farklı figürler çizelim.",
+    "detail": "Kart-ON programlama uygulamasındaki temel şekil komutlarını kullanarak farklı figürler oluşturalım.",
     "docsLink": "https://codenotesalpay.web.app/4.html",
     "id": 3,
     "instruction": "https://drive.google.com/file/d/11hiJXGTnpK3F-xsxYG_x6YZbKotuI1-I/view?usp=sharing",
@@ -81,9 +81,28 @@
     "practiceType": "karton"
   },
   {
-    "detail": "Ekrana dokunduğumuzda parmağımızın konumunu program içinde kullanalım",
-    "docsLink": "https://codenotesalpay.web.app/5.html",
+    "detail": "Tangram, basit şekillerden karmaşık yapıları oluşturmamızı sağlar.",
+    "docsLink": "https://codenotesalpay.web.app/4-1.html",
     "id": 4,
+    "instruction": "https://drive.google.com/file/d/1Z65JMtxZONW5-GdQOcLC2GaNXcwPvELd/view?usp=sharing",
+    "codeExp": "Farklı şekilleri bir arada kullanalım.",
+    "code": [
+      "doldur#40",
+      "boyut#120#160",
+      "konum#200#250",
+      "dikdörtgen",
+      "doldur#160",
+      "boyut#80#80",
+      "konum#200#150",
+      "üçgen"
+    ],
+    "name": "Tangram ve Algoritma",
+    "practiceType": "karton"
+  },
+  {
+    "detail": "Ekrana dokunduğumuzda parmağımızın değdiği konumu program içinde nasıl kullanırız?",
+    "docsLink": "https://codenotesalpay.web.app/5.html",
+    "id": 5,
     "instruction": "https://drive.google.com/file/d/1Spy3i-lS7dcLhVlV85deP0jvBKXsmir4/view?usp=sharing",
     "codeExp": "dokunx ve dokuny komutlarını kullanarak bir çizgiyi hareket ettirelim.",
     "code": [
@@ -99,9 +118,9 @@
   {
     "detail": "Mantık operatörlerini kullanarak girdi olarak verdiğimiz değerleri etkileşim oluşturmak için kullanabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/6.html",
-    "id": 5,
+    "id": 6,
     "instruction": "https://drive.google.com/file/d/1Spy3i-lS7dcLhVlV85deP0jvBKXsmir4/view?usp=sharing",
-    "codeExp": "",
+    "codeExp": "Dokunmatik ekran girdisinin konumuna göre renk değiştiren bir şekil kodlayalım.",
     "code": [
       "eğer # dokunx > 200",
       "doldur # 212",
@@ -118,8 +137,8 @@
   {
     "detail": "Değişkenleri kullanarak bilgileri depolayabilir, değiştirebilir ve kullanabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/7.html",
-    "id": 6,
-    "instruction": "",
+    "id": 7,
+    "instruction": "https://drive.google.com/file/d/11eAbrVQgj_Q4pbZKMdO8N7SBs96OUNOI/view?usp=sharing",
     "codeExp": "x ve y değişkenlerine atadığımız değerleri konum ve boyut bilgisi olarak kullanalım.",
     "code": [
       "değişken # x # 200",
@@ -134,8 +153,8 @@
   {
     "detail": "Döngü yapısı ile tekrarlayan ifadeleri daha az komut kullanarak programlayabiliriz.",
     "docsLink": "https://codenotesalpay.web.app/8.html",
-    "id": 7,
-    "instruction": "",
+    "id": 8,
+    "instruction": "https://drive.google.com/file/d/1hd3Kw7dIto4Rtybalk0JGh_UcL5e2yKY/view?usp=sharing",
     "codeExp": "x değişkeninin döngü içinde değerini artırarak, yan yana dizilmiş elipsler oluştur.",
     "code": [
       "değişken oluştur # x # 40",
@@ -151,9 +170,9 @@
   {
     "detail": "Fonksiyon oluşturarak kod parçalarını tekrar tekrar kullanabiliriz. ",
     "docsLink": "https://codenotesalpay.web.app/9.html",
-    "id": 8,
-    "instruction": "Fonksiyon tanımla komutu bir kelime ile fonksiyonu hafızasına kaydeder. Çağır komutu ile de bu kelimeyi kullanarak fonksiyonu yeniden kullanabilirsin.",
-    "codeExp": "",
+    "id": 9,
+    "instruction": "https://drive.google.com/file/d/1cN8Zviw25HZfbMO1EFnFSDfQrPkkZBLY/view?usp=sharing",
+    "codeExp": "Fonksiyon tanımla komutu bir kelime ile fonksiyonu hafızasına kaydeder. Çağır komutu ile de bu kelimeyi kullanarak fonksiyonu yeniden kullanabilirsin.",
     "code": [
       "fonksiyon tanımla # araba",
       "doldur # 232",
@@ -166,7 +185,7 @@
       "elips",
       "boyutlar # 50 # 50",
       "konum # 225 # 175",
-      "elips",
+      "elips",lll
       "bitir",
       "tekrarla # 12",
       "çağır # araba",
@@ -174,26 +193,6 @@
       "bitir"
     ],
     "name": "Fonksiyon ve Döngü",
-    "practiceType": "karton"
-  },
-  {
-    "detail": "Tangram, basit şekillerden karmaşık yapıları oluşturmamızı sağlar.",
-    "docsLink": "https://codenotesalpay.web.app/10.html",
-    "id": 9,
-    "instruction": "ilk algoritmamızı yapalım.",
-    "codeExp": "",
-    "code": [],
-    "name": "Tangram ve Algoritma",
-    "practiceType": "karton"
-  },
-  {
-    "detail": "Oluşturduğumuz yapılar içinde, bazı özellikleri kaydetmek isteyebiliriz.",
-    "docsLink": "https://codenotesalpay.web.app/11.html",
-    "id": 10,
-    "instruction": "ilk algoritmamızı yapalım.",
-    "codeExp": "",
-    "code": [],
-    "name": "Veriler ve Değişkenler",
     "practiceType": "karton"
   }
 ]
