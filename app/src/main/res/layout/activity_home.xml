@@ -72,7 +72,7 @@
 
                 <ImageView
                     style="@style/icon_home"
-                    app:srcCompat="@drawable/ic_user" />
+                    app:srcCompat="@drawable/ic_toolbox" />
 
                 <TextView
                     style="@style/icon_home_text"

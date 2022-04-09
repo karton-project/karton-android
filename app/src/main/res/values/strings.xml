@@ -3,12 +3,14 @@
     <string name="check">en</string>
     <!-- Account -->
     <string name="my_notes">My Notes</string>
+    <string name="prototype">Sketch Ideas</string>
     <string name="my_programs">My Programs</string>
+    <string name="color_picker">Color Picker</string>
     <string name="karton_website">You can download the card blocks, see all activities, read our research and see more tips and guidelines at <u>karton.ku.edu.tr</u></string>
     <string name="not_ready">The content is not ready yet. We are on it!</string>
 
     <!-- Actionbar Headers -->
-    <string name="task_title">Your Mission</string>
+    <string name="task_title">Your Task</string>
 
     <!-- Compiler -->
     <string name="no_code_dialog_message">No Understandable Code</string>
@@ -33,7 +35,7 @@
     <string name="card_run">Run</string>
     <string name="card_delete">Remove</string>
     <string name="empty_program_text">Create a new program with + button</string>
-    <string name="change_coding_language">Change the coding language to:</string>
+    <string name="change_coding_language">Change Coding Language</string>
     <string name="code_added">The function is added to your code.</string>
     <string name="code_randomly_added">Added a new random code block!</string>
 
@@ -48,7 +50,7 @@
     <string name="home_card_learn">Learn</string>
     <string name="home_card_program">Code</string>
     <string name="home_card_game">Play</string>
-    <string name="home_card_account">Settings</string>
+    <string name="home_card_account">Toolbox</string>
     <string name="hour_of_code_play">Hour of Code with Flappy Bird</string>
     <string name="hour_of_code_flappy_exp">Learn the fundamentals of coding with Flappy Bird</string>
 

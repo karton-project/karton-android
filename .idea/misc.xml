@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_draw.xml" value="0.37135416666666665" />
         <entry key="app/src/main/res/drawable/warningtoastshape.xml" value="0.28802083333333334" />
         <entry key="app/src/main/res/layout/activity_code_blocks_result.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/codeblock_card.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/codeblock_detail_card.xml" value="0.3223958333333333" />
         <entry key="app/src/main/res/layout/content_card_layout.xml" value="0.28177083333333336" />
@@ -23,6 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_sketch.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_web_view.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/layout_level_result.xml" value="0.2989583333333333" />
+        <entry key="app/src/main/res/layout/signed_in_layout.xml" value="0.35" />
         <entry key="app/src/main/res/layout/welcome_page_1.xml" value="0.25" />
         <entry key="app/src/main/res/layout/welcome_page_2.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/welcome_page_3.xml" value="0.32395833333333335" />
