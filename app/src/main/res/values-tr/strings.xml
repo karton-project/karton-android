@@ -3,7 +3,9 @@
     <string name="check">tr</string>
     <!-- Account -->
     <string name="my_notes">Notlarım</string>
+    <string name="prototype">Fikrini Çiz</string>
     <string name="my_programs">Programlarım</string>
+    <string name="color_picker">Renk Seçici</string>
     <string name="karton_website"><u>karton.ku.edu.tr</u> web sitesinde, yazıcıdan çıkarabileceğiniz blokları, aktivite açıklamalarını, araştırmalarımızı ve çok daha fazla bilgiyi bulabilirsiniz.</string>
     <!-- Actionbar Headers -->
     <string name="task_title">Görevin</string>
@@ -31,7 +33,7 @@
     <string name="card_run">Çalıştır</string>
     <string name="card_delete">Sil</string>
     <string name="empty_program_text">Yeni bir program yaratmak için + tuşuna bas</string>
-    <string name="change_coding_language">Kodlama Dilini Değiştir:</string>
+    <string name="change_coding_language">Kodlama Dilini Değiştir</string>
     <string name="code_added">Fonksiyon, koduna eklendi.</string>
     <string name="code_randomly_added">Rastgele bir kod parçası eklendi!</string>
 
@@ -46,7 +48,7 @@
     <string name="home_card_learn">Öğren</string>
     <string name="home_card_program">Kodla</string>
     <string name="home_card_game">Oyna</string>
-    <string name="home_card_account">Ayarlar</string>
+    <string name="home_card_account">Araçlar</string>
     <string name="hour_of_code_play">Flappy Bird ile Kod Saati</string>
     <string name="hour_of_code_flappy_exp">Flappy Bird ile kodlamanın temellerini öğren!</string>
 

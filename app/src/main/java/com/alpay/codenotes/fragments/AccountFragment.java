@@ -1,6 +1,7 @@
 package com.alpay.codenotes.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
 import com.alpay.codenotes.BaseApplication;
@@ -39,6 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import top.defaults.colorpicker.ColorPickerPopup;
 
 import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
@@ -66,6 +70,11 @@ public class AccountFragment extends Fragment {
         NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.NOTES);
     }
 
+    @OnClick(R.id.prototype_button)
+    public void opensketch(){
+        NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.SKETCH);
+    }
+
     @OnClick(R.id.change_language)
     public void openPrograms(){
         if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("TR")){
@@ -77,15 +86,36 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    @OnClick(R.id.color_picker)
+    public void changeColor() {
+        new ColorPickerPopup.Builder(getActivity())
+                .initialColor(Color.BLUE) // Set initial color
+                .enableBrightness(false) // Enable brightness slider or not
+                .enableAlpha(false) // Enable alpha slider or not
+                .okTitle(getResources().getString(R.string.ok))
+                .cancelTitle(getResources().getString(R.string.cancel))
+                .showIndicator(true)
+                .showValue(false)
+                .build()
+                .show(new ColorPickerPopup.ColorPickerObserver() {
+                    @Override
+                    public void onColorPicked(int color) {
+                        float[] hslColor = new float[3];
+                        ColorUtils.colorToHSL(color, hslColor);
+                        Toast.makeText(getActivity(), "H: " + hslColor[0], Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onColor(int color, boolean fromUser) {
+
+                    }
+                });
+    }
+
     @OnClick(R.id.sign_in)
     public void signIn(){
         Intent intent = new Intent(getActivity(), AuthUiActivity.class);
         startActivity(intent);
-    }
-
-    @OnClick(R.id.project_website)
-    public void openWebpage(){
-        NavigationManager.openWebViewFragment((AppCompatActivity) getActivity(), Constants.PROJECT_WEBSITE);
     }
 
     @Override
