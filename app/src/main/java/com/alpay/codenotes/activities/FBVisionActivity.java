@@ -242,10 +242,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     }
 
     private void setUpRecyclerView() {
-        blocksRecyclerView.setHasFixedSize(true);
         blocksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        blocksRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        blocksRecyclerView.addItemDecoration(new MarginDecoration(this));
 
         ItemTouchHelper.Callback callback = new ItemMoveCallback(codeBlockViewAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);

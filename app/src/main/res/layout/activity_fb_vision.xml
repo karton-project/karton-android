@@ -33,12 +33,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/codeblocks_recycler_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/read_code_button"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="@dimen/unit2"
-        android:background="@color/transparent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:background="@color/transparent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/codeblocks_clear_all"
