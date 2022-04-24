@@ -102,7 +102,11 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @OnClick(R.id.read_code_button)
     public void readCode() {
         saveImage();
-        addCodeToCodeList(checkAndCorrectCode(Utils.code));
+        try {
+            addCodeToCodeList(checkAndCorrectCode(Utils.code));
+        }catch (Exception e){
+
+        }
     }
 
     private String checkAndCorrectCode(String code) {
