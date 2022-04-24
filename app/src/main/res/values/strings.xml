@@ -19,6 +19,7 @@
     <string name="save_program_sub">Enter the program name</string>
     <string name="variable_name">Variable Name</string>
     <string name="unknown_code_error">This not a Kart-ON Code</string>
+    <string name="variable_not_defined_yet">You have not defined this variable yet.</string>
     <string name="clear_code_title">Delete Code</string>
     <string name="clear_code_exp">Your code will be deleted. Do you want to continue?</string>
 

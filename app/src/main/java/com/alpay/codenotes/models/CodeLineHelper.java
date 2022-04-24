@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
@@ -127,10 +128,10 @@ public class CodeLineHelper {
         } catch (Exception e) {
             Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
         }
-        return new CodeLine(command, params);
+        return new CodeLine(appCompatActivity, command, params);
     }
 
-    public static ArrayList<CodeLine> codeArrayToCodeLineList(String[] codeArray) {
+    public static ArrayList<CodeLine> codeArrayToCodeLineList(AppCompatActivity appCompatActivity, String[] codeArray) {
         ArrayList<CodeLine> codeLineList = new ArrayList();
         for (String code : codeArray) {
             String command = "";
@@ -142,7 +143,7 @@ public class CodeLineHelper {
             } else {
                 command = code;
             }
-            codeLineList.add(new CodeLine(command, params));
+            codeLineList.add(new CodeLine(appCompatActivity, command, params));
         }
         return codeLineList;
     }
@@ -157,6 +158,7 @@ public class CodeLineHelper {
     public static String[] correctParams(String[] params) {
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].toLowerCase().trim();
+            params[i] = params[i].replace("*", "x");
             if (params[i].matches(".*\\d.*")){
                 params[i] = params[i].replace("o", "0");
                 params[i] = params[i].replace("s", "5");
@@ -164,7 +166,6 @@ public class CodeLineHelper {
                 params[i] = params[i].replace("b", "6");
                 params[i] = params[i].replace("i", "1");
                 params[i] = params[i].replace("l", "1");
-                params[i] = params[i].replace("*", "x");
                 params[i] = params[i].replace("h", "4");
             }
             if (params[i].contains("d0kun")) {
@@ -177,9 +178,15 @@ public class CodeLineHelper {
         return params;
     }
 
-    public static String[] checkAndCorrectVarParams(String command, String[] params) {
-        params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
-        return params;
+    public static String[] checkAndCorrectVarParams(AppCompatActivity appCompatActivity, String[] params) {
+        if (varNames.size() > 0) {
+            params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
+            return params;
+        } else
+        {
+            Toast.makeText(appCompatActivity, R.string.variable_not_defined_yet, Toast.LENGTH_LONG).show();
+            return new String[0];
+        }
     }
 
     public static String prettyPrintCodeLine(CodeLine codeLine) {

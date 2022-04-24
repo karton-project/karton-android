@@ -130,6 +130,7 @@
     <string name="switch_to_inference_hint">Eğitim başladı, artık tanıma moduna geçebilirsin.</string>
     <string name="save_program_as_image"><u>... ya da kamera ile kaydet</u></string>
     <string name="unknown_code_error">Kart-ON Kodu Algılanamadı</string>
+    <string name="variable_not_defined_yet">Değerini değiştirmek istediğin değişkenleri daha tanımlamadın.</string>
 
 
     <string-array name="command_array">

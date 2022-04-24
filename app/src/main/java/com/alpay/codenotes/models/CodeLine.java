@@ -1,5 +1,7 @@
 package com.alpay.codenotes.models;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
@@ -34,7 +36,7 @@ public class CodeLine {
 
     }
 
-    public CodeLine(String command, String[] params) {
+    public CodeLine(AppCompatActivity appCompatActivity, String command, String[] params) {
         this.command = command;
         this.params = params;
         if (Arrays.asList(CodeLineHelper.x_commands).contains(command.trim())) {
@@ -48,7 +50,7 @@ public class CodeLine {
             if (Arrays.asList(CodeLineHelper.def_commands).contains(command.trim()))
                 CodeLineHelper.varNames.add(getFirstInput().trim());
             else
-                this.params = CodeLineHelper.checkAndCorrectVarParams(command, params);
+                this.params = CodeLineHelper.checkAndCorrectVarParams(appCompatActivity, params);
         } else if (Arrays.asList(CodeLineHelper.n_commands).contains(command.trim())) {
             this.type = Type.N;
         } else if (Arrays.asList(CodeLineHelper.end_commands).contains(command.trim())) {
