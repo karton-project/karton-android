@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ import com.alpay.codenotes.models.CodeLine;
 import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.utils.CodePool;
 import com.alpay.codenotes.utils.NavigationManager;
+import com.alpay.codenotes.utils.PlaySound;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.SoundButton;
 import com.alpay.codenotes.view.utils.MarginDecoration;
@@ -65,6 +67,7 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
     private CodePool codePool = new CodePool();
+    protected Vibrator vibe;
 
     @BindView(R.id.codeblocks_recycler_view)
     RecyclerView blocksRecyclerView;
@@ -102,11 +105,17 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
     @OnClick(R.id.read_code_button)
     public void readCode() {
         saveImage();
+        engageWithNotification();
         try {
             addCodeToCodeList(checkAndCorrectCode(Utils.code));
         }catch (Exception e){
 
         }
+    }
+
+    private void engageWithNotification(){
+        vibe.vibrate(200);
+        PlaySound.playSound(this, PlaySound.SUCCESS);
     }
 
     private String checkAndCorrectCode(String code) {
@@ -205,6 +214,8 @@ public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnR
 
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         ShakeDetector sd = new ShakeDetector(this);
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        PlaySound.initSounds(this);
         sd.start(sensorManager);
         clearCodeButton.setVisibility(View.GONE);
         preview = findViewById(R.id.firePreview);

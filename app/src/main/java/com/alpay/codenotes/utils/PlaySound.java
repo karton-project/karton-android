@@ -19,7 +19,7 @@ public class PlaySound {
     /** Populate the SoundPool*/
     public static void initSounds(Context context) {
         soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 100);
-        soundPoolMap = new HashMap(26);
+        soundPoolMap = new HashMap(3);
         soundPoolMap.put(SUCCESS, soundPool.load(context, R.raw.success, 1));
         soundPoolMap.put(CLICK, soundPool.load(context, R.raw.click, 2));
 

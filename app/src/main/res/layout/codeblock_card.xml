@@ -25,7 +25,7 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/textColorDark"
-            android:textSize="@dimen/unit14"
+            android:textSize="@dimen/unit12"
             tool:text="background r: 100 g: 100 b:: 100" />
 
     </LinearLayout>
