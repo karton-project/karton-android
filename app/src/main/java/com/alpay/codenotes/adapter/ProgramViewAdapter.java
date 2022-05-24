@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 
 public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> {
@@ -53,12 +54,17 @@ public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> 
         for (CodeLine codeLine : mProgramList.get(position).getCode()) {
             p5Code = p5Code + CodeLineHelper.prettyPrintCodeLine(codeLine);
         }
+        if (mProgramList.get(position).isTurtle())
+            holder.mCardView.setBackgroundColor(appCompatActivity.getResources().getColor(R.color.colorCode));
+        else
+            holder.mCardView.setBackgroundColor(appCompatActivity.getResources().getColor(R.color.colorAccent));
         holder.mTitle.setText(mProgramList.get(position).getName());
         holder.mDetail.setText(p5Code);
         holder.mRunButton.setOnClickListener(v -> {
             Intent intent = new Intent(appCompatActivity, CodeBlocksResultActivity.class);
             String[] p5CodeArr = (String[]) mProgramList.get(position).getCodeArray();
             intent.putExtra(BUNDLE_CODE_KEY, p5CodeArr);
+            intent.putExtra(BUNDLE_TURTLE, mProgramList.get(position).isTurtle());
             appCompatActivity.startActivity(intent);
         });
         holder.mChangeButton.setOnClickListener(v -> {

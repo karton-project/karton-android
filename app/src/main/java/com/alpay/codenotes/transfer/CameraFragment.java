@@ -99,6 +99,7 @@ public class CameraFragment extends Fragment {
     private static Bitmap tempBitmap;
     private String className = "1";
     String predictionName = "";
+    Boolean turtleMode = false;
 
     // When the user presses the "add sample" button for some class,
     // that class will be added to this queue. It is later extracted by
@@ -134,7 +135,7 @@ public class CameraFragment extends Fragment {
                             groupId = code.getFirstInput();
                         }
                     }
-                    GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, CodeLineHelper.codeList, Utils.bitmapToBase64(tempBitmap));
+                    GroupHelper.saveProgram((AppCompatActivity) getActivity(), GroupHelper.groupId, className, CodeLineHelper.codeList, Utils.bitmapToBase64(tempBitmap), turtleMode);
                     NavigationManager.openFragment((AppCompatActivity) getActivity(), NavigationManager.PROGRAM_LIST);
                     break;
             }

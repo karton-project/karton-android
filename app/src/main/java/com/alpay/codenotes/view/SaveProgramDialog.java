@@ -28,6 +28,7 @@ public class SaveProgramDialog extends Dialog implements
     Button saveButton;
     TextView saveViaCamera;
     ImageView closeButton;
+    Boolean turtleMode;
 
     public void saveCode() {
         String programName = editText.getText().toString().trim().replaceAll(" +", " ");
@@ -36,13 +37,14 @@ public class SaveProgramDialog extends Dialog implements
                 groupId = codeLine.getFirstInput();
             }
         }
-        GroupHelper.saveProgram(appCompatActivity, GroupHelper.groupId, programName, CodeLineHelper.codeList);
+        GroupHelper.saveProgram(appCompatActivity, GroupHelper.groupId, programName, CodeLineHelper.codeList, turtleMode);
     }
 
-    public SaveProgramDialog(AppCompatActivity appCompatActivity) {
+    public SaveProgramDialog(AppCompatActivity appCompatActivity, Boolean turtleMode) {
         super(appCompatActivity);
         // TODO Auto-generated constructor stub
         this.appCompatActivity = appCompatActivity;
+        this.turtleMode = turtleMode;
     }
 
     @Override

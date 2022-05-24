@@ -157,8 +157,8 @@ public class GroupHelper {
         saveProgramList(context);
     }
 
-    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code) {
-        Program program = new Program(name, code);
+    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code, Boolean turtleMode) {
+        Program program = new Program(name, code, turtleMode);
         int pos = getGroupIndex(parentName);
         if (groupList == null) {
             groupList = new ArrayList<>();
@@ -173,8 +173,8 @@ public class GroupHelper {
         CodeLineHelper.codeList = new ArrayList<>();
     }
 
-    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code, String bitmap) {
-        Program program = new Program(name, code, bitmap);
+    public static void saveProgram(Context context, String parentName, String name, ArrayList<CodeLine> code, String bitmap, Boolean turtleMode) {
+        Program program = new Program(name, code, bitmap, turtleMode);
         int pos = getGroupIndex(parentName);
         if (groupList == null) {
             groupList = new ArrayList<>();

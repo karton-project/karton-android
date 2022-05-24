@@ -62,7 +62,7 @@ public class CodeBlocksResultActivity extends BaseActivity {
 
     @OnClick(R.id.save_code_button)
     public void saveProgram() {
-        SaveProgramDialog saveProgramDialog = new SaveProgramDialog(this);
+        SaveProgramDialog saveProgramDialog = new SaveProgramDialog(this, turtleMode);
         saveProgramDialog.show();
     }
 

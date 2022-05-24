@@ -12,19 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/unit4"
-        android:background="@color/colorWhite"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         app:cardElevation="0dp"
         app:cardMaxElevation="0dp"
         card_view:cardCornerRadius="@dimen/unit4">
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimaryDark"
-            android:clickable="true"
-            android:scaleType="fitXY" />
 
         <RelativeLayout
             android:layout_width="match_parent"
