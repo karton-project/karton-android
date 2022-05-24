@@ -15,6 +15,7 @@ limitations under the License.
 
 package com.alpay.codenotes.transfer;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -64,6 +65,12 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.util.Locale;
 import java.util.Objects;
@@ -343,13 +350,50 @@ public class CameraFragment extends Fragment {
         viewFinder.setTransform(matrix);
     }
 
+    private void saveModel() {
+        FileOutputStream fos = null;
+        ObjectOutputStream os = null;
+        try {
+            fos = getActivity().getApplicationContext().openFileOutput("tlmodel", Context.MODE_PRIVATE);
+            try {
+                os = new ObjectOutputStream(fos);
+                os.writeObject(tlModel);
+                os.close();
+                fos.close();
+                tlModel.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private TransferLearningModelWrapper loadModel() {
+        FileInputStream fis = null;
+        ObjectInputStream is = null;
+        try {
+            fis = getActivity().getApplicationContext().openFileInput("tlmodel");
+            try {
+                is = new ObjectInputStream(fis);
+                tlModel = (TransferLearningModelWrapper) is.readObject();
+                is.close();
+                fis.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tlModel;
+    }
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if (Utils.tlModel == null)
-            tlModel = Utils.createTLModel((AppCompatActivity) getActivity());
-        else
-            tlModel = Utils.tlModel;
+        tlModel = loadModel();
+        if (tlModel == null)
+            tlModel = new TransferLearningModelWrapper((AppCompatActivity) getActivity());
         viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
         viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
     }
@@ -429,10 +473,9 @@ public class CameraFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        tlModel.close();
-        tlModel = null;
+    public void onPause() {
+        saveModel();
+        super.onPause();
     }
 
     @Override

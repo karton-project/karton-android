@@ -63,11 +63,6 @@ public class Utils {
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();
 
-    public static TransferLearningModelWrapper createTLModel(AppCompatActivity appCompatActivity) {
-        tlModel = new TransferLearningModelWrapper(appCompatActivity);
-        return tlModel;
-    }
-
     private static boolean isNetworkAvailable(AppCompatActivity appCompatActivity) {
         ConnectivityManager manager =
                 (ConnectivityManager) appCompatActivity.getSystemService(Context.CONNECTIVITY_SERVICE);

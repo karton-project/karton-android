@@ -53,9 +53,6 @@ public class ProgramListFragment extends Fragment {
     @BindView(R.id.empty_program_layout)
     LinearLayout emptyProgramLayout;
 
-    @BindView(R.id.code_info_view)
-    RelativeLayout codeInfoView;
-
     @BindView(R.id.show_examples)
     FloatingActionButton showExamplesButton;
 
@@ -70,12 +67,6 @@ public class ProgramListFragment extends Fragment {
 
     @BindView(R.id.new_program_button)
     FloatingActionButton newProgramButton;
-
-    @OnClick(R.id.close_code_info)
-    public void closeCodeInfoView() {
-        codeInfoView.setVisibility(View.GONE);
-        Utils.addBooleanToSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_CODEINFO, true);
-    }
 
     @OnClick(R.id.new_program_button)
     public void createNewProgram() {
@@ -102,9 +93,9 @@ public class ProgramListFragment extends Fragment {
     }
 
     @Nullable
-    @OnClick(R.id.code_info_view)
-    public void openCodeInfo() {
-        // Open the web view to get more info
+    @OnClick(R.id.transfer_learning_button)
+    public void openTransferLearningModule() {
+        NavigationManager.openTransferLearning((AppCompatActivity) getActivity());
     }
 
     public ProgramListFragment() {
@@ -120,9 +111,6 @@ public class ProgramListFragment extends Fragment {
         setUpRecyclerView();
         refreshCodeBlockRecyclerView(0);
         setupTurtleToggle(Utils.turtleMode);
-        if (Utils.getBooleanFromSharedPreferences((AppCompatActivity) getActivity(), Utils.CLOSE_CODEINFO)) {
-            codeInfoView.setVisibility(View.GONE);
-        }
         return view;
     }
 

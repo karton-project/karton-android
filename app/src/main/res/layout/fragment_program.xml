@@ -34,51 +34,25 @@
         android:textOff="@string/pen"
         android:textOn="@string/karton" />
 
-    <RelativeLayout
-        android:id="@+id/code_info_view"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/transfer_learning_button"
+        style="@style/button_floating_nav"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/unit12"
-        android:layout_marginTop="@dimen/unit12"
-        android:layout_marginEnd="@dimen/unit12"
-        android:layout_marginBottom="@dimen/unit12"
-        android:layout_toLeftOf="@id/turtle_mode"
-        android:background="@drawable/warningtoastshape"
-        android:clickable="true"
-        android:padding="@dimen/unit8">
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/unit10"
+        android:layout_marginLeft="@dimen/unit7"
+        app:srcCompat="@drawable/ic_photo_camera" />
 
-        <ImageView
-            android:id="@+id/code_info_icon"
-            android:layout_width="@dimen/unit48"
-            android:layout_height="@dimen/unit48"
-            android:layout_alignParentLeft="true"
-            app:srcCompat="@drawable/ic_flappy" />
-
-        <ImageView
-            android:id="@+id/close_code_info"
-            android:layout_width="@dimen/unit24"
-            android:layout_height="@dimen/unit24"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_close"
-            app:tint="@color/colorWhite" />
-
-        <TextView
-            style="@style/text_light_bold_large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/unit8"
-            android:layout_toRightOf="@+id/code_info_icon"
-            android:text="@string/hour_of_code_play" />
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/code_info_view">
+        android:layout_marginTop="@dimen/unit14"
+        android:layout_marginRight="@dimen/unit8"
+        android:layout_marginLeft="@dimen/unit8"
+        android:layout_alignParentTop="true" >
 
         <ProgressBar
             android:id="@+id/program_progress_bar"
