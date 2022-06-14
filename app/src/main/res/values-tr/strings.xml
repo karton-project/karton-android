@@ -8,7 +8,7 @@
     <string name="color_picker">Renk Seçici</string>
     <string name="karton_website"><u>karton.ku.edu.tr</u> web sitesinde, yazıcıdan çıkarabileceğiniz blokları, aktivite açıklamalarını, araştırmalarımızı ve çok daha fazla bilgiyi bulabilirsiniz.</string>
     <!-- Actionbar Headers -->
-    <string name="task_title">Görevin</string>
+    <string name="task_title">Bu kod ne yapıyor?</string>
     <string name="not_ready">İçerik henüz hazır değil, üzerinde çalışıyoruz!</string>
 
     <!-- Compiler -->

@@ -22,10 +22,10 @@ public class CodeLineHelper {
 
     public static final String[] command_array_en = {
             "fill", "stroke", "background",
-            "ellipse", "rectangle", "triangle", "puppet", "begin shape", "end shape",
-            "rotate", "define function", "call", "loop", "if",
+            "ellipse", "rectangle", "triangle", "ghost sprite", "begin shape", "end shape",
+            "rotate", "function", "end function", "call", "repeat", "if",
             "vertex", "size", "location", "translate",
-            "variable", "increase value", "decrease value", "set value", "random number",
+            "variable", "increase val", "decrease val", "set val", "random",
             "else", "end",
             "forward", "right", "left", "repeat", "start x", "start y", "width", "colour",
             "pen down", "pen up", "hide pen", "show pen", "clear"
@@ -34,9 +34,9 @@ public class CodeLineHelper {
     public static final String[] command_array_tr = {
             "doldur", "kenar", "arkaplan",
             "elips", "dikdörtgen", "üçgen", "kukla", "şekle başla", "şekli bitir",
-            "döndür", "fonksiyon tanımla", "çağır", "tekrarla", "eğer",
+            "döndür", "fonksiyon", "fonksiyon bitir", "çağır", "tekrarla", "eğer",
             "nokta", "ötele", "boyut", "konum",
-            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele sayı",
+            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele",
             "değilse", "bitir",
             "ileri", "sağa", "sola", "tekrarla", "başlangıç x", "başlangıç y", "genişlik", "renk",
             "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
@@ -59,14 +59,14 @@ public class CodeLineHelper {
 
     public static final String[] x_commands = {
             // english
-            "fill", "stroke", "background", "rotate", "loop",
+            "fill", "stroke", "background", "rotate", "repeat",
             // turkish
             "doldur", "kenar", "arkaplan", "döndür", "tekrarla"
     };
 
     public static final String[] xy_commands = {
             // english
-            "point", "translate", "size", "location",
+            "vertex", "translate", "size", "location",
             // turkish
             "nokta", "ötele", "boyut", "konum"
     };
@@ -81,30 +81,30 @@ public class CodeLineHelper {
 
     public static final String[] n_commands = {
             // english
-            "define function", "call", "if", "text",
+            "function", "call", "if", "text",
             // turkish
-            "fonksiyon tanımla", "çağır", "eğer", "yazı"
+            "fonksiyon", "çağır", "eğer", "yazı"
     };
 
     public static final String[] nv_commands = {
             // english
-            "variable", "increase value", "decrease value", "set value", "random number",
+            "variable", "increase val", "decrease val", "set val", "random",
             // turkish
-            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele sayı"
+            "değişken", "değer artır", "değer azalt", "değer ata", "rastgele"
     };
 
     public static final String[] def_commands = {
             // english
-            "variable", "random number", "define function:",
+            "variable", "random", "function",
             // turkish
-            "değişken", "rastgele sayı", "fonksiyon tanımla:",
+            "değişken", "rastgele", "fonksiyon",
     };
 
     public static final String[] end_commands = {
             // english
-            "else", "end",
+            "else", "end", "end function",
             // turkish
-            "değilse", "bitir"
+            "değilse", "bitir",  "fonksiyon bitir"
     };
 
     public static CodeLine codeToCodeLine(AppCompatActivity appCompatActivity, String code) {

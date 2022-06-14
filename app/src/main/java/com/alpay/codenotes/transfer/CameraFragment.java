@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.DisplayMetrics;
@@ -65,12 +66,15 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
 import java.nio.ByteBuffer;
 import java.util.Locale;
 import java.util.Objects;
@@ -351,51 +355,54 @@ public class CameraFragment extends Fragment {
     }
 
     private void saveModel() {
-        FileOutputStream fos = null;
-        ObjectOutputStream os = null;
+        FileOutputStream outStream = null;
         try {
-            fos = getActivity().getApplicationContext().openFileOutput("tlmodel", Context.MODE_PRIVATE);
-            try {
-                os = new ObjectOutputStream(fos);
-                os.writeObject(tlModel);
-                os.close();
-                fos.close();
-                tlModel.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            File f = new File(Environment.getExternalStorageDirectory(), "tlmodel.dat");
+            outStream = new FileOutputStream(f);
+            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
+            objectOutStream.writeObject(tlModel);
+            objectOutStream.close();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
+
     }
 
-    private TransferLearningModelWrapper loadModel() {
-        FileInputStream fis = null;
-        ObjectInputStream is = null;
+    private void loadModel() {
+        TransferLearningModelWrapper model = null;
+        FileInputStream inStream = null;
         try {
-            fis = getActivity().getApplicationContext().openFileInput("tlmodel");
-            try {
-                is = new ObjectInputStream(fis);
-                tlModel = (TransferLearningModelWrapper) is.readObject();
-                is.close();
-                fis.close();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            File f = new File(Environment.getExternalStorageDirectory(), "tlmodel.dat");
+            inStream = new FileInputStream(f);
+            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
+            model = ((TransferLearningModelWrapper) objectInStream.readObject());
+            objectInStream.close();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (OptionalDataException e1) {
+            e1.printStackTrace();
+        } catch (StreamCorruptedException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
-        return tlModel;
+        if (model != null)
+            tlModel = model;
+        else
+            tlModel = new TransferLearningModelWrapper((AppCompatActivity) getActivity());
+
+        viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
+        viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        tlModel = loadModel();
-        if (tlModel == null)
-            tlModel = new TransferLearningModelWrapper((AppCompatActivity) getActivity());
-        viewModel = ViewModelProviders.of(this).get(CameraFragmentViewModel.class);
-        viewModel.setTrainBatchSize(tlModel.getTrainBatchSize());
+        loadModel();
     }
 
     @Override

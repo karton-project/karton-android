@@ -10,7 +10,7 @@
     <string name="not_ready">The content is not ready yet. We are on it!</string>
 
     <!-- Actionbar Headers -->
-    <string name="task_title">Your Task</string>
+    <string name="task_title">What is this code?</string>
 
     <!-- Compiler -->
     <string name="no_code_dialog_message">No Understandable Code</string>
