@@ -1,13 +1,8 @@
 package com.alpay.codenotes.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_KARTON;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -26,6 +21,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.CodeBlocksResultActivity;
 import com.alpay.codenotes.adapter.LevelBlockAdapter;
@@ -39,8 +43,6 @@ import com.alpay.codenotes.vision.CameraSourcePreview;
 import com.alpay.codenotes.vision.GraphicOverlay;
 import com.alpay.codenotes.vision.LevelBlockRecognitionProcessor;
 
-import org.w3c.dom.Text;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,10 +52,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_KARTON;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 public class LevelFragment extends Fragment {
 

@@ -1,6 +1,8 @@
 package com.alpay.codenotes.utils;
 
 
+import static android.content.Context.CAMERA_SERVICE;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,8 +23,6 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import static android.content.Context.CAMERA_SERVICE;
 
 public class VisionImage {
 

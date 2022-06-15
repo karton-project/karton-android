@@ -1,5 +1,7 @@
 package com.alpay.codenotes.adapter;
 
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alpay.codenotes.R;
@@ -17,8 +18,6 @@ import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.view.CodeBlockDetailDialog;
 
 import java.util.Collections;
-
-import static com.alpay.codenotes.models.CodeLineHelper.codeList;
 
 public class CodeBlockViewAdapter extends RecyclerView.Adapter<CodeBlockViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 

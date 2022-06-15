@@ -1,5 +1,9 @@
 package com.alpay.codenotes.activities;
 
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -12,7 +16,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +37,6 @@ import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.PlaySound;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.view.SoundButton;
-import com.alpay.codenotes.view.utils.MarginDecoration;
 import com.alpay.codenotes.vision.BitmapUtils;
 import com.alpay.codenotes.vision.CameraSource;
 import com.alpay.codenotes.vision.CameraSourcePreview;
@@ -51,10 +52,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.alpay.codenotes.models.CodeLineHelper.codeList;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 
 public class FBVisionActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, ShakeDetector.Listener {

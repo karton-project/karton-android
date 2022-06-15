@@ -15,7 +15,8 @@ limitations under the License.
 
 package com.alpay.codenotes.transfer;
 
-import android.content.Context;
+import static com.alpay.codenotes.models.GroupHelper.groupId;
+
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -86,8 +87,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.alpay.codenotes.models.GroupHelper.groupId;
 
 
 /**

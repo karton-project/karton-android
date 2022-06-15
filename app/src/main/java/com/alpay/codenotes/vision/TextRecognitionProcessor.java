@@ -26,7 +26,6 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -68,14 +67,6 @@ public class TextRecognitionProcessor extends VisionProcessorBase<FirebaseVision
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay,
                     originalCameraImage);
             graphicOverlay.add(imageGraphic);
-            /*
-            try (FileOutputStream out = new FileOutputStream(BitmapUtils.getOutputMediaFile("karton"))) {
-                originalCameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
-                // PNG is a lossless format, the compression factor (100) is ignored
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            */
         }
         List<FirebaseVisionText.TextBlock> blocks = results.getTextBlocks();
         Utils.code = "";

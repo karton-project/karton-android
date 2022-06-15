@@ -6,7 +6,6 @@ import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -19,8 +18,6 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 
 /** Utils functions for bitmap conversions. */
 public class BitmapUtils {

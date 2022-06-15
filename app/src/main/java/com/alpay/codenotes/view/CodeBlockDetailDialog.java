@@ -21,8 +21,6 @@ import com.alpay.codenotes.models.CodeLineHelper;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.util.Set;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -1,5 +1,7 @@
 package com.alpay.codenotes.activities;
 
+import static com.alpay.codenotes.BaseApplication.auth;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,6 @@ import com.alpay.codenotes.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.alpay.codenotes.BaseApplication.auth;
 
 public class WelcomeActivity extends BaseActivity {
 

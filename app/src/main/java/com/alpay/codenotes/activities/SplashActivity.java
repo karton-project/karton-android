@@ -6,12 +6,8 @@ import android.os.Handler;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
-import com.uxcam.UXCam;
-
-import static com.alpay.codenotes.BaseApplication.auth;
 
 public class SplashActivity extends BaseActivity {
-
 
     private static final int SPLASH_DELAY = 500;
     private final Handler mHandler = new Handler();
@@ -21,7 +17,6 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        UXCam.startWithKey("x2f5tx2k2fpvspv");
     }
 
     @Override

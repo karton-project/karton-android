@@ -1,5 +1,7 @@
 package com.alpay.codenotes.fragments;
 
+import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import com.alpay.codenotes.BaseApplication;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.activities.AuthUiActivity;
-import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.NavigationManager;
 import com.alpay.codenotes.utils.Utils;
 import com.bumptech.glide.Glide;
@@ -43,8 +44,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import top.defaults.colorpicker.ColorPickerPopup;
-
-import static com.firebase.ui.auth.AuthUI.EMAIL_LINK_PROVIDER;
 
 public class AccountFragment extends Fragment {
     private static final String TAG = "AccountFragment";

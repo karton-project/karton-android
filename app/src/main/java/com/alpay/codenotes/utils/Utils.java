@@ -15,7 +15,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,10 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.alpay.codenotes.R;
-import com.alpay.codenotes.models.LevelBlock;
 import com.alpay.codenotes.transfer.TransferLearningModelWrapper;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -35,11 +32,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;

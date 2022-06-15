@@ -1,5 +1,9 @@
 package com.alpay.codenotes.adapter;
 
+import static com.alpay.codenotes.models.CodeLineHelper.codeList;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
+import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +27,6 @@ import com.alpay.codenotes.models.Program;
 import com.alpay.codenotes.utils.Utils;
 
 import java.util.ArrayList;
-
-import static com.alpay.codenotes.models.CodeLineHelper.codeList;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_CODE_KEY;
-import static com.alpay.codenotes.utils.NavigationManager.BUNDLE_TURTLE;
 
 
 public class ProgramViewAdapter extends RecyclerView.Adapter<ProgramViewHolder> {

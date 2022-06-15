@@ -22,8 +22,6 @@ import androidx.fragment.app.Fragment;
 import com.alpay.codenotes.R;
 import com.alpay.codenotes.transfer.CameraFragment;
 import com.alpay.codenotes.transfer.PermissionsFragment;
-import com.alpay.codenotes.transfer.TransferLearningModelWrapper;
-import com.alpay.codenotes.utils.Utils;
 
 /**
  * Main activity of the classifier demo app.

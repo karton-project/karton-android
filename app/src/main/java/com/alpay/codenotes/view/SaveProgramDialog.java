@@ -1,5 +1,7 @@
 package com.alpay.codenotes.view;
 
+import static com.alpay.codenotes.models.GroupHelper.groupId;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +18,6 @@ import com.alpay.codenotes.models.CodeLine;
 import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.GroupHelper;
 import com.alpay.codenotes.utils.NavigationManager;
-
-import static com.alpay.codenotes.models.GroupHelper.groupId;
 
 public class SaveProgramDialog extends Dialog implements
         android.view.View.OnClickListener {
