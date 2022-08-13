@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +38,7 @@ import com.alpay.codenotes.adapter.LevelBlockAdapter;
 import com.alpay.codenotes.listener.RecyclerItemClickListener;
 import com.alpay.codenotes.models.CodeLineHelper;
 import com.alpay.codenotes.models.Level;
+import com.alpay.codenotes.utils.Constants;
 import com.alpay.codenotes.utils.Utils;
 import com.alpay.codenotes.vision.BitmapUtils;
 import com.alpay.codenotes.vision.CameraSource;
@@ -53,9 +56,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class LevelFragment extends Fragment {
-
-    private static final String TAG = LevelFragment.class.getSimpleName();
+public class GameFragment extends Fragment {
+    
+    private static final String TAG = GameFragment.class.getSimpleName();
     private static final int PERMISSION_REQUESTS = 1;
 
     private View view;
@@ -81,6 +84,7 @@ public class LevelFragment extends Fragment {
     @BindView(R.id.levels_spinner)
     Spinner levelsSpinner;
 
+
     @OnClick(R.id.level_ok)
     public void checkLevelCode() {
         String result = CodeLineHelper.clearCode((AppCompatActivity) getActivity(), Utils.levelCode.replaceAll("\\s+", ""));
@@ -94,34 +98,19 @@ public class LevelFragment extends Fragment {
         } else {
             recognizedTextContainer.setText(result);
         }
-        saveImage();
-    }
-
-    protected void saveImage(){
-        Bitmap cameraImage = Bitmap.createBitmap(480, 360, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(cameraImage);
-        graphicOverlay.draw(c);
-        try (FileOutputStream out = new FileOutputStream(BitmapUtils.getOutputMediaFile("kartonlevels"))) {
-            cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
-            // PNG is a lossless format, the compression factor (100) is ignored
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_level, container, false);
+        view = inflater.inflate(R.layout.fragment_game, container, false);
         unbinder = ButterKnife.bind(this, view);
         setLevelSpinner(R.array.turtle_levels_array);
         setModSpinner();
         if (Utils.getStringFromSharedPreferences((AppCompatActivity) getActivity(), "CODE_LANG").contentEquals("UK")){
-            Level.populateTurtleLevelsEN();
-            Level.populateKartONLevelsEN();
+            openGameWebFragment(Constants.FLAPPY_EN);
         } else {
-            Level.populateTurtleLevelsTR();
-            Level.populateKartONLevelsTR();
+            openGameWebFragment(Constants.FLAPPY_TR);
         }
         setupRecyclerView();
         preview = view.findViewById(R.id.firePreview);
@@ -140,6 +129,14 @@ public class LevelFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void openGameWebFragment(String url){
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        WebViewFragment webViewFragment = new WebViewFragment(url);
+        ft.replace(R.id.gameWebView, webViewFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
     @Override

@@ -53,6 +53,20 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/nav_level"
+                style="@style/icon_home_layout">
+
+                <ImageView
+                    style="@style/icon_home"
+                    app:srcCompat="@drawable/ic_level" />
+
+                <TextView
+                    style="@style/icon_home_text"
+                    android:text="@string/home_card_level" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/nav_game"
                 style="@style/icon_home_layout">
 

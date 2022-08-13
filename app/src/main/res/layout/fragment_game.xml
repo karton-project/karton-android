@@ -1,45 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="@dimen/unit8">
 
-    <RelativeLayout
-        android:id="@+id/game_flappy"
+
+    <LinearLayout
+        android:id="@+id/spinner_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/unit12"
-        android:background="@drawable/warningtoastshape"
-        android:clickable="true"
-        android:padding="@dimen/unit8">
-
-        <ImageView
-            android:id="@+id/flappy_icon"
-            android:layout_width="@dimen/unit48"
-            android:layout_height="@dimen/unit48"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_flappy" />
-
-        <ImageView
-            android:id="@+id/close_flappy_bird"
-            android:layout_width="@dimen/unit24"
-            android:layout_height="@dimen/unit24"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:tint="@color/colorWhite"
-            app:srcCompat="@drawable/right_arrow" />
+        android:layout_marginBottom="@dimen/unit10">
 
         <TextView
-            style="@style/text_light_bold_large"
+            style="@style/text_dark_bold_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/unit8"
-            android:layout_toRightOf="@+id/flappy_icon"
-            android:text="@string/game_flappy_text"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/unit10"
+            android:text="@string/select_mode" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/mode_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/unit10"
+            android:background="@drawable/spinner_item_background"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            style="@style/text_dark_bold_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/unit10"
+            android:text="@string/select_level" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/levels_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/spinner_item_background"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recognized_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/level_blocks"
+        android:layout_width="@dimen/unit240"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cameraView"
+        android:layout_alignParentLeft="true"
+        android:clickable="true" />
+
+
+    <RelativeLayout
+        android:id="@+id/cameraView"
+        android:layout_width="@dimen/unit240"
+        android:layout_height="@dimen/unit160"
+        android:layout_below="@+id/spinner_container"
+        android:layout_alignParentLeft="true">
+
+        <com.alpay.codenotes.vision.CameraSourcePreview
+            android:id="@+id/firePreview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
+
+            <com.alpay.codenotes.vision.GraphicOverlay
+                android:id="@+id/fireFaceOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.alpay.codenotes.vision.CameraSourcePreview>
+
+        <Button
+            android:id="@+id/level_ok"
+            android:layout_width="@dimen/unit80"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:text="@string/ok" />
 
     </RelativeLayout>
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/gameWebView"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/spinner_container"
+        android:layout_marginStart="@dimen/unit8"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="@dimen/unit8"
+        android:layout_marginEnd="@dimen/unit8"
+        android:layout_marginBottom="@dimen/unit8"
+        android:layout_toRightOf="@+id/cameraView" />
+
+
+</RelativeLayout>

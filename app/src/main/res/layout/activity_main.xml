@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.tensorflow.lite.examples.transfer.MainActivity">
+    tools:context=".activities.TransferLearningActivity">
 
   <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/fragment_container" />
+
 </FrameLayout>

@@ -48,6 +48,7 @@
     <string name="home_card_learn">Öğren</string>
     <string name="home_card_program">Kodla</string>
     <string name="home_card_game">Oyna</string>
+    <string name="home_card_level">Test</string>
     <string name="home_card_account">Araçlar</string>
     <string name="hour_of_code_play">Flappy Bird ile Kod Saati</string>
     <string name="hour_of_code_flappy_exp">Flappy Bird ile kodlamanın temellerini öğren!</string>

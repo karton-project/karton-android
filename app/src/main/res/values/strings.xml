@@ -51,6 +51,7 @@
     <string name="home_card_learn">Learn</string>
     <string name="home_card_program">Code</string>
     <string name="home_card_game">Play</string>
+    <string name="home_card_level">Test</string>
     <string name="home_card_account">Toolbox</string>
     <string name="hour_of_code_play">Hour of Code with Flappy Bird</string>
     <string name="hour_of_code_flappy_exp">Learn the fundamentals of coding with Flappy Bird</string>

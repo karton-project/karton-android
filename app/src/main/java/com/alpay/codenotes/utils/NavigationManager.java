@@ -13,6 +13,7 @@ import com.alpay.codenotes.activities.TransferLearningActivity;
 import com.alpay.codenotes.activities.WelcomeActivity;
 import com.alpay.codenotes.fragments.AccountFragment;
 import com.alpay.codenotes.fragments.ContentListFragment;
+import com.alpay.codenotes.fragments.GameFragment;
 import com.alpay.codenotes.fragments.LevelFragment;
 import com.alpay.codenotes.fragments.ProgramListFragment;
 import com.alpay.codenotes.fragments.SketchFragment;
@@ -26,6 +27,7 @@ public class NavigationManager {
     public static final String BUNDLE_TURTLE = "turtle";
     public static final String BUNDLE_KARTON = "karton";
     public static final String LEVEL = "level";
+    public static final String GAME = "game";
     public static final String CONTENT = "content";
     public static final String SKETCH = "sketch";
     public static final String NOTES = "notes";
@@ -46,6 +48,9 @@ public class NavigationManager {
         } else if (fragmentID.contentEquals(LEVEL)) {
             LevelFragment levelFragment = new LevelFragment();
             ft.replace(R.id.fragment_container, levelFragment);
+        } else if (fragmentID.contentEquals(GAME)) {
+            GameFragment gameFragment = new GameFragment();
+            ft.replace(R.id.fragment_container, gameFragment);
         } else if (fragmentID.contentEquals(SKETCH)) {
             SketchFragment sketchFragment = new SketchFragment();
             ft.replace(R.id.fragment_container, sketchFragment);

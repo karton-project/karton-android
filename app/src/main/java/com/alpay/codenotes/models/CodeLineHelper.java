@@ -165,7 +165,6 @@ public class CodeLineHelper {
                 params[i] = params[i].replace("b", "6");
                 params[i] = params[i].replace("i", "1");
                 params[i] = params[i].replace("l", "1");
-                params[i] = params[i].replace("h", "4");
             }
             if (params[i].contains("d0kun")) {
                 params[i] = params[i].replace("d0kun", "dokun");

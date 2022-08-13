@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/game_flappy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/unit12"
+        android:background="@drawable/warningtoastshape"
+        android:clickable="true"
+        android:padding="@dimen/unit8">
+
+        <ImageView
+            android:id="@+id/flappy_icon"
+            android:layout_width="@dimen/unit48"
+            android:layout_height="@dimen/unit48"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_flappy" />
+
+        <ImageView
+            android:id="@+id/close_flappy_bird"
+            android:layout_width="@dimen/unit24"
+            android:layout_height="@dimen/unit24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/right_arrow" />
+
+        <TextView
+            style="@style/text_light_bold_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/unit8"
+            android:layout_toRightOf="@+id/flappy_icon"
+            android:text="@string/game_flappy_text"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
