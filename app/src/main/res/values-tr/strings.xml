@@ -65,6 +65,8 @@
     <!-- Level -->
     <string name="select_level">Örnek Seç:</string>
     <string name="select_mode">Mod:</string>
+    <string name="select_game_level">Olaylar</string>
+    <string name="select_mode_for_game">Oyun Aksiyonunu Seç:</string>
     <string name="see_result">Oluşan Kodu Gör</string>
     <string name="levelcomplete_title">Tebrikler! Bölümü çözdün.</string>
     <string name="open_next_level">Sonraki Bölüm</string>
@@ -157,6 +159,14 @@
         <item>rastgele</item>
         <item>ötele</item>
         <item>döndür</item>
+    </string-array>
+
+    <string-array name="game_levels_array">
+        <item>Ekrana Dokunulduğunda</item>
+        <item>Yere Çarptığında</item>
+        <item>Oyun Başladığında</item>
+        <item>Engeli Aştığında</item>
+        <item>Engele Çarptığında</item>
     </string-array>
 
     <string-array name="turtle_levels_array">

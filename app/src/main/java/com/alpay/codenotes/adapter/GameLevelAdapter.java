@@ -1,0 +1,69 @@
+package com.alpay.codenotes.adapter;
+
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alpay.codenotes.R;
+import com.alpay.codenotes.models.Game;
+import com.bumptech.glide.Glide;
+
+public class GameLevelAdapter extends RecyclerView.Adapter<GameLevelAdapter.GameLevelBlockViewHolder> {
+
+    private AppCompatActivity appCompatActivity;
+    private int selected_position = RecyclerView.NO_POSITION;
+
+    public GameLevelAdapter(AppCompatActivity appCompatActivity) {
+        this.appCompatActivity = appCompatActivity;
+    }
+
+    @Override
+    public GameLevelBlockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View mView = layoutInflater.inflate(R.layout.game_level_block_layout, parent, false);
+        return new GameLevelBlockViewHolder(mView);
+    }
+
+    @Override
+    public void onBindViewHolder(final GameLevelBlockViewHolder holder, int position) {
+        if (!Game.levelBlockList.get(position).isContainCode()) {
+            addCurrentPicture(holder, position);
+        }
+    }
+
+    public void addCurrentPicture(GameLevelBlockViewHolder holder, int position) {
+        Glide.with(appCompatActivity).load(Uri.parse("file:///android_asset/game_img/" + Game.levelBlockList.get(position).getImage())).into(holder.mImage);
+    }
+
+    @Override
+    public int getItemCount() {
+        return Game.levelBlockList.size();
+    }
+
+    public class GameLevelBlockViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        View mView;
+        ImageView mImage;
+
+        GameLevelBlockViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView.findViewById(R.id.game_level_block_layout);
+            mImage = itemView.findViewById(R.id.game_block_image);
+        }
+
+        @Override
+        public void onClick (View v){
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
+            // Redraw the old selection and the new
+            notifyItemChanged(selected_position);
+            selected_position = getLayoutPosition();
+            notifyItemChanged(selected_position);
+        }
+    }
+
+}

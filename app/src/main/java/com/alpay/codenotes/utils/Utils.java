@@ -49,8 +49,11 @@ public class Utils {
     public static boolean turtleMode = false;
     public static String code = "";
     public static String levelCode = "";
+    public static String gameLevelCode = "";
     public static String checkCode = "";
     public static int currentLevel = 0;
+    public static int currentGameLevel = 0;
+    public static int gameLevelSize = 5;
     public static final boolean finishTraining = false;
     public static Bitmap[] tempBitmapList = new Bitmap[4];
     public static Map<String, Integer> numSamples = new TreeMap<>();
@@ -262,6 +265,11 @@ public class Utils {
         //bm.recycle();
         //bm = null;
         return resizedBitmap;
+    }
+
+    public static boolean isAllFalse(boolean... array) {
+        for (boolean b : array) if (b) return false;
+        return true;
     }
 
 }

@@ -41,6 +41,11 @@ public class CodeLineHelper {
             "kalemi aç", "kalemi kapat", "kalemi gizle", "kalemi göster", "temizle"
     };
 
+    public static final String[] command_flappy = {
+            "whenClick()", "whenRun()", "whenPassObstacle()", "whenHitToObstacle()", "whenHitToGround()",
+            "flap()", "setObstacles()", "setGameScore()", "setSpeed()", "endGame()"
+    };
+
     public static final String[] turtle_none_commands = {
             // english
             "pen down", "pen up", "hide pen", "show pen", "clear", "end",
@@ -103,7 +108,7 @@ public class CodeLineHelper {
             // english
             "else", "end", "end function",
             // turkish
-            "değilse", "bitir",  "fonksiyon bitir"
+            "değilse", "bitir", "fonksiyon bitir"
     };
 
     public static CodeLine codeToCodeLine(AppCompatActivity appCompatActivity, String code) {
@@ -128,6 +133,18 @@ public class CodeLineHelper {
             Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
         }
         return new CodeLine(appCompatActivity, command, params);
+    }
+
+    public static String codeToGameCommandLine(AppCompatActivity appCompatActivity, String code) {
+        try {
+            if (code.length() > 2) {
+                code = code.toLowerCase();
+                code = FuzzySearch.extractOne(code, Arrays.asList(command_flappy)).getString();
+            }
+        } catch (Exception e) {
+            Toast.makeText(appCompatActivity, appCompatActivity.getResources().getString(R.string.unknown_code_error), Toast.LENGTH_SHORT).show();
+        }
+        return code;
     }
 
     public static ArrayList<CodeLine> codeArrayToCodeLineList(AppCompatActivity appCompatActivity, String[] codeArray) {
@@ -158,7 +175,7 @@ public class CodeLineHelper {
         for (int i = 0; i < params.length; i++) {
             params[i] = params[i].toLowerCase().trim();
             params[i] = params[i].replace("*", "x");
-            if (params[i].matches(".*\\d.*")){
+            if (params[i].matches(".*\\d.*")) {
                 params[i] = params[i].replace("o", "0");
                 params[i] = params[i].replace("s", "5");
                 params[i] = params[i].replace("g", "9");
@@ -180,8 +197,7 @@ public class CodeLineHelper {
         if (varNames.size() > 0) {
             params[0] = FuzzySearch.extractOne(params[0], varNames).getString();
             return params;
-        } else
-        {
+        } else {
             Toast.makeText(appCompatActivity, R.string.variable_not_defined_yet, Toast.LENGTH_LONG).show();
             return new String[0];
         }

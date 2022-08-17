@@ -66,6 +66,8 @@
     <!-- Level -->
     <string name="select_level">Select Level:</string>
     <string name="select_mode">From mode:</string>
+    <string name="select_game_level">Events</string>
+    <string name="select_mode_for_game">Select A Game Event:</string>
     <string name="see_result">See Resulted Code</string>
     <string name="levelcomplete_title">Congrats! You solved the level.</string>
     <string name="open_next_level">Next Level</string>
@@ -158,6 +160,13 @@
         <item>rotate</item>
     </string-array>
 
+    <string-array name="game_levels_array">
+        <item>When Touched on Screen</item>
+        <item>When Hits to Ground</item>
+        <item>When Game Started</item>
+        <item>When Passes an Obstacle</item>
+        <item>When Hits an Obstacle</item>
+    </string-array>
 
     <string-array name="turtle_levels_array">
         <item>1: Square</item>
